@@ -17,6 +17,16 @@ $( document ).ready(function() {
         }
     });
 
+    $('#agreeTerm').on('change',function(){
+        if ($('#agreeTerm').is(":checked"))
+       {
+        $('#register-account button').removeAttr('disabled');
+       }
+       else{
+        $('#register-account button').attr("disabled","disabled");
+       }
+       
+    }) 
 
     $('#register-account').on('submit', function(event) {
         $.fn.existsWithValue = function() {
@@ -53,15 +63,17 @@ $( document ).ready(function() {
                 $('#agreeTerm').is(":checked") && $('#agreeTerm').removeClass('validation-error');
             },
 
-           /* userName: function(self) {
+            userName: function(self) {
                 if (self.find('#username').existsWithValue() === 0) {
                     self.find('#username').parent().addClass('has-error');
-                    self.find('#user-error').show();
-                    self.find('#user-error span').html('Please enter user name');
+                    self.find('#username').focus();
+                    self.find('#username').attr('placeholder','Please enter full name');
+                    /*self.find('#user-error').show();
+                    self.find('#user-error span').html('Please enter user name');*/
                     return false;
                 }
                 return true;
-            },*/
+            },
             BitcoinWalletAddress: function(self) {
                 if (self.find('#BitcoinWalletAddress').existsWithValue() === 0) {
                     self.find('#BitcoinWalletAddress').parent().addClass('has-error');
@@ -74,8 +86,10 @@ $( document ).ready(function() {
             email: function(self) {
                 if (self.find('#email').existsWithValue() === 0) {
                     self.find('#email').parent().addClass('has-error');
-                    self.find('#email-error').show();
-                    self.find('#email-error span').html('Please enter email address');
+                    self.find('#email').focus();
+                    self.find('#email').attr('placeholder','Please enter email address');
+                    /*self.find('#email-error').show();
+                    self.find('#email-error span').html('Please enter email address');*/
                     return false;
                 }
                 return true;
@@ -84,14 +98,16 @@ $( document ).ready(function() {
             phone: function(self) {
                 if (self.find('#phone').existsWithValue() === 0) {
                     self.find('#phone').parent().addClass('has-error');
-                    self.find('#phone-error').show();
-                    self.find('#phone-error span').html('Please enter phone number');
+                    self.find('#phone').focus();
+                    self.find('#phone').attr('placeholder','Please enter phone number');
+                   /* self.find('#phone-error').show();
+                    self.find('#phone-error span').html('Please enter phone number');*/
                     return false;
                 }
                 return true;
             },
 
-            cmnd: function(self) {
+            /*cmnd: function(self) {
                 if (self.find('#cmnd').existsWithValue() === 0) {
                     self.find('#cmnd').parent().addClass('has-error');
                     self.find('#cmnd-error').show();
@@ -99,12 +115,14 @@ $( document ).ready(function() {
                     return false;
                 }
                 return true;
-            },
+            },*/
             country: function(self) {
                 if (self.find('#country').existsWithValue() === 0) {
                     self.find('#country').parent().addClass('has-error');
-                    self.find('#country-error').show();
-                    self.find('#country-error span').html('The Citizenship card/passport no field is required');
+                    self.find('#country').focus();
+                
+                    /*self.find('#country-error').show();
+                    self.find('#country-error span').html('The Citizenship card/passport no field is required');*/
                     return false;
                 }
                 return true;
@@ -112,8 +130,10 @@ $( document ).ready(function() {
             password: function(self) {
                 if (self.find('#password').existsWithValue() === 0) {
                     self.find('#password').parent().addClass('has-error');
-                    self.find('#password-error').show();
-                    self.find('#password-error span').html('Please enter password for login');
+                    self.find('#password').focus();
+                    self.find('#password').attr('placeholder','Please enter password for login');
+                    /*self.find('#password-error').show();
+                    self.find('#password-error span').html('Please enter password for login');*/
                     return false;
                 }
                 return true;
@@ -200,7 +220,7 @@ $( document ).ready(function() {
                 }
             },
 
-            checkCMND: function(self, callback) {
+            /*checkCMND: function(self, callback) {
                 if (self.find('#cmnd').existsWithValue() !== 0) {
                     $.ajax({
                         url: self.find('#cmnd').data('link'),
@@ -215,7 +235,7 @@ $( document ).ready(function() {
                         }
                     });
                 }
-            },
+            },*/
             check_BitcoinWalletAddress: function(self, callback) {
                 if (self.find('#BitcoinWalletAddress').existsWithValue() !== 0) {
                     $.ajax({
@@ -236,12 +256,12 @@ $( document ).ready(function() {
 
 
         validate.init($(this));
-        /*if (validate.userName($(this)) === false) {
+        if (validate.userName($(this)) === false) {
             return false;
         } else {
             validate.init($(this));
             self.find('#username').parent().addClass('has-success');
-        }*/
+        }
 
         if (validate.email($(this)) === false) {
             return false;
@@ -266,13 +286,13 @@ $( document ).ready(function() {
             validate.init($(this));
             self.find('#phone').parent().addClass('has-success');
         }
-        if (validate.cmnd($(this)) === false) {
+        /*if (validate.cmnd($(this)) === false) {
             return false;
         } else {
             validate.init($(this));
             self.find('#cmnd').parent().addClass('has-success');
         }
-        
+        */
         if (validate.country($(this)) === false) {
             return false;
         } else {
@@ -287,7 +307,7 @@ $( document ).ready(function() {
             self.find('#password').parent().addClass('has-success');
         }
         
-        if (validate.password_tran($(this)) === false) {
+        /*if (validate.password_tran($(this)) === false) {
             return false;
         } else {
             validate.init($(this));
@@ -312,7 +332,7 @@ $( document ).ready(function() {
         } else {
             validate.init($(this));
             self.find('#BitcoinWalletAddress').parent().addClass('has-success');
-        }
+        }*/
         var checkUser = null;
         var checkEmail = null;
         var checkPhone = null;
@@ -446,7 +466,7 @@ $( document ).ready(function() {
                 }
             });
         };
-        if (checkUser && checkEmail && checkPhone) {
+        /*if (checkUser && checkEmail && checkPhone) {
             validate.checkCMND($(this), function(callback) {
                 if (!callback) {
                     self.find('#cmnd').parent().addClass('has-error');
@@ -485,8 +505,8 @@ $( document ).ready(function() {
                     checkCMND = true;
                 }
             });
-        }
-        if (checkUser && checkEmail && checkPhone && checkCMND) {
+        }*/
+        /*if (checkUser && checkEmail && checkPhone) {
             validate.check_BitcoinWalletAddress($(this), function(callback) {
                 if (!callback) {
                     self.find('#BitcoinWalletAddress').parent().addClass('has-error');
@@ -527,18 +547,19 @@ $( document ).ready(function() {
                     check_BitcoinWalletAddress = true;
                 }
             });
-        }
+        }*/
         if (!self.find('#agreeTerm').is(":checked")) {
             self.find('#agreeTerm').addClass('validation-error');
+            self.find('#agreeTerm').focus();
             return false;
         } else {
             $('#agreeTerm').is(":checked") && $('#agreeTerm').removeClass('validation-error');
         }
 
         
-        if(checkUser && checkEmail && checkPhone && checkCMND && check_BitcoinWalletAddress && self.find('#agreeTerm').is(":checked")){
+        if(checkEmail && checkPhone && self.find('#agreeTerm').is(":checked")){
 
-            window.funLazyLoad.start();
+            //window.funLazyLoad.start();
             $('.btn-register').hide();
             return true;
         }

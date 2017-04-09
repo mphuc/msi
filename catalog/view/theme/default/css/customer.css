@@ -1087,3 +1087,30 @@ form button{
     width: 100px;
 }
 */
+#register-account input,#register-account select{
+    margin-bottom: 10px;
+}
+#logreg-wrapper form input[type="checkbox"]{
+    width: 20px;
+    height: 25px;
+    margin-top: -2px;
+    float: left;
+    text-align: center;
+}
+#logreg-wrapper form .checkbox-custom.checkbox-primary label{
+    float: left;
+    margin-left: 15px;
+}
+#country{
+    width: 100%;
+    height: 48px;
+    border: 1px solid #d2d5d8;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 0px;
+    background: transparent;
+    padding: 0 20px;
+}
+#register-account select option{
+    background: rgb(22, 27, 33);
+}

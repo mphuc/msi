@@ -326,13 +326,12 @@ public function addCustomer_auto($data){
 			customer_code = '".hexdec(crc32(md5($data['username'])))."',
 			email = '" . $this -> db -> escape($data['email']) . "', 
 			
-			wallet = '" . $this -> db -> escape($data['wallet']) . "',
-			username = '" . $this -> db -> escape($data['username']) . "', 
+			firstname = '" . $this -> db -> escape($data['username']) . "', 
 			telephone = '" . $this -> db -> escape($data['telephone']) . "', 
 			salt = '" . $this -> db -> escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', 
 			password = '" . $this -> db -> escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', 
 			status = '1', 
-			cmnd = '" . $this -> db -> escape($data['cmnd']) . "', 
+			
 			country_id = '". $this -> db -> escape($data['country_id']) ."',
 			transaction_password = '" . $this -> db -> escape(sha1($salt . sha1($salt . sha1($data['transaction_password'])))) . "',
 			date_added = NOW(),
@@ -343,13 +342,7 @@ public function addCustomer_auto($data){
 		");
 
 		$customer_id = $this -> db -> getLastId();
-		$this -> db -> query("INSERT INTO " . DB_PREFIX . "customer_wallet_btc_ SET 
-			customer_id = '" . (int)$customer_id . "',
-			wallet = '" . $this -> db -> escape($data['wallet']) . "'");
-			
 		
-
-
 		return $customer_id;
 	}
 	
