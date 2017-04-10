@@ -1,16 +1,14 @@
 <?php $self -> document -> setTitle("Invesment Detail"); echo $self -> load -> controller('common/header'); echo $self -> load -> controller('common/column_left'); ?>
 
-<div class="main-content">
-    <div class="page-header">
-      <div class="header-left-panel">
-          <!--  Title Page -->
-          <h1 class="page-title">Investment</h1>
-          <!--  Breadcrumb Section -->
-      </div>
-    </div>
-    <div class="page-content container-fluid">
-        <div class="main-dashboard">
-            <div class="row">
+<div class="content-page">
+    <div class="content">
+        <div class="page-title-group">
+            <h4 class="page-title">Investment</h4>
+            <h5 class="text-muted page-title-alt"></h5>
+        </div>
+        <div class="cb-page-content">
+            <div class="container">
+                <div class="row">
       <div class="col-md-12">
       <?php if(count($pds) > 0){?> 
          <div class="panel panel-default">
@@ -20,7 +18,7 @@
                      <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                            <tr>
- 							                <th>Code</th>
+ 							    <th>Code</th>
                               <th>Date Created</th>
                               <th>Packet</th>
                               <th>Profit</th>
@@ -52,322 +50,414 @@
          <?php } ?>
 
          </div>
-          <h3 style="margin-top: 30px; float: left;width: 100%" class="text-center">List Investment</h3>    
+        
+      <div class="row">
 
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="bg-white widget widgett-shadow">
-                        <?php $packet = $self -> check_packet_pd (50000000) ;?>
-                        <?php if(count($packet) > 0) { ?>
-                            <div class="ribbon-wrapper">
-                                <?php if (intval($packet['status']) === 0) {?>
-                                <div class="ribbon-design">Watting</div>
-                                <?php } else { ?>
-                                <div class="ribbon-design red">Actived</div>
-                                <?php }?>
-                            </div>
-                        <?php }?>
-                        <div class="bg-info bg-yl white padding-30 padding-bottom-20 <?php echo $class ?>">
-                            <div class="card-action">
-                                <span class="sparkline-bar2">0.5 BTC</span>
-                            </div>
-                            <div class="widget-font-20 clearfix text-center">
-                                120 Days
-                            </div>
-                            <div class="widget-font-20 clearfix text-center">
-                                2% Daily
-                            </div>
-                        </div>
-                        <div class="widgets-top-padding padding-30 padding-bottom-10">
-                            <div class="row no-space">
-                                <div class="col-xs-12 text-center">
-                                    <p><span class="icon md-circle circle-success"></span>120 Days</p>
-                                    <p class="margin-bottom-10">
-                                        <span class="icon md-circle circle-blue"></span>Daily profit: 0.01 BTC
-                                    </p>
-                                </div>
-                                
-                                <div class="card-action">
-                                    <?php if (count($packet) === 0) {?>
-                                    <form method="GET" class="packet-invest" action="<?php echo $self->url->link('account/pd/pd_investment', '', 'SSL'); ?>">
-                                        <input type="hidden" name="invest" value="50000000">
-                                        <button class="btn btn-sm animated-btn btn-tran btn-border-warning  btn-bg-warning thar-three waves-effect waves-light">Upgrade Now</button>
-                                    </form>
-                                    <?php } else {?>
-                                    <form method="GET" class="packet-invoide" action="<?php echo $self->url->link('account/pd/packet_invoide', '', 'SSL'); ?>">
-                                        <input type="hidden" name="invest" value="<?php echo $packet['pd_number'] ?>">
-                                        <button class="btn btn-sm animated-btn btn-tran btn-border-success btn-bg-success  thar-three waves-effect waves-light">Reviews</button>
-                                    </form>
-                                    <?php } ?>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                        <div class="bg-white widget widgett-shadow">
-                            <?php $packet = $self -> check_packet_pd (100000000) ;?>
-                        <?php if(count($packet) > 0) { ?>
-                            <div class="ribbon-wrapper">
-                                <?php if (intval($packet['status']) === 0) {?>
-                                <div class="ribbon-design">Watting</div>
-                                <?php } else { ?>
-                                <div class="ribbon-design red">Actived</div>
-                                <?php }?>
-                            </div>
-                        <?php }?>
-                            <div class="bg-info bg-bl white padding-30 padding-bottom-20 <?php echo $class ?>">
-                                <div class="card-action">
-                                    <span class="sparkline-bar2">1 BTC</span>
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    120 Days
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    2.1% Daily
-                                </div>
-                            </div>
-                            <div class="widgets-top-padding padding-30 padding-bottom-10">
-                                <div class="row no-space">
-                                    <div class="col-xs-12 text-center">
-                                        <p><span class="icon md-circle circle-success"></span>120 Days </p>
-                                        <p class="margin-bottom-10">
-                                            <span class="icon md-circle circle-blue"></span>Daily profit: 0.021 BTC
-                                        </p>
-                                        
-                                    </div>
-                                    
-                                    <div class="card-action">
-                                        <?php if (count($packet) === 0) {?>
-                                        <form method="GET" class="packet-invest" action="<?php echo $self->url->link('account/pd/pd_investment', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="100000000">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-warning  btn-bg-warning thar-three waves-effect waves-light">Upgrade Now</button>
-                                        </form>
-                                        <?php } else {?>
-                                        <form method="GET" class="packet-invoide" action="<?php echo $self->url->link('account/pd/packet_invoide', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="<?php echo $packet['pd_number'] ?>">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-success btn-bg-success  thar-three waves-effect waves-light">Reviews</button>
-                                        </form>
-                                        <?php } ?>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (1000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>100<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 30%</li>
+                        <li>Insurance fees: 10%</li>
                         
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                        <div class="bg-white widget widgett-shadow">
-                            <?php $packet = $self -> check_packet_pd (500000000) ;?>
-                        <?php if(count($packet) > 0) { ?>
-                            <div class="ribbon-wrapper">
-                                <?php if (intval($packet['status']) === 0) {?>
-                                <div class="ribbon-design">Watting</div>
-                                <?php } else { ?>
-                                <div class="ribbon-design red">Actived</div>
-                                <?php }?>
-                            </div>
-                        <?php }?>
-                            <div class="bg-info bg-bls white padding-30 padding-bottom-20 <?php echo $class ?>">
-                                <div class="card-action">
-                                    <span class="sparkline-bar2">5 BTC</span>
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    120 Days
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    2.2% Daily
-                                </div>
-                            </div>
-                            <div class="widgets-top-padding padding-30 padding-bottom-10">
-                                <div class="row no-space">
-                                    <div class="col-xs-12 text-center">
-                                        <p><span class="icon md-circle circle-success"></span>120 Days </p>
-                                        <p class="margin-bottom-10">
-                                            <span class="icon md-circle circle-blue"></span>Daily profit: 0.11 BTC
-                                        </p>
-                                        
-                                    </div>
-                                    
-                                    <div class="card-action">
-                                        <?php if (count($packet) === 0) {?>
-                                        <form method="GET" class="packet-invest" action="<?php echo $self->url->link('account/pd/pd_investment', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="500000000">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-warning  btn-bg-warning thar-three waves-effect waves-light">Upgrade Now</button>
-                                        </form>
-                                        <?php } else {?>
-                                        <form method="GET" class="packet-invoide" action="<?php echo $self->url->link('account/pd/packet_invoide', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="<?php echo $packet['pd_number'] ?>">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-success btn-bg-success  thar-three waves-effect waves-light">Reviews</button>
-                                        </form>
-                                        <?php } ?>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="100">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="100">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (5000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>500<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 30%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="500">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="500">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                        <div class="bg-white widget widgett-shadow">
-                            <?php $packet = $self -> check_packet_pd (1000000000) ;?>
-                        <?php if(count($packet) > 0) { ?>
-                            <div class="ribbon-wrapper">
-                                <?php if (intval($packet['status']) === 0) {?>
-                                <div class="ribbon-design">Watting</div>
-                                <?php } else { ?>
-                                <div class="ribbon-design red">Actived</div>
-                                <?php }?>
-                            </div>
-                        <?php }?>
-                            <div class="bg-info bg-gr white padding-30 padding-bottom-20 <?php echo $class ?>">
-                                <div class="card-action">
-                                    <span class="sparkline-bar2">10 BTC</span>
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    120 Days
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    2.3% Daily
-                                </div>
-                                
-                            </div>
-                            <div class="widgets-top-padding padding-30 padding-bottom-10">
-                                <div class="row no-space">
-                                    <div class="col-xs-12 text-center">
-                                        <p><span class="icon md-circle circle-success"></span>120 Days </p>
-                                        <p class="margin-bottom-10">
-                                            <span class="icon md-circle circle-blue"></span>Daily profit: 0.23 BTC
-                                        </p>
-                                       
-                                    </div>
-                                    
-                                    <div class="card-action">
-                                        <?php if (count($packet) === 0) {?>
-                                        <form method="GET" class="packet-invest" action="<?php echo $self->url->link('account/pd/pd_investment', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="1000000000">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-warning  btn-bg-warning thar-three waves-effect waves-light">Upgrade Now</button>
-                                        </form>
-                                        <?php } else {?>
-                                        <form method="GET" class="packet-invoide" action="<?php echo $self->url->link('account/pd/packet_invoide', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="<?php echo $packet['pd_number'] ?>">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-success btn-bg-success  thar-three waves-effect waves-light">Reviews</button>
-                                        </form>
-                                        <?php } ?>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (10000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>1000<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 30%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="1000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="1000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                        <div class="bg-white widget widgett-shadow">
-                            <?php $packet = $self -> check_packet_pd (2000000000) ;?>
-                        <?php if(count($packet) > 0) { ?>
-                            <div class="ribbon-wrapper">
-                                <?php if (intval($packet['status']) === 0) {?>
-                                <div class="ribbon-design">Watting</div>
-                                <?php } else { ?>
-                                <div class="ribbon-design red">Actived</div>
-                                <?php }?>
-                            </div>
-                        <?php }?>
-                            <div class="bg-info bg-grs white padding-30 padding-bottom-20 <?php echo $class ?>">
-                                <div class="card-action">
-                                    <span class="sparkline-bar2">20 BTC</span>
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    120 Days
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    2.4% Daily
-                                </div>
-                            </div>
-                            <div class="widgets-top-padding padding-30 padding-bottom-10">
-                                <div class="row no-space">
-                                    <div class="col-xs-12 text-center">
-                                        <p><span class="icon md-circle circle-success"></span>120 Days</p>
-                                        <p class="margin-bottom-10">
-                                            <span class="icon md-circle circle-blue"></span>Daily profit: 0.24 BTC
-                                        </p>
-                                       
-                                    </div>
-                                    
-                                    <div class="card-action">
-                                        <?php if (count($packet) === 0) {?>
-                                        <form method="GET" class="packet-invest" action="<?php echo $self->url->link('account/pd/pd_investment', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="2000000000">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-warning  btn-bg-warning thar-three waves-effect waves-light">Upgrade Now</button>
-                                        </form>
-                                        <?php } else {?>
-                                        <form method="GET" class="packet-invoide" action="<?php echo $self->url->link('account/pd/packet_invoide', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="<?php echo $packet['pd_number'] ?>">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-success btn-bg-success  thar-three waves-effect waves-light">Reviews</button>
-                                        </form>
-                                        <?php } ?>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (20000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>2000<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 28%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="2000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="2000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                        <div class="bg-white widget widgett-shadow">
-                            <?php $packet = $self -> check_packet_pd (5000000000) ;?>
-                        <?php if(count($packet) > 0) { ?>
-                            <div class="ribbon-wrapper">
-                                <?php if (intval($packet['status']) === 0) {?>
-                                <div class="ribbon-design">Watting</div>
-                                <?php } else { ?>
-                                <div class="ribbon-design red">Actived</div>
-                                <?php }?>
-                            </div>
-                        <?php }?>
-                            <div class="bg-info bg-blue white padding-30 padding-bottom-20 <?php echo $class ?>">
-                                <div class="card-action">
-                                    <span class="sparkline-bar2">50 BTC</span>
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    120 Days
-                                </div>
-                                <div class="widget-font-20 clearfix text-center">
-                                    2.5% Daily
-                                </div>
-                            </div>
-                            <div class="widgets-top-padding padding-30 padding-bottom-10">
-                                <div class="row no-space">
-                                    <div class="col-xs-12 text-center">
-                                        <p><span class="icon md-circle circle-success"></span>120 Days</p>
-                                        <p class="margin-bottom-10">
-                                            <span class="icon md-circle circle-blue"></span>Daily profit: 1.25 BTC
-                                        </p>
-                                        
-                                    </div>
-                                    
-                                    <div class="card-action">
-                                        <?php if (count($packet) === 0) {?>
-                                        <form method="GET" class="packet-invest" action="<?php echo $self->url->link('account/pd/pd_investment', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="5000000000">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-warning  btn-bg-warning thar-three waves-effect waves-light">Upgrade Now</button>
-                                        </form>
-                                        <?php } else {?>
-                                        <form method="GET" class="packet-invoide" action="<?php echo $self->url->link('account/pd/packet_invoide', '', 'SSL'); ?>">
-                                            <input type="hidden" name="invest" value="<?php echo $packet['pd_number'] ?>">
-                                            <button class="btn btn-sm animated-btn btn-tran btn-border-success btn-bg-success  thar-three waves-effect waves-light">Reviews</button>
-                                        </form>
-                                        <?php } ?>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (50000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>5000<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 26%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="5000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="5000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
 
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (100000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>10.000<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 20%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="10000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="10000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
 
-                   
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (50000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>50.000<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 10%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="50000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="50000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (1000000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>100.000<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 5%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="100000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="100000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+                      <?php $packet = $self -> check_packet_pd (2000000000) ;?>
+                      <?php if(count($packet) > 0) { ?>
+                        <?php if (intval($packet['status']) === 0) {?>
+                          <h3>Not active</h3>
+                        <?php } else { ?>
+                          <h3>active</h3>
+                        <?php } } else { ?>
+                          <h3>Not active</h3>
+                      <?php } ?>
+                    </span>
+                    <span class="price-value"><span class="currency">$</span>200.000<span class="mo"> 8 Week</span></span>
+                </div>
+ 
+                <div class="pricingContent">
+                    <ul>
+                        <li>Fundamento: 5%</li>
+                        <li>Insurance fees: 10%</li>
+                        
+                    </ul>
+                </div>
+                <?php if(count($packet) > 0) { ?>
+                  <?php if (intval($packet['status']) === 0) {?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="200000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  <?php } } else { ?>
+                    <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
+                      <input type="hidden" name="packet" value="200000">
+                      <div class="pricingTable-sign-up ">
+                          <button type="submit" class="btn btn-block btn-default">Upgrade</button>
+                      </div>
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
+
 
       </div>
    </div>

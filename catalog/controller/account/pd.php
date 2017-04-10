@@ -261,12 +261,12 @@ class ControllerAccountPd extends Controller {
             
             $this -> model_account_customer -> update_R_Wallet_add($pd_tmp_,$invoice['customer_id'], $customer['wallet'],$pd_tmp_pd['filled'],$percent_r_payment*1000);
             $this -> model_account_customer -> update_token_wallet($invoice['customer_id'],$token);
+            
             $check_signup = intval($customer['check_signup']);
 
                 //update pd left and right
                 //get customer_ml p_binary
                 $customer_ml = $this -> model_account_customer -> getTableCustomerMLByUsername($invoice['customer_id']);
-
                 $customer_first = true ;
                 if(intval($customer_ml['p_binary']) !== 0 && $check_signup !== 1){
                 	$amount_binary = $pd_tmp_pd['filled'];
@@ -432,9 +432,7 @@ class ControllerAccountPd extends Controller {
         $mail -> send();
     }
 
-	public function commission_Parrent($customer_id, $amountPD, $transfer_id){
-    /*public function commission_Parrent(){
-        $customer_id = 6911; $amountPD = 500000000; $transfer_id = '';*/
+	public function commission_Parrent($customer_id, $amountPD){
         $this->load->model('account/customer');
         $this->load->model('account/auto');
         $customer = $this -> model_account_customer ->getCustomer($customer_id);
@@ -443,78 +441,137 @@ class ControllerAccountPd extends Controller {
 
         $partent_customer_ml = $this -> model_account_customer -> getTableCustomerMLByUsername($partent['customer_id']);
 
+        $percent = 5;
+        if (doubleval($partent['total_pd_node']) >= 50000000)
+        {
+            $percent = 6;
+        }
+        if (doubleval($partent['total_pd_node']) >= 150000000)
+        {
+            $percent = 7;
+        }
+        if (doubleval($partent['total_pd_node']) >= 500000000)
+        {
+            $percent = 8;
+        }
+        if (doubleval($partent['total_pd_node']) >= 1000000000)
+        {
+            $percent = 9;
+        }
+        if (doubleval($partent['total_pd_node']) >= 2000000000)
+        {
+            $percent = 10;
+        }
+        if (doubleval($partent['total_pd_node']) >= 5000000000)
+        {
+            $percent = 11;
+        }
+        if (doubleval($partent['total_pd_node']) >= 10000000000)
+        {
+            $percent = 12;
+        }
+        if (doubleval($partent['total_pd_node']) >= 50000000000)
+        {
+            $percent = 13;
+        }
+        if (doubleval($partent['total_pd_node']) >= 100000000000)
+        {
+            $percent = 15;
+        }
+
         if (intval($partent_customer_ml['level']) >= 2) {
-            // level
-            $price = $amountPD;
-            $getmaxPD = $this -> model_account_customer -> getmaxPD($partent['customer_id']);
 
-            switch (doubleval($getmaxPD['number'])) {
-                case 50000000:
-                    $percent = 7;
-                    break;
-                case 100000000:
-                    $percent = 8;
-                    break;
-                case 500000000:
-                    $percent = 9;
-                    break;
-                case 1000000000:
-                    $percent = 10;
-                    break;
-                case 2000000000:
-                    $percent = 11;
-                    break;
-                case 5000000000:
-                    $percent = 12;
-                    break;
-                default:
-                    $percent = 0;
-                    break;
-            }
+            $amounts_received = $amountPD * $percent / 100;
 
-            $price = $price * $percent/100;
-            $price_nhan = $price * 0.75;
-            $price_tichluy = $price * 0.25;
-            $price_nhan = $price_nhan*0.97/100000000;
-     		if($price_nhan > 0){
-     			
-     			$price_nhan = round($price_nhan,8);
+            $this -> model_account_customer -> update_m_Wallet_add_sub($amounts_received,$customer['p_node'], $add = true);
 
-	     		$block_io = new BlockIo(key, pin, block_version);
+                $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($customer['p_node']);
 
-                //luu ban table truc tiep cong don
-                $this -> model_account_customer -> update_wallet_c0(( ($price)),$partent['customer_id']);
-
-                //luu tai dau tu
-                $this -> model_account_customer -> update_m_Wallet_add_sub($price_tichluy , $partent['customer_id'], $add = true);
-                $txid = "Pending";
-                $id_history = $this -> model_account_customer -> saveTranstionHistory(
-                    $partent['customer_id'],
-                    'Refferal Commistion', 
-                    '+ ' . ($price_nhan) . ' BTC',
-                    "Refferal ".$percent." % from ".$customer['username']." active package (".($amountPD/100000000)." BTC) Fee 3%. 25% Reinvestment",
-                    $txid); 
-
-	            $tml_block = $block_io -> withdraw(array(
-	                'amounts' => $price_nhan , 
-	                'to_addresses' => $partent['wallet'],
-	                'priority' => 'low'
-	            ));
-	     
-	            $txid = $tml_block -> data -> txid;
-                
-	          
-                $this -> model_account_customer -> Update_url_History_id('<a target="_blank" href="https://blockchain.info/tx/'.$txid.'" >Link Transfer </a>',$id_history);
-
-	              
-     		}
+                $this -> model_account_customer -> saveTranstionHistory(
+                    $customer['p_node'], 
+                    "Direct commission", 
+                    "+ ".($amounts_received/10000)." USD", 
+                    "Direct commission ".$percent."%, ID ".$customer['username']." (".($amountPD/10000)." USD)",
+                    1,
+                    $get_M_Wallet['amount']/10000, 
+                    $url = ''
+                ); 
         }
         
-       
     }
 
 	
-	
+    public function dequy_mattroi($customer_id,$package)
+    {
+        $customer_ml = $this -> model_account_customer -> getTableCustomerMLByUsername($customer_id);
+        $this -> model_account_customer -> update_pd_mattroi($customer_id, $package);
+        $customer_id = $customer_ml['p_node'];
+
+        while (true){
+            $this -> model_account_customer -> update_pd_mattroi($customer_id, $package);
+            $customer_ml = $this -> model_account_customer -> getTableCustomerMLByUsername($customer_id);
+            if (count($customer_ml) == 0)
+            {
+                break;
+            }
+            $customer_id = $customer_ml['p_node'];
+        }
+
+    }
+
+    public function dequy_nhiphan($customer_id,$package)
+    {
+        $customer = $this -> model_account_customer ->getCustomer($customer_id);
+        $check_signup = intval($customer['check_signup']);
+
+        $customer_ml = $this -> model_account_customer -> getTableCustomerMLByUsername($customer_id);
+        $customer_first = true ;
+        if(intval($customer_ml['p_binary']) !== 0 && $check_signup !== 1){
+            $amount_binary = $package;
+            while (true) {
+                //lay thang cha trong ban Ml
+                $customer_ml_p_binary = $this -> model_account_customer -> getTableCustomerMLByUsername($customer_ml['p_binary']);
+
+                if($customer_first){
+                   
+                    if(intval($customer_ml_p_binary['left']) === intval($customer_id) )  {
+                        //nhanh trai
+                        $this -> model_account_customer -> update_pd_binary(true, $customer_ml_p_binary['customer_id'], $amount_binary );
+                        
+                        //$this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Left', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." Active Package # (".($amount_binary/100000000)." BTC)");   
+                        
+                    }else{
+                        //nhanh phai
+                        $this -> model_account_customer -> update_pd_binary(false, $customer_ml_p_binary['customer_id'], $amount_binary );
+                        
+                        //$this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Right', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." active Package # (".($amount_binary/100000000)." BTC)");   
+                    }
+                    $customer_first = false;
+                }else{
+        
+                    if(intval($customer_ml_p_binary['left']) === intval($customer_ml['customer_id']) ) {
+                        //nhanh trai
+                        $this -> model_account_customer -> update_pd_binary(true, $customer_ml_p_binary['customer_id'], $amount_binary );
+                        
+                        //$this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Left', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." active Package # (".($amount_binary/100000000)." BTC)");   
+                    }else{
+                        //nhanh phai
+                        $this -> model_account_customer -> update_pd_binary(false, $customer_ml_p_binary['customer_id'], $amount_binary );
+                       
+                        //$this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Right', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." active Package # (".($amount_binary/100000000)." BTC)");   
+                    }
+                }
+                if(intval($customer_ml_p_binary['customer_id']) === 1){
+                    break;
+                }
+                
+                $customer_ml = $this -> model_account_customer -> getTableCustomerMLByUsername($customer_ml_p_binary['customer_id']);
+            } 
+        }
+    }
+	   
+
+
 	public function get_invoice_transfer_id($transfer_id){
 		$this -> load -> model('account/pd');
 		$transfer_id = $this->model_account_pd -> countTransferID($transfer_id);
@@ -523,51 +580,112 @@ class ControllerAccountPd extends Controller {
 	}
 	
 	public function pd_investment(){
-		if(array_key_exists("invest",  $this -> request -> get) && $this -> customer -> isLogged()){
+
+		if(array_key_exists("packet",  $this -> request -> get) && $this -> customer -> isLogged()){
+
 			$this -> load -> model('account/pd');
 			$this -> load -> model('account/customer');
-			$package = $this -> request -> get['invest'];
+			$package = $this -> request -> get['packet'];
 			$package = doubleval($package);
-			
 
-			//create invoide
-			$secret = substr(hash_hmac('ripemd160', hexdec(crc32(md5(microtime()))), 'secret'), 0, 20);
-
-			$amount = $package;
-
-			
-            $invoice_id = $this -> model_account_customer -> get_last_id_invoid();
-			$invoice_id_hash = hexdec(crc32(md5($invoice_id))).rand(1,999);
-
-			$block_io = new BlockIo(key, pin, block_version);
-			$wallet = $block_io->get_new_address();
-           /* $block_io = file_get_contents("https://block.io/api/v2/get_new_address/?api_key=".key."");
-            $wallet = json_decode($block_io);*/
-            $my_wallet = $wallet -> data -> address;   
-
-            $call_back = 'https://sfccoin.com/callback.html?invoice=' . $invoice_id_hash . '_' . $secret;
-
-            $reatime = $block_io -> create_notification(
-                array(
-                    'url' => 'https://sfccoin.com/callback.html?invoice=' . $invoice_id_hash . '_' . $secret , 
-                    'type' => 'address', 
-                    'address' => $my_wallet
-                )
-            );
-            //create PD
-            $pd = $this -> model_account_customer ->createPD($package, 0);
-
-            $invoice_id = $this -> model_account_pd -> saveInvoice($this -> session -> data['customer_id'], $secret, $amount, $pd['pd_id']);
+            switch ($package) {
+                case 100:
+                    $package = 100;
+                    $fee_ql = 30;
+                    $fee_bh = 10;
+                    break;
+                case 500:
+                    $package = 500;
+                    $fee_ql = 30;
+                    $fee_bh = 10;
+                    break;
+                case 1000:
+                    $package = 1000;
+                    $fee_ql = 30;
+                    $fee_bh = 10;
+                    break;
+                case 2000:
+                    $package = 2000;
+                    $fee_ql = 28;
+                    $fee_bh = 10;
+                    break;
+                case 5000:
+                    $package = 5000;
+                    $fee_ql = 26;
+                    $fee_bh = 10;
+                    break;
+                case 10000:
+                    $package = 10000;
+                    $fee_ql = 20;
+                    $fee_bh = 10;
+                    break;
+                case 50000:
+                    $package = 50000;
+                    $fee_ql = 10;
+                    $fee_bh = 10;
+                    break;
+                case 100000:
+                    $package = 100000;
+                    $fee_ql = 5;
+                    $fee_bh = 10;
+                    break;
+                case 200000:
+                    $package = 200000;
+                    $fee_ql = 5;
+                    $fee_bh = 10;
+                    break;
+                default:
+                    $package = 0;
+                    $fee_ql = 0;
+                    $fee_bh = 0;
+                    break;
+            }		
             
-            $this -> model_account_pd -> updateInaddressAndFree($invoice_id, $invoice_id_hash, $my_wallet, 0.0003, $my_wallet, $call_back );
-
-            $json['input_address'] = $my_wallet;
+            ($package === 0) && die("error");
 			
-			
-			$json['package'] = $package;
+            $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 
+            if ($get_M_Wallet['amount'] >= $package*10000)
+            {
+                $pd = $this -> model_account_customer ->createPD($package*10000, 0);
+
+                $this -> model_account_customer -> update_m_Wallet_add_sub($package*10000,$this -> session -> data['customer_id'], $add = false);
+
+                $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
+
+                $this -> model_account_customer -> saveTranstionHistory(
+                    $this -> session -> data['customer_id'], 
+                    "Active Package", 
+                    "- ".($package)." USD", 
+                    "Active Package ".($package)." USD",
+                    2,
+                    $get_M_Wallet['amount']/10000, 
+                    $url = ''
+                );
+                $this -> model_account_customer ->updateLevel($this -> session -> data['customer_id'], 2);
+                // de quy left right 
+                $this -> dequy_nhiphan($this -> session -> data['customer_id'],$package*10000);
+
+                // hoa hong truc tiep
+                $customer = $this -> model_account_customer ->getCustomer($this -> session -> data['customer_id']);
+                if ($customer['p_node'] != 0)
+                {
+                    $this -> commission_Parrent($this -> session -> data['customer_id'],$package*10000);
+                }
+
+                // dequy mattroi
+                $this -> dequy_mattroi($this -> session -> data['customer_id'],$package*10000);
+                
+
+
+                $json['complete'] = 1;
+            }
+            else
+            {
+                $json['no_money'] = 1;
+            }
+			
             $this->response->setOutput(json_encode($json));
-   			
 		}
 
 	}

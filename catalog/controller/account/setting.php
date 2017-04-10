@@ -223,7 +223,7 @@ class ControllerAccountSetting extends Controller {
 			$this -> load -> model('account/customer');
 
 			$this -> model_account_customer -> editPasswordTransactionCustom($this -> request -> post['transaction_password']);
-			$variableLink = HTTPS_SERVER.'transaction-password#success';
+			$variableLink = HTTPS_SERVER.'your-profile.html#success';
 			$this -> response -> redirect($variableLink);
 		}
 	}

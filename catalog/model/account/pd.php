@@ -119,13 +119,13 @@ class ModelAccountPd extends Model {
 		return $this -> db -> getLastId();
 	}
 
-	public function saveInvoice($customer_id, $secret, $amount, $pd_id){
+	public function saveInvoice($customer_id, $secret, $amount, $amount_usd){
 		$query = $this -> db -> query("
 			INSERT INTO ".DB_PREFIX."customer_invoice_pd SET
 			customer_id = '".$customer_id."',
 			secret = '".$secret."',
 			amount = ".$amount.",
-			transfer_id = '".$pd_id."',
+			amount_usd = '".$amount_usd."',
 			received = 0,
 			date_created = NOW()
 		");

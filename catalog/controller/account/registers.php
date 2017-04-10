@@ -79,80 +79,119 @@ class ControllerAccountRegisters extends Controller {
 			$tmp = $this -> model_customize_register -> addCustomerByToken($this->request->post);
 
 			$cus_id= $tmp;
-				$code_active = sha1(md5(md5($cus_id)));
-				$this -> model_customize_register -> insert_code_active($cus_id, $code_active);
-				$amount = 0;
-				$checkC_Wallet = $this -> model_account_customer -> checkR_Wallet($cus_id);
-				if(intval($checkC_Wallet['number'])  === 0){
-					if(!$this -> model_account_customer -> insertR_WalletR($amount, $cus_id)){
-						die();
-					}
+
+			$code_active = sha1(md5(md5($cus_id)));
+
+			$this -> model_customize_register -> insert_code_active($cus_id, $code_active);
+
+			$amount = 0;
+
+			$checkM_Wallet = $this -> model_account_customer -> checkM_Wallet($cus_id);
+			if(intval($checkM_Wallet['number'])  === 0){
+				if(!$this -> model_account_customer -> insert_M_Wallet($amount, $cus_id)){
+					die();
 				}
-				
+			}
 
-				$data['has_register'] = true;
-				$getCountryByID = $this -> model_account_customer -> getCountryByID(intval($this-> request ->post['country_id']));
-				//$this -> response -> redirect($this -> url -> link('account/', '#success', 'SSL'));
+			$check_Setting_Customer = $this -> model_account_customer -> check_Setting_Customer($cus_id);
+			if(intval($check_Setting_Customer['number'])  === 0){
 
-				$data['has_register'] = true;
-				$mail = new Mail();
-				$mail -> protocol = $this -> config -> get('config_mail_protocol');
-				$mail -> parameter = $this -> config -> get('config_mail_parameter');
-				$mail -> smtp_hostname = $this -> config -> get('config_mail_smtp_hostname');
-				$mail -> smtp_username = $this -> config -> get('config_mail_smtp_username');
-				$mail -> smtp_password = html_entity_decode($this -> config -> get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-				$mail -> smtp_port = $this -> config -> get('config_mail_smtp_port');
-				$mail -> smtp_timeout = $this -> config -> get('config_mail_smtp_timeout');
+				$ga = new PHPGangsta_GoogleAuthenticator();
+				$key_authenticator = $ga->createSecret();
 
-				$mail -> setTo($_POST['email']);
-				$mail -> setFrom($this -> config -> get('config_email'));
-				$mail -> setSender(html_entity_decode("Smartmony, Inc", ENT_QUOTES, 'UTF-8'));
-				$mail -> setSubject("Congratulations Your Registration is Confirmed!");
-				$html_mail = '<div style="background: #f2f2f2; width:100%;">
-				   <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#364150;border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
-				    width:700px; margin:0 auto">
-				   <tbody>
-				      <tr>
-				        <td>
-				          <div style="text-align:center" class="ajs-header"><img  src="'.HTTPS_SERVER.'catalog/view/theme/default/img/logo.png" alt="logo" style="margin: 0 auto; width:150px;"></div>
-				        </td>
-				       </tr>
-				       <tr>
-				       <td style="background:#fff">
-				       	<p class="text-center" style="font-size:20px;color: black;text-transform: uppercase; width:100%; float:left;text-align: center;margin: 30px 0px 0 0;">congratulations !<p>
-				       	<p class="text-center" style="color: black; width:100%; float:left;text-align: center;line-height: 15px;margin-bottom:30px;">You have successfully registered account</p>
-       	<div style="width:600px; margin:0 auto; font-size=15px">
+				if(!$this -> model_account_customer -> insert_customer_setting($cus_id,$key_authenticator)){
+					die();
+				}
+			}
+			
 
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Full name: <b>'.$this-> request ->post['username'].'</b></p>
+			$data['has_register'] = true;
+			$getCountryByID = $this -> model_account_customer -> getCountryByID(intval($this-> request ->post['country_id']));
+			//$this -> response -> redirect($this -> url -> link('account/', '#success', 'SSL'));
 
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">ID: <b>M'.($cus_id + 100000).'</b></p>
+			$data['has_register'] = true;
+			$mail = new Mail();
+			$mail -> protocol = $this -> config -> get('config_mail_protocol');
+			$mail -> parameter = $this -> config -> get('config_mail_parameter');
+			$mail -> smtp_hostname = $this -> config -> get('config_mail_smtp_hostname');
+			$mail -> smtp_username = $this -> config -> get('config_mail_smtp_username');
+			$mail -> smtp_password = html_entity_decode($this -> config -> get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+			$mail -> smtp_port = $this -> config -> get('config_mail_smtp_port');
+			$mail -> smtp_timeout = $this -> config -> get('config_mail_smtp_timeout');
 
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Email Address: <b>'.$this-> request ->post['email'].'</b></p>
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Phone Number: <b>'.$this-> request ->post['telephone'].'</b></p>
-					       	
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Password For Login: <b>'.$this-> request ->post['password'].'</b></p>
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Password For Transaction: <b>'.$transaction_password.'</b></p>
-					      				       	
-					       	
-					       	
+			$mail -> setTo($_POST['email']);
+			$mail -> setFrom($this -> config -> get('config_email'));
+			$mail -> setSender(html_entity_decode("Smartmony, Inc", ENT_QUOTES, 'UTF-8'));
+			$mail -> setSubject("Congratulations Your Registration is Confirmed!");
+			$html_mail = '<div style="background: #f2f2f2; width:100%;">
+			   <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
+			    width:700px; margin:0 auto">
+			   <tbody>
+			      <tr>
+			        <td>
+			          <div style="text-align:center" class="ajs-header"><img  src="'.HTTPS_SERVER.'catalog/view/theme/default/img/logo.png" alt="logo" style="margin: 30px auto; width:150px;"></div>
+			        </td>
+			       </tr>
+			       <tr>
+			       <td style="border: 1px solid #dbdbdb;background-color: #ffffff;border-radius: 5px; padding: 10px; width: 600px; margin: auto; font-family: Arial,Helvetica,sans-serif; font-size: 14px; margin-top:25px; padding:30px;">
+			       	<div style="font-size:14px;font-weight:bold; margin-top:25px; margin-bottom:30px;">Hello <span style="color:#01aeef">'.$this-> request ->post['username'].'</span></div>
+			       	<h2>Greetings from <span style="color:#01aeef">mackayshields! </span></h2>
 
-					          </div>
-				       </td>
-				       </tr>
-				    </tbody>
-				    </table>
-				  </div>';
-				
-				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
-				$mail -> setHtml($html_mail);
-				//print_r($mail);
-				//$mail -> send();
+			       	<p>Thank you for applying to open an Yesbook Account with us</p>
 
-				
-				//die;
-				$this->session->data['register_mail'] = $this-> request ->post['email'];
-				unset($this->session->data['customer_id']);
-				$this -> response -> redirect(HTTPS_SERVER . 'login.html#success');
+			       	<table width="70%" cellspacing="0" cellpadding="4" align="center" border="1" rules="all">
+						   <tbody>
+						      <tr>
+						         <td colspan="3" align="center" bgcolor="#fff"><span style="font-size:16px"><strong>Account Details</strong></span></td>
+						      </tr>
+						      <tr>
+						         <td width="50%" align="right">Full Name</td>
+						         
+						         <td width="47%">'.$this-> request ->post['username'].'</td>
+						      </tr>
+						      <tr>
+						         <td align="right">Affilate  ID </td>
+						         
+						         <td>M'.($cus_id + 100000).'</td>
+						      </tr>
+						      <tr>
+						         <td align="right">Login Password </td>
+						        
+						         <td>'.$this-> request ->post['password'].'</td>
+						      </tr>
+						      <tr>
+						         <td align="right">Password For Transaction</td>
+						         
+						         <td>'.$transaction_password.'</td>
+						      </tr>
+						   </tbody>
+						</table>
+						<p style="margin-bottom:10px; line-height:25px;">This is an auto generated password. You are advised to change your password as per your convenience.</p>
+						<p style="margin-bottom:10px; line-height:25px;">
+							We thank you again for your interest in opening Yesbook Account. Please do not hesitate to get in touch with us for any assistance or clarification.
+						</p>
+						<p style="margin-bottom:10px; line-height:25px;">
+							Sincerely
+						</p>
+						<p style="margin-bottom:10px; line-height:25px;">
+							mackayshields
+						</p>
+   	
+			       </tr>
+			    </tbody>
+			    </table>
+			  </div>';
+			
+			$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
+			$mail -> setHtml($html_mail);
+			print_r($mail);
+			//$mail -> send();
+
+			
+			
+			$this->session->data['register_mail'] = $this-> request ->post['email'];
+			unset($this->session->data['customer_id']);
+			$this -> response -> redirect(HTTPS_SERVER . 'login.html#success');
 			
 		}
 	}
@@ -193,14 +232,14 @@ class ControllerAccountRegisters extends Controller {
 	public function checkemail() {
 		if ($this -> request -> get['email']) {
 			$this -> load -> model('customize/register');
-			$json['success'] = intval($this -> model_customize_register -> checkExitEmail($this -> request -> get['email'])) < 100 ? 0 : 1;
+			$json['success'] = intval($this -> model_customize_register -> checkExitEmail($this -> request -> get['email'])) < 1 ? 0 : 1;
 			$this -> response -> setOutput(json_encode($json));
 		}
 	}
 	public function checkphone() {
 		if ($this -> request -> get['phone']) {
 			$this -> load -> model('customize/register');
-			$json['success'] = intval($this -> model_customize_register -> checkExitPhone($this -> request -> get['phone'])) < 100 ? 0 : 1;
+			$json['success'] = intval($this -> model_customize_register -> checkExitPhone($this -> request -> get['phone'])) < 1 ? 0 : 1;
 			$this -> response -> setOutput(json_encode($json));
 		}
 	}

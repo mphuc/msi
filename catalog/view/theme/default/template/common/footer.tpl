@@ -1,9 +1,9 @@
 </div>
 <footer class="footer text-right" style="margin-top: 20px;"> © 2017. All rights reserved. </footer>
-<!-- <div class="page-loader">
+<div class="page-loader">
 	<a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
 	<span class="text-uppercase">Loading...</span>
-</div> -->
+</div>
 
 <!-- SmartBox Js files --> 
 <script>
@@ -53,29 +53,35 @@ copyTextareaBtn.addEventListener('click', function(event) {
    
    	$('.packet-invest').on('submit', function(){
    		var self = $(this);
-   		alertify.confirm('<p class="text-center" style="font-size:25px;color: black;text-transform: uppercase;height: 40px">You make sure your choice !</p>',
+   		alertify.confirm('<p class="text-center" style="font-size:25px;color: black;text-transform: uppercase;height: 40px">Would you like to activate $'+$(this).children('input').val()+' package ?</p>',
 		  function(){
 		    window.funLazyLoad.start();
 	   		setTimeout(function(){
 				self.ajaxSubmit({
 					success : function(result) {
 						result = $.parseJSON(result);
-						console.log(result);
+						if (result.no_money == 1)
+						{
+							window.funLazyLoad.reset();
+							xhtml = '<div class="col-md-12"><h2 class="text-center">You do not have enough dollars. Please deposit</h2><p class="text-center"><a href="?route=account/deposit" class="btn btn-success btn-md">Deposit <i class="fa fa-angle-double-right" aria-hidden="true"></i></a><p></div>';
+							alertify.alert(xhtml, function(){
+							 
+							  });	
+						}
+						else
+						{
+							window.funLazyLoad.reset();
+							xhtml = '<div class="col-md-12"><h2 class="text-center">Successful package activation. Thank you for trusting us</h2></div>';
+							alertify.alert(xhtml, function(){
+							    window.funLazyLoad.reset();
+								    location.reload(true);
+							  });
+						}
 						
-						var package = result.package / 100000000
-						
-						var xhtml = '<div class="col-md-12">Please send '+package+' BTC to this address.</div><div class="col-md-6"><img style="margin-left:0px" src="https://chart.googleapis.com/chart?chs=225x225&chld=L|0&cht=qr&chl=bitcoin:'+result.input_address+'?amount='+package+'"/><p>'+result.input_address+'</p></div><div class="col-md-6"><p>Your Packet: '+package+' BTC</p>Total: '+ package +' BTC</p></div>'
-						alertify.alert(xhtml, function(){
-						    window.funLazyLoad.reset();
-						    
-							    location.reload(true);
-							
-						    
-						  });
 						
 					}
 				});
-				check_payment();
+				
 			}, 200);
 		  },
 		  function(){
@@ -113,7 +119,7 @@ copyTextareaBtn.addEventListener('click', function(event) {
 		}, 200);
    		return false;
    	});
-	 function check_payment(){
+	 /*function check_payment(){
 	 	$.ajax({
 	        url : "<?php echo $check_payment ?>",
 	        type : "post",
@@ -137,7 +143,7 @@ copyTextareaBtn.addEventListener('click', function(event) {
 
 	        }
 	    });
-	 }
+	 }*/
    </script>
   
    

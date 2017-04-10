@@ -107,11 +107,13 @@ class ControllerAccountDashboard extends Controller {
 		$data['taidautu'] = $this -> taidautu($session_id);
 		$data['wallet_token'] = $this -> model_account_customer -> get_sum_token_wallet($session_id);
 		$customer = $this -> model_account_customer-> getCustomer($this -> session -> data['customer_id']);
-$data['user'] = $this -> model_account_customer -> get_count_customer_signup($this->session->data['customer_id']);
+/*$data['user'] = $this -> model_account_customer -> get_count_customer_signup($this->session->data['customer_id']);*/
 		$Hash = $customer['customer_code'];	
 		$data['customer_new'] = $customer;
 		$data['customer_code'] = $Hash;
 
+		$data['get_customer_activity'] = $this -> model_account_customer -> get_customer_activity($this->session->data['customer_id']);
+		
 		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/account/dashboard.tpl')) {
 			$this -> response -> setOutput($this -> load -> view($this -> config -> get('config_template') . '/template/account/dashboard.tpl', $data));
 		} else {

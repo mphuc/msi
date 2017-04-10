@@ -362,7 +362,7 @@ form button {
 }
 
 .page-loader {
-	background:#0e1319 url(../images/bg.jpg) no-repeat center;
+	background:rgba(14, 19, 25, 0.8)  no-repeat center;
 	background-size:cover;
 	position:fixed;
 	top:0;

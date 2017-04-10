@@ -1,6 +1,9 @@
 <?php
 class ControllerCommonHeader extends Controller {
 	public function index() {
+
+		
+		
 		$data['title'] = $this->document->getTitle();
 
 		if ($this->request->server['HTTPS']) {
@@ -185,8 +188,19 @@ class ControllerCommonHeader extends Controller {
 		$data['self'] = $this;
 		if (isset($this -> session -> data['customer_id'])) {
 			$this->load->model('account/customer');
-		$data['customer'] = $customer = $this -> model_account_customer -> getCustomer_by_ml($this -> session -> data['customer_id']);	
-		$data['getmaxPD'] = $this -> model_account_customer -> getmaxPD($this -> session -> data['customer_id']);	
+			$data['customer'] = $customer = $this -> model_account_customer -> getCustomer_by_ml($this -> session -> data['customer_id']);	
+			$data['getmaxPD'] = $this -> model_account_customer -> getmaxPD($this -> session -> data['customer_id']);
+
+
+			// authenticator
+			/*$get_customer_setting = $this -> model_account_customer -> get_customer_setting($this -> session -> data['customer_id']);
+			if ($get_customer_setting['status_authenticator'] == 1)
+			{
+				if (!isset($this -> session -> data['authenticator']))
+				{
+					$this->response->redirect(HTTPS_SERVER . 'lock.html');
+				}
+			}*/
 		}
 
 		

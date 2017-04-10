@@ -20,7 +20,7 @@ class ControllerAccountLogout extends Controller {
 			unset($this->session->data['reward']);
 			unset($this->session->data['voucher']);
 			unset($this->session->data['vouchers']);
-
+			unset($this -> session -> data['authenticator']);
 			$this->event->trigger('post.customer.logout');
 
 			$this->response->redirect(HTTPS_SERVER . 'about');

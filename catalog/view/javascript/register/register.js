@@ -1,4 +1,15 @@
 $( document ).ready(function() {
+    window.funLazyLoad = {
+        start: function() {
+            $('.page-loader').show();
+        },
+        reset: function() {
+            $('.page-loader').hide();
+        },
+        show: function() {
+            $('.page-loader').show();
+        }
+    };
     $('input#phone').keydown(function(event) {
         if (event.keyCode === 13) {
             return true;
@@ -29,6 +40,8 @@ $( document ).ready(function() {
     }) 
 
     $('#register-account').on('submit', function(event) {
+        window.funLazyLoad.start();
+        window.funLazyLoad.show();
         $.fn.existsWithValue = function() {
             return this.length && this.val().length;
         };
@@ -70,6 +83,7 @@ $( document ).ready(function() {
                     self.find('#username').attr('placeholder','Please enter full name');
                     /*self.find('#user-error').show();
                     self.find('#user-error span').html('Please enter user name');*/
+                    window.funLazyLoad.reset();
                     return false;
                 }
                 return true;
@@ -90,6 +104,7 @@ $( document ).ready(function() {
                     self.find('#email').attr('placeholder','Please enter email address');
                     /*self.find('#email-error').show();
                     self.find('#email-error span').html('Please enter email address');*/
+                    window.funLazyLoad.reset();
                     return false;
                 }
                 return true;
@@ -102,6 +117,7 @@ $( document ).ready(function() {
                     self.find('#phone').attr('placeholder','Please enter phone number');
                    /* self.find('#phone-error').show();
                     self.find('#phone-error span').html('Please enter phone number');*/
+                    window.funLazyLoad.reset();
                     return false;
                 }
                 return true;
@@ -123,6 +139,7 @@ $( document ).ready(function() {
                 
                     /*self.find('#country-error').show();
                     self.find('#country-error span').html('The Citizenship card/passport no field is required');*/
+                    window.funLazyLoad.reset();
                     return false;
                 }
                 return true;
@@ -134,6 +151,7 @@ $( document ).ready(function() {
                     self.find('#password').attr('placeholder','Please enter password for login');
                     /*self.find('#password-error').show();
                     self.find('#password-error span').html('Please enter password for login');*/
+                    window.funLazyLoad.reset();
                     return false;
                 }
                 return true;
@@ -257,6 +275,7 @@ $( document ).ready(function() {
 
         validate.init($(this));
         if (validate.userName($(this)) === false) {
+            window.funLazyLoad.reset();
             return false;
         } else {
             validate.init($(this));
@@ -264,6 +283,7 @@ $( document ).ready(function() {
         }
 
         if (validate.email($(this)) === false) {
+            window.funLazyLoad.reset();
             return false;
         } else {
             var checkEmail = null;
@@ -274,6 +294,7 @@ $( document ).ready(function() {
                 self.find('#email').parent().addClass('has-error');
                 self.find('#email-error').show();
                 self.find('#email-error span').html('Please enter email address');
+                window.funLazyLoad.reset();
                 return false;
             } else {
                 validate.init($(this));
@@ -281,6 +302,7 @@ $( document ).ready(function() {
             }
         }
         if (validate.phone($(this)) === false) {
+            window.funLazyLoad.reset();
             return false;
         } else {
             validate.init($(this));
@@ -294,6 +316,7 @@ $( document ).ready(function() {
         }
         */
         if (validate.country($(this)) === false) {
+            window.funLazyLoad.reset();
             return false;
         } else {
             validate.init($(this));
@@ -301,6 +324,7 @@ $( document ).ready(function() {
         }
 
         if (validate.password($(this)) === false) {
+            window.funLazyLoad.reset();
             return false;
         } else {
             validate.init($(this));
@@ -385,16 +409,20 @@ $( document ).ready(function() {
             validate.checkEmailExit($(this), function(callback) {
                 if (!callback) {
                     self.find('#email').parent().addClass('has-error');
-                    self.find('#email-error').show();
-                    self.find('#email-error span').html('This email is already exists');
+                    self.find('#email').val('');
+                    self.find('#email').focus();
+                    self.find('#email').attr('placeholder','This email is already exists');
+                    //self.find('#email-error').show();
+                    /*self.find('#email-error span').html('This email is already exists');*/
                     self.find('#password').val('');
-                    self.find('#password').parent().removeClass('has-success');
+                    /*self.find('#password').parent().removeClass('has-success');
                     self.find('#confirmpassword').val('');
-                    self.find('#confirmpassword').parent().removeClass('has-success');
+                    self.find('#confirmpassword').parent().removeClass('has-success');*/
                     // self.find('#password2').val('');
-                    self.find('#password2').parent().removeClass('has-success');
+                    //self.find('#password2').parent().removeClass('has-success');
                     // self.find('#confirmpasswordtransaction').val('');
-                    self.find('#confirmpasswordtransaction').parent().removeClass('has-success');
+                    //self.find('#confirmpasswordtransaction').parent().removeClass('has-success');
+                    window.funLazyLoad.reset();
                     return false;
                 } else {
                     self.find('#username').parent().removeClass('has-error');
@@ -428,16 +456,22 @@ $( document ).ready(function() {
             validate.checkPhoneExit($(this), function(callback) {
                 if (!callback) {
                     self.find('#phone').parent().addClass('has-error');
-                    self.find('#phone-error').show();
-                    self.find('#phone-error span').html('This phone is already exists');
+
+                    self.find('#phone').val('');
+                    self.find('#phone').focus();
+                    self.find('#phone').attr('placeholder','This phone is already exists');
+
+                    /*self.find('#phone-error').show();
+                    self.find('#phone-error span').html('This phone is already exists');*/
                     self.find('#password').val('');
                     self.find('#password').parent().removeClass('has-success');
-                    self.find('#confirmpassword').val('');
-                    self.find('#confirmpassword').parent().removeClass('has-success');
+                    /*self.find('#confirmpassword').val('');
+                    self.find('#confirmpassword').parent().removeClass('has-success');*/
                     // self.find('#password2').val('');
-                    self.find('#password2').parent().removeClass('has-success');
+                    //self.find('#password2').parent().removeClass('has-success');
                     // self.find('#confirmpasswordtransaction').val('');
-                    self.find('#confirmpasswordtransaction').parent().removeClass('has-success');
+                    //self.find('#confirmpasswordtransaction').parent().removeClass('has-success');
+                    window.funLazyLoad.reset();
                     return false;
                 } else {
                     self.find('#username').parent().removeClass('has-error');
@@ -551,6 +585,7 @@ $( document ).ready(function() {
         if (!self.find('#agreeTerm').is(":checked")) {
             self.find('#agreeTerm').addClass('validation-error');
             self.find('#agreeTerm').focus();
+            window.funLazyLoad.reset();
             return false;
         } else {
             $('#agreeTerm').is(":checked") && $('#agreeTerm').removeClass('validation-error');
@@ -559,7 +594,7 @@ $( document ).ready(function() {
         
         if(checkEmail && checkPhone && self.find('#agreeTerm').is(":checked")){
 
-            //window.funLazyLoad.start();
+            window.funLazyLoad.start();
             $('.btn-register').hide();
             return true;
         }

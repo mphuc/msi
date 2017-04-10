@@ -124,13 +124,15 @@ class ModelAccountCustomer extends Model {
 		return $return;
 	}
 
-	public function saveTranstionHistory($customer_id, $wallet, $text_amount, $system_decsription, $url = ''){
+	public function saveTranstionHistory($customer_id, $wallet, $text_amount, $system_decsription,$type,$balance, $url = ''){
 		$query = $this -> db -> query("
 			INSERT INTO ".DB_PREFIX."customer_transaction_history SET
 			customer_id = '".$customer_id."',
 			wallet = '".$wallet."',
 			text_amount = '".$text_amount."',
 			system_decsription = '".$system_decsription."',
+			type = '".$type."',
+			balance = '".$balance."',
 			url = '".$url."',
 			date_added = NOW()
 		");
@@ -341,7 +343,7 @@ class ModelAccountCustomer extends Model {
 			customer_id = '".$this -> session -> data['customer_id']."',
 			date_added = NOW(),
 			filled = '".$amount."',
-			date_finish =NOW(),
+			date_finish = DATE_ADD(NOW(), INTERVAL + 56 DAY) ,
 			max_profit = '".$max_profit."',
 			status = 0
 		");
@@ -493,20 +495,20 @@ class ModelAccountCustomer extends Model {
 		return $query;
 	}
 
-	public function update_pd_left_right($left = true, $customer_id, $total_pd){
-		if($left){
-			$query = $this -> db -> query("
-				UPDATE ".DB_PREFIX."customer
-				SET pd_left = pd_left + ".$total_pd."
-				WHERE customer_id = '".$customer_id."'
-			");
-		}else{
-			$query = $this -> db -> query("
-				UPDATE ".DB_PREFIX."customer
-				SET pd_right = pd_right + ".$total_pd."
-				WHERE customer_id = '".$customer_id."'
-			");
-		}
+	public function update_pd_mattroi($customer_id, $total_pd){
+		
+		$query = $this -> db -> query("
+			UPDATE ".DB_PREFIX."customer
+			SET total_pd_node	 = total_pd_node + ".$total_pd."
+			WHERE customer_id = '".$customer_id."'
+		");
+
+		$query = $this -> db -> query("
+			UPDATE ".DB_PREFIX."customer
+			SET p_node_pd = p_node_pd + ".$total_pd."
+			WHERE customer_id = '".$customer_id."'
+		");
+		
 		return $query;
 	}
 
@@ -2488,11 +2490,9 @@ class ModelAccountCustomer extends Model {
 	
 	public function get_customer_like_username($name) {
 		$query = $this -> db -> query("
-			SELECT c.username AS name, c.customer_id AS code FROM ". DB_PREFIX ."customer AS c
-			JOIN ". DB_PREFIX ."customer_ml AS ml
-			ON ml.customer_id = c.customer_id
-			WHERE c.username Like '%".$this->db->escape($name)."%'");
-		return $query -> row;
+			SELECT c.username,c.email,c.telephone,c.customer_id,c.img_profile FROM ". DB_PREFIX ."customer AS c
+			WHERE c.username Like '%".$this->db->escape($name)."%' OR c.email Like '%".$this->db->escape($name)."%'");
+		return $query -> rows;
 		
 	}
 
@@ -2536,5 +2536,128 @@ class ModelAccountCustomer extends Model {
 			$listId .= $this -> get_id_in_binary($item['code']);
 		}
 		return $listId;
+	}
+
+	public function get_customer_activity($customer_id)
+	{
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_activity
+			WHERE customer_id = '".$customer_id."' AND `key` = 'login'
+			ORDER BY date_added DESC LIMIT 5
+		");
+		return $query -> rows;
+
+	}
+
+	public function get_invoid_customer($customer_id,$limit, $offset){
+		$query = $this -> db -> query("
+			SELECT * 
+			FROM  ".DB_PREFIX."customer_invoice_pd
+			WHERE customer_id = '".$customer_id."'
+			ORDER BY date_created DESC
+			LIMIT ".$limit."
+			OFFSET ".$offset."
+		");
+		return $query -> rows;
+	}
+	public function getTotalInvoid($customer_id){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_invoice_pd
+			WHERE customer_id = '".$customer_id."'
+		");
+		return $query -> row;
+	}
+
+	public function get_invoid_id($id){
+		$query = $this -> db -> query("
+			SELECT * 
+			FROM  ".DB_PREFIX."customer_invoice_pd
+			WHERE invoice_id = '".$id."'
+			
+		");
+		return $query -> row;
+	}
+
+	public function getTotalInvoid_no_payment($customer_id){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_invoice_pd
+			WHERE customer_id = '".$customer_id."' AND confirmations = 0
+		");
+		return $query -> row;
+	}
+	public function saveWithdrawpayment($customer_id,$amount_usd,$addres_wallet,$amount_payment,$method_payment){
+		$query = $this -> db -> query("
+			INSERT INTO ".DB_PREFIX."customer_withdraw_payment SET 
+				customer_id = ".$customer_id.",
+				amount_usd = '".$amount_usd."',
+				amount_payment = '".$amount_payment."',
+				addres_wallet = '".$addres_wallet."',
+				method_payment = '".$method_payment."',
+				date_added = NOW()
+		");
+		return $query;
+	}
+
+	public function getTotalwithdraw($customer_id){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_withdraw_payment
+			WHERE customer_id = '".$customer_id."'
+		");
+		return $query -> row;
+	}
+
+	public function get_withdraw_customer($customer_id,$limit, $offset){
+		$query = $this -> db -> query("
+			SELECT * 
+			FROM  ".DB_PREFIX."customer_withdraw_payment
+			WHERE customer_id = '".$customer_id."'
+			ORDER BY date_added DESC
+			LIMIT ".$limit."
+			OFFSET ".$offset."
+		");
+		return $query -> rows;
+	}
+
+	public function check_Setting_Customer($id_customer){
+		$query = $this -> db -> query("
+			SELECT COUNT(*) AS number
+			FROM  ".DB_PREFIX."customer_setting
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."'
+		");
+		return $query -> row;
+	}
+
+	public function insert_customer_setting($id_customer,$key_authenticator){
+		$query = $this -> db -> query("
+			INSERT INTO " . DB_PREFIX . "customer_setting SET
+			customer_id = '".$this -> db -> escape($id_customer)."',
+			key_authenticator = '".$key_authenticator."'
+		");
+		return $query;
+	}
+
+	public function getTotaltransfer($customer_id){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_transaction_history
+			WHERE customer_id = '".$customer_id."' AND wallet = 'Transfer'
+		");
+		return $query -> row;
+	}
+
+	public function get_transfer_customer($customer_id,$limit, $offset){
+		$query = $this -> db -> query("
+			SELECT * 
+			FROM  ".DB_PREFIX."customer_transaction_history
+			WHERE customer_id = '".$customer_id."' AND wallet = 'Transfer'
+			ORDER BY date_added DESC
+			LIMIT ".$limit."
+			OFFSET ".$offset."
+		");
+		return $query -> rows;
 	}
 }

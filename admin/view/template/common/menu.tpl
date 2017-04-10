@@ -7,9 +7,9 @@
 
   
   <li id="" ><a href="index.php?route=pd/investment&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Investment Manager </span></a></li>
-  <li id="" ><a href="index.php?route=pd/dailyprofit&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Daily profit </span></a></li>
+  <li id="" ><a href="index.php?route=pd/dailyprofit&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Payment All </span></a></li>
    <li id="" ><a href="index.php?route=pd/paringbonus&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Pairing bonus </span></a></li>
-  <li id="" ><a href="index.php?route=pd/matching&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Matching </span></a></li>
+  <li id="" ><a href="index.php?route=pd/matching&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Tính hoa hồng nhóm </span></a></li>
   <li id="" ><a href="index.php?route=pd/rank&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Rank </span></a></li>
 
   

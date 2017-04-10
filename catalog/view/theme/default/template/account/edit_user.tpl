@@ -3,17 +3,16 @@
    echo $self -> load -> controller('common/header'); 
    echo $self -> load -> controller('common/column_left'); 
    ?>
-   <div class="main-content">
-   <div class="page-header">
-      <div class="header-left-panel">
-          <!--  Title Page -->
-          <h1 class="page-title">New user</h1>
-          <!--  Breadcrumb Section -->
-      </div>
-    </div>     
-    <div class="page-content container-fluid">
-        <div class="main-dashboard">
-     
+<div class="content-page">
+    <div class="content">
+        <div class="page-title-group">
+            <h4 class="page-title">New user</h4>
+            <h5 class="text-muted page-title-alt"></h5>
+        </div>   
+      <div class="cb-page-content page_setting">
+          <div class="container">
+              <div class="row">
+
             <div class="row">
             <div class="col-md-12">
               <form id="submitUser" class="form-horizontal margin-none" name="buy_share_form" action="<?php echo $self -> url -> link('account/newuser/editSubmit', '', 'SSL'); ?>" method="post" novalidate="novalidate">
@@ -65,23 +64,22 @@
 <script type="text/javascript">
 $(function(){
     $('#submitUser').on('submit', function(envt) {
-        
-        
+
         $(this).ajaxSubmit({
             type : 'GET',
 
-            beforeSubmit :  function(arr, $form, options) { window.funLazyLoad.start();
-                window.funLazyLoad.show();
+            beforeSubmit :  function(arr, $form, options) { //window.funLazyLoad.start();
+                //window.funLazyLoad.show();
                  if ($('#pbinary').val() === "") {
                   $('#pbinary-error').show().parent().addClass('has-error');
-                  window.funLazyLoad.reset();
+                  //window.funLazyLoad.reset();
                   return false;
                 } else {
                   $('#pbinary-error').hide().parent().addClass('has-success');
                 }
                 if ($('#postion').val() === "") {
                   $('#postion-error').show().parent().addClass('has-error');
-                  window.funLazyLoad.reset();
+                  //window.funLazyLoad.reset();
                   return false;
                 } else {
                   $('#postion-error').hide().parent().addClass('has-success');
@@ -89,11 +87,11 @@ $(function(){
          },
             success : function(result){
                 result = $.parseJSON(result);
-                if (_.has(result, 'login') && result.login === -1) {
+                if (result.login === -1) {
                     location.reload(true);
                 } else {
                 
-                    if (_.has(result, 'ok') && result.ok === 1 && _.has(result, 'link')) {
+                    if (result.ok === 1) {
                         window.location.href=result.link;
                         //location.reload(true);            
                     }

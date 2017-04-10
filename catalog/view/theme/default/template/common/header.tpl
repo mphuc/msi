@@ -39,9 +39,19 @@
       <script src="<?php echo $script; ?>" type="text/javascript"></script>
       <?php } ?>
       <?php echo $google_analytics; ?>
-      <script type="text/javascript"> window.funLazyLoad={start:function(){$("#fakeloader").fakeLoader({timeToHide:99999999999,zIndex:"999",spinner:"spinne1",bgColor:"rgba(0,0,0,0.8)"})},reset:function(){$("#fakeloader").hide()},show:function(){$("#fakeloader").show()}};
-         (function($) { $(function() { $("#scroller").simplyScroll({frameRate:'20'}); }); })(jQuery)
-             
+      <script type="text/javascript"> 
+        window.funLazyLoad = {
+            start: function() {
+                $('.page-loader').show();
+            },
+            reset: function() {
+                $('.page-loader').hide();
+            },
+            show: function() {
+                $('.page-loader').show();
+            }
+        };
+        
       </script>
       <script src="catalog/view/javascript/jquery.form.min.js" type="text/javascript"></script><script src="catalog/view/javascript/alertifyjs/alertify.js" type="text/javascript"></script>
       <link href="catalog/view/theme/default/css/al_css/alertify.css" rel="stylesheet">
@@ -73,7 +83,7 @@
           
           <ul class="nav navbar-nav navbar-right pull-right">
            
-            <li class="dropdown top-menu-item-xs"> <a href="javascript:void(0)" class="right-bar-toggle profile waves-effect waves-light dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user-name"><?php echo $customer['username'] ?></span> <span class="caret"></span> 
+            <li class="dropdown top-menu-item-xs"> <a href="javascript:void(0)" class="right-bar-toggle profile waves-effect waves-light dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user-name"><?php echo $customer['firstname'] ?></span> <span class="caret"></span> 
             
             <?php if ($customer['img_profile'] == "") { ?>
               <img src="catalog/view/theme/default/images/logo.png" alt="user-img" class="img-circle"> 

@@ -1,12 +1,12 @@
 <?php 
-   $self -> document -> setTitle('Tranfer'); 
+   $self -> document -> setTitle('Withdraw'); 
    echo $self -> load -> controller('common/header'); 
    echo $self -> load -> controller('common/column_left'); 
    ?>
 <div class="content-page">
    <div class="content">
       <div class="page-title-group">
-         <h4 class="page-title">Tranfer History</h4>
+         <h4 class="page-title">Withdraw History</h4>
          <h5 class="text-muted page-title-alt"></h5>
       </div>
       <div class="cb-page-content page_setting">
@@ -27,23 +27,31 @@
                                  <div class="clearfix"></div>
                                  <div class="panel-body">
                                 
-                                    <form id="fr_buy_point" action="index.php?route=account/transfer/submit" role="form" class="fr_buy_point">
+                                    <form id="fr_buy_point" action="index.php?route=account/withdraw/submit" role="form" class="fr_buy_point">
                                        <div class="row">
-                                          
                                           <div class="form-group">
-                                             <label for="exampleInputEmail1">ID or Email</label>
-                                             <input type="text" placeholder="ID or Email" class="form-control autonumber" data-a-sep="." data-a-dec="," name="username" id="username"/>
-                                              <ul id="all_username">
-
-                                              </ul>
+                                             <label for="exampleInputEmail1">Choose payment method</label>
+                                             <select name="payment" class="form-control" id="payment">
+                                               <option value="Bitcoin">Bitcoin</option>
+                                               <option value="Perfect Money">Perfect Money</option>
+                                               <option value="Payeer">Payeer</option>
+                                             </select>
+                                             
                                           </div>
-
                                           <div class="form-group">
+                                             <label for="exampleInputEmail1">Wallet payment</label>
+                                             <input type="text" class="form-control" name="wallet" value="<?php echo $customer['wallet'] ?>" readonly="true" />
+                                            
+                                          </div>
+                                          <div class="col-md-6" >
                                              <label for="exampleInputEmail1">Number USD</label>
                                              <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
                                             
                                           </div>
-                                          <input type="hidden" id="customer_id" name="customer_id">
+                                          <div class="col-md-6 ">
+                                             <label for="exampleInputEmail1">Number BTC</label>
+                                             <input type="text" readonly="true" placeholder="Number BTC" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_btc" id="ip_btc"/>
+                                          </div>
                                           <div class="form-group">
                                              <label for="exampleInputEmail1">Password Transaction</label>
                                              <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
@@ -72,17 +80,16 @@
                                 
                                  <div class="tab-content row" style="">
                                     <div role="tabpanel" class="tab-pane fade active in" id="tab21">
-                                      <h3 class="text-center">Tranfer History</h3>
+                                      <h3 class="text-center">Withdraw History</h3>
                                        <table id="datatable" class="no_payment table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                                           <thead>
                                              <tr>
                                                 <th class="text-center">No.</th>
-                                                <th>Amount</th>
-                                                <th>Description</th>
-                                                <th>Type</th>
-                                                <th>Balance</th>
-                                                <th>Date</th>
-                                                
+                                                <th>Amount USD</th>
+                                                <th>Type of payment</th>
+                                                <th>Amount Payment</th>
+                                                <th>Wallet Payment</th>
+                                                <th>Status</th>
                                              </tr>
                                           </thead>
                                           <tbody>
@@ -93,26 +100,32 @@
                                                    <td data-title="No." align="center">
                                                       <?php echo $i ?>
                                                    </td>
-                                                   <td data-title="Amount" align="center">
-                                                      <?php echo ($value['text_amount']) ?>
+                                                   <td data-title="Amount USD" align="center">
+                                                      <?php echo number_format($value['amount_usd']) ?>
                                                    </td>
-                                                   <td data-title="Description" align="center">
-                                                      <?php echo ($value['system_decsription']) ?>
+                                                   <td data-title="Type of payment" align="center">
+                                                      <?php echo ($value['method_payment']) ?>
                                                    </td>
-                                                   <td data-title="Type" align="center">
-                                                      <?php if ($value['type'] == "1") { ?>
-                                                        <span class="badge badge-success"><i class="fa fa-plus"></i>Received</span>
-                                                      <?php } else { ?>
-                                                        <span class="badge badge-dranger "><i class="fa fa-minus"></i>Sent</span>
+                                                   <td data-title="Amount Payment" align="center">
+                                                      <?php if ($value['method_payment'] == "Bitcoin") { ?>
+                                                        <?php echo $value['amount_payment']/100000000 ?> BTC
+                                                      <?php } ?>
+                                                      
+                                                   </td>
+                                                   <td data-title="Wallet Payment" align="center">
+                                                      <?php if ($value['method_payment'] == "Bitcoin") { ?>
+                                                        <?php echo $value['addres_wallet'] ?>
                                                       <?php } ?>
                                                    </td>
-                                                   <td data-title="Balance" align="center">
-                                                        <?php echo number_format($value['balance']) ?> USD
-                                                   </td>
-                                                  <td data-title="Date" align="center">
-                                                        <?php echo date('d-F-Y H:i',strtotime($value['date_added'])) ?>
-                                                   </td>
                                                   
+                                                   <td data-title="Status" align="center">
+                                                    <?php if ($value['status'] == 0) { ?>
+                                                      <span style="cursor: pointer; padding:6px;" id="payment_complete" onclick="show_payment('<?php echo $value['invoice_id'] ?>')" class="label label-danger"><i style="font-size: 14px;" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> Pendding...</span>
+                                                    <?php } else { ?>
+                                                    
+                                                      <span style="cursor: pointer; padding:6px;" id="payment_complete"  class="label label-success">Finish</span>
+                                                      <?php } ?>
+                                                   </td>
                                                 </tr>
                                                <?php } ?>
                                                <?php } else { ?>

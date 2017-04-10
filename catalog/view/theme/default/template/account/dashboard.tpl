@@ -83,19 +83,19 @@
                                     <div class="col-xs-2">
                                         <div class="item-quick-access">
                                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                             <p><a href="">Invoices</a></p>
+                                             <p><a href="?route=account/transfer">Transfer</a></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="item-quick-access">
                                             <i class="fa fa-area-chart" aria-hidden="true"></i>
-                                             <p><a href="">Task Report</a></p>
+                                             <p><a href="?route=account/deposit">Deposit History</a></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="item-quick-access">
                                             <i class="fa fa-list" aria-hidden="true"></i>
-                                             <p><a href="">Withdrawal History</a></p>
+                                             <p><a href="index.php?route=account/withdraw">Withdrawal History</a></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
@@ -115,8 +115,8 @@
 
         <div class="cb-page-content">
             <div class="container">
-                
-                <div class="col-md-6">
+                <div class="row">
+                <div class="col-md-12">
                     <div class="card-box">
                         <div class="card-box-head  border-b m-t-0">
                             <h4 class="header-title"><b>Recent Login Details</b></h4>
@@ -131,36 +131,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php foreach ($get_customer_activity as $value) { ?>
+                                    
+                                 
                                 <tr>
-                                    <td><i class="fa fa-chrome"></i>Chrome 56.0   </td>
-                                    <td>09-Apr-2017 02:56:15 AM  </td>
-                                    <td>171.250.114.136 </td>
+                                    <td><?php echo $value['browser'] ?></td>
+                                    <td><?php echo date('d-F-Y H:i:s', strtotime($value['date_added'])) ?> </td>
+                                    <td><?php echo $value['ip'] ?> </td>
                                 </tr>
-                                
-                                <tr>
-                                    <td><i class="fa fa-chrome"></i>Chrome 54.0   </td>
-                                    <td>08-Apr-2017 02:03:23 PM  </td>
-                                    <td>171.250.100.102 </td>
-                                </tr>
-                                
-                                <tr>
-                                    <td><i class="fa fa-chrome"></i>Chrome 57.0   </td>
-                                    <td>08-Apr-2017 12:20:31 PM  </td>
-                                    <td>116.102.25.192 </td>
-                                </tr>
-                                
-                                <tr>
-                                    <td><i class="fa fa-chrome"></i>Chrome 54.0   </td>
-                                    <td>08-Apr-2017 09:00:20 AM  </td>
-                                    <td>42.119.150.158 </td>
-                                </tr>
-                                
-                                <tr>
-                                    <td><i class="fa fa-chrome"></i>Chrome 54.0   </td>
-                                    <td>08-Apr-2017 03:38:10 AM  </td>
-                                    <td>14.161.32.189 </td>
-                                </tr>
+                                <?php } ?>
                                 
                             </tbody>
                         </table>
@@ -168,10 +147,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <img class="img-responsive" src="catalog/view/theme/default/images/odoo_image.png">
                 </div>
-               
             </div>
         </div>
    

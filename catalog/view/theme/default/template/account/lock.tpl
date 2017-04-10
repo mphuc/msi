@@ -32,30 +32,17 @@
 <div id="logreg-wrapper" class="login-style2 text-center"> 
    <div class="container">
       <a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
-      <p class="lead">Welcome back</p>
+      <p class="lead">INPUT YOUR AUTHENTICATOR CODE</p>
    
-      <form action="login.html" method="post">
+      <form action="index.php?route=account/lock" method="post">
          <div class="form-group">
-            <label>Username</label>
+            <label>CODE</label>
             
-            <input type="text" name="email" value="<?php echo $email; ?>" placeholder="Enter your email or username" class="form-control" id="email">
+            <input type="text" name="authenticator" value="" placeholder="INPUT YOUR AUTHENTICATOR CODE" class="form-control" id="email">
          </div>
+        
          <div class="form-group">
-            <label>Password</label>
             
-            <input type="password" placeholder="Enter your password" style="border-radius: 0px;
-    background: none;" class="form-control" id="pwd" name="password" value="<?php echo $password; ?>" >
-         </div>
-         <div class="form-group">
-            <?php if ($redirect) { ?>
-               <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
-               <?php } ?>
-            
-            <?php if ($success) { ?>
-            <div class="text-success"><i class="fa fa-check-circle"></i>
-               <?php echo $success; ?>
-            </div>
-            <?php } ?>
             <?php if ($error_warning) { ?>
             <div class="text-warning"><i class="fa fa-exclamation-circle"></i>
                <?php echo $error_warning; ?>

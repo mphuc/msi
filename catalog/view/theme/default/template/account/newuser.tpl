@@ -3,18 +3,17 @@
    echo $self -> load -> controller('common/header'); 
    echo $self -> load -> controller('common/column_left'); 
    ?>
-    <div class="main-content">
-   <div class="page-header">
-      <div class="header-left-panel">
-          <!--  Title Page -->
-          <h1 class="page-title">New user</h1>
-          <!--  Breadcrumb Section -->
-      </div>
-    </div>     
-    <div class="page-content container-fluid">
-        <div class="main-dashboard">
-     
-            <div class="row">
+<div class="content-page">
+    <div class="content">
+        <div class="page-title-group">
+            <h4 class="page-title">New user</h4>
+            <h5 class="text-muted page-title-alt"></h5>
+        </div>   
+      <div class="cb-page-content page_setting">
+          <div class="container">
+              <div class="row">
+
+    
       <div class="col-md-12">
 
                 <?php if(count($user) > 0){ ?>
@@ -24,11 +23,11 @@
                      <thead>
                         <tr>
                           <th class="text-center">No</th>
-                          <th>Username</th>
+                          <th>Affiliate ID</th>
                         
                           <th>Email</th>
                           <th>Phone number</th>
-                          <th>Wallet</th>
+                          
                            <th>Date Join</th>
                           <th>Action</th>
                         </tr>
@@ -37,11 +36,11 @@
                         <?php $number = 1; foreach ($user as $key => $value) {?>
                             <tr>
                                  <td data-title="NO" align="center"><?php echo $number ?></td>
-                                <td data-title="Username"><?php echo $value['username'] ?></td>
+                                <td data-title="Affiliate ID"><?php echo $value['username'] ?></td>
                               
                                  <td data-title="Email"><?php echo $value['email'] ?></td>
                                  <td data-title="Phone Number"><?php echo $value['telephone'] ?></td>
-                                <td data-title="Wallet"><?php echo $value['wallet'] ?></td>
+                                
                                 <td data-title="Date Join"><?php echo date("d/m/Y H:i A", strtotime($value['date_added'])); ?></td>
                                 
                                 <td data-title="Action">

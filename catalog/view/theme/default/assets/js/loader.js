@@ -5,5 +5,5 @@ paceOptions = {
 };
 
 $(window).load(function(){
-	$('.page-loader').fadeOut('slow',function(){$(this).remove();});
+	$('.page-loader').fadeOut('slow');
 });

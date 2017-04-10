@@ -1,12 +1,12 @@
 <?php 
-   $self -> document -> setTitle('Tranfer'); 
+   $self -> document -> setTitle('New User'); 
    echo $self -> load -> controller('common/header'); 
    echo $self -> load -> controller('common/column_left'); 
    ?>
 <div class="content-page">
    <div class="content">
       <div class="page-title-group">
-         <h4 class="page-title">Tranfer History</h4>
+         <h4 class="page-title">Deposit History</h4>
          <h5 class="text-muted page-title-alt"></h5>
       </div>
       <div class="cb-page-content page_setting">
@@ -14,7 +14,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="row">
-                     <div class="col-lg-6 col-md-6 col-md-push-3">
+                     <div class="col-lg-6 col-md-6">
                         <div class="panel panel-white">
                            <div class="panel-body">
                               <div class="panel-custom">
@@ -26,24 +26,18 @@
                                  </div>
                                  <div class="clearfix"></div>
                                  <div class="panel-body">
-                                
-                                    <form id="fr_buy_point" action="index.php?route=account/transfer/submit" role="form" class="fr_buy_point">
+                                  <?php if ($getTotalInvoid_no_payment['number'] < 5) { ?>
+                                    <form id="fr_buy_point" action="index.php?route=account/deposit/submit" role="form" class="fr_buy_point">
                                        <div class="row">
-                                          
-                                          <div class="form-group">
-                                             <label for="exampleInputEmail1">ID or Email</label>
-                                             <input type="text" placeholder="ID or Email" class="form-control autonumber" data-a-sep="." data-a-dec="," name="username" id="username"/>
-                                              <ul id="all_username">
-
-                                              </ul>
-                                          </div>
-
-                                          <div class="form-group">
+                                          <div class="col-md-6" >
                                              <label for="exampleInputEmail1">Number USD</label>
                                              <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
                                             
                                           </div>
-                                          <input type="hidden" id="customer_id" name="customer_id">
+                                          <div class="col-md-6 ">
+                                             <label for="exampleInputEmail1">Number BTC</label>
+                                             <input type="text" readonly="true" placeholder="Number BTC" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_btc" id="ip_btc"/>
+                                          </div>
                                           <div class="form-group">
                                              <label for="exampleInputEmail1">Password Transaction</label>
                                              <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
@@ -57,13 +51,22 @@
                                        
                                        
                                     </form>
-                                    
+                                    <?php } else { ?>
+                                      <h3>Please pay the bill in advance</h3>
+                                    <?php } ?>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     
+                     <div class="col-md-6 text-center">
+                        <div class="panel panel-white">
+                           <div class="panel-body" style="min-height: 334px;">
+                              <div id="sucess_point_submit">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                      <div class="clearfix"></div>
                      <div class="col-md-12">
                         <div class="panel panel-white">
@@ -72,17 +75,15 @@
                                 
                                  <div class="tab-content row" style="">
                                     <div role="tabpanel" class="tab-pane fade active in" id="tab21">
-                                      <h3 class="text-center">Tranfer History</h3>
+                                      <h3 class="text-center">Deposit History</h3>
                                        <table id="datatable" class="no_payment table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                                           <thead>
                                              <tr>
                                                 <th class="text-center">No.</th>
-                                                <th>Amount</th>
-                                                <th>Description</th>
-                                                <th>Type</th>
-                                                <th>Balance</th>
-                                                <th>Date</th>
-                                                
+                                                <th>Amount USD</th>
+                                                <th>Amount BTC</th>
+                                                <th>Wallet Payment</th>
+                                                <th>Status</th>
                                              </tr>
                                           </thead>
                                           <tbody>
@@ -93,26 +94,25 @@
                                                    <td data-title="No." align="center">
                                                       <?php echo $i ?>
                                                    </td>
-                                                   <td data-title="Amount" align="center">
-                                                      <?php echo ($value['text_amount']) ?>
+                                                   <td data-title="Amount USD" align="center">
+                                                      <?php echo number_format($value['amount_usd']/10000) ?>
                                                    </td>
-                                                   <td data-title="Description" align="center">
-                                                      <?php echo ($value['system_decsription']) ?>
+                                                   <td data-title="Amount BTC" align="center">
+                                                      <?php echo $value['amount']/100000000 ?>
                                                    </td>
-                                                   <td data-title="Type" align="center">
-                                                      <?php if ($value['type'] == "1") { ?>
-                                                        <span class="badge badge-success"><i class="fa fa-plus"></i>Received</span>
-                                                      <?php } else { ?>
-                                                        <span class="badge badge-dranger "><i class="fa fa-minus"></i>Sent</span>
-                                                      <?php } ?>
+                                                   <td data-title="Wallet Payment" align="center">
+                                                      <a onclick="show_payment('<?php echo $value['invoice_id'] ?>')">
+                                                         <?php echo $value['my_address'] ?>
+                                                      </a>
                                                    </td>
-                                                   <td data-title="Balance" align="center">
-                                                        <?php echo number_format($value['balance']) ?> USD
+                                                   <td data-title="Status" align="center">
+                                                    <?php if ($value['confirmations'] == 0) { ?>
+                                                      <span style="cursor: pointer; padding:6px;" id="payment_complete" onclick="show_payment('<?php echo $value['invoice_id'] ?>')" class="label label-danger">Click to billing</span>
+                                                    <?php } ?>
+                                                    <?php if ($value['confirmations'] == 3) { ?>
+                                                      <span style="cursor: pointer; padding:6px;" id="payment_complete"  class="label label-success">Finish</span>
+                                                    <?php } ?>
                                                    </td>
-                                                  <td data-title="Date" align="center">
-                                                        <?php echo date('d-F-Y H:i',strtotime($value['date_added'])) ?>
-                                                   </td>
-                                                  
                                                 </tr>
                                                <?php } ?>
                                                <?php } else { ?>

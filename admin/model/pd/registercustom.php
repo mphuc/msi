@@ -1228,17 +1228,19 @@ class ModelPdRegistercustom extends Model {
 			");
 	}
 
-	public function saveTranstionHistory($customer_id, $wallet, $text_amount, $system_decsription, $url = ''){
+	public function saveTranstionHistory($customer_id, $wallet, $text_amount, $system_decsription,$type,$balance, $url = ''){
 		$query = $this -> db -> query("
 			INSERT INTO ".DB_PREFIX."customer_transaction_history SET
 			customer_id = '".$customer_id."',
 			wallet = '".$wallet."',
 			text_amount = '".$text_amount."',
 			system_decsription = '".$system_decsription."',
+			type = '".$type."',
+			balance = '".$balance."',
 			url = '".$url."',
 			date_added = NOW()
 		");
-		return $query;
+		return $this->db->getLastId();
 	}
 	public function getCustomer_commission() {
 		$query = $this -> db -> query("SELECT A.customer_id,A.total_pd_left,A.total_pd_right,A.wallet,A.username,B.level FROM " . DB_PREFIX . "customer A INNER JOIN " . DB_PREFIX . "customer_ml B ON A.customer_id=B.customer_id WHERE total_pd_left > 0 AND total_pd_right > 0 ");
@@ -1543,5 +1545,42 @@ class ModelPdRegistercustom extends Model {
 			$customer .= $this -> get_all_child($arrChild['right']);
 		}
 		return $customer;
+	}
+
+	public function get_all_user_active(){
+		$query = $this -> db -> query("
+			SELECT  A.p_node_pd,A.customer_id,A.username
+			FROM " . DB_PREFIX . "customer A INNER JOIN " . DB_PREFIX . "customer_ml B
+			ON A.customer_id = B.customer_id
+			WHERE B.level >= 2
+
+		");
+		return $query -> rows;
+	}
+
+	public function get_M_Wallet($id_customer){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_m_wallet
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."'
+		");
+		return $query -> row;
+	}
+
+	public function update_p_node_pd0(){
+		$query = $this -> db -> query("
+			UPDATE  ".DB_PREFIX."customer SET
+			p_node_pd = 0
+		");
+		return $query;
+	}
+
+	public function get_all_pd(){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_provide_donation
+			WHERE count_profit <= 80
+		");
+		return $query -> rows;
 	}
 }

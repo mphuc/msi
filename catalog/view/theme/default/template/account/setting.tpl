@@ -29,7 +29,7 @@
                       </form>    
                     </div>
 
-                    <h3><?php echo $customer['username'] ?></h3>
+                    <h3><?php echo $customer['firstname'] ?></h3>
                   </div>
                 </div>
                 <div class="col-md-9">
@@ -70,7 +70,7 @@
                         
                         
                          <div class="form-group">
-                            <label class="col-md-3"><?php echo $lang['text_username'] ?></label>
+                            <label class="col-md-3">Affiliate ID</label>
                             <div class="col-md-9">
                                <div class="input-group">
                                   <input class="form-control valid" id="UserName" name='username'  type="text" readonly='true' data-link="<?php echo $self -> url -> link('account/register/checkuser', '', 'SSL'); ?>" value="<?php echo $customer['username'] ?>" />
