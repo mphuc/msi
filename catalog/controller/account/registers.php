@@ -75,6 +75,7 @@ class ControllerAccountRegisters extends Controller {
 			if ($checkEmail == 1 || $checkPhone == 1) {
 				die('Error');
 			}
+			
 			$transaction_password = $this->request->post['transaction_password'] = rand(100000,999999);
 			$tmp = $this -> model_customize_register -> addCustomerByToken($this->request->post);
 

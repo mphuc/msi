@@ -46,7 +46,7 @@ class ControllerAccountRefferal extends Controller {
 		$pagination->limit = $limit; 
 		$pagination->num_links = 5;
 		$pagination->text = 'text';
-		$pagination -> url = HTTPS_SERVER . 'refferal&p={page}';
+		$pagination -> url = HTTPS_SERVER . 'refferal.html&p={page}';
 
 		$data['refferals'] = $this->model_account_customer->getRefferalByID($this -> session -> data['customer_id'] , $limit , $start);
 		// echo "<pre>"; print_r($data['refferals']); echo "</pre>"; die();

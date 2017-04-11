@@ -116,15 +116,14 @@ class ModelCustomizeRegister extends Model {
 		$this -> db -> query("
 			INSERT INTO " . DB_PREFIX . "customer SET
 			p_node = '" . $this -> db -> escape($data['p_node']) . "',
-			customer_code = '".hexdec(crc32(md5($data['username'])))."',
+			customer_code = '".hexdec(crc32(md5($data['email'])))."',
 			email = '" . $this -> db -> escape($data['email']) . "', 
-			username = '" . $this -> db -> escape($data['username']) . "', 
+			firstname = '" . $this -> db -> escape($data['username']) . "', 
 			telephone = '" . $this -> db -> escape($data['telephone']) . "', 
 			salt = '" . $this -> db -> escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', 
 			password = '" . $this -> db -> escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', 
 			status = '1',
-			wallet= '" . $this -> db -> escape($data['wallet']) . "', 
-			cmnd = '" . $this -> db -> escape($data['cmnd']) . "', 
+			
 			country_id = '". $this -> db -> escape($data['country_id']) ."',
 			transaction_password = '" . $this -> db -> escape(sha1($salt . sha1($salt . sha1($data['transaction_password'])))) . "',
 			date_added = NOW(),
@@ -134,6 +133,13 @@ class ModelCustomizeRegister extends Model {
 
 		$customer_id = $this -> db -> getLastId();
 
+		$this -> db -> query("
+			UPDATE " . DB_PREFIX . "customer SET
+			username = 'M".(100000+$customer_id)."'
+			WHERE customer_id = '".$customer_id."'
+
+		");
+
 		// p_binary = '" . $data['p_node'] . "',
 		$this -> db -> query("INSERT INTO " . DB_PREFIX . "customer_ml SET 
 			customer_id = '" . (int)$customer_id . "',
@@ -142,11 +148,7 @@ class ModelCustomizeRegister extends Model {
 			p_binary = '" . $data['p_binary'] . "', 
 			p_node = '" . $data['p_node'] . "', 
 			date_added = NOW()");
-		$this -> db -> query("INSERT INTO " . DB_PREFIX . "customer_wallet_btc_ SET 
-			customer_id = '" . (int)$customer_id . "',
-			wallet = '" . $this -> db -> escape($data['wallet']) . "'");
-		//update p_binary
-
+		
 		if($data['postion'] === 'right'){
 			$this -> db -> query("UPDATE " . DB_PREFIX . "customer_ml SET `right` = '" . (int)$customer_id . "' WHERE customer_id = '" . $data['p_binary'] . "'");
 		}else{
@@ -323,7 +325,7 @@ public function addCustomer_auto($data){
 		$this -> db -> query("
 			INSERT INTO " . DB_PREFIX . "customer SET
 			p_node = '" . $this -> db -> escape($data['p_node']) . "',
-			customer_code = '".hexdec(crc32(md5($data['username'])))."',
+			customer_code = '".hexdec(crc32(md5($data['email'])))."',
 			email = '" . $this -> db -> escape($data['email']) . "', 
 			
 			firstname = '" . $this -> db -> escape($data['username']) . "', 

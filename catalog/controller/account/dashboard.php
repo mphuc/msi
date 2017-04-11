@@ -77,39 +77,27 @@ class ControllerAccountDashboard extends Controller {
 		}else{
 			$Language_id = 1;
 		}
-		$data['article_limit'] = $this -> model_simple_blog_article -> getArticleLimit($limit,$start, $Language_id);
-		
-		$data['pagination'] = $pagination->render();
-
-		$data['pd_march'] = $this->model_account_customer->getPDMarch($this->session->data['customer_id']);
-		///All GD
-		$pages = isset($this -> request -> get['pages']) ? $this -> request -> get['pages'] : 1;
-
-		//$data['pds'] = $this -> model_account_customer -> getAllPD($limit, $start);
 		
 
 		//customer js
-		$data['countPD'] = $this -> countPD($session_id);
-		
-		$data['getR_Wallet_payment'] = $this -> getR_Wallet_payment($session_id);
-		
-		$data['getCWallet'] = $this -> getCWallet($session_id);
+		$data['m_wallet'] = $this -> model_account_customer -> get_M_Wallet($session_id);
 
-		$data['getCNWallet'] = $this -> getCNWallet($session_id);
+		$data['getTotalPD'] = $this -> model_account_customer -> getTotalPD($session_id);
+		
 		
 		$data['total_binary_left'] = $this -> total_binary_left($session_id);
 		$data['total_binary_right'] = $this -> total_binary_right($session_id);
-		$data['total_pd_left'] = $this -> total_pd_left($session_id);
-		$data['total_pd_right'] = $this -> total_pd_right($session_id);
 		
+
+
 		$data['danhhieu'] = $this -> danhhieu($session_id);
-		$data['randprofit'] = $this -> randprofit($session_id);
-		$data['taidautu'] = $this -> taidautu($session_id);
-		$data['wallet_token'] = $this -> model_account_customer -> get_sum_token_wallet($session_id);
+		
+		$data['withdraw_pendding'] = $this -> model_account_customer -> get_sum_withdraw_payment($session_id);
+
 		$customer = $this -> model_account_customer-> getCustomer($this -> session -> data['customer_id']);
-/*$data['user'] = $this -> model_account_customer -> get_count_customer_signup($this->session->data['customer_id']);*/
+
 		$Hash = $customer['customer_code'];	
-		$data['customer_new'] = $customer;
+		$data['customer'] = $customer;
 		$data['customer_code'] = $Hash;
 
 		$data['get_customer_activity'] = $this -> model_account_customer -> get_customer_activity($this->session->data['customer_id']);
@@ -265,7 +253,7 @@ if ($getLanguage == 'vietnamese') {
 		if(intval($count['total_pd_left']) === 0){
 			return 0;
 		}else{
-			return $count['total_pd_left'] / 100000000;
+			return $count['total_pd_left'] / 10000;
 		}
 
 	}
@@ -288,8 +276,46 @@ if ($getLanguage == 'vietnamese') {
 	}
 	public function danhhieu($customer_id){
 		$this -> load -> model('account/customer');
-		$getTableCustomerMLByUsername = $this -> model_account_customer -> getTableCustomerMLByUsername($customer_id);
-		return $getTableCustomerMLByUsername['position'];
+		$percent = "No level";
+		$partent = $this -> model_account_customer -> getCustomer($customer_id);
+		if (doubleval($partent['total_pd_node']) >= 50000000)
+        {
+            $percent = "Silver";
+        }
+        if (doubleval($partent['total_pd_node']) >= 150000000)
+        {
+            $percent = "Gold";
+        }
+        if (doubleval($partent['total_pd_node']) >= 500000000)
+        {
+            $percent = "Platinium";
+        }
+        if (doubleval($partent['total_pd_node']) >= 1000000000)
+        {
+            $percent = "Ruby";
+        }
+        if (doubleval($partent['total_pd_node']) >= 2000000000)
+        {
+            $percent = "Emeral";
+        }
+        if (doubleval($partent['total_pd_node']) >= 5000000000)
+        {
+            $percent = "Diamond";
+        }
+        if (doubleval($partent['total_pd_node']) >= 10000000000)
+        {
+            $percent = "Double Diamond";
+        }
+        if (doubleval($partent['total_pd_node']) >= 50000000000)
+        {
+            $percent = "Blue Diamond";
+        }
+        if (doubleval($partent['total_pd_node']) >= 100000000000)
+        {
+            $percent = "Black Diamond";
+        }
+        return $percent;
+
 	}
 	public function total_pd_right(){
 		$this -> load -> model('account/customer');

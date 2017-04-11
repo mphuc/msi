@@ -137,6 +137,7 @@ class ModelAccountCustomer extends Model {
 			date_added = NOW()
 		");
 		$id = $this -> db -> getLastId();
+		
 		$this -> db -> query("
 			UPDATE " . DB_PREFIX . "customer_transaction_history 
 			SET code = '".hexdec( crc32($id) ).$id."'
@@ -988,7 +989,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT count(*) AS number 
 			FROM ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".intval($customer_id)."' AND wallet LIKE 'Daily rates'
+			WHERE customer_id = '".intval($customer_id)."' AND wallet LIKE 'Weekly profit'
 		");
 
 		return $query -> row;
@@ -997,7 +998,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT count(*) AS number 
 			FROM ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".intval($customer_id)."' AND wallet = 'Refferal Commistion'
+			WHERE customer_id = '".intval($customer_id)."' AND wallet = 'Direct commission'
 		");
 
 		return $query -> row;
@@ -1006,7 +1007,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT *
 			FROM  ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Refferal Commistion' 
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Direct commission' 
 			ORDER BY date_added DESC
 			LIMIT ".$limit."
 			OFFSET ".$offset."
@@ -1018,7 +1019,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT count(*) AS number 
 			FROM ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".intval($customer_id)."' AND wallet = 'Matching Commission'
+			WHERE customer_id = '".intval($customer_id)."' AND wallet = 'Commision Resonance'
 		");
 
 		return $query -> row;
@@ -1027,7 +1028,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT *
 			FROM  ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Matching Commission' 
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Commision Resonance' 
 			ORDER BY date_added DESC
 			LIMIT ".$limit."
 			OFFSET ".$offset."
@@ -1040,7 +1041,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT count(*) AS number 
 			FROM ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".intval($customer_id)."' AND wallet LIKE 'Bitcoin%' OR wallet LIKE 'VND%'
+			WHERE customer_id = '".intval($customer_id)."' AND wallet LIKE 'Commision Network'
 		");
 
 		return $query -> row;
@@ -1050,7 +1051,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT *
 			FROM  ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet LIKE 'Bitcoin%' OR wallet LIKE 'VND%'
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet LIKE 'Commision Network'
 			ORDER BY date_added DESC
 			LIMIT ".$limit."
 			OFFSET ".$offset."
@@ -1083,7 +1084,7 @@ class ModelAccountCustomer extends Model {
 		$query = $this -> db -> query("
 			SELECT *
 			FROM  ".DB_PREFIX."customer_transaction_history
-			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Daily rates' 
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Weekly profit' 
 			ORDER BY date_added DESC
 			LIMIT ".$limit."
 			OFFSET ".$offset."
@@ -2677,4 +2678,14 @@ class ModelAccountCustomer extends Model {
 		return $query -> row['number'];
 	}
 
+	public function get_sum_withdraw_payment($customer_id)
+	{
+		$query = $this -> db -> query("
+			SELECT SUM(amount_usd) as number
+			FROM  ".DB_PREFIX."customer_withdraw_payment
+			WHERE customer_id = '".$customer_id."' AND status = 0
+		");
+		return $query -> row['number'];
+		
+	}
 }

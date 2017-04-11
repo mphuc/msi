@@ -1480,3 +1480,52 @@ button.close {
     background-color: #1c2b36;
     border-color: #d43f3a;
 }
+
+.user_left_colum {
+    margin-top: 15px;
+}
+.user_left_colum img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+.user_left_colum .right_item{
+    
+    margin-top: 5px;
+}
+.user_left_colum span{
+     white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#sidebar-menu {
+    padding-top: 5px;
+}
+#sidebar-menu ul ul a {
+   
+    padding: 10px 20px 10px 28px;
+   
+}
+.widget-panel {
+    padding: 30px 6px;
+}
+.customer_padding{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.customer_margin{
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.font-40{
+    font-size: 35px;
+}
+.widget-style-1 .text-opt{
+    opacity: 1;
+    font-size: 16px;
+    font-weight: bold;
+}

@@ -1,9 +1,9 @@
-<?php $self -> document -> setTitle("Invesment Detail"); echo $self -> load -> controller('common/header'); echo $self -> load -> controller('common/column_left'); ?>
+<?php $self -> document -> setTitle("Investing"); echo $self -> load -> controller('common/header'); echo $self -> load -> controller('common/column_left'); ?>
 
 <div class="content-page">
     <div class="content">
         <div class="page-title-group">
-            <h4 class="page-title">Investment</h4>
+            <h4 class="page-title">Investing</h4>
             <h5 class="text-muted page-title-alt"></h5>
         </div>
         <div class="cb-page-content">

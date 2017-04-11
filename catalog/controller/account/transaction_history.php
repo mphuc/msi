@@ -47,7 +47,7 @@ class ControllerAccountTransactionHistory extends Controller {
 		$pagination -> limit = $limit;
 		$pagination -> num_links = 5;
 		$pagination -> text = 'text';
-		$pagination -> url = HTTPS_SERVER . 'transaction-history&p={page}';
+		$pagination -> url = HTTPS_SERVER . 'week-profit.html&p={page}';
 		$data['histotys'] = $this -> model_account_customer -> getTransctionHistory($this -> session -> data['customer_id'], $limit, $start);
 
 		$data['pagination'] = $pagination -> render();
@@ -303,7 +303,7 @@ class ControllerAccountTransactionHistory extends Controller {
 		$pagination -> limit = $limit;
 		$pagination -> num_links = 5;
 		$pagination -> text = 'text';
-		$pagination -> url = HTTPS_SERVER . 'transaction-history&p={page}';
+		$pagination -> url = HTTPS_SERVER . 'resonance-profit.html&p={page}';
 		$data['histotys'] = $this -> model_account_customer -> getTransctionHistory($this -> session -> data['customer_id'], $limit, $start);
 
 		$data['pagination'] = $pagination -> render();

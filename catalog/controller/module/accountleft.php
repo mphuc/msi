@@ -46,6 +46,8 @@ class ControllerModuleAccountleft extends Controller {
 		$data['lang'] = $language -> data;
 		$data['base'] = $server;	
 		
+
+		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/accountleft.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/module/accountleft.tpl', $data);
 		} else {

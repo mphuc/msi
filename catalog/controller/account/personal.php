@@ -24,7 +24,7 @@ class ControllerAccountPersonal extends Controller {
 		$language -> load('account/personal');
 		$data['lang'] = $language -> data;
 
-		$this -> document -> setTitle($data['lang']['heading_title']);
+		$this -> document -> setTitle('Genealogy');
 
 		$data['breadcrumbs'] = array();
 
@@ -369,16 +369,33 @@ public function checkBinary($p_binary){
 			}else{
 				$get_customer_Id_by_username = $this -> model_account_customer-> get_customer_Id_by_username($_POST['email']);
 				count($get_customer_Id_by_username) > 0 && die();
+
+				$transaction_password = $this->request->post['transaction_password'] = rand(100000,999999);
+
 				$tmp = $this -> model_customize_register -> addCustomer_custom($this->request->post);
 
 				$cus_id= $tmp;
-				$amount = 0;
+
 				$code_active = sha1(md5(md5($cus_id)));
+
 				$this -> model_customize_register -> insert_code_active($cus_id, $code_active);
-				
+
+				$amount = 0;
+
 				$checkM_Wallet = $this -> model_account_customer -> checkM_Wallet($cus_id);
 				if(intval($checkM_Wallet['number'])  === 0){
-					if(!$this -> model_account_customer ->insert_M_Wallet($cus_id)) {
+					if(!$this -> model_account_customer -> insert_M_Wallet($amount, $cus_id)){
+						die();
+					}
+				}
+
+				$check_Setting_Customer = $this -> model_account_customer -> check_Setting_Customer($cus_id);
+				if(intval($check_Setting_Customer['number'])  === 0){
+
+					$ga = new PHPGangsta_GoogleAuthenticator();
+					$key_authenticator = $ga->createSecret();
+
+					if(!$this -> model_account_customer -> insert_customer_setting($cus_id,$key_authenticator)){
 						die();
 					}
 				}
@@ -395,49 +412,74 @@ public function checkBinary($p_binary){
 				$mail -> smtp_port = $this -> config -> get('config_mail_smtp_port');
 				$mail -> smtp_timeout = $this -> config -> get('config_mail_smtp_timeout');
 
-				//$mail -> setTo($this -> config -> get('config_email'));
 				$mail -> setTo($_POST['email']);
 				$mail -> setFrom($this -> config -> get('config_email'));
-				$mail -> setSender(html_entity_decode("Smart Financial Connections", ENT_QUOTES, 'UTF-8'));
+				$mail -> setSender(html_entity_decode("Smartmony, Inc", ENT_QUOTES, 'UTF-8'));
 				$mail -> setSubject("Congratulations Your Registration is Confirmed!");
 				$html_mail = '<div style="background: #f2f2f2; width:100%;">
-				   <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#2A363C;border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
+				   <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
 				    width:700px; margin:0 auto">
 				   <tbody>
 				      <tr>
 				        <td>
-				          <div style="text-align:center" class="ajs-header"><img  src="'.HTTPS_SERVER.'catalog/view/theme/default/img/logo.png" alt="logo" style="margin: 0 auto; width:150px;"></div>
+				          <div style="text-align:center" class="ajs-header"><img  src="'.HTTPS_SERVER.'catalog/view/theme/default/img/logo.png" alt="logo" style="margin: 30px auto; width:150px;"></div>
 				        </td>
 				       </tr>
 				       <tr>
-				       <td style="background:#fff">
-				       	<p class="text-center" style="font-size:20px;color: black;text-transform: uppercase; width:100%; float:left;text-align: center;margin: 30px 0px 0 0;">congratulations !<p>
-				       	<p class="text-center" style="color: black; width:100%; float:left;text-align: center;line-height: 15px;margin-bottom:30px;">You have successfully registered account</p>
-       	<div style="width:600px; margin:0 auto; font-size=15px">
+				       <td style="border: 1px solid #dbdbdb;background-color: #ffffff;border-radius: 5px; padding: 10px; width: 600px; margin: auto; font-family: Arial,Helvetica,sans-serif; font-size: 14px; margin-top:25px; padding:30px;">
+				       	<div style="font-size:14px;font-weight:bold; margin-top:25px; margin-bottom:30px;">Hello <span style="color:#01aeef">'.$this-> request ->post['username'].'</span></div>
+				       	<h2>Greetings from <span style="color:#01aeef">mackayshields! </span></h2>
 
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Your Username: <b>'.$this-> request ->post['username'].'</b></p>
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Email Address: <b>'.$this-> request ->post['email'].'</b></p>
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Phone Number: <b>'.$this-> request ->post['telephone'].'</b></p>
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Citizenship Card/Passport No: <b>'.$this-> request ->post['cmnd'].'</b></p>
-					       	
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Password For Login: <b>'.$this-> request ->post['password'].'</b></p>			       
-					       	<p style="font-size:14px;color: black;margin-left: 70px;">Bitcoin Wallet: <b>'.$this-> request ->post['wallet'].'</b>	</p>
-					       	<p style="text-align:center;">
-					       		<img style="margin:0 auto" src="https://chart.googleapis.com/chart?chs=150x150&chld=L|1&cht=qr&chl=bitcoin:'.$this-> request ->post['wallet'].'"/>
-					       	</p>
-					       	
+				       	<p>Thank you for applying to open an Yesbook Account with us</p>
 
-					          </div>
-				       </td>
+				       	<table width="70%" cellspacing="0" cellpadding="4" align="center" border="1" rules="all">
+							   <tbody>
+							      <tr>
+							         <td colspan="3" align="center" bgcolor="#fff"><span style="font-size:16px"><strong>Account Details</strong></span></td>
+							      </tr>
+							      <tr>
+							         <td width="50%" align="right">Full Name</td>
+							         
+							         <td width="47%">'.$this-> request ->post['username'].'</td>
+							      </tr>
+							      <tr>
+							         <td align="right">Affilate  ID </td>
+							         
+							         <td>M'.($cus_id + 100000).'</td>
+							      </tr>
+							      <tr>
+							         <td align="right">Login Password </td>
+							        
+							         <td>'.$this-> request ->post['password'].'</td>
+							      </tr>
+							      <tr>
+							         <td align="right">Password For Transaction</td>
+							         
+							         <td>'.$transaction_password.'</td>
+							      </tr>
+							   </tbody>
+							</table>
+							<p style="margin-bottom:10px; line-height:25px;">This is an auto generated password. You are advised to change your password as per your convenience.</p>
+							<p style="margin-bottom:10px; line-height:25px;">
+								We thank you again for your interest in opening Yesbook Account. Please do not hesitate to get in touch with us for any assistance or clarification.
+							</p>
+							<p style="margin-bottom:10px; line-height:25px;">
+								Sincerely
+							</p>
+							<p style="margin-bottom:10px; line-height:25px;">
+								mackayshields
+							</p>
+	   	
 				       </tr>
 				    </tbody>
 				    </table>
 				  </div>';
-				$mail -> setHtml($html_mail); 
-				$mail -> send();
-
 				
 				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
+				$mail -> setHtml($html_mail);
+				print_r($mail);
+				//$mail -> send();
+				die;
 				$this->session->data['register_mail'] = $this-> request ->post['email'];
 				unset($_SESSION['customer_id']);
 				$this -> response -> redirect(HTTPS_SERVER . 'login.html#success');

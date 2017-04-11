@@ -39,7 +39,7 @@ class ControllerAccountTransfer extends Controller {
         $pagination -> limit = $limit;
         $pagination -> num_links = 5;
         $pagination -> text = 'text';
-        $pagination -> url = HTTPS_SERVER . '?route=account/transfer&page={page}';
+        $pagination -> url = HTTPS_SERVER . 'transfer.html&page={page}';
         $data['histotys'] = $this -> model_account_customer -> get_transfer_customer($this -> session -> data['customer_id'], $limit, $start);
 
         $data['pagination'] = $pagination -> render();

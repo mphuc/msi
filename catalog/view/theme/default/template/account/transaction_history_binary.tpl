@@ -1,113 +1,140 @@
 <?php 
-   $self -> document -> setTitle('Transaction History'); 
+   $self -> document -> setTitle('Network Commision'); 
    echo $self -> load -> controller('common/header'); 
    echo $self -> load -> controller('common/column_left'); 
    ?>
-<div class="main-content">
-   <div class="page-header">
-      <div class="header-left-panel">
-          <!--  Title Page -->
-          <h1 class="page-title">Pairing bonus</h1>
-          <!--  Breadcrumb Section -->
+<div class="content-page">
+   <div class="content">
+      <div class="page-title-group">
+         <h4 class="page-title">Network Commision</h4>
+         <h5 class="text-muted page-title-alt"></h5>
       </div>
-    </div>     
-    <div class="page-content container-fluid">
-        <div class="main-dashboard">
+      <div class="cb-page-content">
+         <div class="container">
             <div class="row">
-   <?php if(count($getTransctionHistory_binary_new  ) > 0){ ?>
-      <div class="col-md-12">
-      <div class="panel panel-default">
-         
-          <div class="panel-body">
-              <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-12" id="no-more-tables">
-                      <table id="datatable" class="table table-striped table-bordered">
-                          <thead>
-                              <tr>
-                                 <th class="text-center"><?php echo $lang['column_no'] ?></th>
-                                        <th><?php echo $lang['column_wallet'] ?></th>
-                                        <th><?php echo $lang['column_date_added'] ?></th>
-                                        <th><?php echo $lang['column_amount'] ?></th>
-                                        <th><?php echo $lang['column_description'] ?></th>
-                                        <th>Link</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                               <?php $number = 1; foreach ($getTransctionHistory_binary_new as $key => $value) {?>
-                                          <tr>
-                                               <td data-title="<?php echo $lang['column_no'] ?>." align="center"><?php echo $number ?></td>
-                                              <td data-title="<?php echo $lang['column_wallet'] ?>"><?php echo $value['wallet'] ?></td>
-                                              <td data-title="<?php echo $lang['column_date_added'] ?>"><?php echo date("d/m/Y H:i A", strtotime($value['date_added'])); ?></td>
-                                              <td data-title="<?php echo $lang['column_amount'] ?>"><?php echo $value['text_amount'] ?></td>
-                                              <td data-title="<?php echo $lang['column_description'] ?>">
-                                                  <?php echo $value['system_decsription'] ?>
-                                              </td>
-                                              <td data-title="Link">
-                                                  <?php echo $value['url'] ?>
-                                              </td>
-                                          </tr>
-                                      <?php $number++; } ?>
-                          </tbody>
-                      </table>
-                <?php echo $pagination_new; ?>
-                  </div>
-              </div>
-          </div>
-         
-      </div>
-  </div>
-  <?php } ?>
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                           
-                            <?php if(count($histotys) > 0){ ?>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12" id="no-more-tables">
-                                        <table id="datatable" class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                   <th class="text-center"><?php echo $lang['column_no'] ?></th>
-                                                          <th><?php echo $lang['column_wallet'] ?></th>
-                                                          <th><?php echo $lang['column_date_added'] ?></th>
-                                                          <th><?php echo $lang['column_amount'] ?></th>
-                                                          <th><?php echo $lang['column_description'] ?></th>
-                                                      
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                 <?php $number = 1; foreach ($histotys as $key => $value) {?>
-                                                            <tr>
-                                                                 <td data-title="<?php echo $lang['column_no'] ?>." align="center"><?php echo $number ?></td>
-                                                                <td data-title="<?php echo $lang['column_wallet'] ?>"><?php echo $value['wallet'] ?></td>
-                                                                <td data-title="<?php echo $lang['column_date_added'] ?>"><?php echo date("d/m/Y H:i A", strtotime($value['date_added'])); ?></td>
-                                                                <td data-title="<?php echo $lang['column_amount'] ?>"><?php echo $value['text_amount'] ?></td>
-                                                                <td data-title="<?php echo $lang['column_description'] ?>">
-                                                                    <?php echo $value['system_decsription'] ?>
-                                                                </td>
-                                                                
-                                                            </tr>
-                                                        <?php $number++; } ?>
-                                            </tbody>
-                                        </table>
-                                  <?php echo $pagination; ?>
+               <div class="col-md-12">
+                  <div class="panel panel-default">
+                     
+                     <div class="panel-body">
+                        <div class="row">
+                           <div class="col-md-12 col-sm-12 col-xs-12" id="no-more-tables">
+                              <table id="datatable" class="table table-striped table-bordered">
+                                 <thead>
+                                    <tr>
+                                       <th class="text-center">#</th>
+                                       <th>Transaction Number</th>
+                                       <th>Date</th>
+                                       <th>Amount</th>
+                                       <th>Type</th>
+                                       <th>Balance</th>
+                                       <th>Detail</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <?php if (count($histotys) > 0) { ?>
+                                    <?php $i = 0; foreach ($histotys as $value) { $i++; ?>
+                                    <?php 
+                                       $text_amount = explode(" ", $value['text_amount']);
+                                       ?>
+                                    <tr>
+                                       <td data-title="#" align="center">
+                                          <?php echo $i ?>
+                                       </td>
+                                       <td data-title="Transaction Number" align="center">
+                                          <?php echo $value['code'] ?>
+                                       </td>
+                                       <td data-title="Date" align="center">
+                                          <?php echo date('d-F-Y H:i A',strtotime($value['date_added'])) ?>
+                                       </td>
+                                       <td data-title="Amount" align="center">
+                                          <?php echo $text_amount[1] ?> USD
+                                       </td>
+                                       <td data-title="Type" align="center">
+                                          <?php if ($value['type'] == "1") { ?>
+                                          <span class="badge badge-success"><i class="fa fa-plus"></i>Received</span>
+                                          <?php } else { ?>
+                                          <span class="badge badge-dranger "><i class="fa fa-minus"></i>Sent</span>
+                                          <?php } ?>
+                                       </td>
+                                       <td data-title="Balance" align="center">
+                                          <?php echo number_format($value['balance']) ?> USD
+                                       </td>
+                                       <td class="text-center" data-title="Details">
+                                          <a href="#" data-toggle="modal" data-target="#myModal<?php echo $value['code'] ?>" class="btn btn-info btn-sm">View Detail
+                                          </a>
+                                       </td>
+                                    </tr>
+                                    <div class="modal fade" id="myModal<?php echo $value['code'] ?>" role="dialog">
+                                       <div class="modal-dialog">
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                             <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 >Network Commision $<?php echo $text_amount[1] ?> USD</h4>
+                                             </div>
+                                             <div class="modal-body">
+                                                <div class="row-fluid">
+                                                   <div class="span8">
+                                                      <p>
+                                                         <strong>Transaction Date</strong><br>
+                                                         <?php echo date('d-F-Y H:i A',strtotime($value['date_added'])) ?>
+                                                      </p>
+                                                      <p>
+                                                         <strong>Transaction  Number</strong>
+                                                         <br>
+                                                         #<?php echo $value['code'] ?>
+                                                      </p>
+                                                      <p>
+                                                         <strong>Transaction Type</strong>
+                                                         <br>
+                                                         <?php if ($value['type'] == "1") { ?>
+                                                         <span class="badge badge-success"><i class="fa fa-plus"></i>Received</span>
+                                                         <?php } else { ?>
+                                                         <span class="badge badge-dranger "><i class="fa fa-minus"></i>Sent</span>
+                                                         <?php } ?>
+                                                      </p>
+                                                      <p>
+                                                         <strong>Details</strong>
+                                                         <br>
+                                                         <?php echo ($value['system_decsription']) ?>
+                                                      </p>
+                                                   </div>
+                                                   <div class="span4">
+                                                      <div style="border-radius: 3px; background: <?php echo ($value['type'] == "1") ? '#81c868' : '#e84f4c'?>; text-align: center; padding: 10px; color: #fff; font-size: 14px;">
+                                                         <p><strong>Amount</strong> </p>
+                                                         <h3>$<?php echo $text_amount[1] ?></h3>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                       </div>
                                     </div>
-                                </div>
-                            </div>
+                           </div>
                            <?php } ?>
+                           <?php } else { ?>
+                           <tr>
+                           <td colspan="7" align="center">No data
+                           </td>
+                           </tr>
+                           <?php } ?>
+                           </tbody>
+                           </table>
+                           <div class="text-center">
+                              <?php echo $pagination; ?>
+                           </div>
                         </div>
-                    </div>
-                    
-                </div> <!-- End Row -->
-              </div>
+                     </div>
+                  </div>
+                  
+               </div>
             </div>
-          </div>
-   <!-- End row -->
+         </div>
+         <!-- End Row -->
+      </div>
+   </div>
 </div>
-
- <script type="text/javascript">
-            $(document).ready(function() {
-                $('#datatable').dataTable();
-            } );
-        </script>
+<!-- End row -->
+</div>
 <?php echo $self->load->controller('common/footer') ?>

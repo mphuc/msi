@@ -38,7 +38,7 @@ class ControllerAccountDeposit extends Controller {
 		$pagination -> limit = $limit;
 		$pagination -> num_links = 5;
 		$pagination -> text = 'text';
-		$pagination -> url = HTTPS_SERVER . '?route=account/deposit&page={page}';
+		$pagination -> url = HTTPS_SERVER . 'deposit.html&page={page}';
 		$data['histotys'] = $this -> model_account_customer -> get_invoid_customer($this -> session -> data['customer_id'], $limit, $start);
 
 		$data['pagination'] = $pagination -> render();
