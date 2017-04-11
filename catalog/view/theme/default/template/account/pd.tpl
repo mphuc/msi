@@ -18,25 +18,27 @@
                      <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                            <tr>
- 							    <th>Code</th>
-                              <th>Date Created</th>
-                              <th>Packet</th>
-                              <th>Profit</th>
-                              <th>Time</th>
+                              <th>#</th>
+ 							                <th>Transaction Number</th>
+                              <th>Date</th>
+                              <th>Package</th>
+                              <th>Number of weeks</th>
+                              <th>Details</th>
                            </tr>
                         </thead>
                         <tbody>
                            <?php foreach ($pds as $value=> $key){?> 
                            <tr>
-        					<td data-title="Code">#<?php echo $key['pd_number'] ?></td>
-                            <td data-title="Date Created"><?php echo date("Y-m-d H:i:A", strtotime($key['date_added'])); ?></td>
+                            <td data-title="#">#<?php echo $key['pd_number'] ?></td>
+        					           <td data-title="Transaction Number">#<?php echo $key['pd_number'] ?></td>
+                            <td data-title="Date"><?php echo date("Y-m-d H:i:A", strtotime($key['date_added'])); ?></td>
                               
-                            <td data-title="Packet">
-                              	<?php echo (doubleval($key['filled']) / 100000000) ?> BTC
+                            <td data-title="Package">
+                              	<?php echo (number_format($key['filled']) / 10000) ?> USD
                             </td>
-                            <td data-title="Profit"> <?php echo (doubleval($key['max_profit']) / 100000000) ?> BTC</td>
+                            <td class="text-center text-danger" data-title="Number of weeks"> <?php echo (($key['count_profit'])) ?> Week</td>
                       
-                            <td data-title="Time"> <span style="color:; font-size:15px;" class="text-warning countdown" data-countdown="<?php echo  $key['date_finish'] ?>"> </span> </td>
+                            <td data-title="Details"> <span style="color:; font-size:15px;" class="text-warning countdown" data-countdown="<?php echo  $key['date_finish'] ?>"> </span> </td>
                            </tr>
                            <?php }?> 
                         </tbody>
@@ -67,7 +69,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>100<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>100<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -86,7 +88,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                  <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="100">
@@ -112,7 +116,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>500<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>500<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -131,7 +135,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                    <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="500">
@@ -157,7 +163,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>1000<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>1000<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -176,7 +182,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                    <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="1000">
@@ -202,7 +210,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>2000<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>2000<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -221,7 +229,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                    <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="2000">
@@ -247,7 +257,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>5000<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>5000<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -266,7 +276,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                   <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="5000">
@@ -292,7 +304,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>10.000<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>10.000<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -311,7 +323,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                    <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="10000">
@@ -337,7 +351,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>50.000<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>50.000<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -356,7 +370,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                    <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="50000">
@@ -382,7 +398,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>100.000<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>100.000<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -401,7 +417,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                    <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="100000">
@@ -427,7 +445,7 @@
                           <h3>Not active</h3>
                       <?php } ?>
                     </span>
-                    <span class="price-value"><span class="currency">$</span>200.000<span class="mo"> 8 Week</span></span>
+                    <span class="price-value"><span class="currency">$</span>200.000<span class="mo"> 80 Week</span></span>
                 </div>
  
                 <div class="pricingContent">
@@ -446,7 +464,9 @@
                       </div>
                     </form>
                   <?php } else { ?>
+                    <div class="pricingTable-sign-up ">
                     <button disabled="true" class="btn btn-block btn-default">Active</button>
+                  </div>
                   <?php } } else { ?>
                     <form class="packet-invest" action="index.php?route=account/pd/pd_investment">
                       <input type="hidden" name="packet" value="200000">

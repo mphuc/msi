@@ -136,7 +136,15 @@ class ModelAccountCustomer extends Model {
 			url = '".$url."',
 			date_added = NOW()
 		");
-		return $this->db->getLastId();
+		$id = $this -> db -> getLastId();
+		$this -> db -> query("
+			UPDATE " . DB_PREFIX . "customer_transaction_history 
+			SET code = '".hexdec( crc32($id) ).$id."'
+			WHERE id = ".$id."
+			
+		");
+
+		return $query;
 	}
 	public function Update_url_History_id($url,$id){
 		$query = $this -> db -> query("
@@ -345,7 +353,7 @@ class ModelAccountCustomer extends Model {
 			filled = '".$amount."',
 			date_finish = DATE_ADD(NOW(), INTERVAL + 56 DAY) ,
 			max_profit = '".$max_profit."',
-			status = 0
+			status = 1
 		");
 		//update max_profit and pd_number
 		$pd_id = $this->db->getLastId();

@@ -583,6 +583,7 @@ class ControllerAccountPd extends Controller {
 
 		if(array_key_exists("packet",  $this -> request -> get) && $this -> customer -> isLogged()){
 
+
 			$this -> load -> model('account/pd');
 			$this -> load -> model('account/customer');
 			$package = $this -> request -> get['packet'];
@@ -642,7 +643,11 @@ class ControllerAccountPd extends Controller {
             }		
             
             ($package === 0) && die("error");
-			
+			//check package
+            $check_packet_pd = $this -> check_packet_pd($package*10000);
+            (count($check_packet_pd ) > 0) && die("error");
+
+
             $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 
             if ($get_M_Wallet['amount'] >= $package*10000)

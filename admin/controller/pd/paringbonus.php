@@ -40,171 +40,153 @@ class ControllerPdParingbonus extends Controller {
 		$this->response->setOutput($this->load->view('pd/paringbonus.tpl', $data));
 	}
 	
-	public function get_username($customer_id){
-		$this->load->model('pd/registercustom');
-		return $this -> model_pd_registercustom -> get_username($customer_id);
-	}
-	public function get_blance_coinmax($customer_id){
-		$this->load->model('pd/registercustom');
-		$get_blance_coinmax = $this -> model_pd_registercustom -> get_wallet_coinmax_buy_customer_id($customer_id);
-		return $get_blance_coinmax['amount'];
-	}
 
-	public function pay_paringbounus(){
-		
-		$this->load->model('pd/registercustom');
-		$daliprofit = $_POST['daliprofit'];
-		$pin = $_POST['pin'];
-		$google = $_POST['google'];
-		
-		if ($this->check_otp_login($google) == 1){
-			$this -> team_commission($pin);
-			$this -> response -> redirect($this -> url -> link('pd/paringbonus&token='.$_GET['token'].'#suscces'));
-		}
-		else{
-			$this -> response -> redirect($this -> url -> link('pd/paringbonus&token='.$_GET['token'].'#no_google'));
-		}
-		
-	}
-
-	public function team_commission($pin){
+	public function submit(){
         
         $this->load->model('pd/registercustom');
-        /*TÍNH HOA HỒNG NHÁNH YẾU*/
-        $this -> model_pd_registercustom -> delete_form_cn_payment();
         $getCustomer = $this -> model_pd_registercustom -> getCustomer_commission();
-
-        $bitcoin = "";
-        $wallet = "";
-        $inser_history = "";
-        $test = "";
-        $amount_tai = "";
-        $amount_tra = "";
-        $customer_id = "";
-        $sum = 0;
-       foreach ($getCustomer as $value) {
+        //print_r($getCustomer);die;
+        foreach ($getCustomer as $value) {
        
 	        if ((doubleval($value['total_pd_left']) > 0 && doubleval($value['total_pd_right'])) > 0)
 	        {
 	            if (doubleval($value['total_pd_left']) > doubleval($value['total_pd_right'])){
+
 	                $balanced = doubleval($value['total_pd_right']);
+
+	                $this -> model_pd_registercustom -> update_total_pd_left(doubleval($value['total_pd_left']) - doubleval($value['total_pd_right']), $value['customer_id']);
+		                
+		            $this -> model_pd_registercustom -> update_total_pd_right(0, $value['customer_id']);
 	            }
 	            else
 	            {
 	                $balanced = doubleval($value['total_pd_left']);
+
+	                $this -> model_pd_registercustom -> update_total_pd_right(doubleval($value['total_pd_right']) - doubleval($value['total_pd_left']), $value['customer_id']);
+
+		            $this -> model_pd_registercustom -> update_total_pd_left(0, $value['customer_id']);
+
 	            }
-	            if ($value['level'] == 2 && $this-> check_cannhanh2f1($value['customer_id']) == 1) {
-	            	
-	            
-		            $precent = 10;
-		          	
-		            $getTotalPD = $this-> model_pd_registercustom -> getmaxPD($value['customer_id']);
-		           
-		            $amount = ($balanced*$precent)/100;
 
-		            if (doubleval($amount) > (doubleval($getTotalPD['number'])*2))
-		            {
-		                $amount = (doubleval($getTotalPD['number']))*2;
-		            }
-		            
-	                $sum += round(doubleval($amount)/100000000*0.75*0.97,8);
-	                
-	                $btc_tra = round(doubleval($amount)/100000000*0.75*0.97,8);
-	                $btc_tai = round(doubleval($amount)/100000000*0.25,8);
-	                
-	                $customer_id .= ','. $value['customer_id'];
-	                $amount_tra .= ",".round(doubleval($amount)/100000000*0.75*0.97,8);
-	    			$amount_tai .= ",".round(doubleval($amount)/100000000*0.25,8);
+	            $amounts_received = $balanced * 3 /100;
 
-	               
-	                $bitcoin .= ",".$btc_tra;
-	                $wallet .= ",".$value['wallet'];
-	                $test .= $btc_tra." -------- ".$value['wallet']." --------- ".$value['customer_id']."------".$amount."<br/>";
-	                $this -> model_pd_registercustom ->update_cn_Wallet_payment($amount,$value['customer_id'],$value['wallet']);
-	                
-	            
-	            }
-	        }    
-	    }
-	    echo  $test;
-	    echo "<br>";
-	    $bitcoin = substr($bitcoin,1);
-	    $wallet = substr($wallet,1);
-	    echo $bitcoin;
-	    echo "<br>";
-	    echo $wallet;
-	    
-	    $customer_ids = explode(',', substr($customer_id,1));
-		$amount_tras = explode(',',substr($amount_tra,1));
-		$amount_tais = explode(',',substr($amount_tai,1));
-			
-	    
-	    $block_io = new BlockIo(key, $pin, block_version); 
+	            $this -> model_pd_registercustom -> update_m_Wallet_add_sub($amounts_received,$value['customer_id'], $add = true);
 
-	    $tml_block = $block_io -> withdraw(array(
-	        'amounts' => $bitcoin, 
-	        'to_addresses' => $wallet,
-	        'priority' => 'low'
-	    )); 
-	     
-	    $txid = $tml_block -> data -> txid;
+	            $get_M_Wallet = $this -> model_pd_registercustom -> get_M_Wallet($value['customer_id']);
 
-	    $url = '<a target="_blank" href="https://blockchain.info/tx/'.$txid.'" >Link Transfer </a>';
-		
-	    
-	    foreach ($getCustomer as $value) {
-       
-	        if ((doubleval($value['total_pd_left']) > 0 && doubleval($value['total_pd_right'])) > 0)
-	        {
-	        	if ($value['level'] == 2 && $this-> check_cannhanh2f1($value['customer_id']) == 1) {
-		            if (doubleval($value['total_pd_left']) > doubleval($value['total_pd_right'])){
-		                $balanced = doubleval($value['total_pd_right']);
-		                $this -> model_pd_registercustom -> update_total_pd_left(doubleval($value['total_pd_left']) - doubleval($value['total_pd_right']), $value['customer_id']);
-		                $this -> model_pd_registercustom -> update_total_pd_right(0, $value['customer_id']);
-		            }
-		            else
-		            {
-		               $balanced = doubleval($value['total_pd_left']);
-		               $this -> model_pd_registercustom -> update_total_pd_right(doubleval($value['total_pd_right']) - doubleval($value['total_pd_left']), $value['customer_id']);
-		               $this -> model_pd_registercustom -> update_total_pd_left(0, $value['customer_id']);
-		            }
-		            $precent = 10;
-		            $amount = ($balanced*$precent)/100;
-		            $btc_tra = round(doubleval($amount)/100000000*0.75*0.97,8);
-		            $inser_history .= ",".$this -> model_pd_registercustom -> inser_history('+ '.($btc_tra).' BTC','System Commission','Earn '.$precent.'%  weak team ('.($balanced/100000000).' BTC), Free 3%. 25% Reinvestment ',$value['customer_id']);
-		        }
+                $this -> model_pd_registercustom -> saveTranstionHistory(
+                    $value['customer_id'], 
+                    "Commision Network", 
+                    "+ ".($amounts_received/10000)." USD", 
+                    "Commision Network 3%, From weak branch  ".(number_format($balanced/10000))." USD",
+                    1,
+                    $get_M_Wallet['amount']/10000, 
+                    $url = ''
+                ); 
+
+                $this -> ch_downline($value['customer_id'],$amounts_received);
+	            $this -> ch_upline($value['customer_id'],$amounts_received);
 	        }
 	    }
-	    $this ->model_pd_registercustom->update_transhistory(substr($inser_history,1),$url);
-	    for ($i=0; $i < count($customer_ids); $i++) { 
-	    	 $this -> model_pd_registercustom -> update_m_Wallet_add_sub($amount_tais[$i]*100000000 , $customer_ids[$i], $add = true);
-	    }
 
+	    $this -> session -> data['complete_cn'] = "complete";
+		$this -> response -> redirect($this -> url -> link('pd/dailyprofit&token='.$_GET['token']));
+	     
     }
-	public function check_otp_login($otp){
-		require_once dirname(__FILE__) . '/vendor/autoload.php';
-		$authenticator = new PHPGangsta_GoogleAuthenticator();
-		$secret = "FS34YT4LS76RDZIY";
-		$tolerance = "3";
-		$checkResult = $authenticator->verifyCode($secret, $otp, $tolerance);    
-		if ($checkResult) 
-		{
-		    return 1;
-		     
-		} else {
-		    return 2;
-		}
 
-	}
+    public function ch_downline($customer_id,$amounts_received)
+    {	
+    	
+    	$getCustomer = $this -> model_pd_registercustom -> getCustomer($customer_id);
+    	$getCustomer_ml = $this -> model_pd_registercustom -> getCustomer_ml($customer_id);
+    	$p_binary = $getCustomer_ml['p_binary'];
+    	for ($i=1; $i <=6; $i++)
+    	{
+    		if ($p_binary != 0)
+    		{
+    			$getCustomer_ml_binary = $this -> model_pd_registercustom -> getCustomer_ml($p_binary);
+    			if ($i%2 == 0)
+    			{
+		    		if ($getCustomer_ml_binary['level'] >= 2)
+		    		{
 
-	public function check_cannhanh2f1($customer_id){
-		$this->load->model('pd/registercustom');
-        return $this -> model_pd_registercustom -> check_cannhanh2f1($customer_id);
-	}
+	    				$amounts_receiveds = $amounts_received * 8 /100;
 
-	public function check_cannhanh2f11(){
-		$customer_id = 61;
-		$this->load->model('pd/registercustom');
-        echo $this -> model_pd_registercustom -> check_cannhanh2f1($customer_id);
-	}
+	    				$this -> model_pd_registercustom -> update_m_Wallet_add_sub($amounts_receiveds,$getCustomer_ml_binary['customer_id'], $add = true);
+
+			            $get_M_Wallet = $this -> model_pd_registercustom -> get_M_Wallet($getCustomer_ml_binary['customer_id']);
+
+			            $this -> model_pd_registercustom -> saveTranstionHistory(
+			                $getCustomer_ml_binary['customer_id'], 
+			                "Commision Resonance", 
+			                "+ ".($amounts_receiveds/10000)." USD", 
+			                "Commision Resonance Downline 8%, From ID ".$getCustomer['username']." F ".$i."receive  ".($amounts_received/10000)." USD",
+			                1,
+			                $get_M_Wallet['amount']/10000, 
+			                $url = ''
+			            ); 
+			        }
+    			}
+    			
+    		}
+    		if ($p_binary == 0)
+    		{
+    			break;
+    		}
+    		$p_binary = $getCustomer_ml_binary['p_binary'];
+    		
+    	}
+    }
+
+    public function ch_upline($customer_id,$amounts_received)
+    {
+    	$getCustomer = $this -> model_pd_registercustom -> getCustomer($customer_id);
+    	$getCustomer_ml = $this -> model_pd_registercustom -> getCustomer_ml($customer_id);
+
+    	if ($getCustomer_ml['left'] != 0 && $getCustomer_ml['right'] != 0)
+    	{
+
+    		$amounts_receiveds = $amounts_received * 4 /100;
+
+    		// left nhan
+    		$getCustomer_ml_left = $this -> model_pd_registercustom -> getCustomer_ml($getCustomer_ml['left']);
+    		if ($getCustomer_ml_left['level'] >= 2)
+    		{
+    			$this -> model_pd_registercustom -> update_m_Wallet_add_sub($amounts_receiveds,$getCustomer_ml['left'], $add = true);
+
+	            $get_M_Wallet = $this -> model_pd_registercustom -> get_M_Wallet($getCustomer_ml['left']);
+
+	            $this -> model_pd_registercustom -> saveTranstionHistory(
+	                $getCustomer_ml['left'], 
+	                "Commision Resonance", 
+	                "+ ".($amounts_receiveds/10000)." USD", 
+	                "Commision Resonance Upline 4%, From ID ".$getCustomer['username']." receive  ".($amounts_received/10000)." USD",
+	                1,
+	                $get_M_Wallet['amount']/10000, 
+	                $url = ''
+	            ); 
+    		}
+            
+
+            // right nhan
+    		$getCustomer_ml_right = $this -> model_pd_registercustom -> getCustomer_ml($getCustomer_ml['right']);
+    		if ($getCustomer_ml_right['level'] >= 2)
+    		{
+	            $this -> model_pd_registercustom -> update_m_Wallet_add_sub($amounts_receiveds,$getCustomer_ml['right'], $add = true);
+
+	            $get_M_Wallet = $this -> model_pd_registercustom -> get_M_Wallet($getCustomer_ml['right']);
+
+	            $this -> model_pd_registercustom -> saveTranstionHistory(
+	                $getCustomer_ml['right'], 
+	                "Commision Resonance", 
+	                "+ ".($amounts_receiveds/10000)." USD", 
+	                "Commision Resonance Downline 4%, From ID ".$getCustomer['username']." receive  ".($amounts_received/10000)." USD",
+	                1,
+	                $get_M_Wallet['amount']/10000, 
+	                $url = ''
+	            ); 
+	        }
+    	}
+    }
+	
 }

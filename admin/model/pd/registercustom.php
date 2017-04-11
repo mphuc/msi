@@ -1090,18 +1090,7 @@ class ModelPdRegistercustom extends Model {
 		");
 		return $query -> row;
 	}
-	public function get_all_pd($limit, $offset){
-
-		$query = $this -> db -> query("
-			SELECT A.*, B.username, B.firstname
-			FROM  ".DB_PREFIX."customer_provide_donation_transaction A LEFT JOIN ".DB_PREFIX."customer B ON B.customer_id = A.customer_id
-			ORDER BY A.date_added DESC
-			LIMIT ".$limit."
-			OFFSET ".$offset."
-		");
-		
-		return $query -> rows;
-	}
+	
 	public function get_count_transaction(){
 
 		$query = $this -> db -> query("
@@ -1240,10 +1229,18 @@ class ModelPdRegistercustom extends Model {
 			url = '".$url."',
 			date_added = NOW()
 		");
-		return $this->db->getLastId();
+		$id = $this -> db -> getLastId();
+		$this -> db -> query("
+			UPDATE " . DB_PREFIX . "customer_transaction_history 
+			SET code = '".hexdec( crc32($id) ).$id."'
+			WHERE id = ".$id."
+			
+		");
+
+		return $query;
 	}
 	public function getCustomer_commission() {
-		$query = $this -> db -> query("SELECT A.customer_id,A.total_pd_left,A.total_pd_right,A.wallet,A.username,B.level FROM " . DB_PREFIX . "customer A INNER JOIN " . DB_PREFIX . "customer_ml B ON A.customer_id=B.customer_id WHERE total_pd_left > 0 AND total_pd_right > 0 ");
+		$query = $this -> db -> query("SELECT A.customer_id,A.total_pd_left,A.total_pd_right,A.username,B.level FROM " . DB_PREFIX . "customer A INNER JOIN " . DB_PREFIX . "customer_ml B ON A.customer_id=B.customer_id WHERE total_pd_left > 0 AND total_pd_right > 0 ");
 		return $query -> rows;
 	}
 	public function getmaxPD($id_customer){
@@ -1582,5 +1579,15 @@ class ModelPdRegistercustom extends Model {
 			WHERE count_profit <= 80
 		");
 		return $query -> rows;
+	}
+
+
+	public function update_pd_count_profit($id){
+		$query = $this -> db -> query("
+			UPDATE  ".DB_PREFIX."customer_provide_donation SET
+			count_profit = count_profit + 1
+			WHERE id = '".$id."'
+		");
+		return $query;
 	}
 }

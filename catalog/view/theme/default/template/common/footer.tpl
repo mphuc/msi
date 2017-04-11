@@ -71,7 +71,7 @@ copyTextareaBtn.addEventListener('click', function(event) {
 						else
 						{
 							window.funLazyLoad.reset();
-							xhtml = '<div class="col-md-12"><h2 class="text-center">Successful package activation. Thank you for trusting us</h2></div>';
+							xhtml = '<div class="col-md-12"><h3 class="text-center">Successful package activation. Thank you for trusting us</h3></div>';
 							alertify.alert(xhtml, function(){
 							    window.funLazyLoad.reset();
 								    location.reload(true);
