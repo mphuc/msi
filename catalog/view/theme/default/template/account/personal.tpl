@@ -20,6 +20,8 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="container-fluid">
                 <fieldset>
+
+
                   <div class="personal_contain" style="padding:0px;" >
                     <div class="tootbar-top">
                       <ul class="list-unstyled" style="float: left;">
@@ -57,16 +59,10 @@
               
               </div>
               <div class="detail-icon" style="margin-top: 50px;">
-                          <img src="catalog/view/theme/default/css/icons/packe0.png" width="30px">- New User
-                          <img src="catalog/view/theme/default/css/icons/packe1.png" width="30px">- 0.5 BTC
-                          <img src="catalog/view/theme/default/css/icons/packe2.png" width="30px">- 1 BTC
-                          <img src="catalog/view/theme/default/css/icons/packe3.png" width="30px">- 5 BTC
-                          <img src="catalog/view/theme/default/css/icons/packe4.png" width="30px">- 10 BTC
-                          <img src="catalog/view/theme/default/css/icons/packe5.png" width="30px">- 20 BTC
-                          <img src="catalog/view/theme/default/css/icons/packe6.png" width="30px">- 50 BTC
-                          
-                         <img src="catalog/view/theme/default/stylesheet/icons/3.png" width="45px"> - Add New User
-                        </div>
+                <img src="catalog/view/theme/default/css/icons/open.png" width="30px">- User Not Active
+                <img src="catalog/view/theme/default/css/icons/1.png" width="30px">- User Active
+                <img src="catalog/view/theme/default/css/icons/red.png" width="30px">- Create User
+              </div>
             </div>
           </div>
         </div>
@@ -130,17 +126,17 @@ jQuery.fn.show_tree = function(node) {
     x_p = "<div class='customer_toolip'><p class='h4'>"+node.firstname+"</p>";
     x_p += "<p class='h3'>"+node.username+"</p>";
     x_p += "<table class='table table-bordered'><tbody><tr>";
-    x_p += "<td colspan='2'> <div align='center'> <img src='images/tree/1.png' width='20' height='20'></div> </td></tr>";
+    x_p += "<td colspan='2'> <div align='center'> <img src='"+node.img_profile+"' width='20' height='20'></div> </td></tr>";
     x_p += "<tr><td> <div align='center'>Sponsor</div> </td> <td> <div align='center'>"+node.sponsor+"</div> </td></tr>";
     x_p += "<tr><td> <div align='center'>Date</div> </td> <td> <div align='center'>"+node.date_added+"</div> </td></tr>";
-    x_p += "<tr><td> <div align='center'>Total Package</div> </td> <td> <div align='center'>"+node.totalPD+"</div> </td></tr>";
-    x_p += "<tr><td> <div align='center'>Binary Left</div> </td> <td> <div align='center'>"+node.leftPD+"</div> </td></tr>";
-    x_p += "<tr><td> <div align='center'>Binary Right</div> </td> <td> <div align='center'>"+node.rightPD+"</div> </td></tr>";
-    x_p += "<tr><td> <div align='center'>Binary Right</div> </td> <td> <div align='center'>"+node.rightPD+"</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Total Package</div> </td> <td> <div align='center'>"+node.totalPD+" USD</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Binary Left</div> </td> <td> <div align='center'>"+node.leftPD+" USD</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Binary Right</div> </td> <td> <div align='center'>"+node.rightPD+" USD</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Number F1</div> </td> <td> <div align='center'>"+node.numberf1+"</div> </td></tr>";
     
     html += !node.empty 
-        ? '<div class=\''+node_class+' '+level_active+'\'><a data-html="true" data-toggle="tooltip" rel="tooltip" data-placement="top" data-title="<p>'+x_p+'</p>" class="binaryTree" style="display:block"   \'><i class="fa fa-user type-'+node.level+' package-'+node.maxPD+'" onclick=\'click_node('+node.id+')\' value=\''+node.id+'\' aria-hidden="true"></i></a><span class="username_node">'+node.username+'</span>' 
-        : '<div class=\''+node_class+'\'><a data-toggle="tooltip" data-placement="top" style="display:block" onclick=\'click_node_add('+node.p_binary+', "'+positon[1]+'")\' value=\''+node.p_binary+'\' title="Add new user"><i class="fa fa-plus-square type-add"></i></a>';
+        ? '<div class=\''+node_class+' '+level_active+'\'><a data-html="true" data-toggle="tooltip" rel="tooltip" data-placement="left" data-title="<p>'+x_p+'</p>" class="binaryTree" style="display:block"   \'><i class="fa fa-user type-'+node.level+' package-'+node.maxPD+'" onclick=\'click_node('+node.id+')\' value=\''+node.id+'\' aria-hidden="true"></i></a><div class="username_node"><p>'+node.firstname+'</p><p>'+node.username+'</p></div>' 
+        : '<div class=\''+node_class+'\'><a data-toggle="tooltip" data-placement="bottom" style="display:block" onclick=\'click_node_add('+node.p_binary+', "'+positon[1]+'")\' value=\''+node.p_binary+'\' title="Add new user"><i class="fa fa-plus-square type-add"></i></a>';
 
     html += '<div id=\''+node.id+'\' ></div>';
 
@@ -213,8 +209,8 @@ jQuery.fn.build_tree = function(id, method) {
 
 })(jQuery);
   var click_node_add =  function (p_binary, positon){
-    var link = '/register.html';
-    link += '&token=' + p_binary;
+    var link = 'adduser.html';
+    link += '&id=' + p_binary;
     link += '_'+ positon;
     link += '_'+ '<?php echo $customer_code; ?>';
     location.href = link;
@@ -285,10 +281,5 @@ jQuery(document).ready(function($) {
 });
 
 </script>
-<style>
-  .username_node{
-     margin-top: -39px; float: left; position: absolute; left: -8px; font-size: 8px; width: 51px; overflow: hidden;
-  }
-  
-</style>
+
 <?php echo $footer; ?>

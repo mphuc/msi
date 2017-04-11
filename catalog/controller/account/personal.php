@@ -288,15 +288,10 @@ public function checkBinary($p_binary){
 
 			$this -> load -> model('account/customer');
 			$this -> document -> addScript('catalog/view/javascript/register/register.js');
-		//language
 		
-	
-		//method to call function
+		! array_key_exists('id', $this -> request -> get) && $this -> response -> redirect($this -> url -> link('/login.html'));
 		
-		/*! array_key_exists('p_binary', $this -> request -> get) && $this -> response -> redirect($this -> url -> link('/login.html'));*/
-		! array_key_exists('token', $this -> request -> get) && $this -> response -> redirect($this -> url -> link('/login.html'));
-		/*! array_key_exists('postion', $this -> request -> get) && $this -> response -> redirect($this -> url -> link('/login.html'));*/
-		$token = explode("_", $this -> request -> get['token']);
+		$token = explode("_", $this -> request -> get['id']);
 		
 		$p_binary = $token[0]; 
 		if (!is_numeric($p_binary)) $this -> response -> redirect($this -> url -> link('/login.html'));
@@ -361,9 +356,7 @@ public function checkBinary($p_binary){
 
 	public function register_submit(){
 		
-		//method to call function
-		// !call_user_func_array("myCheckLoign", array($this)) && $this -> response -> redirect($this -> url -> link('/login.html'));
-
+		
 		if ($this->request->server['REQUEST_METHOD'] === 'POST'){
 			$this -> load -> model('customize/register');
 			$this -> load -> model('account/auto');
@@ -374,7 +367,7 @@ public function checkBinary($p_binary){
 			if (intval($check_p_binary['number']) === 2) {
 				die('Error');
 			}else{
-				$get_customer_Id_by_username = $this -> model_account_customer-> get_customer_Id_by_username($_POST['username']);
+				$get_customer_Id_by_username = $this -> model_account_customer-> get_customer_Id_by_username($_POST['email']);
 				count($get_customer_Id_by_username) > 0 && die();
 				$tmp = $this -> model_customize_register -> addCustomer_custom($this->request->post);
 
@@ -382,28 +375,16 @@ public function checkBinary($p_binary){
 				$amount = 0;
 				$code_active = sha1(md5(md5($cus_id)));
 				$this -> model_customize_register -> insert_code_active($cus_id, $code_active);
-				$checkC_Wallet = $this -> model_account_customer -> checkR_Wallet($cus_id);
-				if(intval($checkC_Wallet['number'])  === 0){
-					if(!$this -> model_account_customer -> insertR_WalletR($amount, $cus_id)){
-						die();
-					}
-				}
+				
 				$checkM_Wallet = $this -> model_account_customer -> checkM_Wallet($cus_id);
 				if(intval($checkM_Wallet['number'])  === 0){
 					if(!$this -> model_account_customer ->insert_M_Wallet($cus_id)) {
 						die();
 					}
 				}
-				$checkmatching_Wallet = $this -> model_account_customer -> checkmatching_Wallet($cus_id);
-				if(intval($checkmatching_Wallet['number'])  === 0){
-					if(!$this -> model_account_customer ->insert_matching_Wallet($cus_id)) {
-						die();
-					}
-				}
+				
 				$data['has_register'] = true;
-				$getCountryByID = $this -> model_account_customer -> getCountryByID(intval($this-> request ->post['country_id']));
-				//$this -> response -> redirect($this -> url -> link('account/', '#success', 'SSL'));
-
+				
 				// send mail
 				$mail = new Mail();
 				$mail -> protocol = $this -> config -> get('config_mail_protocol');
@@ -725,8 +706,6 @@ public function checkBinary($p_binary){
 
 		$user = $this -> model_account_customer -> getInfoUsers_binary($id);
 
-
-
 		$node = new stdClass();
 
 
@@ -737,16 +716,17 @@ public function checkBinary($p_binary){
 		$node->username = $user['username'] ;
 		$node -> email = $user['email'];
 		$node -> telephone = $user['telephone'];
-		$node -> date_added = $user['date_added'];
+		$node -> date_added = date('d-F-Y H:i A',strtotime($user['date_added']));
 		$node -> level = $user['level'];
 		$node -> level_user = $user["level_member"];
-
+		$node -> firstname = $user["firstname"];
 		$node -> leftPD = $this -> total_pd_left($id);
 		$node -> rightPD = $this -> total_pd_right($id);
 		$node -> totalPD = $this -> total_pd($id);
 		$node -> maxPD = $this -> max_pd($id);
 		$node -> sponsor = $this -> sponsor($user['p_node']);
-			
+		$node -> numberf1 = $this -> numberf1($id);
+		$node -> img_profile = $this -> img_profile($id);
 		$node -> empty = false;
 		
 		$date = strtotime(date('Y-m-d'));
@@ -780,7 +760,7 @@ public function checkBinary($p_binary){
 	function total_pd_left($customer_id){
 		$this -> load -> model('account/customer');
 		$count = $this -> model_account_customer ->  getCustomer($customer_id);
-		$count = $count['total_pd_left'] / 100000000;
+		$count = number_format($count['total_pd_left'] / 10000);
 
 		return $count;
 		// $left_id = $count['left'];
@@ -805,14 +785,14 @@ public function checkBinary($p_binary){
 	public function total_pd($customer_id){
 		$this -> load -> model('account/customer');
 		$count = $this -> model_account_customer ->  getTotalPD($customer_id);
-		$count = $count['number'] / 100000000;
+		$count = number_format($count['number'] / 10000);
 
 		return $count;
 	}
 	public function sponsor($customer_id){
 		if ($customer_id == 0)
 		{
-			return "SFCCOIN";
+			return "Null";
 		}
 		else
 		{
@@ -820,31 +800,44 @@ public function checkBinary($p_binary){
 			$count = $this -> model_account_customer ->  getCustomer($customer_id);
 			return $count['username'];
 		}
-		
-		
 	}
+
+	public function numberf1($customer_id)
+	{
+		return $this -> model_account_customer -> numberf1($customer_id);
+	}
+
 	public function max_pd($customer_id){
 		$this -> load -> model('account/customer');
 		$count = $this -> model_account_customer ->  getmax_PD($customer_id);
-		$count = $count['number'] / 100000000;
+		$count = number_format($count['number'] / 10000);
 		switch (doubleval($count)) {
-			case 0.5:
-				$package = 1;
+			case 100:
+				$package = 100;
 				break;
-			case 1:
-				$package = 2;
+			case 500:
+				$package = 500;
 				break;
-			case 5:
-				$package = 3;
+			case 1000:
+				$package = 1000;
 				break;
-			case 10:
-				$package = 4;
+			case 2000:
+				$package = 2000;
 				break;
-			case 20:
-				$package = 5;
+			case 5000:
+				$package = 5000;
 				break;
-			case 50:
-				$package = 6;
+			case 10000:
+				$package = 10000;
+				break;
+			case 50000:
+				$package = 50000;
+				break;
+			case 100000:
+				$package = 100000;
+				break;
+			case 200000:
+				$package = 200000;
 				break;
 			default:
 				$package = 0;
@@ -857,7 +850,7 @@ public function checkBinary($p_binary){
 		$this -> load -> model('account/customer');
 		$count = $this -> model_account_customer ->  getCustomer($customer_id);
 
-		$count = $count['total_pd_right'] / 100000000;
+		$count = number_format($count['total_pd_right'] / 10000);
 		return $count;
 		// $left_id = $count['right'];
 		// if(intval($count['right']) === 0){
@@ -914,6 +907,11 @@ public function checkBinary($p_binary){
 					$left -> totalPD = $this -> total_pd($left->id);
 					$left -> maxPD = $this -> max_pd($left->id);
 					$left -> sponsor = $this -> sponsor($left_row['p_node']);
+					$left -> firstname = $left_row["firstname"];
+					$left -> date_added = date('d-F-Y H:i A',strtotime($left_row['date_added']));
+					$left -> numberf1 = $this -> numberf1($left->id);
+					$left -> img_profile = $this -> img_profile($left->id);
+					$left -> level = $left_row['level'];
 					$this->getBinaryChild_binary($left);
 				}
 
@@ -949,6 +947,11 @@ public function checkBinary($p_binary){
 				$right -> totalPD = $this -> total_pd($right->id);
 				$right -> maxPD = $this -> max_pd($right->id);
 				$right -> sponsor = $this -> sponsor($right_row['p_node']);
+				$right -> firstname = $right_row["firstname"];
+				$right -> date_added = date('d-F-Y H:i A',strtotime($right_row['date_added']));
+				$right -> numberf1 = $this -> numberf1($right->id);
+				$right -> img_profile = $this -> img_profile($right->id);
+				$right -> level = $right_row['level'];
 				$this->getBinaryChild_binary($right);
 			}
 			else $right->children = 1;
@@ -1023,6 +1026,20 @@ public function checkBinary($p_binary){
 			$node -> children = 0;
 		return;
 
+	}
+
+	public function img_profile($customer_id)
+	{
+		$getCustomer = $this -> model_account_customer -> getCustomer($customer_id);
+		if ($getCustomer['img_profile'] == "")
+		{
+			$img = "catalog/view/theme/default/images/logo.png";
+		}
+		else
+		{
+			$img = $getCustomer['img_profile'];
+		}
+		return $img;
 	}
 
 	public function checkwallet() {

@@ -1,78 +1,63 @@
 <?php
-$self -> document -> setTitle('Register User');
+$self -> document -> setTitle('Create New User');
  echo $header; ?>
- <style type="text/css" media="screen">
-    .main-header{
-      display: none;
-    }
- </style>
- 
-<div class="login-form page-login-image">
+<?php echo $self->load->controller('common/column_left');  ?>
+<div class="content-page">
+    <div class="content">
+       
+        <div class="cb-page-content">
+            <div class="container">
+                <div class="row">
+<div class="register-login-form page-login-image">
    <div class="main-login-form register-page">
          <div class="content-login">
             <div class="login-page">
-               <div class="logo-title">
+               <div class="logo-title col-md-6 col-md-push-3 text-center">
                   <!-- Template Logo -->
-                  <img src="catalog/view/theme/default/img/logo.png" alt="logo" style=" width:150px;">
+                  <img src="catalog/view/theme/default/img/logo.png" alt="logo" style=" width:150px; margin-top: 30px; margin-bottom: 40px;">
                </div>
-               <p class="sign-login">Create an Account.</p>
+               <div class="clearfix"></div>
                <!-- Start Register Form -->
                <?php if(!$p_binary) { ?>
       <form id="register-account " action="<?php echo $self -> url -> link('account/register', '', 'SSL'); ?>" class="form-horizontal form-login" method="post" novalidate="novalidate">
          <?php  } else { ?>
-      <form id="register-account" action="<?php echo $self -> url -> link('account/personal/register_submit', '', 'SSL'); ?>" class="form-horizontal form-login" method="post" novalidate="novalidate">
+      <form id="register-account" action="<?php echo $self -> url -> link('account/personal/register_submit', '', 'SSL'); ?>" class="form-horizontal form-login col-md-6 col-md-push-3" method="post" novalidate="novalidate">
          <?php }?>
          <?php if($p_binary) { ?>
          <input type="hidden" name="p_binary" value="<?php echo $p_binary ?>"/>
          <input type="hidden" name="postion" value="<?php echo $postion ?>">
          <?php } ?>
          <?php 
-            $token = explode("_", $self -> request -> get['token']);
+            $token = explode("_", $self -> request -> get['id']);
             if(intval($self -> checkBinaryLeft($token[0], $token[1])) === 1) { ?>
             <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="icon icon_profile"></i></div>
+               
                <div class="textbox-login">
-                  <input type="hidden" name="node" value="<?php echo $token[2]; ?>">
-                  <input class="form-control" placeholder="Your Username" name="username" id="username" value="" data-link="<?php echo $actionCheckUser; ?>">
-                  <span id="user-error" class="field-validation-error" style="display: none;">
-                     <span>Please enter user name</span>
-                  </span>
+                  <input type="hidden" name="node" value="<?php echo $self->request->get['ref']; ?>">
+                  <input class="form-control" placeholder="Full name" name="username" id="username" value="" data-link="<?php echo $actionCheckUser; ?>">
+                 
                </div>
             </div>
 
             <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+               
                <div class="textbox-login">
-                  <input type="hidden" name="node" value="<?php echo $token[2]; ?>">
+                 
                   <input class="form-control" placeholder="Email Address" name="email" id="email" data-link="<?php echo $actionCheckEmail; ?>">
-                  <span id="email-error" class="field-validation-error" style="display: none;">
-                     <span id="Email-error">Please enter Email Address</span>
-                  </span>
+                  
                </div>
             </div>
 
             <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
+               
                <div class="textbox-login">
                   <input class="form-control" placeholder="Phone Number" name="telephone" id="phone" data-link="<?php echo $actionCheckPhone; ?>">
-                  <span id="phone-error" class="field-validation-error" style="display: none;">
-                     <span>Please enter Phone Number</span>
-                  </span>
+                  
                </div>
             </div>
 
             <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-file-image-o" aria-hidden="true"></i></div>
-               <div class="textbox-login">
-                  <input class="form-control" placeholder="Citizenship Card/Passport No" name="cmnd" id="cmnd" data-link="<?php echo $actionCheckCmnd; ?>">
-                  <span id="cmnd-error" class="field-validation-error" style="display: none;">
-                     <span id="CardId-error">The Citizenship card/passport no field is required.</span>
-                  </span>
-               </div>
-            </div>
-
-            <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-clone" aria-hidden="true"></i></div>
+               
                <div class="textbox-login">
                   <select class="form-control" id="country" name="country_id">
                      <option value="">-- Choose your Country --</option>
@@ -82,61 +67,17 @@ $self -> document -> setTitle('Register User');
                      </option>
                      <?php } ?>
                   </select>
-                  <span id="country-error" class="field-validation-error" style="display: none;">
-                     <span>The country field is required.</span>
-                  </span>
+                  
                </div>
             </div>
 
             <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-key" aria-hidden="true"></i></div>
+               
                <div class="textbox-login">
                   <input class="form-control" placeholder="Password For Login" id="password" name="password" type="password">
-                  <span id="password-error" class="field-validation-error" style="display: none;">
-                     <span>Please enter password for login</span>
-                  </span>
+                 
                </div>
             </div>
-
-            <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-key" aria-hidden="true"></i></div>
-               <div class="textbox-login">
-                  <input class="form-control valid" placeholder="Repeat Password For Login" id="confirmpassword" type="password">
-                  <span id="confirmpassword-error" class="field-validation-error" style="display: none;">
-                     <span>Repeat Password For Login not correct</span>
-                  </span>
-               </div>
-            </div>
-   
-            <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="icon icon_profile"></i></div>
-               <div class="textbox-login">
-                  <input class="form-control" id="password2" placeholder="Transaction Password" name="transaction_password" type="password">
-                  <span id="password2-error" class="field-validation-error" style="display: none;">
-                     <span>Please enter transaction password</span>
-                  </span>
-               </div>
-            </div>
-
-            <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-key" aria-hidden="true"></i></div>
-               <div class="textbox-login">
-                  <input  class="form-control valid" placeholder="Repeat Transaction Password" id="confirmpasswordtransaction" type="password">
-                  <span id="confirmpasswordtransaction-error" class="field-validation-error" style="display: none;">
-                     <span>Repeat Transaction Password is not correct</span>
-                  </span>
-               </div>
-            </div>
-              
-            <div class="input-box">
-               <div class="left-icon-login btn-info"><i class="fa fa-btc" aria-hidden="true"></i></div>
-               <div class="textbox-login">
-                  <input class="form-control" id="BitcoinWalletAddress" placeholder="Bitcoin Wallet" data-link="<?php echo $actionWallet; ?>" name="wallet" type="text"/>
-                  <span id="BitcoinWalletAddress-error" style="display: none;" class="field-validation-error">
-                     <span></span>
-                  </span>
-               </div>
-            </div>               
             <div class="bottom-login">
                <div class="remember-text-login">
                   <span class="checkbox-custom checkbox-primary">
@@ -146,11 +87,12 @@ $self -> document -> setTitle('Register User');
                </div>
             </div>
             <div class="bottom-login">
-              <button style="margin: 0 auto" type="submit" class="btn btn-info mobile-btn-login btn-sign waves-effect waves-dark">Register</button>
+              <button disabled="true" style="margin: 0 auto" type="submit" class="btn btn-danger btn-md">Register</button>
             </div>
             
-                  <div class="text-center"><p>Copyrights © 2016 All Rights Reserved by Sfccoin.com</p></div>
             </div>
+      
+      
                   
          <?php } else { ?>
          <div class="alert alert-danger" style="margin-top:100px;">
