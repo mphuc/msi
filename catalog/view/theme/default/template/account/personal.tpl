@@ -126,15 +126,18 @@ jQuery.fn.show_tree = function(node) {
 
     var node_class = positon[1]+'_node '+'nodefloor'+node.fl;
     var html = '<div class=\''+line_class+'\'></div>';
-// onclick=\'click_node('+node.id+')\' value=\''+node.id+'\'
-    x_p = "<p>Username: "+node.username+"<p>";
-    x_p += "<p>Sponsor: "+node.sponsor+"<p>";
-    // x_p += "<p>Email: "+node.email+"<p>";
-    // x_p += "<p>Phone: "+node.telephone+"<p>";
-    x_p += "<p>Date: "+node.date_added+"<p>";
-    x_p += "<p>Total Package: "+node.totalPD+" BTC<p>";
-    x_p += "<p>PD Binary Left: "+node.leftPD+" BTC</p>";
-    x_p += "<p>PD Binary Right: "+node.rightPD+" BTC</p>";
+    
+    x_p = "<div class='customer_toolip'><p class='h4'>"+node.firstname+"</p>";
+    x_p += "<p class='h3'>"+node.username+"</p>";
+    x_p += "<table class='table table-bordered'><tbody><tr>";
+    x_p += "<td colspan='2'> <div align='center'> <img src='images/tree/1.png' width='20' height='20'></div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Sponsor</div> </td> <td> <div align='center'>"+node.sponsor+"</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Date</div> </td> <td> <div align='center'>"+node.date_added+"</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Total Package</div> </td> <td> <div align='center'>"+node.totalPD+"</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Binary Left</div> </td> <td> <div align='center'>"+node.leftPD+"</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Binary Right</div> </td> <td> <div align='center'>"+node.rightPD+"</div> </td></tr>";
+    x_p += "<tr><td> <div align='center'>Binary Right</div> </td> <td> <div align='center'>"+node.rightPD+"</div> </td></tr>";
+    
     html += !node.empty 
         ? '<div class=\''+node_class+' '+level_active+'\'><a data-html="true" data-toggle="tooltip" rel="tooltip" data-placement="top" data-title="<p>'+x_p+'</p>" class="binaryTree" style="display:block"   \'><i class="fa fa-user type-'+node.level+' package-'+node.maxPD+'" onclick=\'click_node('+node.id+')\' value=\''+node.id+'\' aria-hidden="true"></i></a><span class="username_node">'+node.username+'</span>' 
         : '<div class=\''+node_class+'\'><a data-toggle="tooltip" data-placement="top" style="display:block" onclick=\'click_node_add('+node.p_binary+', "'+positon[1]+'")\' value=\''+node.p_binary+'\' title="Add new user"><i class="fa fa-plus-square type-add"></i></a>';

@@ -12,38 +12,7 @@
         <div class="cb-page-content">
             <div class="container">
                 <div class="row">
-      <div class="col-sm-12">
-        <div class="panel panel-info">
-          <div class="panel-heading" style="background: #31708f; padding: 7px;">
-            <h3 class="panel-title" style="padding: 3px; color: #fff">Refferals Link</h3>
-          </div>
-          <div class="panel-body">
-           <input style="width:100%;border:none;margin-top:15px;color: #2196f3;font-size: 16px;" readonly class="js-copytextarea"value="<?php echo HTTPS_SERVER.'registerss?ref='.$customer_code; ?>" title="<?php echo HTTPS_SERVER.'registerss?ref='.$customer_code; ?>">
-                <br>
-                <br>
-             <button class="btn btn-default js-textareacopybtn">COPY Referral Link</button>
-          </div>
-        </div>
-        
-        <script type="text/javascript">
-
-          var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-          copyTextareaBtn.addEventListener('click', function(event) {
-            var copyTextarea = document.querySelector('.js-copytextarea');
-            copyTextarea.select();
-
-            try {
-              var successful = document.execCommand('copy');
-              var msg = successful ? 'successful' : 'unsuccessful';
-              console.log('Copying text command was ' + msg);
-            } catch (err) {
-              console.log('Oops, unable to copy');
-            }
-          });
-        </script>
-       
-      </div>
+     
     </div>
     <?php if (count($refferals_pnode) > 0) { ?>
        <div class="">
@@ -56,8 +25,7 @@
                            <tr>
                               <th class="text-center">No.</th>
                               <th>Username</th>
-                              <!-- <th>Level</th> -->
-                              <th>QR Code</th>
+                              
                               <th>Phone</th>
                               <th>Email</th>
                               <th>Country</th>
@@ -69,14 +37,7 @@
                            <tr>
                               <td data-title="<?php echo $lang['NO'] ?>." align="center"><?php echo $count ?></td>
                               <td data-title="<?php echo $lang['USERNAME'] ?>"><?php echo $value['username'] ?></td>
-                              <!-- <td data-title="LEVEL">
-                                 <?php echo "L".(intval($value['level']) - 1) ?>
-                              </td> -->
-                              <td data-title="<?php echo $lang['WALLET'] ?>" >
-                                 
-                                 <img src="https://chart.googleapis.com/chart?chs=75x75&chld=L|0&cht=qr&chl=bitcoin:<?php echo $value['wallet']; ?>">
-                                 
-                              </td>
+                            
                               <td data-title="<?php echo $lang['TELEPHONE'] ?>" >
                                  <?php echo $value['telephone']; ?>
                               </td>
@@ -104,7 +65,7 @@
                               <th class="text-center">No.</th>
                               <th>Username</th>
                               <!-- <th>Level</th> -->
-                              <th>QR Code</th>
+                             
                               <th>Phone</th>
                               <th>Email</th>
                               <th>Country</th>
@@ -119,11 +80,7 @@
                               <!-- <td data-title="LEVEL">
                                  <?php echo "L".(intval($value['level']) - 1) ?>
                               </td> -->
-                              <td data-title="<?php echo $lang['WALLET'] ?>" >
-                                 
-                                 <img src="https://chart.googleapis.com/chart?chs=75x75&chld=L|0&cht=qr&chl=bitcoin:<?php echo $value['wallet']; ?>">
-                                 
-                              </td>
+                              
                               <td data-title="<?php echo $lang['TELEPHONE'] ?>" >
                                  <?php echo $value['telephone']; ?>
                               </td>

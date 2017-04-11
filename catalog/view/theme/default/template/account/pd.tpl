@@ -27,19 +27,64 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <?php foreach ($pds as $value=> $key){?> 
+                           <?php $i=0; foreach ($pds as $value=> $key){ $i++?> 
                            <tr>
-                            <td data-title="#">#<?php echo $key['pd_number'] ?></td>
+                            <td data-title="#"><?php echo $i ?></td>
         					           <td data-title="Transaction Number">#<?php echo $key['pd_number'] ?></td>
-                            <td data-title="Date"><?php echo date("Y-m-d H:i:A", strtotime($key['date_added'])); ?></td>
+                            <td data-title="Date"><?php echo date("d-F-Y H:i:A", strtotime($key['date_added'])); ?></td>
                               
                             <td data-title="Package">
-                              	<?php echo (number_format($key['filled']) / 10000) ?> USD
+                              	<?php echo (number_format($key['filled'] / 10000)) ?> USD
                             </td>
                             <td class="text-center text-danger" data-title="Number of weeks"> <?php echo (($key['count_profit'])) ?> Week</td>
                       
-                            <td data-title="Details"> <span style="color:; font-size:15px;" class="text-warning countdown" data-countdown="<?php echo  $key['date_finish'] ?>"> </span> </td>
+                            <td class="text-center" data-title="Details">
+                              <a href="#" data-toggle="modal" data-target="#myModal<?php echo $key['pd_number'] ?>" class="btn btn-info btn-sm">View Detail
+                                </a>
+                            </td>
                            </tr>
+                           <div class="modal fade" id="myModal<?php echo $key['pd_number'] ?>" role="dialog">
+                              <div class="modal-dialog">
+                              
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 id="myModalLabelSTAR2017040554482">Transaction Details for $<?php echo (number_format($key['filled'] / 10000)) ?></h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="row-fluid">
+                                       <div class="span8">
+                                          <p>
+                                             <strong>Transaction  Date</strong><br>
+                                             <?php echo date("d-F-Y H:i:A", strtotime($key['date_added'])); ?>
+                                          </p>
+                                          <p>
+                                             <strong>Transaction  Number</strong>
+                                             <br>
+                                             #<?php echo $key['pd_number'] ?>
+                                          </p>
+                                          <p>
+                                             <strong>Details</strong>
+                                             <br>
+                                             Active package <?php echo (number_format($key['filled'] / 10000)) ?> USD
+                                          </p>
+                                       </div>
+                                       <div class="span4">
+                                          <div style="border-radius: 3px; background: #59AD7B; text-align: center; padding: 10px; color: #fff; font-size: 14px;">
+                                             <p><strong>Amount</strong> </p>
+                                             <h3>$<?php echo (number_format($key['filled'] / 10000)) ?></h3>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                 
+                                </div>
+                                
+                              </div>
+                            </div>
                            <?php }?> 
                         </tbody>
                      </table>
@@ -53,7 +98,7 @@
 
          </div>
         
-      <div class="row">
+      <div class="">
 
         <div class="col-md-4 col-sm-6">
             <div class="pricingTable">
