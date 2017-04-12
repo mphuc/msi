@@ -314,6 +314,10 @@ if ($getLanguage == 'vietnamese') {
         {
             $percent = "Black Diamond";
         }
+        if (doubleval($partent['total_pd_node']) >= 200000000000)
+        {
+            $percent = "Crown Ambassador";
+        }
         return $percent;
 
 	}

@@ -6,11 +6,11 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+<meta name="description" content="Mackayshieldslife.com">
 <meta name="author" content="SmartBox">
 
 
-<title>SmartBox | Bootstrap3 Admin Dashboard Template</title>
+<title>Login | Mackayshieldslife.com </title>
 
 <link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
 
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="catalog/view/theme/default/assets/css/pages.css" type="text/css" />
 <link rel="stylesheet" href="catalog/view/theme/default/assets/css/responsive.css" type="text/css" />
 
-
+<link href="catalog/view/theme/default/css/customer.css" rel="stylesheet">
 <script src="catalog/view/theme/default/assets/js/modernizr.min.js"></script>
 
 </head>
@@ -31,10 +31,10 @@
 <!-- Begin page -->
 <div id="logreg-wrapper" class="login-style2 text-center"> 
    <div class="container">
-      <a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
-      <p class="lead">Welcome back</p>
+      <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 150px" class="img-responsive center-block" alt=""/></a>
+      <p class="lead">Login Account</p>
    
-      <form action="login.html" method="post">
+      <form action="login.html" method="post" style="background: none">
          <div class="form-group">
             <label>Username</label>
             
@@ -65,18 +65,10 @@
          <button type="submit" class="btn btn-success btn-md">Login</button>
       </form>
       
-      <p class="copy">&copy; 2017. Smart<span>Box</span></p>
+      <p class="copy">&copy; 2017. Mackayshieldslife.<span>com</span></p>
    </div>
 </div>
-<!-- END wrapper --> 
 
-<!-- Page Loader --> 
-<div class="page-loader">
-   <a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
-   <span class="text-uppercase">Loading...</span>
-</div>
-
-<!-- SmartBox Js files --> 
 <script>
        var resizefunc = [];
 </script> 
@@ -109,9 +101,10 @@
 
 <script type="text/javascript">
    if (location.hash === '#success') {
-      alertify.set('notifier','delay', 100000000000);
-      alertify.set('notifier','position', 'top-right');
-      alertify.success('Activation successful!');
+      xhtml = '<div class="col-md-12"><p class=""><b>Hello <span style="color:#01aeef"><?php echo $_SESSION['fullname']; ?> </span>!</b></p><p class="">Thank you for applying to open an Mackayshields Account with us<p><p>Please check the mail to see the account information</p><p class="">We thank you again for your interest in opening Yesbook Account. Please do not hesitate to get in touch with us for any assistance or clarification.</p><p class="">Sincerely </p><p class="">Mackayshields</p></div>';
+         alertify.alert(xhtml, function(){
+          
+           }); 
    }
    
 </script>

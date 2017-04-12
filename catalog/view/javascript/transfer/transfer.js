@@ -76,7 +76,34 @@ $(function(){
             
             return false;
         }
-        alertify.confirm('<h3 class="text-center" style="font-size:22px !important; text-transform:uppercase; color: #000; margin-bottom:15px;">Confirm transfer</h3> <p style="font-size:18px !important;color: #000;">ID receive: <b>'+$('#username').val()+'</b></p> <p style="font-size:18px !important;color: #000;">Amount send: <b>'+$('#ip_usd').val()+' USD</b></p><i  style="font-size:16px; margin-top:10px;">Click "OK" to execute transaction. Click "Cancel" to cancel</i></p>', function (e) {
+        var request = $.ajax({ cache: false,
+           url : "index.php?route=account/transfer/getgustomer_all",
+            type : "post",
+            dateType:"text",
+            data : {
+                 'customer_id_recieve' : $('#customer_id').val(),
+                 'amount_send' : $('#ip_usd').val()
+            },
+        });
+        
+        request.done(function (data) {
+           data = $.parseJSON(data);
+           console.log(data);
+        var htmlxx = '<h3 class="text-center" style="font-size:22px !important; text-transform:uppercase; color: #000; margin-bottom:15px;">Confirm transfer</h3>';
+        htmlxx += '<table class="table table-bordered"><tbody><tr><td>';
+        htmlxx += '<h4 class="text-center" style="text-transform:uppercase; color: #000;">ID Send</4>';
+        htmlxx += '</td><td><h4 class="text-center" style="text-transform:uppercase; color: #000;">ID Receive</4></td></tr>';
+        htmlxx += '<tr><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_send+'" /></td><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_re+'" /></td></tr>';
+        htmlxx += '<tr><td>ID: <b>'+data.username_send+'</br></td><td>ID: <b>'+data.username_re+'</br></td></tr>';
+        htmlxx += '<tr><td>Full Name: <b>'+data.firstname_send+'</br></td><td>Full Name: <b>'+data.firstname_re+'</br></td></tr>';
+        htmlxx += '<tr><td>Telephone: <b>'+data.telephone_send+'</br></td><td>Telephone: <b>'+data.telephone_re+'</br></td></tr>';
+        htmlxx += '<tr><td>Email: <b>'+data.email_send+'</br></td><td>Email: <b>'+data.email_re+'</br></td></tr>';
+        htmlxx += '<tr><td>Amount Send: <b>'+$('#ip_usd').val()+' USD</br></td><td>Amount Receive: <b>'+$('#ip_usd').val()+' USD</br></td></tr>';
+        htmlxx += '<tr><td colspan="2">Account balance after transfer: <b>'+data.balance+' USD</tr>';
+        
+        htmlxx += '</tbody></table>';
+        htmlxx += '<p><i  style="font-size:16px; margin-top:10px;">Click "OK" to execute transaction. Click "Cancel" to cancel</i></p>';
+        alertify.confirm(htmlxx, function (e) {
         if (e) {
             window.funLazyLoad.start();
             window.funLazyLoad.show();
@@ -124,6 +151,7 @@ $(function(){
         {
                
         }
+        });
     });
     return false;
         

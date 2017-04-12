@@ -324,17 +324,17 @@
                                       <h3 class="text-center">Security</h3>
                                       <!-- step 3 -->
 
-                                         <div class="control-group">
-                                          <form id="updateIPaddress" action="<?php echo $self -> url -> link('account/setting/updateipaddress', '', 'SSL'); ?>" method="GET" novalidate="novalidate">
+                                         <!-- <div class="control-group">
+                                          <form id="updateIPaddress" action="<?php //echo $self -> url -> link('account/setting/updateipaddress', '', 'SSL'); ?>" method="GET" novalidate="novalidate">
                                             <label class="control-label">Restrict API Access</label>
                                             <br>
                                             <i style="font-size: 14px;">Status: Access granted to ANY(!) IP address.</i>
-                                            <input style="width: 300px" class="form-control" name="ip_address" id="ip_address_ip"  size="15" placeholder="67.237.22.248" value="<?php echo $get_customer_setting['ip']; ?>">
+                                            <input style="width: 300px" class="form-control" name="ip_address" id="ip_address_ip"  size="15" placeholder="67.237.22.248" value="<?php //echo $get_customer_setting['ip']; ?>">
                                             <button style="background: #F0F3F4; margin-top: 5px; margin-bottom: 20px;" type="submit" class="btn btn-lg btn-default submitter">Restrict API Access</button>
                                           </form>
                                          </div>
                                          
-                                         <hr>
+                                         <hr> -->
                                          <div class="control-group">
                                             <label class="control-label">Login Alerts</label>
                                             <br>

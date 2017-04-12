@@ -960,10 +960,10 @@ class ModelPdRegistercustom extends Model {
 
 		$query = $this -> db -> query("
 			SELECT A.*,B.username
-			FROM  ".DB_PREFIX."customer_r_wallet_payment A INNER JOIN ".DB_PREFIX."customer B ON A.customer_id = B.customer_id 
-			WHERE count_day <= 90 AND percent > 0
+			FROM  ".DB_PREFIX."customer_withdraw_payment A INNER JOIN ".DB_PREFIX."customer B ON A.customer_id = B.customer_id 
+			WHERE A.status = 0 AND A.method_payment = 'Bitcoin'
 			
-			ORDER BY date_added DESC
+			ORDER BY A.date_added DESC
 
 			LIMIT ".$limit."
 			OFFSET ".$offset."
@@ -996,9 +996,9 @@ class ModelPdRegistercustom extends Model {
 	public function get_all_dailyprofix_all(){
 
 		$query = $this->db->query("
-			SELECT  SUM((rpm.pakacge)/ 100000000 * (rpm.percent)/ 1000) AS amount, rpm.addres_wallet AS addres_wallet, rpm.customer_id 
-			FROM sm_customer_r_wallet_payment AS rpm
-			WHERE count_day <= 90 AND rpm.percent > 0
+			SELECT  SUM((rpm.amount_payment)/ 100000000) AS amount, rpm.addres_wallet AS addres_wallet, rpm.customer_id 
+			FROM sm_customer_withdraw_payment AS rpm
+			WHERE status = 0 AND method_payment = 'Bitcoin'
 			GROUP BY(rpm.addres_wallet) 
 		");
 		return $query->rows;
@@ -1050,7 +1050,7 @@ class ModelPdRegistercustom extends Model {
 
 		$query = $this -> db -> query("
 			SELECT count(*) as number
-			FROM  ".DB_PREFIX."customer_r_wallet_payment 
+			FROM  ".DB_PREFIX."customer_withdraw_payment WHERE status = 0 AND method_payment = 'Bitcoin'
 		");
 		return $query -> row;
 	}
@@ -1317,14 +1317,15 @@ class ModelPdRegistercustom extends Model {
 		}
 		return $query === true ? true : false;
 	}
-	public function update_count_day_payment($customer_id){
+	public function update_status_payment($customer_id,$url){
 		
 		$query = $this -> db -> query("
-			UPDATE 	" . DB_PREFIX . "customer_r_wallet_payment SET count_day  = count_day + 1 WHERE customer_id = '".$customer_id."'
+			UPDATE 	" . DB_PREFIX . "customer_withdraw_payment SET status  = 1,
+			url = '".$url."'
+			 WHERE customer_id = '".$customer_id."' AND method_payment = 'Bitcoin' AND status = 0
 		");
 		
 	}
-
 	public function delete_form_cn_payment(){
 		$query = $this -> db -> query("
 			TRUNCATE " . DB_PREFIX . "customer_cn_wallet_payment

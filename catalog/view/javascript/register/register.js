@@ -293,6 +293,7 @@ $( document ).ready(function() {
             if (checkEmail) {
                 self.find('#email').parent().addClass('has-error');
                 self.find('#email-error').show();
+                self.find('#email').val('');
                 self.find('#email-error span').html('Please enter email address');
                 window.funLazyLoad.reset();
                 return false;

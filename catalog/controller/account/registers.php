@@ -22,7 +22,7 @@ class ControllerAccountRegisters extends Controller {
         	$_GET[$key] = $this -> replace_injection($_GET[$key], $filter_wave2);
         /*check ---- sql*/
 
-		$customer_get = $this -> model_account_customer -> getCustomerbyCode($_GET['ref']);
+		$data['customercode'] = $customer_get = $this -> model_account_customer -> getCustomerbyCode($_GET['ref']);
 
 		count($customer_get) === 0 && $this -> response -> redirect($this -> url -> link('account/login', '', 'SSL'));
 
@@ -183,6 +183,8 @@ class ControllerAccountRegisters extends Controller {
 			    </table>
 			  </div>';
 			
+			$this -> session -> data['fullname'] = $this-> request ->post['username'];
+			unset($this -> session -> data['customer_id']);
 			$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 			$mail -> setHtml($html_mail);
 			print_r($mail);

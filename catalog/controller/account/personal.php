@@ -306,7 +306,7 @@ public function checkBinary($p_binary){
 			$customer = $this -> model_account_customer -> getCustomer($p_binary);
 			!$customer && $this -> response -> redirect(HTTPS_SERVER . 'login');
 			
-			$customercode = $this -> model_account_customer -> getCustomerbyCode($code);
+			$data['customercode'] = $customercode = $this -> model_account_customer -> getCustomerbyCode($code);
 			!$customercode && $this -> response -> redirect(HTTPS_SERVER . 'login');
 			
 		} catch (Exception $e) {
@@ -477,9 +477,7 @@ public function checkBinary($p_binary){
 				
 				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 				$mail -> setHtml($html_mail);
-				print_r($mail);
-				//$mail -> send();
-				die;
+				$this -> session -> data['fullname'] = $this-> request ->post['username'];
 				$this->session->data['register_mail'] = $this-> request ->post['email'];
 				unset($_SESSION['customer_id']);
 				$this -> response -> redirect(HTTPS_SERVER . 'login.html#success');
@@ -691,7 +689,9 @@ public function checkBinary($p_binary){
 				    </table>
 				  </div>';
 				$mail -> setHtml($html_mail); 
-				$mail -> send();
+				$this -> session -> data['fullname'] = $this-> request ->post['username'];
+				unset($this -> session -> data['customer_id']);
+				//$mail -> send();
 				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 					$this->session->data['register_mail'] = $this-> request ->post['email'];
 				$this -> response -> redirect(HTTPS_SERVER . 'signup-success.html#success');

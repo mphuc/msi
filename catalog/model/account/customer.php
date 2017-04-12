@@ -1015,6 +1015,19 @@ class ModelAccountCustomer extends Model {
 		
 		return $query -> rows;
 	}
+
+	public function get_history_active_package($id_customer){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_transaction_history
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Active Package' 
+			ORDER BY date_added DESC
+			
+		");
+		
+		return $query -> rows;
+	}
+
 	public function getTotalHistory_matching($customer_id){
 		$query = $this -> db -> query("
 			SELECT count(*) AS number 
@@ -2553,7 +2566,7 @@ class ModelAccountCustomer extends Model {
 			SELECT *
 			FROM  ".DB_PREFIX."customer_activity
 			WHERE customer_id = '".$customer_id."' AND `key` = 'login'
-			ORDER BY date_added DESC LIMIT 5
+			ORDER BY date_added DESC LIMIT 6
 		");
 		return $query -> rows;
 

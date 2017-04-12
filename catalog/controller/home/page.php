@@ -37,24 +37,24 @@ class ControllerHomePage extends Controller {
 			$this -> response -> setOutput($this -> load -> view('default/template/home/contact.tpl', $data));
 		}
 	}
-	public function faq() {
+	public function insights() {
 
 		$data['base'] = HTTPS_SERVER;
 		$data['self'] = $this;
-		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/home/faq.tpl')) {
-			$this -> response -> setOutput($this -> load -> view($this -> config -> get('config_template') . '/template/home/faq.tpl', $data));
+		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/home/insights.tpl')) {
+			$this -> response -> setOutput($this -> load -> view($this -> config -> get('config_template') . '/template/home/insights.tpl', $data));
 		} else {
-			$this -> response -> setOutput($this -> load -> view('default/template/home/faq.tpl', $data));
+			$this -> response -> setOutput($this -> load -> view('default/template/home/insights.tpl', $data));
 		}
 	}
-	public function blog() {
+	public function investment() {
 
 		$data['base'] = HTTPS_SERVER;
 		$data['self'] = $this;
-		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/home/blog.tpl')) {
-			$this -> response -> setOutput($this -> load -> view($this -> config -> get('config_template') . '/template/home/blog.tpl', $data));
+		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/home/investment.tpl')) {
+			$this -> response -> setOutput($this -> load -> view($this -> config -> get('config_template') . '/template/home/investment.tpl', $data));
 		} else {
-			$this -> response -> setOutput($this -> load -> view('default/template/home/blog.tpl', $data));
+			$this -> response -> setOutput($this -> load -> view('default/template/home/investment.tpl', $data));
 		}
 	}
 	public function service() {
@@ -67,14 +67,14 @@ class ControllerHomePage extends Controller {
 			$this -> response -> setOutput($this -> load -> view('default/template/home/service.tpl', $data));
 		}
 	}
-	public function sfccoin() {
+	public function news() {
 
 		$data['base'] = HTTPS_SERVER;
 		$data['self'] = $this;
-		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/home/sfccoin.tpl')) {
-			$this -> response -> setOutput($this -> load -> view($this -> config -> get('config_template') . '/template/home/sfccoin.tpl', $data));
+		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/home/new.tpl')) {
+			$this -> response -> setOutput($this -> load -> view($this -> config -> get('config_template') . '/template/home/new.tpl', $data));
 		} else {
-			$this -> response -> setOutput($this -> load -> view('default/template/home/sfccoin.tpl', $data));
+			$this -> response -> setOutput($this -> load -> view('default/template/home/new.tpl', $data));
 		}
 	}
 	public function header() {

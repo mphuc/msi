@@ -8,10 +8,7 @@
   
   <li id="" ><a href="index.php?route=pd/investment&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Investment Manager </span></a></li>
   <li id="" ><a href="index.php?route=pd/dailyprofit&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Payment All </span></a></li>
-   <li id="" ><a href="index.php?route=pd/paringbonus&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Pairing bonus </span></a></li>
-  <li id="" ><a href="index.php?route=pd/matching&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Tính hoa hồng nhóm </span></a></li>
-  <li id="" ><a href="index.php?route=pd/rank&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Rank </span></a></li>
-
+   <li id="" ><a href="index.php?route=pd/paringbonus&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Withdraw customer </span></a></li>
   
   <li id="system"><a class="parent"><i class="fa fa-cog fa-fw"></i> <span><?php echo $text_system; ?></span></a>
     <ul>

@@ -1,0 +1,8 @@
+@media (min-width: 1200px){
+	.container {
+	    width: 980px;
+	}
+}
+body{
+	background: url(body-bg.png) repeat-x #2c3133;
+}

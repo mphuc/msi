@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from ckthemes.com/html/smartbox/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 07 Apr 2017 09:12:38 GMT -->
 <head>
 
-<!-- META TAGS -->
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 <meta name="author" content="SmartBox">
 
-<!-- TITLE -->
-<title>SmartBox | Bootstrap3 Admin Dashboard Template</title>
+
+<title>Create New User | Mackayshieldslife.com </title>
 
 <!-- FAVICON -->
 <link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
@@ -32,40 +31,46 @@
 
 </head>
 
-<body class="loreg-page close-it">
-<!-- Begin page -->
-<div id="logreg-wrapper" class="text-center"> 
+<body class="loreg-page close-it customer">
+<div id="logreg-wrapper" class="login-style2 text-center customer"> 
    <div class="container">
-      <a href="#" ><img style="margin-bottom: 30px;" src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
+     
      <form id="register-account" action="<?php echo $self -> url -> link('account/registers/confirmSubmit', '', 'SSL'); ?>" class="form-horizontal" method="post" novalidate="novalidate">
-       
-         
-            <div class="input-box">
-               
+         <a href="#" ><img style="margin-bottom: 20px;width: 100px" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
+           
+            <div class="form-group">
                <div class="textbox-login">
+                  <label>Full name</label>
                   <input type="hidden" name="node" value="<?php echo $self->request->get['ref']; ?>">
                   <input class="form-control" placeholder="Full name" name="username" id="username" value="" data-link="<?php echo $actionCheckUser; ?>">
                  
                </div>
             </div>
 
-            <div class="input-box">
-               
-               <div class="textbox-login">
-                 
+            
+            <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Email</label>
                   <input class="form-control" placeholder="Email Address" name="email" id="email" data-link="<?php echo $actionCheckEmail; ?>">
                   
                </div>
             </div>
 
-            <div class="input-box">
-               
-               <div class="textbox-login">
+             <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Phone</label>
                   <input class="form-control" placeholder="Phone Number" name="telephone" id="phone" data-link="<?php echo $actionCheckPhone; ?>">
                   
                </div>
             </div>
-
+            <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Sponser</label>
+                  <input class="form-control" placeholder="sponser" name="sponser" id="" readonly value="<?php echo $customercode['username'];?>">
+                  
+               </div>
+              
+            </div>
             <!-- <div class="input-box">
                
                <div class="textbox-login">
@@ -76,9 +81,9 @@
                </div>
             </div>
  -->
-            <div class="input-box">
-               
-               <div class="textbox-login">
+            <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Country</label>
                   <select class="form-control" id="country" name="country_id">
                      <option value="">-- Choose your Country --</option>
                      <?php foreach ($country as $key=> $value) {?>
@@ -91,9 +96,9 @@
                </div>
             </div>
 
-            <div class="input-box">
-               
-               <div class="textbox-login">
+           <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Password</label>
                   <input class="form-control" placeholder="Password For Login" id="password" name="password" type="password">
                  
                </div>
@@ -137,22 +142,23 @@
                      <span></span>
                   </span>
                </div>
-            </div>         -->       
+            </div>         -->    
+            <div class="clearfix"></div>   
             <div class="bottom-login">
-               <div class="remember-text-login">
+               <div class="remember-text-login text-left">
                   <span class="checkbox-custom checkbox-primary">
-                  <input id="agreeTerm" type="checkbox" value="true">
-                  <label for="requiredCheckbox">I agree to the <a href="javascript:void(0)">Terms and Conditions</a> and <a href="javascript:void(0)">Privacy Policy. </a></label>
+                  <input id="agreeTerm" type="checkbox" value="true" style="width: 20px; float: left;padding: 0px;margin-top: -14px; margin-right: 10px;">
+                  <label for="requiredCheckbox" class="text-left">I agree to the <a href="javascript:void(0)">Terms and Conditions</a></label>
                   </span>
                </div>
             </div>
-            <div class="bottom-login">
+            <div class="bottom-login" style="margin-top: 30px;">
               <button disabled="true" style="margin: 0 auto" type="submit" class="btn btn-info mobile-btn-login btn-sign waves-effect waves-dark">Register</button>
             </div>
             
             </div>
       </form>
-      <p class="copy">&copy; 2017. Smart<span>Box</span></p>
+      
    </div>
 </div>
 <!-- END wrapper --> 

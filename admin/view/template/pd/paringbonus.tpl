@@ -3,7 +3,7 @@
 <div id="content">
 <div class="page-header">
   <div class="container-fluid">
-    <h1>Pairing Profit</h1>
+    <h1>Daily Profit</h1>
 
   </div>
 </div>
@@ -12,22 +12,11 @@
     <div class="panel-heading">      
       <div class="clearfix">
           <?php 
-            $btc_tra_ = 0;
+            $total = 0;
             foreach ($code_all as $value_new) {
-              if ($self-> check_cannhanh2f1($value_new['customer_id'])){
-                if (doubleval($value_new['total_pd_left']) > doubleval($value_new['total_pd_right']) == 1){
-                  $balanced = doubleval($value_new['total_pd_right']); 
-                }
-                else
-                {
-                  $balanced = doubleval($value_new['total_pd_left']);
-                }
-                $precent = 10;
-                $amount = ($balanced*$precent)/100;
-                $btc_tra_ += round(doubleval($amount)/100000000*0.75*0.97,8);
-              }
+
+              $total += $value_new['amount'];
             }
-            
            ?>
            <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.3s">
                 <div class="item_wallet">
@@ -41,9 +30,9 @@
                 </div>
             </div>
             <div class="col-md-8 text-center wow fadeInUp" data-wow-delay="0.3s" style="margin-top: 60px;">
-              <form id="forn_payment" method="POST" action="index.php?route=pd/paringbonus/pay_paringbounus&token=<?php echo $_GET['token'] ?>" style="">
+              <form id="forn_payment" method="POST" action="index.php?route=pd/paringbonus/payment_daily&token=<?php echo $_GET['token'] ?>" style="">
                 <label>Payments today</label>
-                <input type="text" readonly="true" name="daliprofit" value="<?php echo $btc_tra_;?> BTC" >
+                <input type="text" readonly="true" name="daliprofit" value="<?php echo $total;?> BTC" >
                 <br>
                 <label>Pin code</label>
                 <input required="true" type="password" placeholder="Pin code"  name="pin">
@@ -52,66 +41,44 @@
                 <input required="true" type="password" placeholder="Googleauthenticator" name="google" >
                 <br>
                 <label></label>
-                <input type="submit" name="ok" value="OK" >
+                <input type="submit" name="ok" value="OK" onclick="return confirm('Are you sure ?');">
               </form>
             </div>
       </div>
     </div>
     <div class="panel-body row">
         <div class="clearfix" style="margin-top:10px;"></div>
-     	<table class="table table-bordered table-hover">
-     		<thead>
-     			<tr>
-     				<th>TT</th>
-     				<th>Username</th>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>TT</th>
+            <th>Username</th>
             <th>Wallet</th>
-            <th>Amount</th>
-            <th>Amount Payment</th>
-            <th>Amount Cumulative</th>
-            
-     			</tr>
-     		</thead>
-     		<tbody>
+            <th>Amount USD</th>
+            <th>Amount BTC</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
         <?php 
           $i = 0;
           //print_r($_SESSION); die;
           foreach ($code as $value) {
-            if ($self-> check_cannhanh2f1($value['customer_id'])){
             $i++;
         ?>
           <tr>
             <td><?php echo $i; ?></td>
             <td><?php echo $value['username'] ?></td>
-            <td><a target="_blank" href="https://blockchain.info/address/<?php echo $value['wallet'] ?>"><?php echo $value['wallet'] ?> <i class="fa fa-external-link" aria-hidden="true"></i></a></td>
-            <?php 
-              if (doubleval($value['total_pd_left']) > doubleval($value['total_pd_right'])){
-                $balanced = doubleval($value['total_pd_right']); 
-              }
-              else
-              {
-                $balanced = doubleval($value['total_pd_left']);
-              }
-              $precent = 10;
-              $amount = ($balanced*$precent)/100;
-              $btc_tra = round(doubleval($amount)/100000000*0.75*0.97,8);
-              $btc_tai = round(doubleval($amount)/100000000*0.25,8);
-            ?>
-
-            <td>
-              <?php echo $amount/100000000 ?> BTC
-            </td>
-            <td>
-              <?php echo $btc_tra ?> BTC
-            </td>
-            <td>
-              <?php echo $btc_tai ?> BTC
-            </td>
+            <td><a target="_blank" href="https://blockchain.info/address/<?php echo $value['addres_wallet'] ?>"><?php echo $value['addres_wallet'] ?> <i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+            <td><?php echo $value['amount_usd']; ?> USD</td>
+            <td><?php echo $value['amount_payment']/100000000; ?> BTC</td>
+            <td><?php echo date('d/m/Y H:i:s',strtotime($value['date_added'])) ?></td>
           </tr>
          <?php
-          } }
+          }
          ?>
-     		</tbody>
-     	</table>
+        </tbody>
+      </table>
       <?php echo $pagination; ?>
     </div>
   </div>
@@ -132,19 +99,20 @@
 </style>
 <script>
   var balace_btc = parseFloat(<?php echo $blance_blockio; ?>);
-  var btc_tra = parseFloat(<?php echo $btc_tra_; ?>);
+  var total = parseFloat(<?php echo $total; ?>);
   $('#forn_payment').on('submit',function(){
-    if (parseFloat(balace_btc) < parseFloat(btc_tra)+0.00021)
+    /*if (parseFloat(balace_btc) < parseFloat(total)+0.00021)
     {
       var html = '<div class="col-md-12">';
-        html += '<p class="text-center" style="font-size:23px;text-transform: uppercase;height: 20px;color:red">ERROR !</p><p class="text-center" style="font-size:20px;height: 20px">You need '+(parseFloat(btc_tra+0.00021))+' BTC in the wallet to payment</p>';
+        html += '<p class="text-center" style="font-size:23px;text-transform: uppercase;height: 20px;color:red">ERROR !</p><p class="text-center" style="font-size:20px;height: 20px">You need '+(parseFloat(total+0.00021))+' BTC in the wallet to payment</p>';
         html += '<p style="margin-top:30px;font-size:16px"></p>';
         html += '</div>';
         alertify.alert(html, function(){
            
         });
         return false;
-    }
+    }*/
+       
   })
   if (location.hash === '#no_google') {
       var html = '<div class="col-md-12">';

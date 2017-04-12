@@ -443,7 +443,7 @@ a:focus {
 /* Background colors */
 
 .bg-custom {
-    background-color: #1c2b36;
+    background-color: #0A3555;
 }
 .bg-primary {
     background-color: #00bcd4;
@@ -591,7 +591,7 @@ textarea.form-control {
     line-height: 20px;
 }
 .label-default {
-    background-color: #1c2b36;
+    background-color: #0A3555;
 }
 .label-primary {
     background-color: #39b54a;
@@ -1120,7 +1120,7 @@ pre {
     position: relative;
     width: 205px;
     z-index: 1;
-    background: #1c2b36;
+    background: #0A3555;
 }
 .topbar .topbar-left-sm {
     width: 180px;
@@ -1281,7 +1281,7 @@ pre {
     z-index: 9;
 }
 .side-menu.left {
-    background: #1c2b36;
+    background: #0A3555;
     box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
     position: absolute;
     top: 60px;
@@ -2635,8 +2635,9 @@ body.fixed-left-void .side-menu.left{ position: fixed;}
 
 .loreg-page,
 .error-page {
-    background: #1d2734 url(../images/bg.jpg) no-repeat center;
-    background-size: cover;
+    background: url(../images/bg.jpg) repeat-x #2c3133;
+    
+    background-position-y: -84px;
     height: 100%;
     position: fixed;
     width: 100%;
@@ -2789,7 +2790,7 @@ body.fixed-left-void .side-menu.left{ position: fixed;}
     border: none;
     border-radius: 0px;
     height: 48px;
-    margin-top: 40px;
+    margin-top: 10px;
     color: #ff000c;
     text-transform: uppercase;
     font-size: 16px;
@@ -2821,7 +2822,7 @@ body.fixed-left-void .side-menu.left{ position: fixed;}
 }
 
 #logreg-wrapper.login-style2 .lead {
-    margin-bottom: 80px;
+    margin-bottom: 35px;
 }
 
 #logreg-wrapper.login-style2 form button {
@@ -2830,8 +2831,8 @@ body.fixed-left-void .side-menu.left{ position: fixed;}
 
 #logreg-wrapper.login-style2 form input[type=email] ,
 #logreg-wrapper.login-style2 form input[type=password] {
-	border-radius:45px;
-	background:#111d2d;
+	/*border-radius:45px;
+	background:#111d2d;*/
 }
 
 #logreg-wrapper.login-style2 form input {

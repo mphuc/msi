@@ -97,7 +97,7 @@ class ControllerAccountTransfer extends Controller {
                         $this -> session -> data['customer_id'], 
                         "Transfer", 
                         "- ".($amount_usd)." USD", 
-                        "Transfer to ".($username)." ".($amount_usd)." USD",
+                        "Transfer to  ".($username)."  ".($amount_usd)." USD",
                         2,
                         $get_M_Wallet['amount']/10000, 
                         $url = ''
@@ -111,7 +111,7 @@ class ControllerAccountTransfer extends Controller {
                         $customer_id, 
                         "Transfer", 
                         "+ ".($amount_usd)." USD", 
-                        "Get from ".($getCustomer['username'])." ".($amount_usd)." USD",
+                        "Get from ".($getCustomer['username'])."  ".($amount_usd)." USD",
                         1,
                         $get_M_Wallet['amount']/10000, 
                         $url = ''
@@ -170,5 +170,38 @@ class ControllerAccountTransfer extends Controller {
             <?php }
         }
 
+    }
+
+    public function getgustomer_all()
+    {
+        if ($this -> request -> post)
+        {
+            $customer_id_recieve = $this -> request -> post['customer_id_recieve'];
+            $this -> load -> model('account/customer');
+            $customer_id_recieve = $this -> model_account_customer -> getCustomer(intval($customer_id_recieve));
+
+            $img_profile_re = ($customer_id_recieve['img_profile'] == "") ? "catalog/view/theme/default/images/logo.png" : $customer_id_recieve['img_profile'];
+
+            $customer_id_send = $this -> model_account_customer -> getCustomer(intval($this -> session -> data['customer_id']));
+
+            $img_profile_send = ($customer_id_send['img_profile'] == "") ? "catalog/view/theme/default/images/logo.png" : $customer_id_send['img_profile'];
+
+            $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
+            $json = array(
+                    'username_re' => $customer_id_recieve['username'],
+                    'firstname_re' => $customer_id_recieve['firstname'],
+                    'telephone_re' => $customer_id_recieve['telephone'],
+                    'email_re' => $customer_id_recieve['email'],
+                    'img_profile_re' => $img_profile_re,
+                    'username_send' => $customer_id_send['username'],
+                    'firstname_send' => $customer_id_send['firstname'],
+                    'telephone_send' => $customer_id_send['telephone'],
+                    'email_send' => $customer_id_send['email'],
+                    'img_profile_send' => $img_profile_send,
+                    'balance' => $get_M_Wallet['amount']/10000 - $this -> request -> post['amount_send']
+                );
+
+            $this->response->setOutput(json_encode($json));
+        }
     }
 }

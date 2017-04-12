@@ -69,7 +69,7 @@ class ControllerPdMatching extends Controller {
 		                );
 					}
 
-					if ($percent_parent == 15 && $percent_child == 15)
+					if (($percent_parent == 15 && $percent_child == 15) || ($percent_parent == 18 && $percent_child == 18))
 					{
 						$percent = 1;
 						
@@ -140,7 +140,10 @@ class ControllerPdMatching extends Controller {
         {
             $percent = 15;
         }
-
+        if (doubleval($total_pd_node) >= 200000000000)
+        {
+            $percent = 18;
+        }
         return $percent;
 	}
 }

@@ -2,13 +2,16 @@
 $self -> document -> setTitle('Create New User');
  echo $header; ?>
 <?php echo $self->load->controller('common/column_left');  ?>
+
+
 <div class="content-page">
     <div class="content">
-         <div class="page-title-group" style="border: none;">
-            
+        <div class="page-title-group">
+            <h4 class="page-title">Create New User</h4>
+            <h5 class="text-muted page-title-alt"></h5>
         </div>
         <div class="cb-page-content">
-            <div class="container" >
+            <div class="container">
                 <div class="row">
                <div class="panel panel-default">
                   <div class="register-login-form page-login-image" >
@@ -24,7 +27,7 @@ $self -> document -> setTitle('Create New User');
                         </div>
                <!-- Start Register Form -->
                <?php if(!$p_binary) { ?>
-      <form id="register-account " action="<?php echo $self -> url -> link('account/register', '', 'SSL'); ?>" class="form-horizontal form-login" method="post" novalidate="novalidate">
+      <form id="register-account" action="<?php echo $self -> url -> link('account/register', '', 'SSL'); ?>" class="form-horizontal form-login" method="post" novalidate="novalidate">
          <?php  } else { ?>
       <form id="register-account" action="<?php echo $self -> url -> link('account/personal/register_submit', '', 'SSL'); ?>" class="form-horizontal form-login col-md-6 col-md-push-3" method="post" novalidate="novalidate" style="margin-bottom: 70px;" >
          <?php }?>
@@ -38,7 +41,7 @@ $self -> document -> setTitle('Create New User');
             <div class="input-box">
                
                <div class="textbox-login">
-                  <input type="hidden" name="node" value="<?php echo $self->request->get['ref']; ?>">
+                  <input type="hidden" name="node" value="<?php echo $token['2']; ?>">
                   <input class="form-control" placeholder="Full name" name="username" id="username" value="" data-link="<?php echo $actionCheckUser; ?>">
                  
                </div>
@@ -57,6 +60,18 @@ $self -> document -> setTitle('Create New User');
                
                <div class="textbox-login">
                   <input class="form-control" placeholder="Phone Number" name="telephone" id="phone" data-link="<?php echo $actionCheckPhone; ?>">
+                  
+               </div>
+            </div>
+
+            <div class="input-box" style="margin-left: -8px; margin-right: -8px;">
+               
+               <div class="textbox-login col-md-6">
+                  <input class="form-control" placeholder="sponser" name="sponser"  readonly value="Sponser: <?php echo $customercode['username'];?>">
+                  
+               </div>
+               <div class="textbox-login col-md-6">
+                  <input class="form-control" placeholder="position" name="position" id="" value="Position: <?php echo $token['1'] ?>" readonly>
                   
                </div>
             </div>
@@ -83,7 +98,7 @@ $self -> document -> setTitle('Create New User');
                  
                </div>
             </div>
-            <div class="bottom-login">
+            <div class="bottom-login" style="margin-top: 15px">
                <div class="remember-text-login">
                   <span class="checkbox-custom checkbox-primary">
                   <input id="agreeTerm" type="checkbox" value="true">
@@ -91,7 +106,7 @@ $self -> document -> setTitle('Create New User');
                   </span>
                </div>
             </div>
-            <div class="bottom-login">
+            <div class="bottom-login"  style="margin-top: 75px">
               <button disabled="true" style="margin: 0 auto" type="submit" class="btn btn-danger btn-md">Register</button>
             </div>
             

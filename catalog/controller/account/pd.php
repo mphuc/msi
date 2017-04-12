@@ -50,6 +50,7 @@ class ControllerAccountPd extends Controller {
 		$data['pds'] = $this -> model_account_customer -> getPDById($this -> session -> data['customer_id'], $limit, $start);
 		$data['pagination'] = $pagination -> render();
 
+        $data['histotys'] = $this -> model_account_customer -> get_history_active_package($this -> session -> data['customer_id']);
 
 		//get all PD
 		$data['pd_all'] = $this -> model_account_customer ->getPD($this -> session -> data['customer_id']);
@@ -475,6 +476,10 @@ class ControllerAccountPd extends Controller {
             $percent = 13;
         }
         if (doubleval($partent['total_pd_node']) >= 100000000000)
+        {
+            $percent = 15;
+        }
+        if (doubleval($partent['total_pd_node']) >= 200000000000)
         {
             $percent = 15;
         }
