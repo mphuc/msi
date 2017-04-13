@@ -58,7 +58,7 @@
       <script src="catalog/view/javascript/changeLang.js" type="text/javascript"></script><script type="text/javascript" src="catalog/view/javascript/bxslider/jquery.bxslider.js"></script>
     
    </head>
-<body class="fixed-left close-it">
+<body class="fixed-left close-it widescreen">
   <div id="wrapper">
    
     <div class="topbar">

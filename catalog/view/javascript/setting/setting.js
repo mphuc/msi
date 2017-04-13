@@ -763,6 +763,18 @@ $( document ).ready(function() {
                     $('#BitcoinWalletAddress').css({'border':'1px solid red'});
                     return false;
                 }
+
+                if ($('#Perfect_Money').val() == ""){
+                    $('#Perfect_Money').focus();
+                    $('#Perfect_Money').css({'border':'1px solid red'});
+                    return false;
+                }
+
+                if ($('#Payeer').val() == ""){
+                    $('#Payeer').focus();
+                    $('#Payeer').css({'border':'1px solid red'});
+                    return false;
+                }
                
                 if ($('#Password2').val() == ""){
                     $('#Password2').focus();

@@ -359,8 +359,8 @@ class ControllerAccountLogin extends Controller {
 
 			$mail -> setTo($getCustomer['email']);
 			$mail -> setFrom($this -> config -> get('config_email'));
-			$mail -> setSender(html_entity_decode("Mackayshields", ENT_QUOTES, 'UTF-8'));
-			$mail -> setSubject("Security alert for your Mackayshields account!");
+			$mail -> setSender(html_entity_decode("Mackayshieldslife", ENT_QUOTES, 'UTF-8'));
+			$mail -> setSubject("Security alert for your Mackayshieldslife account!");
 			$html_mail = '<div style="background: #f2f2f2; width:100%;">
 			   <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
 			    width:700px; margin:0 auto">
@@ -409,7 +409,7 @@ class ControllerAccountLogin extends Controller {
 						Thank you,
 					</p>
 					<p style="margin-bottom:10px; line-height:25px;">
-						mackayshields
+						Mackayshieldslife
 					</p>
    	
 			       </tr>

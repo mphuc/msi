@@ -212,7 +212,7 @@
 }
 .ajs-header{
     text-align: center;
-    background-color: #263238 !important;
+    background-color: #0A3555 !important;
     padding:0px !important;
 }
 
@@ -1092,6 +1092,9 @@ form button{
     width: 100px;
 }
 */
+#register-account{
+    position: relative;
+}
 #register-account input,#register-account select,.register-login-form input,.register-login-form select{
     margin-bottom: 10px;
 }
@@ -1589,4 +1592,18 @@ button.close {
 }
 #logreg-wrapper.login-style2.customer form .form-group {
     margin-bottom: 15px;
+}
+.loreg-page, .error-page {
+    background: url(../images/maxresdefault.jpg);
+    background-size: 100%;
+}
+#logreg-wrapper, #error-wrapper {
+    
+    margin: 0 auto;
+    background: rgba(53, 50, 50, 0.86);
+    padding: 30px 10px;
+    border-radius: 5px;
+}
+#logreg-wrapper.login-style2 .lead{
+    margin: 10px;
 }

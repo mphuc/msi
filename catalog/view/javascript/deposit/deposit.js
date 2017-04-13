@@ -26,6 +26,13 @@ $(function(){
             timer = setTimeout(callback, ms);
         };
     })();
+
+    $('#payment_method').on('change',function(){
+    	var url = $(this).val();
+    	window.location.href = 'deposit.html?type='+url;
+
+    });
+
 	$('#ip_usd').on('input propertychange',function(){
 		$('#ip_usd').css({'border':'1px solid #ccc'});
 		delay(function(){
@@ -102,6 +109,139 @@ $(function(){
 		
 		
 	});
+
+
+	$('#fr_buy_point_perfect').on('submit',function(){
+		window.funLazyLoad.start();
+        window.funLazyLoad.show();
+        $('#ip_usd').css({'border':'1px solid rgb(204, 204, 204)'});
+        $('#password_transaction').css({'border':'1px solid rgb(204, 204, 204)'});
+		$(this).ajaxSubmit({
+            type : 'POST',
+            beforeSubmit : function(arr, $form, options) {
+               if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 10 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == "" ){
+					$('.point_error').show();
+					$('#ip_usd').css({'border':'1px solid red'});
+					$('#ip_usd').focus();
+					$('#ip_usd').attr('placeholder','Please enter USD number');
+					window.funLazyLoad.reset();
+					return false;
+				}
+				if ($('#password_transaction').val() == "")
+				{
+					$('#password_transaction').css({'border':'1px solid red'});
+					$('#password_transaction').focus();
+					$('#password_transaction').attr('placeholder','Please enter password transaction');
+		        	window.funLazyLoad.reset();
+					return false;
+				}
+				
+            },
+            success : function(result){
+                result = $.parseJSON(result);
+                if (result.password == -1)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		$('#password_transaction').css({'border':'1px solid red'});
+					$('#password_transaction').focus();
+					$('#password_transaction').val('');
+					$('#password_transaction').attr('placeholder','Wrong password transaction');
+					window.funLazyLoad.reset();
+					return false;
+
+	        	}
+                if (result.complete == 1){
+                    window.funLazyLoad.reset();
+
+                    var html = '<div class="col-md-12 text-center">';
+                  	html += '<p class="text-center" style="font-size:19px;color: black;text-transform: uppercase;height: 20px">Select payment to pay with perfect money</p>';
+                    html += result.html;
+                    html += '</div>';
+		        	
+		        	 alertify.alert(html, function(){
+	                      //location.reload(true); 
+	                  });
+		        	
+		        	$('#ip_usd').val('');
+		        	$('#ip_btc').val('');
+		        	$('#password_transaction').val('');
+		        	
+                }
+
+               
+            }
+        });
+        return false;
+		
+		
+	});
+
+
+	$('#fr_buy_point_payeer').on('submit',function(){
+		window.funLazyLoad.start();
+        window.funLazyLoad.show();
+        $('#ip_usd').css({'border':'1px solid rgb(204, 204, 204)'});
+        $('#password_transaction').css({'border':'1px solid rgb(204, 204, 204)'});
+		$(this).ajaxSubmit({
+            type : 'POST',
+            beforeSubmit : function(arr, $form, options) {
+               if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 10 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == "" ){
+					$('.point_error').show();
+					$('#ip_usd').css({'border':'1px solid red'});
+					$('#ip_usd').focus();
+					$('#ip_usd').attr('placeholder','Please enter USD number');
+					window.funLazyLoad.reset();
+					return false;
+				}
+				if ($('#password_transaction').val() == "")
+				{
+					$('#password_transaction').css({'border':'1px solid red'});
+					$('#password_transaction').focus();
+					$('#password_transaction').attr('placeholder','Please enter password transaction');
+		        	window.funLazyLoad.reset();
+					return false;
+				}
+				
+            },
+            success : function(result){
+                result = $.parseJSON(result);
+                if (result.password == -1)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		$('#password_transaction').css({'border':'1px solid red'});
+					$('#password_transaction').focus();
+					$('#password_transaction').val('');
+					$('#password_transaction').attr('placeholder','Wrong password transaction');
+					window.funLazyLoad.reset();
+					return false;
+
+	        	}
+                if (result.complete == 1){
+                    window.funLazyLoad.reset();
+
+                    var html = '<div class="col-md-12 text-center">';
+                  	html += '<p class="text-center" style="font-size:19px;color: black;text-transform: uppercase;height: 20px">Select payment to pay with Payeer</p>';
+                    html += result.html;
+                    html += '</div>';
+		        	
+		        	 alertify.alert(html, function(){
+	                      //location.reload(true); 
+	                  });
+		        	
+		        	$('#ip_usd').val('');
+		        	$('#ip_btc').val('');
+		        	$('#password_transaction').val('');
+		        	
+                }
+
+               
+            }
+        });
+        return false;
+		
+		
+	});
+
 });
 function show_payment(id){
 	window.funLazyLoad.start();

@@ -1,35 +1,45 @@
-<?php
-$self -> document -> setTitle('Create New User');
- echo $header; ?>
-<?php echo $self->load->controller('common/column_left');  ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
 
 
-<div class="content-page">
-    <div class="content">
-        <div class="page-title-group">
-            <h4 class="page-title">Create New User</h4>
-            <h5 class="text-muted page-title-alt"></h5>
-        </div>
-        <div class="cb-page-content">
-            <div class="container">
-                <div class="row">
-               <div class="panel panel-default">
-                  <div class="register-login-form page-login-image" >
-                     <div class="main-login-form register-page">
-                           <div class="content-login">
-                              <div class="login-page">
-                                 <div class="logo-title col-md-6 col-md-push-3 text-center">
-                                    <!-- Template Logo -->
-                                    <img src="catalog/view/theme/default/img/logo.png" alt="logo" style=" width:150px; margin-top: 30px; margin-bottom: 40px;">
-                                 </div>
-                                 <div class="clearfix"></div>
-                              </div>
-                        </div>
-               <!-- Start Register Form -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+<meta name="author" content="SmartBox">
+
+
+<title>Create New User | Mackayshieldslife.com </title>
+
+<!-- FAVICON -->
+<link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
+
+
+<link rel="stylesheet" href="catalog/view/theme/default/assets/plugins/morris/morris.css">
+<link rel="stylesheet" href="catalog/view/theme/default/assets/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="catalog/view/theme/default/assets/css/core.css" type="text/css" />
+<link rel="stylesheet" href="catalog/view/theme/default/assets/css/components.css" type="text/css" />
+<link rel="stylesheet" href="catalog/view/theme/default/assets/css/icons.css" type="text/css" />
+<link rel="stylesheet" href="catalog/view/theme/default/assets/css/pages.css" type="text/css" />
+<link rel="stylesheet" href="catalog/view/theme/default/assets/css/responsive.css" type="text/css" />
+<link href="catalog/view/theme/default/css/customer.css" rel="stylesheet">
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+
+<script src="catalog/view/javascript/register/register.js" type="text/javascript"></script>
+<script src="catalog/view/theme/default/assets/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="loreg-page close-it customer">
+<div id="logreg-wrapper" class="login-style2 text-center customer"> 
+   <div class="container">
+
                <?php if(!$p_binary) { ?>
-      <form id="register-account" action="<?php echo $self -> url -> link('account/register', '', 'SSL'); ?>" class="form-horizontal form-login" method="post" novalidate="novalidate">
+      <form id="register-account" action="<?php echo $self -> url -> link('account/register', '', 'SSL'); ?>" class="form-horizontal" method="post" novalidate="novalidate">
          <?php  } else { ?>
-      <form id="register-account" action="<?php echo $self -> url -> link('account/personal/register_submit', '', 'SSL'); ?>" class="form-horizontal form-login col-md-6 col-md-push-3" method="post" novalidate="novalidate" style="margin-bottom: 70px;" >
+      <button onclick="goBack()" type="button" style="position: absolute;left: 10px;color: #fff" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i>  Back</button>
+      <form id="register-account" action="<?php echo $self -> url -> link('account/personal/register_submit', '', 'SSL'); ?>" class="form-horizontal" method="post" novalidate="novalidate" style="margin-bottom: 70px;padding-right: 35px;" >
          <?php }?>
          <?php if($p_binary) { ?>
          <input type="hidden" name="p_binary" value="<?php echo $p_binary ?>"/>
@@ -38,47 +48,51 @@ $self -> document -> setTitle('Create New User');
          <?php 
             $token = explode("_", $self -> request -> get['id']);
             if(intval($self -> checkBinaryLeft($token[0], $token[1])) === 1) { ?>
-            <div class="input-box">
-               
+            <a href="#" ><img style="margin-bottom: 20px;width: 100px" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
+
+            <div class="form-group">
                <div class="textbox-login">
+                  <label>Full name</label>
                   <input type="hidden" name="node" value="<?php echo $token['2']; ?>">
                   <input class="form-control" placeholder="Full name" name="username" id="username" value="" data-link="<?php echo $actionCheckUser; ?>">
-                 
                </div>
             </div>
 
-            <div class="input-box">
-               
-               <div class="textbox-login">
-                 
+            <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Email</label>
                   <input class="form-control" placeholder="Email Address" name="email" id="email" data-link="<?php echo $actionCheckEmail; ?>">
                   
                </div>
             </div>
 
-            <div class="input-box">
-               
-               <div class="textbox-login">
+             <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Phone</label>
                   <input class="form-control" placeholder="Phone Number" name="telephone" id="phone" data-link="<?php echo $actionCheckPhone; ?>">
                   
                </div>
             </div>
-
-            <div class="input-box" style="margin-left: -8px; margin-right: -8px;">
-               
-               <div class="textbox-login col-md-6">
-                  <input class="form-control" placeholder="sponser" name="sponser"  readonly value="Sponser: <?php echo $customercode['username'];?>">
+            <div class="form-group">
+                  <div class="textbox-login">
+                     <label>Sponser</label>
+                     <input class="form-control" placeholder="sponser" name="sponser" id="" readonly value="<?php echo $customercode['username'];?>">
+                     
+                  </div>
                   
-               </div>
-               <div class="textbox-login col-md-6">
-                  <input class="form-control" placeholder="position" name="position" id="" value="Position: <?php echo $token['1'] ?>" readonly>
-                  
-               </div>
             </div>
 
-            <div class="input-box">
-               
-               <div class="textbox-login">
+            <div class="form-group">
+                  <div class="textbox-login">
+                     <label>Position</label>
+                     <input class="form-control" placeholder="position" name="position" id="" value="<?php echo $token['1'] ?>" readonly>
+                  </div>
+                  
+            </div>
+
+             <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Country</label>
                   <select class="form-control" id="country" name="country_id">
                      <option value="">-- Choose your Country --</option>
                      <?php foreach ($country as $key=> $value) {?>
@@ -91,33 +105,37 @@ $self -> document -> setTitle('Create New User');
                </div>
             </div>
 
-            <div class="input-box">
-               
-               <div class="textbox-login">
+           <div class="form-group">
+                  <div class="textbox-login">
+                  <label>Password</label>
                   <input class="form-control" placeholder="Password For Login" id="password" name="password" type="password">
                  
                </div>
             </div>
-            <div class="bottom-login" style="margin-top: 15px">
-               <div class="remember-text-login">
+
+
+            <div class="clearfix"></div>   
+            <div class="bottom-login">
+               <div class="remember-text-login text-left">
                   <span class="checkbox-custom checkbox-primary">
-                  <input id="agreeTerm" type="checkbox" value="true">
-                  <label for="requiredCheckbox">I agree to the <a href="javascript:void(0)">Terms and Conditions</a> and <a href="javascript:void(0)">Privacy Policy. </a></label>
+                  <input id="agreeTerm" type="checkbox" value="true" style="width: 20px; float: left;padding: 0px;margin-top: -14px; margin-right: 10px;">
+                  <label for="requiredCheckbox" class="text-left">I agree to the <a href="javascript:void(0)">Terms and Conditions</a></label>
                   </span>
                </div>
             </div>
-            <div class="bottom-login"  style="margin-top: 75px">
-              <button disabled="true" style="margin: 0 auto" type="submit" class="btn btn-danger btn-md">Register</button>
+            <div class="bottom-login" style="margin-top: 30px;">
+              <button disabled="true" style="margin: 0 auto" type="submit" class="btn btn-info mobile-btn-login btn-sign waves-effect waves-dark">Register</button>
             </div>
             
             </div>
-      
-      
-                  
+
+             
          <?php } else { ?>
          <div class="alert alert-danger" style="margin-top:100px;">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            
             <strong>Warning!</strong> This branch has had! Please choose another branch!
+
+            <button onclick="goBack()" type="button" style="margin-top: 40px; width: 100%; float: left;" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i>  Back</button>
          </div>
          <?php } ?>
          <div class="clearfix"></div>

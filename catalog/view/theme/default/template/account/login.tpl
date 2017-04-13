@@ -29,11 +29,10 @@
 
 <body class="loreg-page close-it">
 <!-- Begin page -->
-<div id="logreg-wrapper" class="login-style2 text-center"> 
+<div id="logreg-wrapper" class="login-style2 text-center" style="width: 400px"> 
    <div class="container">
-      <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 150px" class="img-responsive center-block" alt=""/></a>
-      <p class="lead">Login Account</p>
-   
+      <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 150px; margin-bottom: 70px;" class="img-responsive center-block" alt=""/></a>
+      
       <form action="login.html" method="post" style="background: none">
          <div class="form-group">
             <label>Username</label>
@@ -63,10 +62,12 @@
             <?php } ?>
          </div>
          <button type="submit" class="btn btn-success btn-md">Login</button>
+         <a href="forgot.html" class="forgot" style="float: right; margin-top: 20px;font-size: 16px;">Forgot Password?</a>
       </form>
       
-      <p class="copy">&copy; 2017. Mackayshieldslife.<span>com</span></p>
+      
    </div>
+
 </div>
 
 <script>
@@ -101,7 +102,7 @@
 
 <script type="text/javascript">
    if (location.hash === '#success') {
-      xhtml = '<div class="col-md-12"><p class=""><b>Hello <span style="color:#01aeef"><?php echo $_SESSION['fullname']; ?> </span>!</b></p><p class="">Thank you for applying to open an Mackayshields Account with us<p><p>Please check the mail to see the account information</p><p class="">We thank you again for your interest in opening Yesbook Account. Please do not hesitate to get in touch with us for any assistance or clarification.</p><p class="">Sincerely </p><p class="">Mackayshields</p></div>';
+      xhtml = '<div class="col-md-12"><p class=""><b>Hello <span style="color:#01aeef"><?php echo $_SESSION['fullname']; ?> </span>!</b></p><p class="">Thank you for applying to open an Mackayshieldslife Account with us<p><p>Please check the mail to see the account information</p><p class="">We thank you again for your interest in opening Mackayshieldslife. Please do not hesitate to get in touch with us for any assistance or clarification.</p><p class="">Sincerely </p><p class="">Mackayshieldslife</p></div>';
          alertify.alert(xhtml, function(){
           
            }); 

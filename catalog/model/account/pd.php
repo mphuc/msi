@@ -119,7 +119,7 @@ class ModelAccountPd extends Model {
 		return $this -> db -> getLastId();
 	}
 
-	public function saveInvoice($customer_id, $secret, $amount, $amount_usd){
+	public function saveInvoice($customer_id, $secret, $amount, $amount_usd,$type){
 		$query = $this -> db -> query("
 			INSERT INTO ".DB_PREFIX."customer_invoice_pd SET
 			customer_id = '".$customer_id."',
@@ -127,6 +127,7 @@ class ModelAccountPd extends Model {
 			amount = ".$amount.",
 			amount_usd = '".$amount_usd."',
 			received = 0,
+			type = '".$type."',
 			date_created = NOW()
 		");
 
@@ -139,6 +140,17 @@ class ModelAccountPd extends Model {
 			FROM ". DB_PREFIX ."customer_invoice_pd
 			WHERE invoice_id_hash = '". $invoice_id_hash ."' AND 
 				  secret = '".$secret."'
+		");
+		return $query -> row;
+	}
+
+
+	public function getInvoceForm_InvoiceIdHash($invoice_id_hash){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM ". DB_PREFIX ."customer_invoice_pd
+			WHERE invoice_id_hash = '". $invoice_id_hash ."'
+				  
 		");
 		return $query -> row;
 	}

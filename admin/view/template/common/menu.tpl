@@ -8,8 +8,8 @@
   
   <li id="" ><a href="index.php?route=pd/investment&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Investment Manager </span></a></li>
   <li id="" ><a href="index.php?route=pd/dailyprofit&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Payment All </span></a></li>
-   <li id="" ><a href="index.php?route=pd/paringbonus&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Withdraw customer </span></a></li>
-  
+   <li id="" ><a href="index.php?route=pd/paringbonus&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Withdraw BTC </span></a></li>
+  <li id="" ><a href="index.php?route=pd/withdraw&token=<?php echo $_GET['token'];?>"><i class="fa fa-user fa-fw"></i> <span> Withdraw Orther </span></a></li>
   <li id="system"><a class="parent"><i class="fa fa-cog fa-fw"></i> <span><?php echo $text_system; ?></span></a>
     <ul>
       <!-- <li><a href="<?php echo $setting; ?>"><?php echo $text_setting; ?></a></li> -->

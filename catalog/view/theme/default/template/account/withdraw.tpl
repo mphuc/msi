@@ -26,46 +26,109 @@
                                  </div>
                                  <div class="clearfix"></div>
                                  <div class="panel-body">
-                                
+                                  <?php if (!isset($_GET['type']) || $_GET['type'] == 'bitcoin') { ?>
                                     <form id="fr_buy_point" action="index.php?route=account/withdraw/submit" role="form" class="fr_buy_point">
                                        <div class="row">
                                           <div class="form-group">
                                              <label for="exampleInputEmail1">Choose payment method</label>
-                                             <select name="payment" class="form-control" id="payment">
-                                               <option value="Bitcoin">Bitcoin</option>
-                                               <option value="Perfect Money">Perfect Money</option>
-                                               <option value="Payeer">Payeer</option>
-                                             </select>
-                                             
+                                            <select class="form-control" id="payment_method" name="payment"/>
+                                              <option selected="selected" value="bitcoin">Bitcoin</option>
+                                              <option  value="perfect">Perfect Money</option>
+                                              <option  value="payeer">Payeer</option>
+                                            </select>
                                           </div>
-                                          <div class="form-group">
+                                          <div class="form-group" style="margin-bottom: 0px;">
                                              <label for="exampleInputEmail1">Wallet payment</label>
-                                             <input type="text" class="form-control" name="wallet" value="<?php echo $customer['wallet'] ?>" readonly="true" />
+                                             <input type="text" class="form-control" name="wallet" value="<?php echo $customer['wallet'] ?>" id="wallet_addres" readonly="true" />
                                             
                                           </div>
-                                          <div class="col-md-6" >
+                                          <div class="col-md-6" style="padding: 0; padding-right: 10px;">
                                              <label for="exampleInputEmail1">Number USD</label>
                                              <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
                                             
                                           </div>
-                                          <div class="col-md-6 ">
+                                          <div class="col-md-6 " style="padding: 0;padding-left: 10px;">
                                              <label for="exampleInputEmail1">Number BTC</label>
                                              <input type="text" readonly="true" placeholder="Number BTC" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_btc" id="ip_btc"/>
                                           </div>
                                           <div class="form-group">
                                              <label for="exampleInputEmail1">Password Transaction</label>
                                              <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
-                                            
                                           </div>
                                           <br/>
                                             <button style="width: 100%" type="submit" class="btn btn-success btn-md">
                                               Submit
                                             </button>
                                        </div>
-                                       
-                                       
                                     </form>
-                                    
+                                    <?php } ?>
+
+                                    <?php if (isset($_GET['type']) && $_GET['type'] == 'perfect') { ?>
+                                      <form id="fr_buy_point_perfect" action="index.php?route=account/withdraw/submit_perfect" role="form" class="fr_buy_point">
+                                       <div class="row">
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Choose payment method</label>
+                                            <select class="form-control" id="payment_method" name="payment"/>
+                                              <option  value="bitcoin">Bitcoin</option>
+                                              <option selected="selected" value="perfect">Perfect Money</option>
+                                              <option  value="payeer">Payeer</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Wallet payment</label>
+                                             <input type="text" class="form-control" name="wallet" value="<?php echo $customer['perfect_money'] ?>" id="wallet_addres" readonly="true" />
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Number USD</label>
+                                             <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
+                                            
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Password Transaction</label>
+                                             <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
+                                          </div>
+                                          <br/>
+                                            <button style="width: 100%" type="submit" class="btn btn-success btn-md">
+                                              Submit
+                                            </button>
+                                       </div>
+                                    </form>
+                                    <?php } ?>
+
+                                    <?php if (isset($_GET['type']) && $_GET['type'] == 'payeer') { ?>
+                                      <form id="fr_buy_point_payeer" action="index.php?route=account/withdraw/submit_payeer" role="form" class="fr_buy_point">
+                                       <div class="row">
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Choose payment method</label>
+                                            <select class="form-control" id="payment_method" name="payment"/>
+                                              <option  value="bitcoin">Bitcoin</option>
+                                              <option  value="perfect">Perfect Money</option>
+                                              <option selected="selected" value="payeer">Payeer</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Wallet payment</label>
+                                             <input type="text" class="form-control" name="wallet" value="<?php echo $customer['payeer'] ?>" readonly="true" id="wallet_addres"  />
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Number USD</label>
+                                             <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
+                                            
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                             <label for="exampleInputEmail1">Password Transaction</label>
+                                             <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
+                                          </div>
+                                          <br/>
+                                            <button style="width: 100%" type="submit" class="btn btn-success btn-md">
+                                              Submit
+                                            </button>
+                                       </div>
+                                    </form>
+                                    <?php } ?>
+
                                  </div>
                               </div>
                            </div>
@@ -103,18 +166,34 @@
                                                    <td data-title="Amount USD" align="center">
                                                       <?php echo number_format($value['amount_usd']) ?>
                                                    </td>
-                                                   <td data-title="Type of payment" align="center">
-                                                      <?php echo ($value['method_payment']) ?>
+                                                   <td data-title="Type of payment" align="center" style="text-transform: capitalize;">
+                                                      <?php 
+                                                        if ($value['method_payment'] == "bitcoin") 
+                                                          echo "Bitcoin";
+                                                        if ($value['method_payment'] == "perfect") 
+                                                          echo "Payeer Money";
+                                                        if ($value['method_payment'] == "payeer") 
+                                                          echo "Payeer";
+                                                      ?>
                                                    </td>
                                                    <td data-title="Amount Payment" align="center">
-                                                      <?php if ($value['method_payment'] == "Bitcoin") { ?>
+                                                      <?php if ($value['method_payment'] == "bitcoin") { ?>
                                                         <?php echo $value['amount_payment']/100000000 ?> BTC
+                                                      <?php } ?>
+                                                      <?php if ($value['method_payment'] != "bitcoin") { ?>
+                                                        <?php echo $value['amount_payment'] ?> USD
                                                       <?php } ?>
                                                       
                                                    </td>
                                                    <td data-title="Wallet Payment" align="center">
-                                                      <?php if ($value['method_payment'] == "Bitcoin") { ?>
-                                                        <?php echo $value['addres_wallet'] ?>
+                                                      <?php if ($value['method_payment'] == "bitcoin") { ?>
+                                                        Bitcoin: <?php echo $value['addres_wallet'] ?>
+                                                      <?php } ?>
+                                                      <?php if ($value['method_payment'] == "perfect") { ?>
+                                                       ID Perfect Money: <?php echo $value['addres_wallet'] ?>
+                                                      <?php } ?>
+                                                      <?php if ($value['method_payment'] == "payeer") { ?>
+                                                       ID Payeer: <?php echo $value['addres_wallet'] ?>
                                                       <?php } ?>
                                                    </td>
                                                   
@@ -130,7 +209,7 @@
                                                <?php } ?>
                                                <?php } else { ?>
                                                 <tr>
-                                                   <td colspan="5" align="center">No data
+                                                   <td colspan="6" align="center">No data
                                                    </td>
                                                 </tr>
                                                <?php } ?>

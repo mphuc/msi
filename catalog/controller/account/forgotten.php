@@ -72,32 +72,37 @@ class ControllerAccountForgotten extends Controller {
 			//$mail -> setTo($this -> config -> get('config_email'));
 			$mail -> setTo($customer_info['email']);
 			$mail -> setFrom($this -> config -> get('config_email'));
-			$mail -> setSender(html_entity_decode("Sfccoin.com", ENT_QUOTES, 'UTF-8'));
-			$mail -> setSubject("Smart Financial Connections - New Password For Login");
+			$mail -> setSender(html_entity_decode("Mackayshieldslife", ENT_QUOTES, 'UTF-8'));
+			$mail -> setSubject("Mackayshieldslife - New Password For Login");
 			$html_mail = '<div style="background: #f2f2f2; width:100%;">
-			   <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#2A363C;border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
-			    width:700px; margin:0 auto">
-			   <tbody>
-			      <tr>
-			        <td>
-			          <div style="text-align:center" class="ajs-header"><img  src="'.HTTPS_SERVER.'catalog/view/theme/default/img/logo.png" alt="logo" style="margin: 0 auto; width:150px;"></div>
-			        </td>
-			       </tr>
-			       <tr>
-			       <td style="background:#fff">
-			       	<p class="text-center" style="font-size:20px;color: black;text-transform: uppercase; width:100%; float:left;text-align: center;margin: 30px 0px 0 0;margin-bottom:30px;">Reset password<p>
-			       		
-			       		<p style="font-size:14px;color: black;margin-left: 70px;">Hi <b>'.$customer_info['username'].' !</b></p>
+				   <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
+				    width:700px; margin:0 auto">
+				   <tbody>
+				      <tr>
+				        <td>
+				          <div style="text-align:center" class="ajs-header"><img  src="'.HTTPS_SERVER.'catalog/view/theme/default/img/logo.png" alt="logo" style="margin: 30px auto; width:150px;"></div>
+				        </td>
+				       </tr>
+				       <tr>
+				       <td style="border: 1px solid #dbdbdb;background-color: #ffffff;border-radius: 5px; padding: 10px; width: 600px; margin: auto; font-family: Arial,Helvetica,sans-serif; font-size: 14px; margin-top:25px; padding:30px;">
+				       	<div style="font-size:14px;font-weight:bold; margin-top:25px; margin-bottom:30px;">Hello <span style="color:#01aeef">'.$customer_info['username'].'</span></div>
+				       	<h2>New password from <span style="color:#01aeef">Mackayshieldslife! </span></h2>
 
-				       	<p style="font-size:14px;color: black;margin-left: 70px;margin-bottom:60px;">Your new password is: <b>'.$password.'</b></p>
-				      
-				          </div>
-			       </td>
-			       </tr>
-			    </tbody>
-			    </table>
-			  </div>';
+				       	<p style="margin-bottom:10px;line-height:25px;">Your new password is: <b>'.$password.'</b></p>
+
+				       	<p style="margin-bottom:10px; line-height:25px;">
+							Sincerely
+						</p>
+						<p style="margin-bottom:10px; line-height:25px;">
+							Mackayshieldslife
+						</p>
+			       	</td>
+			        </tr>
+				    </tbody>
+				    </table>
+				  </div>';
 			$mail -> setHtml($html_mail);
+			
 			$mail->send();
 			
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -181,10 +186,14 @@ class ControllerAccountForgotten extends Controller {
 		$language -> load('account/forgotten');
 		$lang = $language -> data;
 	
-		if (!isset($this->request->post['email'])) {
-			$this->error['warning'] = $lang['error_email'];
+		if (!isset($this->request->post['email']) || $this->request->post['email'] == "") {
+			$this->error['warning'] = "Warning: The ID was not found in our records, please try again!";
 		} elseif (!$this->model_account_customer->getCustomerByUsername($this->request->post['email'])) {
-			$this->error['warning'] = $lang['error_email'];
+			$this->error['warning'] = "Warning: The ID was not found in our records, please try again!";
+		}
+
+		if (!isset($this->request->post['capcha']) || $this->request->post['capcha'] == "" || $this->request->post['capcha'] != $_SESSION['cap_code']) {
+			$this->error['warning'] = "Warning: Capcha fail!";
 		}
 
 		return !$this->error;

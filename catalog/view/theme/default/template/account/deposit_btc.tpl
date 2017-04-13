@@ -30,19 +30,19 @@
                                     <form id="fr_buy_point" action="index.php?route=account/deposit/submit" role="form" class="fr_buy_point">
                                        <div class="row">
                                           <div class="form-group">
-                                             <label for="exampleInputEmail1">Password Transaction</label>
+                                             <label for="exampleInputEmail1">Payment Method</label>
                                             <select class="form-control" id="payment_method" name="payment_method"/>
                                               <option value="bitcoin">Bitcoin</option>
                                               <option value="perfect">Perfect Money</option>
                                               <option value="payeer">Payeer</option>
                                             </select>
                                           </div>
-                                          <div class="col-md-6" >
+                                          <div class="col-md-6" style="margin-left: -5px;">
                                              <label for="exampleInputEmail1">Number USD</label>
                                              <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
                                             
                                           </div>
-                                          <div class="col-md-6 ">
+                                          <div class="col-md-6 " style="padding-right: 0px;">
                                              <label for="exampleInputEmail1">Number BTC</label>
                                              <input type="text" readonly="true" placeholder="Number BTC" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_btc" id="ip_btc"/>
                                           </div>

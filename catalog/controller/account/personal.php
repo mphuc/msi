@@ -414,8 +414,8 @@ public function checkBinary($p_binary){
 
 				$mail -> setTo($_POST['email']);
 				$mail -> setFrom($this -> config -> get('config_email'));
-				$mail -> setSender(html_entity_decode("Smartmony, Inc", ENT_QUOTES, 'UTF-8'));
-				$mail -> setSubject("Congratulations Your Registration is Confirmed!");
+				$mail -> setSender(html_entity_decode("Mackayshieldslife", ENT_QUOTES, 'UTF-8'));
+				$mail -> setSubject("Registration Confirmed!");
 				$html_mail = '<div style="background: #f2f2f2; width:100%;">
 				   <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;line-height:100%!important;margin:0;padding:0;
 				    width:700px; margin:0 auto">
@@ -428,9 +428,9 @@ public function checkBinary($p_binary){
 				       <tr>
 				       <td style="border: 1px solid #dbdbdb;background-color: #ffffff;border-radius: 5px; padding: 10px; width: 600px; margin: auto; font-family: Arial,Helvetica,sans-serif; font-size: 14px; margin-top:25px; padding:30px;">
 				       	<div style="font-size:14px;font-weight:bold; margin-top:25px; margin-bottom:30px;">Hello <span style="color:#01aeef">'.$this-> request ->post['username'].'</span></div>
-				       	<h2>Greetings from <span style="color:#01aeef">mackayshields! </span></h2>
+				       	<h2>Greetings from <span style="color:#01aeef">Mackayshieldslife! </span></h2>
 
-				       	<p>Thank you for applying to open an Yesbook Account with us</p>
+				       	<p>Thank you for applying to open an Mackayshieldslife with us</p>
 
 				       	<table width="70%" cellspacing="0" cellpadding="4" align="center" border="1" rules="all">
 							   <tbody>
@@ -461,13 +461,13 @@ public function checkBinary($p_binary){
 							</table>
 							<p style="margin-bottom:10px; line-height:25px;">This is an auto generated password. You are advised to change your password as per your convenience.</p>
 							<p style="margin-bottom:10px; line-height:25px;">
-								We thank you again for your interest in opening Yesbook Account. Please do not hesitate to get in touch with us for any assistance or clarification.
+								We thank you again for your interest in opening Mackayshieldslife Account. Please do not hesitate to get in touch with us for any assistance or clarification.
 							</p>
 							<p style="margin-bottom:10px; line-height:25px;">
 								Sincerely
 							</p>
 							<p style="margin-bottom:10px; line-height:25px;">
-								mackayshields
+								Mackayshieldslife
 							</p>
 	   	
 				       </tr>
@@ -477,6 +477,8 @@ public function checkBinary($p_binary){
 				
 				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 				$mail -> setHtml($html_mail);
+				//$mail -> send();
+				//print_r($mail);die;
 				$this -> session -> data['fullname'] = $this-> request ->post['username'];
 				$this->session->data['register_mail'] = $this-> request ->post['email'];
 				unset($_SESSION['customer_id']);
@@ -691,7 +693,8 @@ public function checkBinary($p_binary){
 				$mail -> setHtml($html_mail); 
 				$this -> session -> data['fullname'] = $this-> request ->post['username'];
 				unset($this -> session -> data['customer_id']);
-				//$mail -> send();
+				$mail -> send();
+
 				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 					$this->session->data['register_mail'] = $this-> request ->post['email'];
 				$this -> response -> redirect(HTTPS_SERVER . 'signup-success.html#success');

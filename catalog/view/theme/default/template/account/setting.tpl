@@ -187,7 +187,29 @@
                                               </div>
                                            </div>
 
-                                          
+                                           <div class="form-group">
+                                              <label class="col-md-4" for="BitcoinWalletAddress">Perfect Money</label>
+                                              <div class="col-md-8">
+                                                <input class="form-control" id="Perfect_Money" name="perfect_money" type="text" data-link="<?php echo $self -> url -> link('account/account/main', '', 'SSL'); ?>" value="<?php echo $customer['perfect_money'] ?>" placeholder="Perfect Money"/>
+                                                <span id="BitcoinWalletAddress-error" class="field-validation-error">
+                                                <span></span>
+                                                </span>
+                                              
+                                              </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                              <label class="col-md-4" for="BitcoinWalletAddress">Payeer</label>
+                                              <div class="col-md-8">
+                                                <input class="form-control" id="Payeer" name="payeer" type="text" data-link="<?php echo $self -> url -> link('account/account/main', '', 'SSL'); ?>" value="<?php echo $customer['payeer'] ?>" placeholder="Payeer" />
+                                                <span id="BitcoinWalletAddress-error" class="field-validation-error">
+                                                <span></span>
+                                                </span>
+                                              
+                                              </div>
+                                           </div>
+                                            
+                                           <?php if ($customer['payeer'] == "" || $customer['perfect_money'] == "" || $customer['wallet'] == "") { ?>
 
                                            <div class="form-group">
                                               <label class="col-md-4" for="transaction_password"><?php echo $lang['transaction_pasword'] ?></label>
@@ -203,7 +225,9 @@
                                            </div>
                                            <div class="text-center">
                                           <button type="submit" style="width: 200px;" class="btn btn-success btn-md"><?php echo $lang['wallet_btn'] ?></button>
+                                          <?php } ?>
                                           </div>
+                                          <p style="margin-top: 20px; font-size: 15px;color: red">*Note: The information is only updated once</p>
                                         </form>
                                         <!-- /.col-lg-6 (nested) -->
                                      

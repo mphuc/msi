@@ -972,6 +972,24 @@ class ModelPdRegistercustom extends Model {
 		
 		return $query -> rows;
 	}
+
+	public function get_all_dailyprofix_orther($limit, $offset){
+
+		$query = $this -> db -> query("
+			SELECT A.*,B.username
+			FROM  ".DB_PREFIX."customer_withdraw_payment A INNER JOIN ".DB_PREFIX."customer B ON A.customer_id = B.customer_id 
+			WHERE A.status = 0 AND A.method_payment <> 'Bitcoin'
+			
+			ORDER BY A.date_added DESC
+
+			LIMIT ".$limit."
+			OFFSET ".$offset."
+			
+		");
+		
+		return $query -> rows;
+	}
+
 	public function get_all_paringbonus($limit, $offset){
 
 		$query = $this -> db -> query("
@@ -1054,6 +1072,16 @@ class ModelPdRegistercustom extends Model {
 		");
 		return $query -> row;
 	}
+
+	public function get_count_dailyprofix_orther(){
+
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_withdraw_payment WHERE status = 0 AND method_payment <> 'Bitcoin'
+		");
+		return $query -> row;
+	}
+
 	public function get_count_paringbonus(){
 
 		$query = $this -> db -> query("
@@ -1326,6 +1354,17 @@ class ModelPdRegistercustom extends Model {
 		");
 		
 	}
+
+	public function update_status_payment_orther($id){
+		
+		$query = $this -> db -> query("
+			UPDATE 	" . DB_PREFIX . "customer_withdraw_payment SET status  = 1
+			
+			 WHERE id = '".$id."'
+		");
+		
+	}
+
 	public function delete_form_cn_payment(){
 		$query = $this -> db -> query("
 			TRUNCATE " . DB_PREFIX . "customer_cn_wallet_payment

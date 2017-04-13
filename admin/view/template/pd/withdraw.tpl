@@ -3,48 +3,14 @@
 <div id="content">
 <div class="page-header">
   <div class="container-fluid">
-    <h1>Withdraw BTC</h1>
+    <h1>Withdraw Orther</h1>
 
   </div>
 </div>
 <div class="container-fluid">
   <div class="panel panel-default">
     <div class="panel-heading">      
-      <div class="clearfix">
-          <?php 
-            $total = 0;
-            foreach ($code_all as $value_new) {
-
-              $total += $value_new['amount'];
-            }
-           ?>
-           <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.3s">
-                <div class="item_wallet">
-                    <h5>Your BTC Wallet</h5>
-                    <div class="wallet wallet_blockcio">
-                        <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=<?php echo $wallet ?>" alt="">
-                    </div>
-                    <p><?php echo $wallet ?></p>
-                    <p>Amount: <?php echo doubleval(round($blance_blockio,8)); ?> BTC</p>
-                    <p>Amount Pending: <?php echo doubleval(round($blance_blockio_pending,8)); ?> BTC</p>
-                </div>
-            </div>
-            <div class="col-md-8 text-center wow fadeInUp" data-wow-delay="0.3s" style="margin-top: 60px;">
-              <form id="forn_payment" method="POST" action="index.php?route=pd/paringbonus/payment_daily&token=<?php echo $_GET['token'] ?>" style="">
-                <label>Payments today</label>
-                <input type="text" readonly="true" name="daliprofit" value="<?php echo $total;?> BTC" >
-                <br>
-                <label>Pin code</label>
-                <input required="true" type="password" placeholder="Pin code"  name="pin">
-                <br>
-                <label>Googleauthenticator</label>
-                <input required="true" type="password" placeholder="Googleauthenticator" name="google" >
-                <br>
-                <label></label>
-                <input type="submit" name="ok" value="OK" onclick="return confirm('Are you sure ?');">
-              </form>
-            </div>
-      </div>
+      
     </div>
     <div class="panel-body row">
         <div class="clearfix" style="margin-top:10px;"></div>
@@ -55,8 +21,9 @@
             <th>Username</th>
             <th>Wallet</th>
             <th>Amount USD</th>
-            <th>Amount BTC</th>
+            <th>Payment Method</th>
             <th>Date</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -71,8 +38,13 @@
             <td><?php echo $value['username'] ?></td>
             <td><a target="_blank" href="https://blockchain.info/address/<?php echo $value['addres_wallet'] ?>"><?php echo $value['addres_wallet'] ?> <i class="fa fa-external-link" aria-hidden="true"></i></a></td>
             <td><?php echo $value['amount_usd']; ?> USD</td>
-            <td><?php echo $value['amount_payment']/100000000; ?> BTC</td>
+            <td><?php echo $value['method_payment']; ?> BTC</td>
             <td><?php echo date('d/m/Y H:i:s',strtotime($value['date_added'])) ?></td>
+            <td>
+              <a href="index.php?route=pd/withdraw/payment&token=<?php echo $_GET['token'] ?>&id=<?php echo $value['id'] ?>">
+                <button type="button" onclick="return confirm('Payment ?');" class="btn btn-success">Payment</button>
+              </a>
+            </td>
           </tr>
          <?php
           }

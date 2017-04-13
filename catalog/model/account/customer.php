@@ -866,14 +866,17 @@ class ModelAccountCustomer extends Model {
 		return $query -> rows;
 	}
 
-	public function editCustomerWallet($wallet) {
+	public function editCustomerWallet($wallet,$perfect_money,$payeer) {
 
 		$data['wallet'] = $wallet;
 		$this -> event -> trigger('pre.customer.edit', $data);
 		$customer_id = $this -> customer -> getId();
-		$this -> db -> query("UPDATE " . DB_PREFIX . "customer SET wallet = '". $wallet ."' WHERE customer_id = '" . (int)$customer_id . "'");
-		$this -> db -> query("UPDATE " . DB_PREFIX . "customer_r_wallet_payment SET addres_wallet = '". $wallet ."' WHERE customer_id = '" . (int)$customer_id . "'");
-		$this -> db -> query("UPDATE " . DB_PREFIX . "customer_wallet_btc_ SET wallet = '". $wallet ."' WHERE customer_id = '" . (int)$customer_id . "'");
+		$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
+			SET wallet = '". $wallet ."',
+			perfect_money = '". $perfect_money ."',
+			payeer = '". $payeer ."'
+			WHERE customer_id = '" . (int)$customer_id . "'");
+		
 		$this -> event -> trigger('post.customer.edit', $customer_id);
 	}
 
@@ -1115,7 +1118,7 @@ class ModelAccountCustomer extends Model {
 	}
 
 	public function getCustomerBank($customer_id) {
-		$query = $this -> db -> query("SELECT account_holder, bank_name, account_number,branch_bank   FROM ". DB_PREFIX ."customer WHERE customer_id = '" . (int)$customer_id . "'");
+		$query = $this -> db -> query("SELECT *  FROM ". DB_PREFIX ."customer WHERE customer_id = '" . (int)$customer_id . "'");
 		return $query -> row;
 	}
 
@@ -2572,22 +2575,22 @@ class ModelAccountCustomer extends Model {
 
 	}
 
-	public function get_invoid_customer($customer_id,$limit, $offset){
+	public function get_invoid_customer($customer_id,$limit, $offset,$type){
 		$query = $this -> db -> query("
 			SELECT * 
 			FROM  ".DB_PREFIX."customer_invoice_pd
-			WHERE customer_id = '".$customer_id."'
+			WHERE customer_id = '".$customer_id."' AND type LIKE '".$type."'
 			ORDER BY date_created DESC
 			LIMIT ".$limit."
 			OFFSET ".$offset."
 		");
 		return $query -> rows;
 	}
-	public function getTotalInvoid($customer_id){
+	public function getTotalInvoid($customer_id,$type){
 		$query = $this -> db -> query("
 			SELECT count(*) as number
 			FROM  ".DB_PREFIX."customer_invoice_pd
-			WHERE customer_id = '".$customer_id."'
+			WHERE customer_id = '".$customer_id."' AND type LIKE '".$type."'
 		");
 		return $query -> row;
 	}
@@ -2602,11 +2605,11 @@ class ModelAccountCustomer extends Model {
 		return $query -> row;
 	}
 
-	public function getTotalInvoid_no_payment($customer_id){
+	public function getTotalInvoid_no_payment($customer_id,$type){
 		$query = $this -> db -> query("
 			SELECT count(*) as number
 			FROM  ".DB_PREFIX."customer_invoice_pd
-			WHERE customer_id = '".$customer_id."' AND confirmations = 0
+			WHERE customer_id = '".$customer_id."' AND confirmations = 0 AND type LIKE '".$type."' 
 		");
 		return $query -> row;
 	}

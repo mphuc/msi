@@ -136,6 +136,137 @@ class ControllerAccountWithdraw extends Controller {
 		}
 	}
 
+
+	public function submit_perfect()
+	{
+		function myCheckLoign($self) {
+			return $self -> customer -> isLogged() ? true : false;
+		};
+
+		function myConfig($self) {
+			
+		};
+		!call_user_func_array("myCheckLoign", array($this)) && $this -> response -> redirect("/login.html");
+		call_user_func_array("myConfig", array($this));
+		$this -> load -> model('account/pd');
+		$this -> load -> model('account/customer');
+		if ($this -> request -> post){
+			$amount_usd = array_key_exists('ip_usd', $this -> request -> post) ? $_POST['ip_usd'] : "Error";
+			
+			$addres_wallet = array_key_exists('wallet', $this -> request -> post) ? $_POST['wallet'] : "Error";
+			$payment = array_key_exists('payment', $this -> request -> post) ? $_POST['payment'] : "Error";
+
+			$password_transaction = array_key_exists('password_transaction', $this -> request -> post) ? $_POST['password_transaction'] : "Error";
+			if ($password_transaction == "Error" || $amount_usd == "Error") {
+				return $json['error'] = -1;
+			}
+			$check_password_transaction = $this -> model_account_customer -> check_password_transaction($this->session->data['customer_id'],$password_transaction);
+
+			if ($check_password_transaction > 0)
+			{
+				
+				$get_m_walleet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
+				 
+				if ($get_m_walleet['amount'] >= $amount_usd*10000)
+				{
+					$amount = $amount_usd;
+					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000,$this -> session -> data['customer_id'], $add = false);
+
+					$get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
+
+					$this -> model_account_customer -> saveTranstionHistory(
+			           	$this -> session -> data['customer_id'], 
+			           	"Withdraw", 
+			           	"- ".($amount_usd)." USD", 
+			           	"Withdraw ".($amount_usd)." USD",
+			           	2,
+			           	$get_M_Wallet['amount']/10000, 
+			           	$url = ''
+		           	);
+					//save withdraw payment
+					
+					$this -> model_account_customer -> saveWithdrawpayment($this -> session -> data['customer_id'],$amount_usd,$addres_wallet,$amount, $payment);
+
+					$json['complete'] = 1;
+	            }
+	            else
+				{
+					$json['money_transfer'] = 1;
+				}
+			}
+			else
+			{
+				$json['password'] = -1;
+			}
+			$this->response->setOutput(json_encode($json));
+		}
+	}
+
+	public function submit_payeer()
+	{
+		function myCheckLoign($self) {
+			return $self -> customer -> isLogged() ? true : false;
+		};
+
+		function myConfig($self) {
+			
+		};
+		!call_user_func_array("myCheckLoign", array($this)) && $this -> response -> redirect("/login.html");
+		call_user_func_array("myConfig", array($this));
+		$this -> load -> model('account/pd');
+		$this -> load -> model('account/customer');
+		if ($this -> request -> post){
+			$amount_usd = array_key_exists('ip_usd', $this -> request -> post) ? $_POST['ip_usd'] : "Error";
+			
+			$addres_wallet = array_key_exists('wallet', $this -> request -> post) ? $_POST['wallet'] : "Error";
+			$payment = array_key_exists('payment', $this -> request -> post) ? $_POST['payment'] : "Error";
+
+			$password_transaction = array_key_exists('password_transaction', $this -> request -> post) ? $_POST['password_transaction'] : "Error";
+			if ($password_transaction == "Error" || $amount_usd == "Error") {
+				return $json['error'] = -1;
+			}
+			$check_password_transaction = $this -> model_account_customer -> check_password_transaction($this->session->data['customer_id'],$password_transaction);
+
+			if ($check_password_transaction > 0)
+			{
+				
+				$get_m_walleet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
+				 
+				if ($get_m_walleet['amount'] >= $amount_usd*10000)
+				{
+					$amount = $amount_usd;
+					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000,$this -> session -> data['customer_id'], $add = false);
+
+					$get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
+
+					$this -> model_account_customer -> saveTranstionHistory(
+			           	$this -> session -> data['customer_id'], 
+			           	"Withdraw", 
+			           	"- ".($amount_usd)." USD", 
+			           	"Withdraw ".($amount_usd)." USD",
+			           	2,
+			           	$get_M_Wallet['amount']/10000, 
+			           	$url = ''
+		           	);
+					//save withdraw payment
+					
+					$this -> model_account_customer -> saveWithdrawpayment($this -> session -> data['customer_id'],$amount_usd,$addres_wallet,$amount, $payment);
+
+					$json['complete'] = 1;
+	            }
+	            else
+				{
+					$json['money_transfer'] = 1;
+				}
+			}
+			else
+			{
+				$json['password'] = -1;
+			}
+			$this->response->setOutput(json_encode($json));
+		}
+	}
+
 	public function get_invoid()
 	{
 		if ($this -> request -> post){
