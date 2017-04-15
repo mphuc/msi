@@ -1670,4 +1670,43 @@ class ModelPdRegistercustom extends Model {
 		}
 		return array();
 	}
+
+
+	public function get_all_user_all(){
+		$query = $this -> db -> query("
+			SELECT  A.p_node_pd,A.customer_id,A.username,B.star
+			FROM " . DB_PREFIX . "customer A INNER JOIN " . DB_PREFIX . "customer_ml B
+			ON A.customer_id = B.customer_id
+			WHERE B.level >= 2
+
+		");
+		return $query -> rows;
+	}
+
+	public function count_p_node_pd_node($customer_id,$total_pd_node){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_ml A INNER JOIN ".DB_PREFIX."customer B 
+			ON A.customer_id = B.customer_id
+			WHERE A.p_node = '".$customer_id."' AND total_pd_node >= '".$total_pd_node."'
+		");
+		return $query -> row['number'];
+	}
+
+	public function update_star_customer_ml($customer_id,$star){
+		$query = $this -> db -> query("
+			UPDATE  ".DB_PREFIX."customer_ml SET
+			star = '".$star."'
+			WHERE customer_id = '".$customer_id."'
+		");
+		return $query;
+	}
+	public function count_p_node_star($customer_id,$star){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_ml A 
+			WHERE A.p_node = '".$customer_id."' AND star >= '".$star."'
+		");
+		return $query -> row['number'];
+	}
 }

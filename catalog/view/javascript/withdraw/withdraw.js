@@ -65,11 +65,12 @@ $(function(){
 					return false;
 				}
 
-               if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 10 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == "" || $('#ip_btc').val() == "Loading..." ){
+               if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 20 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == "" || $('#ip_btc').val() == "Loading..." ){
 					$('.point_error').show();
 					$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
-					$('#ip_usd').attr('placeholder','Please enter USD number');
+					$('#ip_usd').val('');
+					$('#ip_usd').attr('placeholder','Please enter USD number min 20 USD');
 					window.funLazyLoad.reset();
 					return false;
 				}
@@ -94,6 +95,17 @@ $(function(){
 					$('#password_transaction').focus();
 					$('#password_transaction').val('');
 					$('#password_transaction').attr('placeholder','Wrong password transaction');
+					window.funLazyLoad.reset();
+					return false;
+
+	        	}
+	        	if (result.maxfive == 1)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		$('#ip_usd').css({'border':'1px solid red'});
+					$('#ip_usd').focus();
+					$('#ip_usd').val('');
+					$('#ip_usd').attr('placeholder','Maximum withdrawal of no more than 5 times the investment package');
 					window.funLazyLoad.reset();
 					return false;
 
@@ -140,11 +152,12 @@ $(function(){
 					return false;
 				}
 
-               if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 10 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == ""  ){
+               if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 20 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == ""  ){
 					$('.point_error').show();
 					$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
-					$('#ip_usd').attr('placeholder','Please enter USD number');
+					$('#ip_usd').val('');
+					$('#ip_usd').attr('placeholder','Please enter USD number min 20 USD');
 					window.funLazyLoad.reset();
 					return false;
 				}
@@ -173,7 +186,17 @@ $(function(){
 					return false;
 
 	        	}
+	        	if (result.maxfive == 1)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		$('#ip_usd').css({'border':'1px solid red'});
+					$('#ip_usd').focus();
+					$('#ip_usd').val('');
+					$('#ip_usd').attr('placeholder','Maximum withdrawal of no more than 5 times the investment package');
+					window.funLazyLoad.reset();
+					return false;
 
+	        	}
 	        	if (result.money_transfer == 1)
 	        	{
 	        		$('#sucess_point_submit').hide();
@@ -214,11 +237,12 @@ $(function(){
 					return false;
 				}
 
-               	if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 10 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == ""  ){
+               	if ($('#ip_usd').val() == "" || $('#ip_usd').val() < 20 || isNaN(parseFloat($('#ip_usd').val())) || $('#ip_usd').val() == ""  ){
 					$('.point_error').show();
 					$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
-					$('#ip_usd').attr('placeholder','Please enter USD number');
+					$('#ip_usd').val('');
+					$('#ip_usd').attr('placeholder','Please enter USD number  min 20 USD');
 					window.funLazyLoad.reset();
 					return false;
 				}
@@ -248,7 +272,17 @@ $(function(){
 					return false;
 
 	        	}
+	        	if (result.maxfive == 1)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		$('#ip_usd').css({'border':'1px solid red'});
+					$('#ip_usd').focus();
+					$('#ip_usd').val('');
+					$('#ip_usd').attr('placeholder','Maximum withdrawal of no more than 5 times the investment package');
+					window.funLazyLoad.reset();
+					return false;
 
+	        	}
 	        	if (result.money_transfer == 1)
 	        	{
 	        		$('#sucess_point_submit').hide();

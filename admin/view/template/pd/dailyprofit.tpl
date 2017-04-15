@@ -71,7 +71,7 @@
 
             <?php } unset($_SESSION['complete_lv'])?>
               <input type="hidden" name="class" value="123">
-              <button class="btn btn-danger" onclick="return confirm('Tính hoa hồng nhóm ?');"> Tính hoa hồng cấp bậc </button>
+              <button class="btn btn-danger" onclick="return confirm('Tính hoa cấp bậc ?');"> Tính hoa hồng cấp bậc </button>
             </form>
           </div>
         </div>

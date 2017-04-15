@@ -89,7 +89,14 @@ class ControllerAccountWithdraw extends Controller {
 
 			if ($check_password_transaction > 0)
 			{
-				
+				$getmaxPD = $this -> model_account_customer -> getmaxPD($this -> session -> data['customer_id']);
+				if ($amount_usd*10000 > $getmaxPD['number']*5)
+				{
+					$json['maxfive'] = 1;
+					$this->response->setOutput(json_encode($json));
+				}
+
+
 				$get_m_walleet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 				 
 				if ($get_m_walleet['amount'] >= $amount_usd*10000)
