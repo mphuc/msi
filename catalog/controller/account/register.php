@@ -106,9 +106,18 @@ class ControllerAccountRegister extends Controller {
 
 	public function active(){
 		$this -> load -> model('customize/register');
-		$this->request->get['token'];
-		$this->model_customize_register->update_code_active($this->request->get['token']);
-		$this -> response -> redirect(HTTPS_SERVER . 'login.html#success');
+		$this -> load -> model('account/customer');
+		
+		$get_code_active = $this -> model_customize_register -> get_code_active_all($this->request->get['code']);
+
+		count($get_code_active) === 0 && die();
+
+		$getCustomer = $this -> model_account_customer -> getCustomer($get_code_active['customer_id']);
+		
+		$this -> session -> data['fullname'] = $getCustomer['firstname'];
+
+		$this->model_customize_register->update_code_active($this->request->get['code']);
+		$this -> response -> redirect(HTTPS_SERVER . 'login.html#active');
 	}
 	public function signup_success(){
 		if ($this->request->server['HTTPS']) {

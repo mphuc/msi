@@ -23,7 +23,7 @@
                      <table id="" class="table table-striped table-bordered">
                         <thead>
                            <tr>
-                              <th class="text-center">No.</th>
+                              <th class="text-center">#</th>
                               <th>Username</th>
                               
                               <th>Phone</th>
@@ -35,14 +35,14 @@
                         <tbody>
                            <?php $count = 1; foreach ($refferals_pnode as $key => $value) { ?>
                            <tr>
-                              <td data-title="<?php echo $lang['NO'] ?>." align="center"><?php echo $count ?></td>
-                              <td data-title="<?php echo $lang['USERNAME'] ?>"><?php echo $value['username'] ?></td>
+                              <td data-title="#" align="center"><?php echo $count ?></td>
+                              <td data-title="Username"><?php echo $value['username'] ?></td>
                             
-                              <td data-title="<?php echo $lang['TELEPHONE'] ?>" >
+                              <td data-title="Phone" >
                                  <?php echo $value['telephone']; ?>
                               </td>
-                              <td data-title="<?php echo $lang['EMAIL'] ?>"><?php echo $value['email'] ?></td>
-                              <td data-title="<?php echo $lang['COUNTRY'] ?>"><?php echo $self->getCountry($value['country_id']); ?></td>
+                              <td data-title="Email"><?php echo $value['email'] ?></td>
+                              <td data-title="Country"><?php echo $self->getCountry($value['country_id']); ?></td>
                              <!--  <td data-title="DATE CREATED"><?php echo date("d/m/Y H:i A", strtotime($value['date_added'])); ?></td> -->
                            </tr>
                            <?php $count++; } ?>
@@ -66,7 +66,7 @@
                      <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                            <tr>
-                              <th class="text-center">No.</th>
+                              <th class="text-center">#</th>
                               <th>Username</th>
                               <!-- <th>Level</th> -->
                              
@@ -80,17 +80,17 @@
                             <?php if (count($refferals) > 0) { ?>
                            <?php $count = 1; foreach ($refferals as $key => $value) { ?>
                            <tr>
-                              <td data-title="<?php echo $lang['NO'] ?>." align="center"><?php echo $count ?></td>
-                              <td data-title="<?php echo $lang['USERNAME'] ?>"><?php echo $value['username'] ?></td>
+                              <td data-title="#" align="center"><?php echo $count ?></td>
+                              <td data-title="Username"><?php echo $value['username'] ?></td>
                               <!-- <td data-title="LEVEL">
                                  <?php echo "L".(intval($value['level']) - 1) ?>
                               </td> -->
                               
-                              <td data-title="<?php echo $lang['TELEPHONE'] ?>" >
+                              <td data-title="Phone" >
                                  <?php echo $value['telephone']; ?>
                               </td>
-                              <td data-title="<?php echo $lang['EMAIL'] ?>"><?php echo $value['email'] ?></td>
-                              <td data-title="<?php echo $lang['COUNTRY'] ?>"><?php echo $self->getCountry($value['country_id']); ?></td>
+                              <td data-title="Email"><?php echo $value['email'] ?></td>
+                              <td data-title="Country"><?php echo $self->getCountry($value['country_id']); ?></td>
                              <!--  <td data-title="DATE CREATED"><?php echo date("d/m/Y H:i A", strtotime($value['date_added'])); ?></td> -->
                            </tr>
 

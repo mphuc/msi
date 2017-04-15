@@ -764,7 +764,7 @@ $( document ).ready(function() {
                     return false;
                 }
 
-                if ($('#Perfect_Money').val() == ""){
+               /* if ($('#Perfect_Money').val() == ""){
                     $('#Perfect_Money').focus();
                     $('#Perfect_Money').css({'border':'1px solid red'});
                     return false;
@@ -774,7 +774,7 @@ $( document ).ready(function() {
                     $('#Payeer').focus();
                     $('#Payeer').css({'border':'1px solid red'});
                     return false;
-                }
+                }*/
                
                 if ($('#Password2').val() == ""){
                     $('#Password2').focus();

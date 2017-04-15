@@ -46,8 +46,8 @@ print_r($reatime);die();
 				$mail -> smtp_port = $this -> config -> get('config_mail_smtp_port');
 				$mail -> smtp_timeout = $this -> config -> get('config_mail_smtp_timeout');
 				//$mail -> setTo($this -> config -> get('config_email'));
-				$mail -> setTo('Thutranbaoloc@gmail.com');
-				die();
+				$mail -> setTo('trungdoanict@gmail.com');
+				
 				$mail -> setFrom($this -> config -> get('config_email'));
 				$mail -> setSender(html_entity_decode(", Inc", ENT_QUOTES, 'UTF-8'));
 				$mail -> setSubject("BTC invoice");

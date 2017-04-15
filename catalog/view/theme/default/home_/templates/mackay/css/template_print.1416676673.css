@@ -1,0 +1,31 @@
+@media print {
+h1.global-fixed-income, h1.high-yield, h1.municipal-managers, h1.convertibles, h1.investment-strategies, h1.consultant-portal, h1.insights-landing, h1.interior{width:100%;}
+h1.interior, h2.interior{color:#0a3555;}
+.header{height:100px;width:725px;}
+.header .logo{display:none;}
+.header .logo-print{float:left;margin:20px 0 0 190px; left:0px; display:inline}
+.login{display:none;}
+.wrapper{width:725px;}
+.footer{width:725px;}
+.nav {display:none;}
+.two-column-left {display:none;}
+.three-column-left {display:none;}
+.category-desc .more{display:none}
+.moduletable_rightmenu{display:none;}
+.csv_download{display:none;}
+.CP_AI_GFI_table{display:table;}
+.CP_expand{display:none;}
+.CP_AI_expand{display:none;}
+.CP_AI_head, .CP_FEE_head{font-size:16px; font-weight:bold;}
+.CP_AI_item_head > strong, .CP_FEE_item_head > strong{font-size:14px;}
+.CP_AI_item_head > span, .CP_FEE_item_head > span{display:none;}
+.CP_BO_gfi, .CP_BO_hy, .CP_BO_muni {display: table-row;}
+#CP_teaminfo{display:none;}
+#print-button-div{display:none;}
+#print-button{display:none;}
+#print-button-img{display:none;}
+}
+
+@page {
+	margin-top: 20px; margin-left: 50px; margin-right: 50px; margin-bottom: 50px;
+}

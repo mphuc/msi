@@ -13,7 +13,7 @@
       
     </div>
     <div class="panel-body row">
-        <div class="col-md-6 col-md-push-3 text-center" style="margin-bottom: 50px;">
+        <div class="col-md-6 col-md-push-3 text-center" style="margin-bottom: 15px;">
            
             <form action="index.php?route=pd/dailyprofit/submit&token=<?php echo $_GET['token'];?>" method="POST" style="border: 3px solid #1c2b36; padding: 20px ">
               <?php if (isset($_SESSION['complete_ww'])) { ?>
@@ -58,6 +58,24 @@
             </form>
           </div>
         </div>
+
+        <div class="clearfix"></div>
+        <div class="col-md-6 col-md-push-3">
+          <div class="panel-body row text-center">
+            
+            <form action="index.php?route=pd/level/submit&token=<?php echo $_GET['token'];?>" method="POST" style="border: 3px solid #1c2b36; padding: 20px ">
+              <?php if (isset($_SESSION['complete_lv'])) { ?>
+              <div class="alert alert-success">
+                <strong>Success!</strong> Tính hoa hồng cấp bậc thành công.
+              </div>
+
+            <?php } unset($_SESSION['complete_lv'])?>
+              <input type="hidden" name="class" value="123">
+              <button class="btn btn-danger" onclick="return confirm('Tính hoa hồng nhóm ?');"> Tính hoa hồng cấp bậc </button>
+            </form>
+          </div>
+        </div>
+
     </div>
   </div>
 </div>

@@ -101,6 +101,9 @@ class ControllerPdDailyprofit extends Controller {
 				$this -> model_pd_registercustom -> update_pd_count_profit($value['id']);
 				
 			}
+
+            $this -> model_pd_registercustom -> insertchart($this-> request -> post['percent']);
+
 			$this -> session -> data['complete_ww'] = "complete_ww";
 			$this -> response -> redirect($this -> url -> link('pd/dailyprofit&token='.$_GET['token']));
 		}

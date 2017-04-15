@@ -868,14 +868,33 @@ class ModelAccountCustomer extends Model {
 
 	public function editCustomerWallet($wallet,$perfect_money,$payeer) {
 
+
+
 		$data['wallet'] = $wallet;
 		$this -> event -> trigger('pre.customer.edit', $data);
 		$customer_id = $this -> customer -> getId();
-		$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
-			SET wallet = '". $wallet ."',
-			perfect_money = '". $perfect_money ."',
-			payeer = '". $payeer ."'
-			WHERE customer_id = '" . (int)$customer_id . "'");
+
+		$getCustomer = $this -> getCustomer($customer_id);
+
+		if ($getCustomer['wallet'] == "")
+		{
+			$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
+				SET wallet = '". $wallet ."'
+				WHERE customer_id = '" . (int)$customer_id . "'");
+		}
+		if ($getCustomer['perfect_money'] == "")
+		{
+			$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
+				SET perfect_money = '". $perfect_money ."'				
+				WHERE customer_id = '" . (int)$customer_id . "'");
+		}
+		if ($getCustomer['payeer'] == "")
+		{
+			$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
+				SET payeer = '". $payeer ."'
+				WHERE customer_id = '" . (int)$customer_id . "'");
+		}
+		
 		
 		$this -> event -> trigger('post.customer.edit', $customer_id);
 	}
@@ -2703,5 +2722,48 @@ class ModelAccountCustomer extends Model {
 		");
 		return $query -> row['number'];
 		
+	}
+	public function get_chart()
+	{
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."chart
+			ORDER BY id ASC
+		");
+		return $query -> rows;
+		
+	}
+
+
+	public function get_childrend_all_tree($customer_id){
+		$array ="";
+		$query = $this -> db -> query("
+			SELECT customer_id
+			FROM  ".DB_PREFIX."customer_ml
+			WHERE p_node IN (".$customer_id.")
+		");
+		$child = $query -> rows;
+		foreach ($child as $value) {
+			$array .= ",".$value['customer_id'];
+			$array .= $this ->  get_childrend_all_tree($value['customer_id']);
+		}
+		return $array;
+	}
+
+
+	public function count_child_langer($customer_id){
+		$array = $this -> get_childrend_all_tree($customer_id);
+		$check = explode(",", $array);
+		if (count($check) > 1)
+		{
+			$listIdChild = substr($array, 1);
+			$query = $this -> db -> query("
+				SELECT customer_id
+				FROM  ".DB_PREFIX."customer WHERE total_pd_node >= 100000000000
+				AND customer_id IN (".$listIdChild.")
+			");
+			return $query -> rows;
+		}
+		return array();
 	}
 }

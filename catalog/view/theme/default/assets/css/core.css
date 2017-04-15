@@ -1132,7 +1132,7 @@ pre {
     letter-spacing: .05em;
     line-height: 60px;
     text-transform: uppercase;
-    padding: 12px 20px;
+    padding: 12px 0;
 }
 .logo h1 {
     height: 50px;
@@ -2126,13 +2126,13 @@ body.fixed-left-void .side-menu.left{ position: fixed;}
     display: inline-block;
     background-repeat: no-repeat;
     position: relative;
-    top: 19px;
-    left: 20px;
+    top: 15px;
+    left: 0px;
     box-sizing: CONTENT-BOX;
-    padding-bottom: 11px;
+   
 }
-.widescreen.fixed-left .logo{ background: url(../images/logo.png) no-repeat; width: 118px;}
-.mobile.smallscreen .logo ,.widescreen.fixed-left-void .logo{background: url(../images/m-logo.png) no-repeat; width:31px; }
+.widescreen.fixed-left .logo{ }
+.mobile.smallscreen .logo ,.widescreen.fixed-left-void .logo{ }
 .mobile.smallscreen .logo{top: 15px;}
 
 

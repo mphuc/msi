@@ -76,6 +76,7 @@
                                  <div class="tab-content row" style="">
                                     <div role="tabpanel" class="tab-pane fade active in" id="tab21">
                                       <h3 class="text-center">Deposit History</h3>
+                                      <div id="no-more-tables">
                                        <table id="datatable" class="no_payment table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                                           <thead>
                                              <tr>
@@ -142,6 +143,7 @@
                                                <?php } ?>
                                           </tbody>
                                        </table>
+                                       </div>
                                        <div class="text-center">
                                         <?php echo $pagination ?>
                                       </div>

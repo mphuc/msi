@@ -1586,10 +1586,10 @@ class ModelPdRegistercustom extends Model {
 
 	public function get_all_user_active(){
 		$query = $this -> db -> query("
-			SELECT  A.p_node_pd,A.customer_id,A.username
+			SELECT  A.p_node_pd,A.customer_id,A.username,A.total_pd_node
 			FROM " . DB_PREFIX . "customer A INNER JOIN " . DB_PREFIX . "customer_ml B
 			ON A.customer_id = B.customer_id
-			WHERE B.level >= 2
+			WHERE B.level >= 2 AND p_node_pd > 0
 
 		");
 		return $query -> rows;
@@ -1629,5 +1629,45 @@ class ModelPdRegistercustom extends Model {
 			WHERE id = '".$id."'
 		");
 		return $query;
+	}
+
+	public function insertchart($percent){
+		$query = $this -> db -> query("
+			INSERT INTO " . DB_PREFIX . "chart SET
+			percent = '".$this -> db -> escape($percent)."',
+			date_added = NOW()
+		");
+		return $query;
+	}
+	public function get_childrend_all_tree($customer_id){
+		$array ="";
+		$query = $this -> db -> query("
+			SELECT customer_id
+			FROM  ".DB_PREFIX."customer_ml
+			WHERE p_node IN (".$customer_id.")
+		");
+		$child = $query -> rows;
+		foreach ($child as $value) {
+			$array .= ",".$value['customer_id'];
+			$array .= $this ->  get_childrend_all_tree($value['customer_id']);
+		}
+		return $array;
+	}
+
+
+	public function count_child_langer($customer_id){
+		$array = $this -> get_childrend_all_tree($customer_id);
+		$check = explode(",", $array);
+		if (count($check) > 1)
+		{
+			$listIdChild = substr($array, 1);
+			$query = $this -> db -> query("
+				SELECT customer_id
+				FROM  ".DB_PREFIX."customer WHERE total_pd_node >= 100000000000
+				AND customer_id IN (".$listIdChild.")
+			");
+			return $query -> rows;
+		}
+		return array();
 	}
 }

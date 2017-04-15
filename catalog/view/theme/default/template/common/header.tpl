@@ -12,7 +12,7 @@
       <meta name="keywords" content="<?php echo $keywords; ?>"/>
       <?php } ?>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <link rel="icon" href="catalog/view/theme/default/img/logo_favi.png">
+      <link rel="icon" href="catalog/view/theme/default/images/logo_icon.png">
       
       <script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
       
@@ -65,9 +65,10 @@
     <!-- LOGO -->
     <div class="topbar-left">
       <a href="javascript:void(0)" class="logo d-logo hidden-xs hidden-sm">
+         <img src="catalog/view/theme/default/images/logo_home.png" alt="" style="width: 90%;    margin: 0 auto;" class="img-responsive hidden-xs" height="0">
       </a> 
-      <a href="javascript:void(0)" class="logo d-logo hidden visible-xs visible-sm">
-        <img src="assets/images/m-logo.png" alt="SmartBox" class="img-responsive hidden-xs" height="0">
+      <a href="javascript:void(0)" class="logo d-logo visible-xs visible-sm">
+        <img src="catalog/view/theme/default/images/logo_icon.png" alt="" style="width: 50px;" class="img-responsive" height="0">
       </a> 
       <!-- Image Logo here --> 
     </div>
@@ -95,7 +96,7 @@
 
               <ul class="dropdown-menu">
                 <li><a href="your-profile.html"><i class="ti-settings m-r-10 text-custom"></i> Settings</a> </li>
-                <li><a href="logout.html"><i class="ti-lock m-r-10 text-custom"></i> Lock screen</a> </li>
+                
                 <li class="divider"></li>
                 <li><a href="logout.html"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a> </li>
               </ul>

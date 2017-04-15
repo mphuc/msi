@@ -93,7 +93,7 @@ $(function(){
         htmlxx += '<table class="table table-bordered"><tbody><tr><td>';
         htmlxx += '<h4 class="text-center" style="text-transform:uppercase; color: #000;">ID Send</4>';
         htmlxx += '</td><td><h4 class="text-center" style="text-transform:uppercase; color: #000;">ID Receive</4></td></tr>';
-        htmlxx += '<tr><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_send+'" /></td><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_re+'" /></td></tr>';
+        //htmlxx += '<tr><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_send+'" /></td><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_re+'" /></td></tr>';
         htmlxx += '<tr><td>ID: <b>'+data.username_send+'</br></td><td>ID: <b>'+data.username_re+'</br></td></tr>';
         htmlxx += '<tr><td>Full Name: <b>'+data.firstname_send+'</br></td><td>Full Name: <b>'+data.firstname_re+'</br></td></tr>';
         htmlxx += '<tr><td>Telephone: <b>'+data.telephone_send+'</br></td><td>Telephone: <b>'+data.telephone_re+'</br></td></tr>';

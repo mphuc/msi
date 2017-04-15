@@ -1,7 +1,7 @@
 </div>
 <footer class="footer text-right" style="margin-top: 20px;"> © 2017. All rights reserved. </footer>
 <div class="page-loader">
-	<a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
+	<a href="#"><img style="width: 350px;" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
 	<span class="text-uppercase">Loading...</span>
 </div>
 

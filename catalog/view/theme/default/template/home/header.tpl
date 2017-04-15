@@ -7,10 +7,11 @@
             <base  />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Fixed Income, MacKay Shields, MackayShields, investment management, income solutions, investment solutions, investment strategies, high yield, municipal managers, convertibles, emerging markets, high yield, Fixed income strategies, asset management, investment solutions, investment strategies, municipal managers, portfolio managers, family office portfolio managers, endowment portfolio managers, emerging markets, high yield, convertibles, MacKay Shields, MackayShields" />
+    <link rel="icon" href="catalog/view/theme/default/images/logo_icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Design Martians" />
     <meta name="generator" content="Joomla! - Open Source Content Management" />
-    <title> | MacKay Shields</title>
+    <title> Home | MacKay Shields Life</title>
     <link href="catalog/view/theme/default/home/plugins/system/jcemediabox/css/jcemediaboxfc54.css?version=116" rel="stylesheet" type="text/css" />
     <link href="catalog/view/theme/default/home/plugins/system/jcemediabox/themes/squeeze/css/stylefc54.css?version=116" rel="stylesheet" type="text/css" />
     <script src="catalog/view/theme/default/home/media/jui/js/jquery.min.js" type="text/javascript"></script>
@@ -40,8 +41,8 @@
     <div class="wrapper invest ">
        <div class="header">
           <div class="cf top">
-             <div class='logo'><a href='index.html'><img src='catalog/view/theme/default/home/templates/mackay/images/logo.1362404818.png' alt='MacKay Shields' /></a></div>
-             <div class='logo-print'><img src='catalog/view/theme/default/home/templates/mackay/images/logo-grey-350x76.1387754273.png' /></div>
+             <div class='logo'><a href='index.html'><img style="width: 300px; margin-top: -30px;" src='catalog/view/theme/default/images/logo.png' alt='MacKay Shields' /></a></div>
+             <div class='logo-print'><img src='catalog/view/theme/default/images/logo.png' /></div>
              <div class="login">
              </div>
           </div>

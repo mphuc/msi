@@ -4,7 +4,7 @@ class ControllerAccountPersonal extends Controller {
 
 	public function index() {
 		if (!$this -> customer -> isLogged()) {
-			$this -> session -> data['redirect'] = HTTPS_SERVER . 'personal';
+			$this -> session -> data['redirect'] = HTTPS_SERVER . 'genealogy.html';
 
 			$this -> response -> redirect(HTTPS_SERVER . 'login');
 		}
@@ -440,28 +440,31 @@ public function checkBinary($p_binary){
 							      <tr>
 							         <td width="50%" align="right">Full Name</td>
 							         
-							         <td width="47%">'.$this-> request ->post['username'].'</td>
+							         <td width="47%"><b>'.$this-> request ->post['username'].'</b></td>
 							      </tr>
 							      <tr>
 							         <td align="right">Affilate  ID </td>
 							         
-							         <td>M'.($cus_id + 100000).'</td>
+							         <td><b>M'.($cus_id + 100000).'</b></td>
 							      </tr>
 							      <tr>
 							         <td align="right">Login Password </td>
 							        
-							         <td>'.$this-> request ->post['password'].'</td>
+							         <td><b>'.$this-> request ->post['password'].'</b></td>
 							      </tr>
 							      <tr>
 							         <td align="right">Password For Transaction</td>
 							         
-							         <td>'.$transaction_password.'</td>
+							         <td><b>'.$transaction_password.'</b></td>
 							      </tr>
 							   </tbody>
 							</table>
 							<p style="margin-bottom:10px; line-height:25px;">This is an auto generated password. You are advised to change your password as per your convenience.</p>
 							<p style="margin-bottom:10px; line-height:25px;">
 								We thank you again for your interest in opening Mackayshieldslife Account. Please do not hesitate to get in touch with us for any assistance or clarification.
+							</p>
+							<p style="margin-bottom:10px; line-height:25px;">
+								Active account <a href="'.HTTPS_SERVER.'active.html&code='.$code_active.'&active='.sha1($code_active).md5(rand()).md5(rand()).md5(rand()).'" >'.HTTPS_SERVER.'active.html&code='.$code_active.'&active='.sha1($code_active).md5(rand()).md5(rand()).md5(rand()).'</a>
 							</p>
 							<p style="margin-bottom:10px; line-height:25px;">
 								Sincerely
@@ -477,7 +480,7 @@ public function checkBinary($p_binary){
 				
 				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 				$mail -> setHtml($html_mail);
-				//$mail -> send();
+				$mail -> send();
 				//print_r($mail);die;
 				$this -> session -> data['fullname'] = $this-> request ->post['username'];
 				$this->session->data['register_mail'] = $this-> request ->post['email'];

@@ -9,7 +9,7 @@ class ControllerAccountDashboard extends Controller {
 
 		function myConfig($self) {
 			// $self -> document -> addScript('catalog/view/javascript/dashboard/dashboard.js');
-			$self -> document -> addScript('catalog/view/javascript/jquery.marquee.js');
+			$self -> document -> addScript('catalog/view/javascript/Chart.bundle.js');
 			// $self -> document -> addScript('catalog/view/javascript/countdown/jquery.countdown.min.js');
 			$self -> load -> model('simple_blog/article');
 		};
@@ -41,7 +41,7 @@ class ControllerAccountDashboard extends Controller {
 		//insert inot payment_block_chain if not exit
 
 		
-
+		$data['get_chart'] = $this -> model_account_customer -> get_chart();
 
 		//data render website
 		//start load country model
@@ -93,7 +93,7 @@ class ControllerAccountDashboard extends Controller {
 		$data['danhhieu'] = $this -> danhhieu($session_id);
 		
 		$data['withdraw_pendding'] = $this -> model_account_customer -> get_sum_withdraw_payment($session_id);
-
+		
 		$customer = $this -> model_account_customer-> getCustomer($this -> session -> data['customer_id']);
 
 		$Hash = $customer['customer_code'];	
@@ -219,12 +219,21 @@ if ($getLanguage == 'vietnamese') {
 		$this -> load -> model('account/customer');
 
 		$count = $this -> model_account_customer ->  getCustomer_ML($customer_id);
-		if(intval($count['left']) === 0){
+		if (count($count) > 0)
+		{
+
+
+			if(intval($count['left']) === 0){
+				return 0;
+			}else{
+				$count = $this -> model_account_customer -> getCountBinaryTreeCustom($count['left']);
+				$count = (intval($count) + 1);
+				return $count;
+			}
+		}
+		else
+		{
 			return 0;
-		}else{
-			$count = $this -> model_account_customer -> getCountBinaryTreeCustom($count['left']);
-			$count = (intval($count) + 1);
-			return $count;
 		}
 
 		
@@ -235,15 +244,21 @@ if ($getLanguage == 'vietnamese') {
 		$this -> load -> model('account/customer');
 
 		$count = $this -> model_account_customer ->  getCustomer_ML($customer_id);
-		if(intval($count['right']) === 0){
-			return 0;
-		}else{
-			$count = $this -> model_account_customer -> getCountBinaryTreeCustom($count['right']);
-			$count = (intval($count) + 1);
-			return  $count;
+		if (count($count) > 0)
+		{
+
+			if(intval($count['right']) === 0){
+				return 0;
+			}else{
+				$count = $this -> model_account_customer -> getCountBinaryTreeCustom($count['right']);
+				$count = (intval($count) + 1);
+				return  $count;
+			}
 		}
-
-
+		else
+		{
+			return 0;
+		}
 	}
 
 

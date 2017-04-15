@@ -13,8 +13,7 @@
 <title>Create New User | Mackayshieldslife.com </title>
 
 <!-- FAVICON -->
-<link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
-
+<link rel="icon" href="catalog/view/theme/default/images/logo_icon.png">
 
 <link rel="stylesheet" href="catalog/view/theme/default/assets/plugins/morris/morris.css">
 <link rel="stylesheet" href="catalog/view/theme/default/assets/css/bootstrap.css" type="text/css" />
@@ -48,7 +47,7 @@
          <?php 
             $token = explode("_", $self -> request -> get['id']);
             if(intval($self -> checkBinaryLeft($token[0], $token[1])) === 1) { ?>
-            <a href="#" ><img style="margin-bottom: 20px;width: 100px" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
+            <a href="#" ><img style="margin-bottom: 20px;width: 300px" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
 
             <div class="form-group">
                <div class="textbox-login">
@@ -119,7 +118,7 @@
                <div class="remember-text-login text-left">
                   <span class="checkbox-custom checkbox-primary">
                   <input id="agreeTerm" type="checkbox" value="true" style="width: 20px; float: left;padding: 0px;margin-top: -14px; margin-right: 10px;">
-                  <label for="requiredCheckbox" class="text-left">I agree to the <a href="javascript:void(0)">Terms and Conditions</a></label>
+                  <label for="requiredCheckbox" class="text-left">I agree to the <a href="terms.html">Terms and Conditions</a></label>
                   </span>
                </div>
             </div>

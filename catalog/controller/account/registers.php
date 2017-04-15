@@ -172,6 +172,10 @@ class ControllerAccountRegisters extends Controller {
 							We thank you again for your interest in opening Mackayshieldslife Account. Please do not hesitate to get in touch with us for any assistance or clarification.
 						</p>
 						<p style="margin-bottom:10px; line-height:25px;">
+							Active account <a href="'.HTTPS_SERVER.'active.html&code='.$code_active.'&active='.sha1($code_active).md5(rand()).md5(rand()).md5(rand()).'" >'.HTTPS_SERVER.'active.html&code='.$code_active.'&active='.sha1($code_active).md5(rand()).md5(rand()).md5(rand()).'</a>
+						</p>
+						
+						<p style="margin-bottom:10px; line-height:25px;">
 							Sincerely
 						</p>
 						<p style="margin-bottom:10px; line-height:25px;">
@@ -188,7 +192,7 @@ class ControllerAccountRegisters extends Controller {
 			$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 			$mail -> setHtml($html_mail);
 			
-			//$mail -> send();
+			$mail -> send();
 
 			
 			

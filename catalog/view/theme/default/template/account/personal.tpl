@@ -27,9 +27,9 @@
                       <ul class="list-unstyled" style="float: left;">
                         <li style="margin-bottom:15px;">
                           <a class="" href="javascript:void(0)" onclick='click_node(
-                          <?php echo intval($idCustomer); ?>)'> <span class="btn btn-default" style="font-weight:700"><?php echo $lang['top'] ?></span> </a>
+                          <?php echo intval($idCustomer); ?>)'> <span class="btn btn-info btn-md" style="font-weight:700"><?php echo $lang['top'] ?></span> </a>
                         
-                          <a class="" href="javascript:void(0)" onclick='click_back()'> <span class="btn btn-default" style="font-weight:700">Back</span> </a>
+                          <a class="" href="javascript:void(0)" onclick='click_back()'> <span class="btn btn-info btn-md" style="font-weight:700">Back</span> </a>
                         </li>
                         
                       </ul>
@@ -37,13 +37,13 @@
                          <ul id="suggesstion-box" class="list-group" style="position: absolute;width: 200px;"></ul>
                          <form method="GET" id="frmAccount" action="<?php echo $self->url->link('account/personal/searchBinary', '', 'SSL'); ?>">
 
-                            <input type="text"  autocomplete="off" name="account" id="account" placeholder="Username" required style=" height: 35px; padding: 5px; border-radius: 3px; border: 1px solid #d0dee2; ">
-                            <button style="margin-top: -5px;" type="submit" id="btnAccount" class="btn btn-default">Search</button>
+                            <input type="text"  autocomplete="off" name="account"  id="account" placeholder="Username" required style=" height: 38px; padding: 5px; border-radius: 3px; border: 1px solid #d0dee2; ">
+                            <button style="margin-top: -5px;" type="submit" id="btnAccount" class="btn btn-info btn-md">Search</button>
                          </form>
                       </div>
                       <?php if (intval($user) > 0) {  ?>
   
-                        <u style="margin-left: 30px">New User:</u> <a href="user.html" class="btn btn-danger">View Detail</a>
+                        <u style="margin-left: 30px">New User:</u> <a style="margin-left: 20px;" href="user.html" class="btn btn-danger">View Detail</a>
                         
                     <?php } ?>
                      <div class="clearfix"></div>
@@ -126,7 +126,7 @@ jQuery.fn.show_tree = function(node) {
     x_p = "<div class='customer_toolip'><p class='h4'>"+node.firstname+"</p>";
     x_p += "<p class='h3'>"+node.username+"</p>";
     x_p += "<table class='table table-bordered'><tbody><tr>";
-    x_p += "<td colspan='2'> <div align='center'> <img src='"+node.img_profile+"' width='20' height='20'></div> </td></tr>";
+    x_p += "<td colspan='2'> <div align='center'> <img src='"+node.img_profile+"' height='20'></div> </td></tr>";
     x_p += "<tr><td> <div align='center'>Sponsor</div> </td> <td> <div align='center'>"+node.sponsor+"</div> </td></tr>";
     x_p += "<tr><td> <div align='center'>Date</div> </td> <td> <div align='center'>"+node.date_added+"</div> </td></tr>";
     x_p += "<tr><td> <div align='center'>Total Package</div> </td> <td> <div align='center'>"+node.totalPD+" USD</div> </td></tr>";

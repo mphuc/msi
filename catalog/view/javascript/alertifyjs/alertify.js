@@ -45,7 +45,7 @@
             position:'bottom-right'
         },
         glossary:{
-            title:'<img src="catalog/view/theme/default/img/logo.png" alt="logo" style=" width:150px;">',
+            title:'<img src="catalog/view/theme/default/img/logo.png" alt="logo" style=" width:300px;">',
             ok: 'OK',
             cancel: 'Cancel',
             acccpt: 'Accept',
@@ -353,7 +353,7 @@
                 content: '<div class="ajs-content"></div>',
                 footer: '<div class="ajs-footer"></div>',
                 buttons: { primary: '<div class="ajs-primary ajs-buttons"></div>', auxiliary: '<div class="ajs-auxiliary ajs-buttons"></div>' },
-                button: '<button class="btn btn-default ajs-btn"></button>',
+                button: '<button class="btn btn-success btn-md"></button>',
                 resizeHandle: '<div class="ajs-handle"></div>',
             },
             //common class names

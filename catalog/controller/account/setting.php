@@ -42,7 +42,7 @@ class ControllerAccountSetting extends Controller {
 
 		$ga = new PHPGangsta_GoogleAuthenticator();
 		$data['secret'] = $get_customer_setting['key_authenticator'];
-		$data['qrCodeUrl'] = $ga->getQRCodeGoogleUrl('odoo', $data['secret']);
+		$data['qrCodeUrl'] = $ga->getQRCodeGoogleUrl($data['customer']['username'].' - mackayshieldslife.com', $data['secret']);
 		//$oneCode = $ga->getCode($secret);
 
 		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/account/setting.tpl')) {
@@ -303,12 +303,17 @@ class ControllerAccountSetting extends Controller {
 			{
 				$getCustomer = $this -> model_account_customer -> getCustomer($this -> session -> data['customer_id']);
 
-				if ($getCustomer['wallet'] == "" || $getCustomer['perfect_money'] == "" || $getCustomer['payeer'] == "")
+				if ($getCustomer['payeer'] == "" && $getCustomer['perfect_money'] == "" && $getCustomer['wallet'] == "")
 				{
-					$this -> model_account_customer -> editCustomerWallet($this -> request -> post['wallet'],$this -> request -> post['perfect_money'],$this -> request -> post['payeer']);
 
 					$this -> xml($this -> session -> data['customer_id'],$getCustomer['username'],$this -> request -> post['wallet'],$this -> request -> post['perfect_money'],$this -> request -> post['payeer']);
 				}
+				else
+				{
+					//$this -> update_xml($this -> session -> data['customer_id'],$this -> request -> post['wallet'],$this -> request -> post['perfect_money'],$this -> request -> post['payeer']);
+				}
+
+				$this -> model_account_customer -> editCustomerWallet($this -> request -> post['wallet'],$this -> request -> post['perfect_money'],$this -> request -> post['payeer']);
 
 				
 			}	
@@ -316,11 +321,42 @@ class ControllerAccountSetting extends Controller {
 		}
 	}
 
-	public function xml($customer_id, $username, $wallet,$perfectmoney,$payeersss){
+	public function update_xml($customer_id, $wallet,$perfectmoney,$payeersss)
+	{
+		
+		$file = "qwrwqrgqUQadVbaWErqwre.xml";
 
+		$xml=simplexml_load_file($file);
+		$i = -1;
+		foreach ($xml->customer as $value) {
+			$i = $i + 1;
+			if  ($value->customer_id == $customer_id)
+			{
+				$getCustomer = $this -> model_account_customer -> getCustomer($customer_id);
+				if ($getCustomer['wallet'] == "" && $wallet)
+				{
+					$value ->wallet[$i] = $wallet;
+				}
+				if ($getCustomer['perfect_money'] == "" && $perfectmoney)
+				{
+					$value ->perfect_money[$i] = $perfectmoney;
+				}
+				if ($getCustomer['payeer'] == "" && $payeersss)
+				{
+					$value ->payeer[$i] = $payeersss;
+				}
+			}
+		}
+
+		file_put_contents("qwrwqrgqUQadVbaWErqwre.xml", $xml -> saveXML());
+
+	}
+
+	public function xml($customer_id, $username, $wallet,$perfectmoney,$payeersss){
+		
 	   	$doc = new DOMDocument('1.0');
-$doc->preserveWhiteSpace = false;
-$doc->formatOutput = true;
+		$doc->preserveWhiteSpace = false;
+		$doc->formatOutput = true;
 	   	$doc->load( 'qwrwqrgqUQadVbaWErqwre.xml' );
 	   	$root = $doc->getElementsByTagName('wallet_payment')->item(0);
 

@@ -91,18 +91,19 @@ $(function(){
 	        	}
                 if (result.complete == 1){
                     
-                    var html='<div class="col-md-12 text-center"><img style="margin-left:-10px" src="https://chart.googleapis.com/chart?chs=225x225&chld=L|0&cht=qr&chl=bitcoin:'+result.my_address+'?amount='+result.ip_btc+'"/></div>';
+                    /*var html='<div class="col-md-12 text-center"><img style="margin-left:-10px" src="https://chart.googleapis.com/chart?chs=225x225&chld=L|0&cht=qr&chl=bitcoin:'+result.my_address+'?amount='+result.ip_btc+'"/></div>';
 		        	html +='<p>Please send '+result.ip_btc+' BTC to wallets <br/> '+result.my_address+' <br/> to buy '+numberWithCommas(result.ip_usd)+' USD</p>';
 		        	
+		        	$('#sucess_point_submit').show();
 		        	$('#sucess_point_submit').html(html);
-		        	check_payment(result.invoice_id);
-		        	$('#ip_usd').val('');
+
+		        	check_payment(result.invoice_id);*/
+		        	/*$('#ip_usd').val('');
 		        	$('#ip_btc').val('');
 		        	$('#password_transaction').val('');
-		        	window.funLazyLoad.reset();
-                }
-
-               
+		        	window.funLazyLoad.reset();*/
+		        	window.location.href = 'confirm_deposit.html?invoid_id='+result.url; 
+                } 
             }
         });
         return false;
@@ -237,9 +238,10 @@ $(function(){
                
             }
         });
+
+
+
         return false;
-		
-		
 	});
 
 });
@@ -247,7 +249,7 @@ function show_payment(id){
 	window.funLazyLoad.start();
     window.funLazyLoad.show();
 	$('html, body').animate({
-        scrollTop: $("#sucess_point_submit").offset().top
+        scrollTop: $("#sucess_point_submit").offset().top - 200
     }, 400);
 	$('#sucess_point_submit').show();
 	$('#sucess_point_submit').html('<img  style="width:100px; margin-top:30px;" src="catalog/view/theme/default/images/loading-gallery.gif" />');
@@ -322,4 +324,29 @@ function numberWithCommas(x) {
     while (pattern.test(x))
         x = x.replace(pattern, "$1,$2");
     return x;
+}
+
+function checkPayment(invoid_id) {
+	$.ajax({
+		 type: "GET",
+		 url: 'getreceivedbyaddress.html',
+		 data: {
+		     'invoid_id': invoid_id
+		 },
+		 success: function(result) {
+		     result = JSON.parse(result);
+		    
+		     if (result.complete == -1) {
+
+		         setTimeout(function(){ checkPayment(invoid_id); }, 5000);
+		       
+		     } 
+		     else 
+		     {
+		         $('.coin_yes').show();
+		         $('.coin_no').hide();
+		         $('#message_no').html('This invoice has been paid!');
+		     }
+		 }
+	});
 }

@@ -1,4 +1,13 @@
 <?php echo $header; ?>
+<style type="text/css">
+  body{
+    background: #2B3334;
+    margin-top: -80px;
+  }
+</style>
+<div class="text-center">
+<img src="view/images/logo.png" style="margin:0 auto; width: 350px; margin-top: 20px;" />
+</div>
 <div id="content" class="common-login">
   <div class="container-fluid"><br />
     <br />
@@ -10,7 +19,7 @@
             <div class="panel panel-color panel-primary" style="background:#fff !important; border:1px solid #cecece;">
             <div class="heade-login text-center">
               <a href="">
-                 Smart financial connections
+                 Adminsitrator
                </a>
             </div>
             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">

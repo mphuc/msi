@@ -209,7 +209,7 @@
                                               </div>
                                            </div>
                                             
-                                           <?php if ($customer['payeer'] == "" || $customer['perfect_money'] == "" || $customer['wallet'] == "") { ?>
+                                           <?php if ($customer['payeer']  != "" && $customer['perfect_money'] != "" && $customer['wallet'] != "") { } else { ?>
 
                                            <div class="form-group">
                                               <label class="col-md-4" for="transaction_password"><?php echo $lang['transaction_pasword'] ?></label>
@@ -342,7 +342,7 @@
 
                                 
 
-                                <div class="row setup-content" id="step-5">
+                                <div class="setup-content" id="step-5">
                                   <div class="col-xs-12">
                                     <div class="col-md-12">
                                       <h3 class="text-center">Security</h3>

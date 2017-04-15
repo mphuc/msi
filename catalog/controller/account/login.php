@@ -97,7 +97,7 @@ class ControllerAccountLogin extends Controller {
 			);
 
 			$browserss = $this -> getBrowser();
-			$browserss = $browserss['name']." ".$browserss['version']." - ".$browserss['platform']." ".gethostname();
+			$browserss = $browserss['name']." ".round($browserss['version'],2)." - ".$browserss['platform']." ".gethostname();
 
 			$this->model_account_activity->addActivity('login', $activity_data,$browserss);
 			// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
@@ -327,6 +327,53 @@ class ControllerAccountLogin extends Controller {
 		}
 		
 
+		/*cap cha google*/
+
+		$api_url     = 'https://www.google.com/recaptcha/api/siteverify';
+		$site_key    = '6LfjEh0UAAAAAFxYgDNTBcz7NlUTgPHTvJSgPNJJ';
+		$secret_key  = '6LfjEh0UAAAAAF7ExX33W5OKkGtaRf2om4vbCWmt';
+		if (!$_POST['g-recaptcha-response']) 
+		{
+		   //$this->error['warning'] = "Warning: No match for Capcha";
+		} 
+		else
+		{
+		   	$site_key_post    = $_POST['g-recaptcha-response'];
+		   if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
+		   	{
+		        $remoteip = $_SERVER['HTTP_CLIENT_IP'];
+		   	} 
+		   	elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) 
+		   	{
+		        $remoteip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		   	} 
+		   	else 
+		   	{
+		        $remoteip = $_SERVER['REMOTE_ADDR'];
+		    }
+
+		    $api_url = $api_url.'?secret='.$secret_key.'&response='.$site_key_post.'&remoteip='.$remoteip;
+		    $response = file_get_contents($api_url);
+		    $response = json_decode($response);
+		    if(!isset($response->success))
+		    {
+		        $json['captcha'] = -1;
+		    }
+		    if($response->success == true)
+		    {
+		        $json['captcha'] = 1;
+		    }
+		    else
+		    {
+		        $json['captcha'] = -1;
+		    }
+		    if (intval($json['captcha']) === -1) 
+		    {
+		       	//$this->error['warning'] = "Warning: No match for Capcha";
+		   	}
+		}
+
+
 
 		if (!$this->error) {
 			if (call_user_func_array("myHasLogin", array($this->request->post['email'], $this->request->post['password'], $this->customer))) {
@@ -340,6 +387,8 @@ class ControllerAccountLogin extends Controller {
 
 		return !$this->error;
 	}
+
+
 
 
 	public function send_mail_login()

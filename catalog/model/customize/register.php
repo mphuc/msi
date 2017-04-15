@@ -358,7 +358,7 @@ public function addCustomer_auto($data){
 		$query = $this -> db -> query("INSERT INTO " . DB_PREFIX . "customer_code_active SET 
 			customer_id = '" . (int)$customer_id . "',
 			code_active = '".$code."',
-			status = 1
+			status = 0
 			
 			");
 		return $query;
@@ -378,6 +378,13 @@ public function addCustomer_auto($data){
 		$query = $this -> db -> query("SELECT COUNT(*) as number FROM " . DB_PREFIX . "customer_code_active  WHERE status = 1 AND customer_id = '" . (int)$customer_id . "'");
 		return $query -> row;
 	}
+
+	public function get_code_active_all($code_active){
+		
+		$query = $this -> db -> query("SELECT * FROM " . DB_PREFIX . "customer_code_active  WHERE code_active = '" .$code_active . "'");
+		return $query -> row;
+	}
+
 	public function get_id_by_username($username) {
 		$query = $this -> db -> query("SELECT customer_id FROM " . DB_PREFIX . "customer  WHERE username = '" . $username . "'");
 		return $query -> row['customer_id'];

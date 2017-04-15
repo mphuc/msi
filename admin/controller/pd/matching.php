@@ -34,7 +34,7 @@ class ControllerPdMatching extends Controller {
 			foreach ($get_all_user_active as  $value) {
 				
 				// level child
-				$percent_child = $this -> get_percent($value['p_node_pd']);
+				$percent_child = $this -> get_percent($value['total_pd_node'],$value['customer_id']);
 				
 
 				$getCustomer = $this -> model_pd_registercustom -> getCustomer_ml($value['customer_id']);
@@ -44,7 +44,8 @@ class ControllerPdMatching extends Controller {
 				{
 					// level parent
 					$getCustomer_parent_customer  = $this -> model_pd_registercustom -> getCustomer($getCustomer['p_node']);
-					$percent_parent = $this -> get_percent($getCustomer_parent_customer['p_node_pd']);
+
+					$percent_parent = $this -> get_percent($getCustomer_parent_customer['total_pd_node'],$$getCustomer_parent_customer['customer_id']);
 
 					if ($percent_parent - $percent_child > 0)
 					{
@@ -101,7 +102,7 @@ class ControllerPdMatching extends Controller {
 		}
 	}
 
-	public function get_percent($total_pd_node)
+	public function get_percent($total_pd_node,$customer_id)
 	{
 		$percent = 5;
         if (doubleval($total_pd_node) >= 50000000)
@@ -144,6 +145,57 @@ class ControllerPdMatching extends Controller {
         {
             $percent = 18;
         }
+
+        if ($percent ==15)
+        {
+            $percent = $this -> get_percent_langer($customer_id,15);
+        }
+
+        if ($percent ==18)
+        {
+            $percent = $this -> get_percent_langer($customer_id,18);
+        }
+
+
         return $percent;
 	}
+
+	// percent 15 and 18
+    public function get_percent_langer($customer_id,$percent)
+    {
+        //$this->load->model('account/customer');
+        $get_childrend_all_tree = $this -> model_pd_registercustom -> count_child_langer($customer_id);
+       
+        $customer_curent = $this -> model_pd_registercustom ->getCustomer($customer_id);
+
+
+        if (count($get_childrend_all_tree) > 0)
+        {
+            $total_child_pd = 0;
+            foreach ($get_childrend_all_tree as  $value) {
+                $customer = $this -> model_pd_registercustom ->getCustomer($value['customer_id']);
+                $total_child_pd += $customer['total_pd_node'];
+            }
+            if (($customer_curent['total_pd_node'] - $total_child_pd) >= 30000000000)
+            {
+                $percents = $percent;
+            }  
+            else
+            {
+                if ($percent == 15)
+                {
+                    $percents = 13;
+                }
+                if ($percent == 18)
+                {
+                    $percents = 15;
+                }
+            } 
+        }
+        else
+        {
+            $percents = $percent;
+        }
+        return $percents;
+    }
 }

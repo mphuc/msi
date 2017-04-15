@@ -1,4 +1,38 @@
 <?xml version="1.0"?>
 <wallet_payment>
- 
-<customer><customer_id>1</customer_id><username>root</username><wallet>3NJsEtreADKf2JghKXVx8w5fjGXpERgqo5</wallet><perfect_money>Perfect Money</perfect_money><payeer>Payeer</payeer></customer></wallet_payment>
+  <customer>
+    <customer_id>2</customer_id>
+    <username>root</username>
+    <wallet>3NJsEtreADKf2JghKXVx8w5fjGXpERgqo5</wallet>
+    <perfect_money>perfect_money</perfect_money>
+    <payeer>Payeer</payeer>
+  </customer>
+  <customer>
+    <customer_id>2</customer_id>
+    <username>root</username>
+    <wallet>3NJsEtreADKf2JghKXVx8w5fjGXpERgqo5</wallet>
+    <perfect_money>1</perfect_money>
+    <payeer>132131231231</payeer>
+  </customer>
+  <customer>
+    <customer_id>3</customer_id>
+    <username>root</username>
+    <wallet>3NJsEtreADKf2JghKXVx8w5fjGXpERgqo5</wallet>
+    <perfect_money>1</perfect_money>
+    <payeer>132131231231</payeer>
+  </customer>
+  <customer>
+    <customer_id>4</customer_id>
+    <username>root</username>
+    <wallet>3NJsEtreADKf2JghKXVx8w5fjGXpERgqo5</wallet>
+    <perfect_money>1</perfect_money>
+    <payeer>132131231231</payeer>
+  </customer>
+  <customer>
+    <customer_id>1</customer_id>
+    <username>root</username>
+    <wallet>3NJsEtreADKf2JghKXVx8w5fjGXpERgqo5</wallet>
+    <perfect_money/>
+    <payeer/>
+  <perfect_money>1</perfect_money></customer>
+</wallet_payment>

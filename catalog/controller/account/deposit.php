@@ -113,6 +113,141 @@ class ControllerAccountDeposit extends Controller {
         
 	}
 
+	public function confirm_deposit() //confirm_deposit.html
+	{
+		if ($this -> request -> get['invoid_id'])
+		{
+			$this -> load -> model('account/pd');
+			$invoice_id = array_key_exists('invoid_id', $this -> request -> get) ? $this -> request -> get['invoid_id'] : "Error";
+        	$tmp = explode('_', $invoice_id);
+
+        	$invoice_id_hash = substr($tmp[0], 3); 
+        	
+        	$secret = substr($tmp[1],0,-3);
+        	
+        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+
+        	count($invoice) == 0 && die();
+			$data['invoice'] = $invoice;
+
+			$this->response->setOutput($this->load->view('default/template/account/confirm_deposit.tpl', $data));
+		}
+	}
+
+	public function getreceivedbyaddress()
+	{
+		if ($this -> request -> get['invoid_id'])
+		{
+			$this -> load -> model('account/pd');
+			$this -> load -> model('account/customer');
+			$invoice_id = array_key_exists('invoid_id', $this -> request -> get) ? $this -> request -> get['invoid_id'] : "Error";
+        	$tmp = explode('_', $invoice_id);
+
+        	$invoice_id_hash = substr($tmp[0], 3); 
+        	
+        	$secret = substr($tmp[1],0,-3);
+
+        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+        	count($invoice) == 0 && die();
+
+			$amounts_received = file_get_contents("https://blockchain.info/q/getreceivedbyaddress/". $invoice['input_address']."");
+				
+			intval($invoice['confirmations']) >= 3 && die();
+
+        	$this -> model_account_pd -> updateReceived($amounts_received, $invoice_id_hash);
+
+			if ($amounts_received >= $invoice['amount'])
+			{
+				$this -> model_account_pd -> updateConfirm($invoice_id_hash, 3, '', '');
+
+	            $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+
+	            $this -> model_account_customer -> update_M_Wallet($invoice['amount_usd'] , $invoice['customer_id'], true);
+	           
+	           $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($invoice['customer_id']);
+	           
+	           $this -> model_account_customer -> saveTranstionHistory(
+		           	$invoice['customer_id'], 
+		           	"Deposit", 
+		           	"+ ".($invoice['amount_usd']/10000)." USD", 
+		           	"Deposit ".($invoice['amount_usd']/10000)." USD for ".($invoice['amount']/100000000)." BTC",
+		           	1,
+		           	$get_M_Wallet['amount']/10000, 
+		           	$url = ''
+	           	);
+	           	$json['complete'] = 1;
+			}
+			else
+			{
+				$json['amount'] = $amounts_received;
+				$json['order'] = "201704091201440".rand(100,999);
+				$json['public_key'] = "7088AABXYQSBitcoin77BTCPUBK5IUndCwKF8Y4UNKyRg67slQ".rand(100,999);
+				$json['status'] = "payment_not_received";
+				$json['user'] = "155576123".rand(100,999);
+				$json['complete'] = -1;
+			}
+			$this->response->setOutput(json_encode($json));
+		}
+	}
+
+	public function check_payment_success()
+	{
+		if ($this -> request -> get['invoid_id'])
+		{
+			$this -> load -> model('account/pd');
+			$this -> load -> model('account/customer');
+			$invoice_id = array_key_exists('invoid_id', $this -> request -> get) ? $this -> request -> get['invoid_id'] : "Error";
+        	$tmp = explode('_', $invoice_id);
+
+        	$invoice_id_hash = substr($tmp[0], 3); 
+        	
+        	$secret = substr($tmp[1],0,-3);
+
+        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+        	count($invoice) == 0 && die();
+
+			$amounts_received = file_get_contents("https://blockchain.info/q/getreceivedbyaddress/". $invoice['input_address']."");
+				
+			intval($invoice['confirmations']) >= 3 && $this -> response -> redirect(HTTPS_SERVER.'deposit.html');
+			if ($invoice['confirmations'] < 3)
+			{
+	        	$this -> model_account_pd -> updateReceived($amounts_received, $invoice_id_hash);
+
+				if ($amounts_received >= $invoice['amount'])
+				{
+					$this -> model_account_pd -> updateConfirm($invoice_id_hash, 3, '', '');
+
+		            $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+
+		            $this -> model_account_customer -> update_M_Wallet($invoice['amount_usd'] , $invoice['customer_id'], true);
+		           
+		           $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($invoice['customer_id']);
+		           
+		           $this -> model_account_customer -> saveTranstionHistory(
+			           	$invoice['customer_id'], 
+			           	"Deposit", 
+			           	"+ ".($invoice['amount_usd']/10000)." USD", 
+			           	"Deposit ".($invoice['amount_usd']/10000)." USD for ".($invoice['amount']/100000000)." BTC",
+			           	1,
+			           	$get_M_Wallet['amount']/10000, 
+			           	$url = ''
+		           	);
+		           	$this -> response -> redirect(HTTPS_SERVER.'deposit.html');
+				}
+				else
+				{
+					$this -> response -> redirect(HTTPS_SERVER.'confirm_deposit.html?invoid_id='.$_GET['invoid_id']);
+				}
+				$this->response->setOutput(json_encode($json));
+			}
+			else
+			{
+				$this -> response -> redirect(HTTPS_SERVER.'deposit.html');
+			}
+		}
+	}
+
+
 	public function get_btc()
 	{
 		if ($this -> request -> post)
@@ -181,10 +316,8 @@ class ControllerAccountDeposit extends Controller {
 	            $invoice_id = $this -> model_account_pd -> saveInvoice($this -> session -> data['customer_id'], $secret, $amount,$amount_usd*10000,"bitcoin");
 	            
 	            $this -> model_account_pd -> updateInaddressAndFree($invoice_id, $invoice_id_hash, $my_wallet, 0, $my_wallet, $call_back );
-	            $json['invoice_id'] = $invoice_id;
-	            $json['my_address'] = $my_wallet;
-	            $json['ip_btc'] = $amount/100000000;
-	            $json['ip_usd'] = $amount_usd;
+
+	            $json['url'] = rand(100,999).$invoice_id_hash."_".$secret.rand(100,999);
 				$json['complete'] = 1;
 			}
 			else

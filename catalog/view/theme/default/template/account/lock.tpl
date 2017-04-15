@@ -6,13 +6,13 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+<meta name="description" content="">
 <meta name="author" content="SmartBox">
 
 
-<title>SmartBox | Bootstrap3 Admin Dashboard Template</title>
+<title>Lock authentication | mackayshieldslife.com</title>
 
-<link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
+<link rel="icon" href="catalog/view/theme/default/images/logo_icon.png">
 
 <link rel="stylesheet" href="catalog/view/theme/default/assets/plugins/morris/morris.css">
 <link rel="stylesheet" href="catalog/view/theme/default/assets/css/bootstrap.css" type="text/css" />
@@ -31,8 +31,8 @@
 <!-- Begin page -->
 <div id="logreg-wrapper" class="login-style2 text-center"> 
    <div class="container">
-      <a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
-      <p class="lead">INPUT YOUR AUTHENTICATOR CODE</p>
+       <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 310px; margin-bottom: 70px;" class="img-responsive center-block" alt=""/></a>
+      <p class="lead" style="font-size: 35px;">INPUT YOUR AUTHENTICATOR CODE</p>
    
       <form action="index.php?route=account/lock" method="post">
          <div class="form-group">

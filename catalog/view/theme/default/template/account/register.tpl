@@ -6,14 +6,14 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+
 <meta name="author" content="SmartBox">
 
 
 <title>Create New User | Mackayshieldslife.com </title>
 
 <!-- FAVICON -->
-<link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
+<link rel="icon" href="catalog/view/theme/default/images/logo_icon.png">
 
 
 <link rel="stylesheet" href="catalog/view/theme/default/assets/plugins/morris/morris.css">
@@ -36,7 +36,7 @@
    <div class="container">
      
      <form id="register-account" action="<?php echo $self -> url -> link('account/registers/confirmSubmit', '', 'SSL'); ?>" class="form-horizontal" method="post" novalidate="novalidate">
-         <a href="#" ><img style="margin-bottom: 20px;width: 100px" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
+         <a href="#" ><img style="margin-bottom: 20px;width: 300px" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
            
             <div class="form-group">
                <div class="textbox-login">
@@ -165,7 +165,7 @@
 
 <!-- Page Loader --> 
 <div class="page-loader">
-   <a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
+   <a href="#"><img style="width: 350px;" src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
    <span class="text-uppercase">Loading...</span>
 </div>
 

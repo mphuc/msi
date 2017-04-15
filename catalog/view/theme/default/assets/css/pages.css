@@ -383,7 +383,7 @@ form button {
 
 .page-loader span {
     position: fixed;
-    top: 50%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%,-50%);
     margin-top: 60px;
@@ -403,14 +403,14 @@ form button {
 	z-index: 2000;
 	position: fixed;
 	margin: auto;
-	top: 0;
+	top: 18%;
 	left: 0%;
 	right: 0;
 	bottom: 0;
 	height: 15px;
 	width: 80%;
-	background: #0f131a;
-	border: 1px solid #2f3b48;
+	background: rgba(10, 53, 85, 0.25);
+	border: 1px solid rgba(10, 53, 85, 0.25);
 	overflow: hidden;
 	border-radius: 15px;
 	max-width: 700px;
@@ -440,7 +440,7 @@ form button {
 	-webkit-border-radius: 7px 8px 8px 7px/7px 7px 8px 8px;
 	-moz-border-radius: 7px 8px 8px 7px/7px 7px 8px 8px;
 	border-radius: 7px 8px 8px 7px/7px 7px 8px 8px;
-	background-color: #d81d26;
+	background-color: #0A3555;
 	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.3), rgba(255,255,255,.3));
 	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.3), rgba(255,255,255,.3));
 	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.3), rgba(255,255,255,.3));

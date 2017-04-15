@@ -12,7 +12,7 @@
 
 <title>Login | Mackayshieldslife.com </title>
 
-<link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
+<link rel="icon" href="catalog/view/theme/default/images/logo_icon.png">
 
 <link rel="stylesheet" href="catalog/view/theme/default/assets/plugins/morris/morris.css">
 <link rel="stylesheet" href="catalog/view/theme/default/assets/css/bootstrap.css" type="text/css" />
@@ -24,14 +24,14 @@
 
 <link href="catalog/view/theme/default/css/customer.css" rel="stylesheet">
 <script src="catalog/view/theme/default/assets/js/modernizr.min.js"></script>
-
+<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
 </head>
 
 <body class="loreg-page close-it">
 <!-- Begin page -->
 <div id="logreg-wrapper" class="login-style2 text-center" style="width: 400px"> 
    <div class="container">
-      <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 150px; margin-bottom: 70px;" class="img-responsive center-block" alt=""/></a>
+      <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 100%; margin-bottom: 25px;" class="img-responsive center-block" alt=""/></a>
       
       <form action="login.html" method="post" style="background: none">
          <div class="form-group">
@@ -44,6 +44,10 @@
             
             <input type="password" placeholder="Enter your password" style="border-radius: 0px;
     background: none;" class="form-control" id="pwd" name="password" value="<?php echo $password; ?>" >
+         </div>
+         <div class="form-group text-center" id="capatcha" style="text-align: center; margin: 0 auto">
+            <div  class="g-recaptcha" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;" data-sitekey="6LfjEh0UAAAAAFxYgDNTBcz7NlUTgPHTvJSgPNJJ"></div>
+
          </div>
          <div class="form-group">
             <?php if ($redirect) { ?>
@@ -102,7 +106,14 @@
 
 <script type="text/javascript">
    if (location.hash === '#success') {
-      xhtml = '<div class="col-md-12"><p class=""><b>Hello <span style="color:#01aeef"><?php echo $_SESSION['fullname']; ?> </span>!</b></p><p class="">Thank you for applying to open an Mackayshieldslife Account with us<p><p>Please check the mail to see the account information</p><p class="">We thank you again for your interest in opening Mackayshieldslife. Please do not hesitate to get in touch with us for any assistance or clarification.</p><p class="">Sincerely </p><p class="">Mackayshieldslife</p></div>';
+      xhtml = '<div class="col-md-12"><p class=""><b>Hello <span style="color:#01aeef"><?php echo $_SESSION['fullname']; ?> </span>!</b></p><p class="">Thank you for applying to open an Mackayshieldslife Account with us<p><p>Please check the mail to see the account information</p><p class="">We thank you again for your interest in opening Mackayshieldslife. Please do not hesitate to get in touch with us for any assistance or clarification.</p><p class="">Please check the mail to activate the account</p><p class="">Sincerely </p><p class="">Mackayshieldslife</p></div>';
+         alertify.alert(xhtml, function(){
+          
+           }); 
+   }
+
+   if (location.hash === '#active') {
+      xhtml = '<div class="col-md-12"><p class=""><b>Hello <span style="color:#01aeef"><?php echo $_SESSION['fullname']; ?> </span>!</b></p><p>Account activation successful</p><p class="">Thank you for applying to open an Mackayshieldslife Account with us<p><p class="">We thank you again for your interest in opening Mackayshieldslife. Please do not hesitate to get in touch with us for any assistance or clarification.</p><p class="">Sincerely </p><p class="">Mackayshieldslife</p></div>';
          alertify.alert(xhtml, function(){
           
            }); 

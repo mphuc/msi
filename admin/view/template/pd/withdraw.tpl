@@ -36,9 +36,29 @@
           <tr>
             <td><?php echo $i; ?></td>
             <td><?php echo $value['username'] ?></td>
-            <td><a target="_blank" href="https://blockchain.info/address/<?php echo $value['addres_wallet'] ?>"><?php echo $value['addres_wallet'] ?> <i class="fa fa-external-link" aria-hidden="true"></i></a></td>
-            <td><?php echo $value['amount_usd']; ?> USD</td>
-            <td><?php echo $value['method_payment']; ?> BTC</td>
+            <td><?php if ($value['method_payment'] == "bitcoin") { ?>
+                Bitcoin: <?php echo $value['addres_wallet'] ?>
+              <?php } ?>
+              <?php if ($value['method_payment'] == "perfect") { ?>
+               ID Perfect Money: <?php echo $value['addres_wallet'] ?>
+              <?php } ?>
+              <?php if ($value['method_payment'] == "payeer") { ?>
+               ID Payeer: <?php echo $value['addres_wallet'] ?>
+              <?php } ?></td>
+            <td><?php if ($value['method_payment'] == "bitcoin") { ?>
+                  <?php echo $value['amount_payment']/100000000 ?> BTC
+                <?php } ?>
+                <?php if ($value['method_payment'] != "bitcoin") { ?>
+                  <?php echo $value['amount_payment'] ?> USD
+                <?php } ?></td>
+            <td><?php 
+                if ($value['method_payment'] == "bitcoin") 
+                  echo "Bitcoin";
+                if ($value['method_payment'] == "perfect") 
+                  echo "Payeer Money";
+                if ($value['method_payment'] == "payeer") 
+                  echo "Payeer";
+              ?></td>
             <td><?php echo date('d/m/Y H:i:s',strtotime($value['date_added'])) ?></td>
             <td>
               <a href="index.php?route=pd/withdraw/payment&token=<?php echo $_GET['token'] ?>&id=<?php echo $value['id'] ?>">

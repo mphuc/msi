@@ -6,3 +6,11 @@
 body{
 	background: url(body-bg.png) repeat-x #2c3133;
 }
+h1, .componentheading {
+    font-weight: 100;
+    font-size: 18px;
+    font-family: georgia,times,serif;
+    border-bottom: 1px solid #163b5f;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}

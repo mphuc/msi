@@ -433,6 +433,47 @@ class ControllerAccountPd extends Controller {
         $mail -> send();
     }
 
+    // percent 15 and 18
+    public function get_percent_langer($customer_id,$percent)
+    {
+        $this->load->model('account/customer');
+        $get_childrend_all_tree = $this -> model_account_customer -> count_child_langer($customer_id);
+
+        $customer_curent = $this -> model_account_customer ->getCustomer($customer_id);
+
+
+        if (count($get_childrend_all_tree) > 0)
+        {
+            $total_child_pd = 0;
+            foreach ($get_childrend_all_tree as  $value) {
+                $customer = $this -> model_account_customer ->getCustomer($value['customer_id']);
+                $total_child_pd += $customer['total_pd_node'];
+            }
+            if (($customer_curent['total_pd_node'] - $total_child_pd) >= 30000000000)
+            {
+                $percents = $percent;
+            }  
+            else
+            {
+                if ($percent == 15)
+                {
+                    $percents = 13;
+                }
+                if ($percent == 18)
+                {
+                    $percents = 15;
+                }
+
+            } 
+            
+        }
+        else
+        {
+            $percents = $percent;
+        }
+        return $percents;
+    }
+
 	public function commission_Parrent($customer_id, $amountPD){
         $this->load->model('account/customer');
         $this->load->model('account/auto');
@@ -481,8 +522,19 @@ class ControllerAccountPd extends Controller {
         }
         if (doubleval($partent['total_pd_node']) >= 200000000000)
         {
-            $percent = 15;
+            $percent = 18;
         }
+
+        if ($percent ==15)
+        {
+            $percent = $this -> get_percent_langer($partent['customer_id'],15);
+        }
+
+        if ($percent ==18)
+        {
+            $percent = $this -> get_percent_langer($partent['customer_id'],18);
+        }
+
 
         if (intval($partent_customer_ml['level']) >= 2) {
 
@@ -584,6 +636,8 @@ class ControllerAccountPd extends Controller {
 		return $transfer_id;
 	}
 	
+    
+
 	public function pd_investment(){
 
 		if(array_key_exists("packet",  $this -> request -> get) && $this -> customer -> isLogged()){
