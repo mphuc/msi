@@ -28,75 +28,107 @@
                     </div>
                 </div>
                 <div class="customer_margin" >
-                    <div class="col-md-3 customer_padding">
-                        <div class="widget-panel widget-style-1 bg-primary">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center">$ <?php echo number_format($m_wallet['amount']/1000) ?></h2>
-                            <div class="text-white text-opt  m-t-5 text-center font-12">Total balance</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
+                    <div class="backgroundColor_dashboard">
+                    <div class="col-md-4 customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">Total balance</h5>
+                                    <strong><?php echo number_format($m_wallet['amount']/1000) ?> USD</strong>
+                                </div>
+                                
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">Total package</h5>
+                                    <strong><?php echo number_format($getTotalPD['number']/10000) ?> USD</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">Binary Left</h5>
+                                    <strong><?php echo number_format($customer['total_pd_left']/10000) ?> USD</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">Binary right</h5>
+                                    <strong><?php echo number_format($customer['total_pd_right']/10000) ?> USD</strong>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
 
 
-                    <div class="col-md-3  customer_padding">
-                        <div class="widget-panel widget-style-1 bg-success">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center">$ <?php echo number_format($getTotalPD['number']/10000) ?></h2>
-                            <div class="text-white text-opt m-t-5 text-center font-12">Total package</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3  customer_padding">
-                        <div class="widget-panel widget-style-1 bg-info">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center">$ <?php echo number_format($customer['total_pd_left']/10000) ?></h2>
-                            <div class="text-white text-opt m-t-5 text-center font-12">Binary Left</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3  customer_padding">
-                        <div class="widget-panel widget-style-1 bg-purple">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center">$ <?php echo number_format($customer['total_pd_right']/10000) ?></h2>
-                            <div class="text-white text-opt m-t-5 text-center font-12">Binary right</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
+                    <div class="col-md-4  customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">Level</h5>
+                                    <strong><?php echo $danhhieu ?></strong>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
 
-                    <div class="col-md-3  customer_padding">
-                        <div class="widget-panel widget-style-1 bg-info">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center"> <?php echo $danhhieu ?></h2>
-                            <div class="text-white text-opt m-t-5 text-center font-12">Level</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
+                    <div class="col-md-4  customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">ID left</h5>
+                                    <strong><?php echo $total_binary_left ?></strong>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">ID right</h5>
+                                    <strong><?php echo $total_binary_right ?></strong>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
 
 
-                    <div class="col-md-3  customer_padding">
-                        <div class="widget-panel widget-style-1 bg-purple">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center">$ <?php echo $total_binary_left ?></h2>
-                            <div class="text-white text-opt m-t-5 text-center font-12">ID left</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
+                    <div class="col-md-4 customer_padding">
+                        <div class="item_dashboard">
+                            <div class="media">
+                                <div class="media-body media-middle">
+                                    <h5 class="media-heading">Withdraw</h5>
+                                    <strong><?php echo $withdraw_pendding ?></strong>
+                                </div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
+                     <div class="clearfix"></div>
 
-                    <div class="col-md-3  customer_padding">
-                        <div class="widget-panel widget-style-1 bg-success">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center">$ <?php echo $total_binary_right ?></h2>
-                            <div class="text-white text-opt m-t-5 text-center font-12">ID right</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
-                        </div>
                     </div>
-
-
-                    <div class="col-md-3 customer_padding">
-                        <div class="widget-panel widget-style-1 bg-primary">
-                            <h2 class="m-0 text-white counter font-40 font-400 text-center">$ <?php echo $withdraw_pendding ?></h2>
-                            <div class="text-white text-opt  m-t-5 text-center font-12">Withdraw Pendding</div>
-                            <div class="sparkline1"><canvas width="180" height="20" style="display: inline-block; width: 180px; height: 20px; vertical-align: top;"></canvas></div>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
         </div>

@@ -55,6 +55,10 @@
                                              <label for="exampleInputEmail1">Password Transaction</label>
                                              <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
                                           </div>
+                                          <div class="clearfix"></div>
+                                          <div class="alert alert-danger pendding_withdraw" style="display: none;">
+                                            <strong>Warning:</strong> Please wait for the withdrawal order to end.
+                                          </div>
                                           <br/>
                                             <button style="width: 100%" type="submit" class="btn btn-success btn-md">
                                               Submit
@@ -88,6 +92,10 @@
                                              <label for="exampleInputEmail1">Password Transaction</label>
                                              <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
                                           </div>
+                                          <div class="clearfix"></div>
+                                          <div class="alert alert-danger pendding_withdraw" style="display: none;">
+                                            <strong>Warning:</strong> Please wait for the withdrawal order to end.
+                                          </div>
                                           <br/>
                                             <button style="width: 100%" type="submit" class="btn btn-success btn-md">
                                               Submit
@@ -120,6 +128,10 @@
                                           <div class="form-group">
                                              <label for="exampleInputEmail1">Password Transaction</label>
                                              <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div class="alert alert-danger pendding_withdraw" style="display: none;">
+                                            <strong>Warning:</strong> Please wait for the withdrawal order to end.
                                           </div>
                                           <br/>
                                             <button style="width: 100%" type="submit" class="btn btn-success btn-md">

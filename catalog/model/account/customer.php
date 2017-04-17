@@ -2766,4 +2766,18 @@ class ModelAccountCustomer extends Model {
 		}
 		return array();
 	}
+
+	public function getTotalwithdraw_pedding($customer_id){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_withdraw_payment
+			WHERE customer_id = '".$customer_id."' AND status = 0
+		");
+		return $query -> row;
+	}
+
+	public function getcustomer_byUserName($username) {
+		$query = $this -> db -> query("SELECT * FROM " . DB_PREFIX . "customer WHERE username = '".$username."' AND customer_id <> '" . $this -> session -> data['customer_id'] . "'");
+		return $query -> row;
+	}
 }

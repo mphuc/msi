@@ -82,6 +82,10 @@ class ControllerAccountTransfer extends Controller {
             if ($check_password_transaction > 0)
             {
                 
+                $user_recieve = $this -> model_account_customer -> getcustomer_byUserName($username);
+                (count($user_recieve) === 0) && die();
+                $customer_id = $user_recieve['customer_id'];
+
                 $get_m_walleet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
                  
                 if ($get_m_walleet['amount'] >= $amount_usd*10000)
@@ -178,28 +182,34 @@ class ControllerAccountTransfer extends Controller {
         {
             $customer_id_recieve = $this -> request -> post['customer_id_recieve'];
             $this -> load -> model('account/customer');
-            $customer_id_recieve = $this -> model_account_customer -> getCustomer(intval($customer_id_recieve));
+            $customer_id_recieve = $this -> model_account_customer -> getcustomer_byUserName($customer_id_recieve);
+            if (count($customer_id_recieve) > 0)
+            {
+                $img_profile_re = ($customer_id_recieve['img_profile'] == "") ? "catalog/view/theme/default/images/logo.png" : $customer_id_recieve['img_profile'];
 
-            $img_profile_re = ($customer_id_recieve['img_profile'] == "") ? "catalog/view/theme/default/images/logo.png" : $customer_id_recieve['img_profile'];
+                $customer_id_send = $this -> model_account_customer -> getCustomer(intval($this -> session -> data['customer_id']));
 
-            $customer_id_send = $this -> model_account_customer -> getCustomer(intval($this -> session -> data['customer_id']));
+                $img_profile_send = ($customer_id_send['img_profile'] == "") ? "catalog/view/theme/default/images/logo.png" : $customer_id_send['img_profile'];
 
-            $img_profile_send = ($customer_id_send['img_profile'] == "") ? "catalog/view/theme/default/images/logo.png" : $customer_id_send['img_profile'];
-
-            $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
-            $json = array(
-                    'username_re' => $customer_id_recieve['username'],
-                    'firstname_re' => $customer_id_recieve['firstname'],
-                    'telephone_re' => $customer_id_recieve['telephone'],
-                    'email_re' => $customer_id_recieve['email'],
-                    'img_profile_re' => $img_profile_re,
-                    'username_send' => $customer_id_send['username'],
-                    'firstname_send' => $customer_id_send['firstname'],
-                    'telephone_send' => $customer_id_send['telephone'],
-                    'email_send' => $customer_id_send['email'],
-                    'img_profile_send' => $img_profile_send,
-                    'balance' => $get_M_Wallet['amount']/10000 - $this -> request -> post['amount_send']
-                );
+                $get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
+                $json = array(
+                        'username_re' => $customer_id_recieve['username'],
+                        'firstname_re' => $customer_id_recieve['firstname'],
+                        'telephone_re' => $customer_id_recieve['telephone'],
+                        'email_re' => $customer_id_recieve['email'],
+                        'img_profile_re' => $img_profile_re,
+                        'username_send' => $customer_id_send['username'],
+                        'firstname_send' => $customer_id_send['firstname'],
+                        'telephone_send' => $customer_id_send['telephone'],
+                        'email_send' => $customer_id_send['email'],
+                        'img_profile_send' => $img_profile_send,
+                        'balance' => number_format($get_M_Wallet['amount']/10000 - $this -> request -> post['amount_send'])
+                    );
+            }
+            else
+            {
+                $json['username'] = $this -> request -> post['customer_id_recieve'];
+            }
 
             $this->response->setOutput(json_encode($json));
         }

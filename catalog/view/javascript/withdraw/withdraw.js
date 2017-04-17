@@ -70,7 +70,7 @@ $(function(){
 					$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
 					$('#ip_usd').val('');
-					$('#ip_usd').attr('placeholder','Please enter USD number min 20 USD');
+					$('#ip_usd').attr('placeholder','Please enter USD min 20 USD');
 					window.funLazyLoad.reset();
 					return false;
 				}
@@ -99,16 +99,26 @@ $(function(){
 					return false;
 
 	        	}
-	        	if (result.maxfive == 1)
+	        	if (result.maxfive)
 	        	{
 	        		$('#sucess_point_submit').hide();
 	        		$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
 					$('#ip_usd').val('');
-					$('#ip_usd').attr('placeholder','Maximum withdrawal of no more than 5 times the investment package');
+					$('#ip_usd').attr('placeholder','Maximum withdrawal '+result.maxfive+' USD');
 					window.funLazyLoad.reset();
 					return false;
+	        	}
 
+	        	if (result.pedding)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		
+					$('#ip_usd').val('');
+					$('#password_transaction').val('');
+					$('.pendding_withdraw').show();
+					window.funLazyLoad.reset();
+					return false;
 	        	}
 
 	        	if (result.money_transfer == 1)
@@ -157,7 +167,7 @@ $(function(){
 					$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
 					$('#ip_usd').val('');
-					$('#ip_usd').attr('placeholder','Please enter USD number min 20 USD');
+					$('#ip_usd').attr('placeholder','Please enter USD min 20 USD');
 					window.funLazyLoad.reset();
 					return false;
 				}
@@ -186,16 +196,25 @@ $(function(){
 					return false;
 
 	        	}
-	        	if (result.maxfive == 1)
+	        	if (result.maxfive)
 	        	{
 	        		$('#sucess_point_submit').hide();
 	        		$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
 					$('#ip_usd').val('');
-					$('#ip_usd').attr('placeholder','Maximum withdrawal of no more than 5 times the investment package');
+					$('#ip_usd').attr('placeholder','Maximum withdrawal '+result.maxfive+' USD');
 					window.funLazyLoad.reset();
 					return false;
-
+	        	}
+	        	if (result.pedding)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		
+					$('#ip_usd').val('');
+					$('#password_transaction').val('');
+					$('.pendding_withdraw').show();
+					window.funLazyLoad.reset();
+					return false;
 	        	}
 	        	if (result.money_transfer == 1)
 	        	{
@@ -242,7 +261,7 @@ $(function(){
 					$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
 					$('#ip_usd').val('');
-					$('#ip_usd').attr('placeholder','Please enter USD number  min 20 USD');
+					$('#ip_usd').attr('placeholder','Please enter USD min 20 USD');
 					window.funLazyLoad.reset();
 					return false;
 				}
@@ -272,16 +291,25 @@ $(function(){
 					return false;
 
 	        	}
-	        	if (result.maxfive == 1)
+	        	if (result.maxfive)
 	        	{
 	        		$('#sucess_point_submit').hide();
 	        		$('#ip_usd').css({'border':'1px solid red'});
 					$('#ip_usd').focus();
 					$('#ip_usd').val('');
-					$('#ip_usd').attr('placeholder','Maximum withdrawal of no more than 5 times the investment package');
+					$('#ip_usd').attr('placeholder','Maximum withdrawal '+result.maxfive+' USD');
 					window.funLazyLoad.reset();
 					return false;
-
+	        	}
+	        	if (result.pedding)
+	        	{
+	        		$('#sucess_point_submit').hide();
+	        		
+					$('#ip_usd').val('');
+					$('#password_transaction').val('');
+					$('.pendding_withdraw').show();
+					window.funLazyLoad.reset();
+					return false;
 	        	}
 	        	if (result.money_transfer == 1)
 	        	{

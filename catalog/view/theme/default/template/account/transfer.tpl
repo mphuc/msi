@@ -31,11 +31,11 @@
                                        <div class="row">
                                           
                                           <div class="form-group">
-                                             <label for="exampleInputEmail1">ID or Email</label>
-                                             <input type="text" placeholder="ID or Email" class="form-control autonumber" data-a-sep="." data-a-dec="," name="username" id="username"/>
-                                              <ul id="all_username">
+                                             <label for="exampleInputEmail1">ID Recieve</label>
+                                             <input type="text" placeholder="ID Recieve" class="form-control autonumber" data-a-sep="." data-a-dec="," name="username" id="username"/>
+                                              <!-- <ul id="all_username">
 
-                                              </ul>
+                                              </ul> -->
                                           </div>
 
                                           <div class="form-group">
@@ -43,7 +43,7 @@
                                              <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
                                             
                                           </div>
-                                          <input type="hidden" id="customer_id" name="customer_id">
+                                          <!-- <input type="hidden" id="customer_id" name="customer_id"> -->
                                           <div class="form-group">
                                              <label for="exampleInputEmail1">Password Transaction</label>
                                              <input type="password" class="form-control" id="password_transaction" name="password_transaction" placeholder="Password Transaction" />

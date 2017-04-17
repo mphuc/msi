@@ -89,17 +89,24 @@ class ControllerAccountWithdraw extends Controller {
 
 			if ($check_password_transaction > 0)
 			{
+
+				$getTotalwithdraw_pedding = $this -> model_account_customer -> getTotalwithdraw_pedding($this->session->data['customer_id']);
+				if ($getTotalwithdraw_pedding['number'] > 0)
+				{
+					$json['pedding'] = 1;
+					return $this->response->setOutput(json_encode($json));
+				}
+
 				$getmaxPD = $this -> model_account_customer -> getmaxPD($this -> session -> data['customer_id']);
 				if ($amount_usd*10000 > $getmaxPD['number']*5)
 				{
-					$json['maxfive'] = 1;
-					$this->response->setOutput(json_encode($json));
+					$json['maxfive'] = $getmaxPD['number']*5/10000;
+					return $this->response->setOutput(json_encode($json));
 				}
-
+				
 
 				$get_m_walleet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
-				 
-				if ($get_m_walleet['amount'] >= $amount_usd*10000)
+				if ($get_m_walleet['amount'] >= $amount_usd*10000*1.05)
 				{
 
 					$url = "https://blockchain.info/tobtc?currency=USD&value=".$amount_usd;
@@ -108,7 +115,7 @@ class ControllerAccountWithdraw extends Controller {
 					$amount = $amount_check * 100000000;
 
 
-					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000,$this -> session -> data['customer_id'], $add = false);
+					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000*1.05,$this -> session -> data['customer_id'], $add = false);
 
 					$get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 
@@ -116,12 +123,12 @@ class ControllerAccountWithdraw extends Controller {
 			           	$this -> session -> data['customer_id'], 
 			           	"Withdraw", 
 			           	"- ".($amount_usd)." USD", 
-			           	"Withdraw ".($amount_usd)." USD for ".($amount/100000000)." BTC",
+			           	"Withdraw ".($amount_usd)." USD for ".($amount/100000000)." BTC. Fee 5% (".($amount_usd*0.05)." USD)",
 			           	2,
 			           	$get_M_Wallet['amount']/10000, 
 			           	$url = ''
 		           	);
-					//save withdraw payment
+					//save withdraw payment 
 					
 					$this -> model_account_customer -> saveWithdrawpayment($this -> session -> data['customer_id'],$amount_usd,$addres_wallet,$amount, $payment);
 
@@ -139,7 +146,7 @@ class ControllerAccountWithdraw extends Controller {
 			{
 				$json['password'] = -1;
 			}
-			$this->response->setOutput(json_encode($json));
+			return $this->response->setOutput(json_encode($json));
 		}
 	}
 
@@ -171,13 +178,26 @@ class ControllerAccountWithdraw extends Controller {
 
 			if ($check_password_transaction > 0)
 			{
-				
+				$getTotalwithdraw_pedding = $this -> model_account_customer -> getTotalwithdraw_pedding($this->session->data['customer_id']);
+				if ($getTotalwithdraw_pedding['number'] > 0)
+				{
+					$json['pedding'] = 1;
+					return $this->response->setOutput(json_encode($json));
+				}
+
+				$getmaxPD = $this -> model_account_customer -> getmaxPD($this -> session -> data['customer_id']);
+				if ($amount_usd*10000 > $getmaxPD['number']*5)
+				{
+					$json['maxfive'] = $getmaxPD['number']*5/10000;
+					return $this->response->setOutput(json_encode($json));
+				}
+
 				$get_m_walleet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 				 
-				if ($get_m_walleet['amount'] >= $amount_usd*10000)
+				if ($get_m_walleet['amount'] >= $amount_usd*10000*1.05)
 				{
 					$amount = $amount_usd;
-					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000,$this -> session -> data['customer_id'], $add = false);
+					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000*1.05,$this -> session -> data['customer_id'], $add = false);
 
 					$get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 
@@ -185,7 +205,7 @@ class ControllerAccountWithdraw extends Controller {
 			           	$this -> session -> data['customer_id'], 
 			           	"Withdraw", 
 			           	"- ".($amount_usd)." USD", 
-			           	"Withdraw ".($amount_usd)." USD",
+			           	"Withdraw ".($amount_usd)." USD for ".($amount/100000000)." BTC. Fee 5% (".($amount_usd*0.05)." USD)",
 			           	2,
 			           	$get_M_Wallet['amount']/10000, 
 			           	$url = ''
@@ -237,12 +257,25 @@ class ControllerAccountWithdraw extends Controller {
 			if ($check_password_transaction > 0)
 			{
 				
+				$getTotalwithdraw_pedding = $this -> model_account_customer -> getTotalwithdraw_pedding($this->session->data['customer_id']);
+				if ($getTotalwithdraw_pedding['number'] > 0)
+				{
+					$json['pedding'] = 1;
+					return $this->response->setOutput(json_encode($json));
+				}
+
+				$getmaxPD = $this -> model_account_customer -> getmaxPD($this -> session -> data['customer_id']);
+				if ($amount_usd*10000 > $getmaxPD['number']*5)
+				{
+					$json['maxfive'] = $getmaxPD['number']*5/10000;
+					return $this->response->setOutput(json_encode($json));
+				}
 				$get_m_walleet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 				 
-				if ($get_m_walleet['amount'] >= $amount_usd*10000)
+				if ($get_m_walleet['amount'] >= $amount_usd*10000*1.05)
 				{
 					$amount = $amount_usd;
-					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000,$this -> session -> data['customer_id'], $add = false);
+					$this -> model_account_customer -> update_m_Wallet_add_sub($amount_usd*10000*1.05,$this -> session -> data['customer_id'], $add = false);
 
 					$get_M_Wallet = $this -> model_account_customer -> get_M_Wallet($this -> session -> data['customer_id']);
 
@@ -250,7 +283,7 @@ class ControllerAccountWithdraw extends Controller {
 			           	$this -> session -> data['customer_id'], 
 			           	"Withdraw", 
 			           	"- ".($amount_usd)." USD", 
-			           	"Withdraw ".($amount_usd)." USD",
+			           	"Withdraw ".($amount_usd)." USD for ".($amount/100000000)." BTC. Fee 5% (".($amount_usd*0.05)." USD)",
 			           	2,
 			           	$get_M_Wallet['amount']/10000, 
 			           	$url = ''

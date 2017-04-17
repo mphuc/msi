@@ -27,7 +27,7 @@ $(function(){
         };
     })();
     
-    $('#username').on('input propertychange',function(){
+    /*$('#username').on('input propertychange',function(){
         $('#all_username').show();
         $('.transaction_compelte_username').hide();
         $('#user_send').val('');
@@ -47,11 +47,11 @@ $(function(){
             });
         }, 1000 );
 
-    });
+    });*/
 
     $('#fr_buy_point').on('submit',function(){
         
-        if ($('#username').val() == "" || $('#customer_id').val() == "" )
+        if ($('#username').val() == "")
         {
             $('#username').css({'border':'1px solid red'});
             $('#username').focus();
@@ -81,26 +81,33 @@ $(function(){
             type : "post",
             dateType:"text",
             data : {
-                 'customer_id_recieve' : $('#customer_id').val(),
+                 'customer_id_recieve' : $('#username').val(),
                  'amount_send' : $('#ip_usd').val()
             },
         });
         
         request.done(function (data) {
            data = $.parseJSON(data);
-           console.log(data);
+           if (data.username)
+           {
+                $('#username').css({'border':'1px solid red'});
+                $('#username').focus();
+                $('#username').val('');
+                $('#username').attr('placeholder','Username '+data.username+' does not exist');
+                return false;
+           }
         var htmlxx = '<h3 class="text-center" style="font-size:22px !important; text-transform:uppercase; color: #000; margin-bottom:15px;">Confirm transfer</h3>';
         htmlxx += '<table class="table table-bordered"><tbody><tr><td>';
         htmlxx += '<h4 class="text-center" style="text-transform:uppercase; color: #000;">ID Send</4>';
         htmlxx += '</td><td><h4 class="text-center" style="text-transform:uppercase; color: #000;">ID Receive</4></td></tr>';
-        //htmlxx += '<tr><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_send+'" /></td><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_re+'" /></td></tr>';
+        htmlxx += '<tr><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_send+'" /></td><td class="text-center"><img style="width:55px; height:55px; border-radius:50%" src="'+data.img_profile_re+'" /></td></tr>';
         htmlxx += '<tr><td>ID: <b>'+data.username_send+'</br></td><td>ID: <b>'+data.username_re+'</br></td></tr>';
         htmlxx += '<tr><td>Full Name: <b>'+data.firstname_send+'</br></td><td>Full Name: <b>'+data.firstname_re+'</br></td></tr>';
         htmlxx += '<tr><td>Telephone: <b>'+data.telephone_send+'</br></td><td>Telephone: <b>'+data.telephone_re+'</br></td></tr>';
         htmlxx += '<tr><td>Email: <b>'+data.email_send+'</br></td><td>Email: <b>'+data.email_re+'</br></td></tr>';
         htmlxx += '<tr><td>Amount Send: <b>'+$('#ip_usd').val()+' USD</br></td><td>Amount Receive: <b>'+$('#ip_usd').val()+' USD</br></td></tr>';
         htmlxx += '<tr><td colspan="2">Account balance after transfer: <b>'+data.balance+' USD</tr>';
-        
+       
         htmlxx += '</tbody></table>';
         htmlxx += '<p><i  style="font-size:16px; margin-top:10px;">Click "OK" to execute transaction. Click "Cancel" to cancel</i></p>';
         alertify.confirm(htmlxx, function (e) {
