@@ -121,7 +121,11 @@ class ModelAccountPd extends Model {
 
 	public function saveInvoice($customer_id,$invoice_id_hash, $redeem_code, $amount, $amount_usd,$type,$my_wallet){
 		$date_added= date('Y-m-d H:i:s');
-		$date_finish = strtotime ( '+ 30 minute' , strtotime ($date_added));
+		$date_added = strtotime ( '+ 7 hour' , strtotime ($date_added));
+		$date_added= date('Y-m-d H:i:s',$date_finish) ;
+
+		$date_finish= date('Y-m-d H:i:s');
+		$date_finish = strtotime ( '+ 7.50 hour' , strtotime ($date_added));
 		$date_finish= date('Y-m-d H:i:s',$date_finish) ;
 		$query = $this -> db -> query("
 			INSERT INTO ".DB_PREFIX."customer_invoice_pd SET
