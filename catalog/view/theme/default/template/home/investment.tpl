@@ -101,7 +101,9 @@
                      </tr>
                   </tbody>
                </table>
+               <div class="clearfix"></div>
             </div>
+            <div class="clearfix"></div>
             <p>
                <br> 
                <span style="color: #767575; font-size: 10px;">
