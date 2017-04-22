@@ -42,7 +42,7 @@ class ControllerAccountSetting extends Controller {
 
 		$ga = new PHPGangsta_GoogleAuthenticator();
 		$data['secret'] = $get_customer_setting['key_authenticator'];
-		$data['qrCodeUrl'] = $ga->getQRCodeGoogleUrl($data['customer']['username'].' - mackayshieldslife.com', $data['secret']);
+		$data['qrCodeUrl'] = $ga->getQRCodeGoogleUrl($data['customer']['username'].' - Mackayshieldslife.com', $data['secret']);
 		//$oneCode = $ga->getCode($secret);
 
 		if (file_exists(DIR_TEMPLATE . $this -> config -> get('config_template') . '/template/account/setting.tpl')) {
