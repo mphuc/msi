@@ -125,6 +125,8 @@ class ControllerAccountDeposit extends Controller {
         	
         	$secret = substr($tmp[1],0,-3);*/
         	
+        	$this -> model_account_pd -> updatr_finish_InvoiceByIdAnd($invoice_id);
+
         	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id);
 
         	count($invoice) == 0 && die();

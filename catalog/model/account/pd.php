@@ -171,6 +171,16 @@ class ModelAccountPd extends Model {
 		return $query -> row['number'];
 	}
 
+	public function updatr_finish_InvoiceByIdAnd($invoice_id_hash){
+		$query = $this -> db -> query("
+			UPDATE ". DB_PREFIX ."customer_invoice_pd SET
+			date_finish = DATE_ADD(NOW(),INTERVAL + 3 minute)
+			WHERE invoice_id_hash = '". $invoice_id_hash ."'
+		");
+		return $query;
+	}
+
+
 	/*public function getInvoiceByIdAndSecret($invoice_id_hash, $secret){
 		$query = $this -> db -> query("
 			SELECT *
