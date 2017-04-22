@@ -488,6 +488,12 @@ class ModelPdRegistercustom extends Model {
 		return $query -> row;
 	}
 
+	public function getCustomer_ml_hh($customer_id) {
+		$query = $this -> db -> query("SELECT * FROM " . DB_PREFIX . "customer_ml  WHERE star > level_payment
+		");
+		return $query -> row;
+	}
+
 	public function getTotalChild($customer_id) {
 		$query = $this -> db -> query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_ml WHERE p_binary = '" . (int)$customer_id . "' AND status <> 0");
 		return intval($query -> row['total']);
@@ -1708,5 +1714,73 @@ class ModelPdRegistercustom extends Model {
 			WHERE A.p_node = '".$customer_id."' AND star >= '".$star."'
 		");
 		return $query -> row['number'];
+	}
+
+	public function update_level_payment_customer_ml($customer_id,$level_payment){
+		$query = $this -> db -> query("
+			UPDATE  ".DB_PREFIX."customer_ml SET
+			level_payment = '".$level_payment."'
+			WHERE customer_id = '".$customer_id."'
+		");
+		return $query;
+	}
+
+	public function getTransctionHistory_stock($limit, $offset){
+	
+		$query = $this -> db -> query("
+			SELECT A.*, B.username
+			FROM  ".DB_PREFIX."customer_share_withdraw A INNER JOIN ".DB_PREFIX."customer B ON A.customer_id = B.customer_id
+			WHERE A.status = 0
+			ORDER BY A.date_added DESC
+			LIMIT ".$limit."
+			OFFSET ".$offset."
+		");
+		
+		return $query -> rows;
+	}
+
+	public function get_count_stock(){
+
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_share_withdraw WHERE status = 0
+		");
+		return $query -> row;
+	}
+
+	public function update_status_payment_stock($id){
+		
+		$query = $this -> db -> query("
+			UPDATE  ".DB_PREFIX."customer_share_withdraw SET
+			status = 1
+			WHERE id = '".$id."'
+		");
+		return $query;
+	}
+
+	public function get_count_stock_id($id){
+
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_share_withdraw WHERE id = '".$id."'
+		");
+		return $query -> row;
+	}
+
+	public function update_reshare_Wallet($amount_re , $customer_id, $date = false){
+		if ($date) {
+			$query = $this -> db -> query("	UPDATE " . DB_PREFIX . "customer_share_wallet SET
+			amount_re = amount_re + ".intval($amount_re)."
+			WHERE customer_id = '".$customer_id."'
+		");
+		
+		}else{
+			$query = $this -> db -> query("	UPDATE " . DB_PREFIX . "customer_share_wallet SET
+			amount_re = amount_re - ".intval($amount_re)."
+			WHERE customer_id = '".$customer_id."'
+		");
+		
+		}
+		return $query === true ? true : false;
 	}
 }

@@ -4,11 +4,21 @@
    echo $self -> load -> controller('common/column_left'); 
    ?>
 <div class="content-page">
+    <div class="content">
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             Deposit History
+          </h1>
+       </div>
+       
+    </div>
+  </div>
+</div>
+
+<div class="content-page">
    <div class="content">
-      <div class="page-title-group">
-         <h4 class="page-title">Deposit History</h4>
-         <h5 class="text-muted page-title-alt"></h5>
-      </div>
+      
       <div class="cb-page-content page_setting">
          <div class="container">
             <div class="row">
@@ -29,14 +39,14 @@
                                   <?php if ($getTotalInvoid_no_payment['number'] < 5) { ?>
                                     <form id="fr_buy_point" action="index.php?route=account/deposit/submit" role="form" class="fr_buy_point">
                                        <div class="row">
-                                          <div class="form-group">
-                                             <label for="exampleInputEmail1">Payment Method</label>
+                                         <!--  <div class="form-group">
+                                            <label for="exampleInputEmail1">Payment Method</label>
                                             <select class="form-control" id="payment_method" name="payment_method"/>
                                               <option value="bitcoin">Bitcoin</option>
                                               <option value="perfect">Perfect Money</option>
                                               <option value="payeer">Payeer</option>
                                             </select>
-                                          </div>
+                                          </div> -->
                                           <div class="col-md-6" style="margin-left: -5px;">
                                              <label for="exampleInputEmail1">Number USD</label>
                                              <input type="text" placeholder="Number USD !" class="form-control autonumber" data-a-sep="." data-a-dec="," name="ip_usd" id="ip_usd"/>
@@ -88,10 +98,11 @@
                                        <table id="datatable" class="no_payment table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                                           <thead>
                                              <tr>
-                                                <th class="text-center">No.</th>
+                                                <th class="text-center">#</th>
                                                 <th>Amount USD</th>
                                                 <th>Amount BTC</th>
                                                 <th>Wallet Payment</th>
+                                                <th>Date</th>
                                                 <th>Status</th>
                                              </tr>
                                           </thead>
@@ -100,23 +111,27 @@
                                               <?php $i = 0; foreach ($histotys as $value) { $i++; ?>
                                                
                                                 <tr>
-                                                   <td data-title="No." align="center">
+                                                   <td data-title="#" align="center">
                                                       <?php echo $i ?>
                                                    </td>
                                                    <td data-title="Amount USD" align="center">
-                                                      <?php echo number_format($value['amount_usd']/10000) ?>
+                                                      <?php echo number_format($value['amount_usd']/10000) ?> USD
                                                    </td>
                                                    <td data-title="Amount BTC" align="center">
-                                                      <?php echo $value['amount']/100000000 ?>
+                                                      <?php echo $value['amount']/100000000 ?> BTC
                                                    </td>
                                                    <td data-title="Wallet Payment" align="center">
                                                       <a onclick="show_payment('<?php echo $value['invoice_id'] ?>')">
                                                          <?php echo $value['my_address'] ?>
                                                       </a>
                                                    </td>
+                                                   <td data-title="Date" align="center">
+                                                     <?php echo date('d F Y H:i',strtotime(
+                                                     $value['date_created'])) ?>
+                                                   </td>
                                                    <td data-title="Status" align="center">
                                                     <?php if ($value['confirmations'] == 0) { ?>
-                                                      <span style="cursor: pointer; padding:6px;" id="payment_complete" onclick="show_payment('<?php echo $value['invoice_id'] ?>')" class="label label-danger">Click to billing</span>
+                                                      <span style="cursor: pointer; padding:6px;" id="payment_complete" onclick="show_payment('<?php echo $value['invoice_id'] ?>')" class="label label-danger">Billing</span>
                                                     <?php } ?>
                                                     <?php if ($value['confirmations'] == 3) { ?>
                                                       <span style="cursor: pointer; padding:6px;" id="payment_complete"  class="label label-success">Finish</span>

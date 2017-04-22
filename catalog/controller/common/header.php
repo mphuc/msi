@@ -12,6 +12,9 @@ class ControllerCommonHeader extends Controller {
 			$server = $this->config->get('config_url');
 		}
 		
+		$this -> document -> addScript('catalog/view/javascript/countdown/jquery.countdown.min.js');
+		$this -> document -> addScript('catalog/view/javascript/pd/countdown.js');
+
 		$data['base'] = $server;
 		$data['description'] = $this->document->getDescription();
 		$data['keywords'] = $this->document->getKeywords();

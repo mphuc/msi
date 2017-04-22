@@ -5,10 +5,19 @@
    ?>
 <div class="content-page">
     <div class="content">
-        <div class="page-title-group">
-            <h4 class="page-title">My Referral</h4>
-            <h5 class="text-muted page-title-alt"></h5>
-        </div>
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             My Referral
+          </h1>
+       </div>
+       
+    </div>
+  </div>
+</div>
+<div class="content-page">
+    <div class="content">
+       
         <div class="cb-page-content">
             <div class="container">
                 <div class="row">
@@ -24,7 +33,7 @@
                         <thead>
                            <tr>
                               <th class="text-center">#</th>
-                              <th>Username</th>
+                              <th>ID</th>
                               
                               <th>Phone</th>
                               <th>Email</th>
@@ -36,7 +45,7 @@
                            <?php $count = 1; foreach ($refferals_pnode as $key => $value) { ?>
                            <tr>
                               <td data-title="#" align="center"><?php echo $count ?></td>
-                              <td data-title="Username"><?php echo $value['username'] ?></td>
+                              <td data-title="ID"><?php echo $value['username'] ?></td>
                             
                               <td data-title="Phone" >
                                  <?php echo $value['telephone']; ?>
@@ -48,7 +57,7 @@
                            <?php $count++; } ?>
                         </tbody>
                      </table>
-                     <?php echo $pagination; ?>
+
                   </div>
                 </div>
                 
@@ -67,7 +76,7 @@
                         <thead>
                            <tr>
                               <th class="text-center">#</th>
-                              <th>Username</th>
+                              <th>ID</th>
                               <!-- <th>Level</th> -->
                              
                               <th>Phone</th>
@@ -81,7 +90,7 @@
                            <?php $count = 1; foreach ($refferals as $key => $value) { ?>
                            <tr>
                               <td data-title="#" align="center"><?php echo $count ?></td>
-                              <td data-title="Username"><?php echo $value['username'] ?></td>
+                              <td data-title="ID"><?php echo $value['username'] ?></td>
                               <!-- <td data-title="LEVEL">
                                  <?php echo "L".(intval($value['level']) - 1) ?>
                               </td> -->
@@ -102,7 +111,10 @@
                            <?php } ?>
                         </tbody>
                      </table>
-                     <?php echo $pagination; ?>
+                     <div class="clearfix"></div>
+                      <div class="text-center">
+                        <?php echo $pagination; ?>
+                      </div>
                   </div>
                </div>
             </div>

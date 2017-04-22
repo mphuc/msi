@@ -1,11 +1,19 @@
 <?php $self -> document -> setTitle("Investing"); echo $self -> load -> controller('common/header'); echo $self -> load -> controller('common/column_left'); ?>
-
 <div class="content-page">
     <div class="content">
-        <div class="page-title-group">
-            <h4 class="page-title">Investing</h4>
-            <h5 class="text-muted page-title-alt"></h5>
-        </div>
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             Investing
+          </h1>
+       </div>
+       
+    </div>
+  </div>
+</div>
+<div class="content-page">
+    <div class="content">
+        
         <div class="cb-page-content">
             <div class="container">
                 <div class="row">
@@ -118,11 +126,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 30%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                  <img src="catalog/view/theme/default/images/100copy.png" style="margin: 15px auto">  
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -165,11 +169,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 30%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                    <img src="catalog/view/theme/default/images/500copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -212,11 +212,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 30%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                    <img src="catalog/view/theme/default/images/1000copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -259,11 +255,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 28%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                   <img src="catalog/view/theme/default/images/2000copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -306,11 +298,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 26%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                   <img src="catalog/view/theme/default/images/5000copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -353,11 +341,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 20%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                   <img src="catalog/view/theme/default/images/10000copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -400,11 +384,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 10%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                   <img src="catalog/view/theme/default/images/50000copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -447,11 +427,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 5%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                  <img src="catalog/view/theme/default/images/100000copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>
@@ -494,11 +470,7 @@
                 </div>
  
                 <div class="pricingContent">
-                    <ul>
-                        <li>Fundamento: 5%</li>
-                        <li>Insurance fees: 10%</li>
-                        
-                    </ul>
+                  <img src="catalog/view/theme/default/images/200000copy.png" style="margin: 15px auto">
                 </div>
                 <?php if(count($packet) > 0) { ?>
                   <?php if (intval($packet['status']) === 0) {?>

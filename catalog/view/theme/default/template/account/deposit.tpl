@@ -3,12 +3,15 @@
    echo $self -> load -> controller('common/header'); 
    echo $self -> load -> controller('common/column_left'); 
    ?>
+
 <div class="content-page">
    <div class="content">
       <div class="page-title-group">
          <h4 class="page-title">Deposit History</h4>
          <h5 class="text-muted page-title-alt"></h5>
       </div>
+
+
       <div class="cb-page-content page_setting">
          <div class="container">
             <div class="row">
@@ -133,6 +136,7 @@
                                        </table>
                                        <div class="text-center">
                                         <?php echo $pagination ?>
+                                        
                                       </div>
                                     </div>
                                  </div>

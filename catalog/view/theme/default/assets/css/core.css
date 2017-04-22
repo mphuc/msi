@@ -14,11 +14,10 @@
    Common
 ============= */
 
-@import url(https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i);
 body {
     background: #f0f3f4;
     font-family: sans-serif;
-    font-family: 'Lato';
+    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
     margin: 0;
     overflow-x: hidden;
     color: #555;
@@ -1106,7 +1105,7 @@ pre {
 
 .topbar {
     left: 0px;
-    position: fixed;
+    /*position: fixed;*/
     right: 0;
     top: 0;
  z-index: 9999;
@@ -1117,8 +1116,8 @@ pre {
 }
 .topbar .topbar-left {
     float: left;
-    position: relative;
-    width: 205px;
+    position: fixed;
+    width: 250px;
     z-index: 1;
     background: #0A3555;
 }
@@ -1277,7 +1276,7 @@ pre {
 .side-menu {
     bottom: 0;
     top: 0;
-    width: 205px;
+    width: 250px;
     z-index: 9;
 }
 .side-menu.left {
@@ -1314,14 +1313,14 @@ body.fixed-left .side-menu.right {
 }
 
 .content-page {
-    margin-left: 205px;
+    margin-left: 250px;
 	/*margin-right: 240px;*/
     overflow: hidden;
 }
 
 .content-page > .content {
     margin-bottom: 60px;
-    margin-top: 60px;
+    
     padding: 0;
 }
 .cb-page-content {

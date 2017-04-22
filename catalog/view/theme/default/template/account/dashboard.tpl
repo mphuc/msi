@@ -1,13 +1,30 @@
 <?php $self->document->setTitle(" Dashboard "); echo $self->load->controller('common/header'); echo $self->load->controller('common/column_left'); ?>
+
+
 <div class="content-page">
     <div class="content">
-        <div class="page-title-group">
-            <h4 class="page-title">Dashboard</h4>
-            <h5 class="text-muted page-title-alt"></h5>
-        </div>
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             Dashboard
+          </h1>
+       </div>
+       <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 pull-right count-down-box">
+          <a href="" class="white">until next bonus round.</a>
+          <div id="myCounter" class="is-countdown">
+             <?php $date_6 =strtotime("next Saturday");
+               $date_6 = date("Y-m-d 00:00:00", $date_6)?>
+            </div>
+             <div class="countdown-row inline-block clearfix">
+                <div class="countdowns pull-right" data-countdown="<?php echo $date_6; ?>"></span>
+                
+             </div>
+          </div>
+       </div>
+    </div>
         <div class="cb-page-content">
             <div class="container">
-                <?php if ($customer['img_profile'] == "" || $customer['wallet'] == "" || $customer['branch_bank'] == "") { ?>
+                <?php if ($customer['img_profile'] == "" || $customer['wallet'] == "") { ?>
                 <div class="alert alert-danger">
                   <strong>Notification!</strong> Please update your account information. <a href="your-profile.html" class="btn btn-danger btn-xs" style="margin-top: -1px; margin-left: 14px;">Update Now</a>
                 </div>
@@ -30,109 +47,137 @@
                 <div class="customer_margin" >
                     <div class="backgroundColor_dashboard">
                     <div class="col-md-4 customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">Total balance</h5>
-                                    <strong><?php echo number_format($m_wallet['amount']/1000) ?> USD</strong>
+                        <a href="deposit.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Total balance</h5>
+                                        <strong><?php echo number_format($m_wallet['amount']/1000) ?> USD</strong>
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <a href="investing.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Total package</h5>
+                                        <strong><?php echo number_format($getTotalPD['number']/10000) ?> USD</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4  customer_padding">
+                        <a href="genealogy.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Level</h5>
+                                        <strong><?php echo $danhhieu ?></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4  customer_padding">
+                        <a href="genealogy.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Binary Left</h5>
+                                        <strong><?php echo number_format($customer['total_pd_left']/10000) ?> USD</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <a href="genealogy.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Binary right</h5>
+                                        <strong><?php echo number_format($customer['total_pd_right']/10000) ?> USD</strong>
+                                    </div>
                                 </div>
                                 
                             </div>
-                           
-                        </div>
+                        </a>
                     </div>
-
-                    <div class="col-md-4  customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">Total package</h5>
-                                    <strong><?php echo number_format($getTotalPD['number']/10000) ?> USD</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4  customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">Binary Left</h5>
-                                    <strong><?php echo number_format($customer['total_pd_left']/10000) ?> USD</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4  customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">Binary right</h5>
-                                    <strong><?php echo number_format($customer['total_pd_right']/10000) ?> USD</strong>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4  customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">Level</h5>
-                                    <strong><?php echo $danhhieu ?></strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4  customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">ID left</h5>
-                                    <strong><?php echo $total_binary_left ?></strong>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="col-md-4  customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">ID right</h5>
-                                    <strong><?php echo $total_binary_right ?></strong>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
 
                     <div class="col-md-4 customer_padding">
-                        <div class="item_dashboard">
-                            <div class="media">
-                                <div class="media-body media-middle">
-                                    <h5 class="media-heading">Withdraw</h5>
-                                    <strong><?php echo $withdraw_pendding ?></strong>
+                        <a href="withdraw.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Withdraw</h5>
+                                        <strong><?php echo $withdraw_pendding ?> USD</strong>
+                                    </div>
                                 </div>
+                                
                             </div>
-                            
-                        </div>
-                        
+                        </a>
                     </div>
+                    
+
+
+                    <div class="col-md-4  customer_padding">
+                        <a href="stock.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Total Stock</h5>
+                                        <strong><?php echo number_format($total_share/100000); ?> USD</strong>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <a href="sell_stock.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Balance Wallet Stock</h5>
+                                        <strong><?php echo number_format($wallet_share['amount']/10000) ?> USD</strong>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4  customer_padding">
+                        <a href="sell_stock.html">
+                            <div class="item_dashboard">
+                                <div class="media">
+                                    <div class="media-body media-middle">
+                                        <h5 class="media-heading">Balance Wallet Re-Stock</h5>
+                                        <strong><?php echo number_format($wallet_share['amount_re']/10000) ?> USD</strong>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </a>
+                    </div>
+
+                    
                      <div class="clearfix"></div>
 
                     </div>
                 </div>
             </div>
         </div>
-
+        <div class="clearfix" style="margin-bottom: 20px;"></div>
         <div class="cb-page-content">
             <div class="container">
                 <div class="row">

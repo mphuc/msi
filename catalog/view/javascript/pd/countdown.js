@@ -2,18 +2,8 @@
     $('[data-countdown]').each(function() {
          var $this = $(this), finalDate = $(this).data('countdown');
             $this.countdown(finalDate, function(event) {
-            $this.html(event.strftime('<span style="color:#797979;"> </span>%D Days %H:%M:%S'));
+            $this.html(event.strftime('<div class="countdown-section"> <div class="countdown-amount">%D</div> <div class="countdown-period">Days</div> </div> <div class="countdown-section sep"> : </div> <div class="countdown-section"> <div class="countdown-amount">%H</div> <div class="countdown-period">Hours</div> </div> <div class="countdown-section sep"> : </div> <div class="countdown-section"> <div class="countdown-amount">%M</div> <div class="countdown-period">Minutes</div> </div><div class="countdown-section sep"> : </div><div class="countdown-section"> <div class="countdown-amount">%S</div> <div class="countdown-period">Second</div> </div>'));
             
         });
     });
  });
- //  $(function() {
- //    $('[data-countdown]').each(function() {
- //         var $this = $(this), finalDate = $(this).data('countdown');
- //            $this.countdown(finalDate, function(event) {
- //            //$('.time-out').html(event.strftime('%D days %H:%M:%S'));
- //              $this.html(event.strftime('<span class="time">%D Days</span>-<span class="time">%H</span>:<span class="time">%M</span>:<span class="time">%S</span>'));
-            
- //        });
- //    });
- // });

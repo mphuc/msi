@@ -5,10 +5,19 @@
    ?>
 <div class="content-page">
     <div class="content">
-        <div class="page-title-group">
-            <h4 class="page-title">Setting</h4>
-            <h5 class="text-muted page-title-alt"></h5>
-        </div>   
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             Setting
+          </h1>
+       </div>
+       
+    </div>
+  </div>
+</div>
+<div class="content-page">
+    <div class="content">
+        
       <div class="cb-page-content page_setting">
           <div class="container">
               <div class="row">
@@ -35,8 +44,8 @@
                 <div class="col-md-9">
                       <div class="card-box">
                           <div class="card-box-head  border-b m-t-0">
-                            <h4 class="header-title"><b>Profile Settings</b>
-                            <div class="clearfix"></div>
+                           <!--  <h4 class="header-title"><b>Profile Settings</b></h4> -->
+                            <div class="clearfix" style="margin-top: 20px;"></div>
                               <div class="stepwizard col-md-12">
                                 <div class="stepwizard-row setup-panel">
                                   <div class="stepwizard-step">
@@ -187,10 +196,10 @@
                                               </div>
                                            </div>
 
-                                           <div class="form-group">
+                                           <!-- <div class="form-group">
                                               <label class="col-md-4" for="BitcoinWalletAddress">Perfect Money</label>
                                               <div class="col-md-8">
-                                                <input class="form-control" id="Perfect_Money" name="perfect_money" type="text" data-link="<?php echo $self -> url -> link('account/account/main', '', 'SSL'); ?>" value="<?php echo $customer['perfect_money'] ?>" placeholder="Perfect Money"/>
+                                                <input class="form-control" id="Perfect_Money" name="perfect_money" type="text" data-link="<?php //echo $self -> url -> link('account/account/main', '', 'SSL'); ?>" value="<?php //echo $customer['perfect_money'] ?>" placeholder="Perfect Money"/>
                                                 <span id="BitcoinWalletAddress-error" class="field-validation-error">
                                                 <span></span>
                                                 </span>
@@ -201,13 +210,13 @@
                                            <div class="form-group">
                                               <label class="col-md-4" for="BitcoinWalletAddress">Payeer</label>
                                               <div class="col-md-8">
-                                                <input class="form-control" id="Payeer" name="payeer" type="text" data-link="<?php echo $self -> url -> link('account/account/main', '', 'SSL'); ?>" value="<?php echo $customer['payeer'] ?>" placeholder="Payeer" />
+                                                <input class="form-control" id="Payeer" name="payeer" type="text" data-link="<?php //echo $self -> url -> link('account/account/main', '', 'SSL'); ?>" value="<?php //echo $customer['payeer'] ?>" placeholder="Payeer" />
                                                 <span id="BitcoinWalletAddress-error" class="field-validation-error">
                                                 <span></span>
                                                 </span>
                                               
                                               </div>
-                                           </div>
+                                           </div> -->
                                             
                                            <?php if ($customer['payeer']  != "" && $customer['perfect_money'] != "" && $customer['wallet'] != "") { } else { ?>
 

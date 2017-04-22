@@ -5,10 +5,19 @@
    ?>
 <div class="content-page">
     <div class="content">
-        <div class="page-title-group">
-            <h4 class="page-title"> Welcome Letter </h4>
-            <h5 class="text-muted page-title-alt"></h5>
-        </div>
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             Welcome Letter
+          </h1>
+       </div>
+       
+    </div>
+  </div>
+</div>
+<div class="content-page">
+    <div class="content">
+       
         <div class="cb-page-content">
             <div class="container">
                 <div class="row">

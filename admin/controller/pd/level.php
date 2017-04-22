@@ -74,58 +74,61 @@ class ControllerPdLevel extends Controller {
 
 
 				$getCustomer_ml = $this -> model_pd_registercustom -> getCustomer_ml($value['customer_id']);
-				$amounts_receiveds = 0;
-				if (intval($getCustomer_ml['star']) == 1)
+				if ($getCustomer_ml['star'] > $getCustomer_ml['level_payment'])
 				{
-					$amounts_receiveds = 10000000;
-				}
-				if (intval($getCustomer_ml['star']) == 2)
-				{
-					$amounts_receiveds = 20000000;
-				}
-				if (intval($getCustomer_ml['star']) == 3)
-				{
-					$amounts_receiveds = 50000000;
-				}
-				if (intval($getCustomer_ml['star']) == 4)
-				{
-					$amounts_receiveds = 100000000;
-				}
-				if (intval($getCustomer_ml['star']) == 5)
-				{
-					$amounts_receiveds = 200000000;
-				}
-				if (intval($getCustomer_ml['star']) == 6)
-				{
-					$amounts_receiveds = 500000000;
-				}
-				if (intval($getCustomer_ml['star']) == 7)
-				{
-					$amounts_receiveds = 1500000000;
-				}
-				if (intval($getCustomer_ml['star']) == 8)
-				{
-					$amounts_receiveds = 5000000000;
-				}
-				if ($amounts_receiveds > 0)
-				{
-					$this -> model_pd_registercustom -> update_m_Wallet_add_sub($amounts_receiveds,$value['customer_id'], $add = true);
+					$amounts_receiveds = 0;
+					if (intval($getCustomer_ml['star']) == 1)
+					{
+						$amounts_receiveds = 10000000;
+					}
+					if (intval($getCustomer_ml['star']) == 2)
+					{
+						$amounts_receiveds = 20000000;
+					}
+					if (intval($getCustomer_ml['star']) == 3)
+					{
+						$amounts_receiveds = 50000000;
+					}
+					if (intval($getCustomer_ml['star']) == 4)
+					{
+						$amounts_receiveds = 100000000;
+					}
+					if (intval($getCustomer_ml['star']) == 5)
+					{
+						$amounts_receiveds = 200000000;
+					}
+					if (intval($getCustomer_ml['star']) == 6)
+					{
+						$amounts_receiveds = 500000000;
+					}
+					if (intval($getCustomer_ml['star']) == 7)
+					{
+						$amounts_receiveds = 1500000000;
+					}
+					if (intval($getCustomer_ml['star']) == 8)
+					{
+						$amounts_receiveds = 5000000000;
+					}
+					if ($amounts_receiveds > 0)
+					{
+						$this -> model_pd_registercustom -> update_m_Wallet_add_sub($amounts_receiveds,$value['customer_id'], $add = true);
 
-		            $get_M_Wallet = $this -> model_pd_registercustom -> get_M_Wallet($value['customer_id']);
+			            $get_M_Wallet = $this -> model_pd_registercustom -> get_M_Wallet($value['customer_id']);
 
-		            $this -> model_pd_registercustom -> saveTranstionHistory(
-		                $value['customer_id'], 
-		                "Commision Rank", 
-		                "+ ".($amounts_receiveds/10000)." USD", 
-		                "Commision Rank ".($amounts_receiveds/10000)." USD",
-		                1,
-		                $get_M_Wallet['amount']/10000, 
-		                $url = ''
-		            );
+			            $this -> model_pd_registercustom -> saveTranstionHistory(
+			                $value['customer_id'], 
+			                "Commision Rank", 
+			                "+ ".(number_format($amounts_receiveds/10000))." USD", 
+			                "Commision Rank ".(number_format($amounts_receiveds/10000))." USD",
+			                1,
+			                $get_M_Wallet['amount']/10000, 
+			                $url = ''
+			            );
+					}
+					$this -> model_pd_registercustom ->update_level_payment_customer_ml($value['customer_id'],$getCustomer_ml['star']);
 				}
-				 
 			}
-
+			
 			$this -> session -> data['complete_lv'] = "complete";
 			$this -> response -> redirect($this -> url -> link('pd/dailyprofit&token='.$_GET['token']));
 		}

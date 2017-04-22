@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Design Martians" />
     <meta name="generator" content="Joomla! - Open Source Content Management" />
-    <title> Home | MacKay Shields Life</title>
+    <title> <?php if ($title) echo $title." | " ?> MacKayShieldsLife</title>
     <link href="catalog/view/theme/default/home/plugins/system/jcemediabox/css/jcemediaboxfc54.css?version=116" rel="stylesheet" type="text/css" />
     <link href="catalog/view/theme/default/home/plugins/system/jcemediabox/themes/squeeze/css/stylefc54.css?version=116" rel="stylesheet" type="text/css" />
     <script src="catalog/view/theme/default/home/media/jui/js/jquery.min.js" type="text/javascript"></script>
@@ -26,8 +26,6 @@
     <link rel='stylesheet' href='catalog/view/theme/default/home/templates/mackay/css/template.1477846058.css' type='text/css' />
     <link rel='stylesheet' href='catalog/view/theme/default/home/templates/mackay/css/template_print.1416676673.css' type='text/css' />
 
-
-
     <script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
       
       <script src="catalog/view/javascript/bootstrap.min.js"></script>
@@ -41,18 +39,19 @@
     <div class="wrapper invest ">
        <div class="header">
           <div class="cf top">
-             <div class='logo'><a href='index.html'><img style="width: 300px; margin-top: -30px;" src='catalog/view/theme/default/images/logo.png' alt='MacKay Shields' /></a></div>
+             <div class='logo'><a href='index.html'><img style="width: 230px; margin-top: -30px;" src='catalog/view/theme/default/images/logo.png' alt='MacKay Shields' /></a></div>
              <div class='logo-print'><img src='catalog/view/theme/default/images/logo.png' /></div>
              <div class="login">
              </div>
           </div>
           <div class="nav cf">
              <ul class="menu">
-                <li class="item-about-us"><a href="?route=home/page"><span>Home</span></a></li>
-                <li class="item-investment-strategies"><a href="?route=home/page/investment"><span>Investment Strategies</span></a></li>
-                <li class="item-insights-landing"><a href="?route=home/page/insights"><span>Insights</span></a></li>
-                <li class="item-in-the-news"><a href="?route=home/page/news"><span>In the News</span></a></li>
-                <li class="item-investment-strategies"><a href="login.html"><span>login</span></a></li>
+                <li class="item-about-us"><a href="<?php echo HTTPS_SERVER ?>index.html"><span>Home</span></a></li>
+                <li class="item-in-the-news"><a href="<?php echo HTTPS_SERVER ?>about-us.html"><span>About Us</span></a></li>
+                <li class="item-investment-strategies"><a href="<?php echo HTTPS_SERVER ?>investment.html"><span>Investment Strategies</span></a></li>
+                <li class="item-insights-landing"><a href="<?php echo HTTPS_SERVER ?>insights.html"><span>Insights</span></a></li>
+                <li class="item-in-the-news"><a href="<?php echo HTTPS_SERVER ?>news.html"><span>In the News</span></a></li>
+                <li class="item-investment-strategies"><a href="<?php echo HTTPS_SERVER ?>login.html"><span>login</span></a></li>
              </ul>
           </div>
          

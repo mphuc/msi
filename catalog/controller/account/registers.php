@@ -94,6 +94,13 @@ class ControllerAccountRegisters extends Controller {
 				}
 			}
 
+			$checkshare_Wallet = $this -> model_account_customer -> checkshare_Wallet($cus_id);
+			if(intval($checkshare_Wallet['number'])  === 0){
+				if(!$this -> model_account_customer -> insert_share_Wallet($cus_id)){
+					die();
+				}
+			}
+
 			$check_Setting_Customer = $this -> model_account_customer -> check_Setting_Customer($cus_id);
 			if(intval($check_Setting_Customer['number'])  === 0){
 
@@ -105,6 +112,8 @@ class ControllerAccountRegisters extends Controller {
 				}
 			}
 			
+
+
 
 			$data['has_register'] = true;
 			$getCountryByID = $this -> model_account_customer -> getCountryByID(intval($this-> request ->post['country_id']));
@@ -153,7 +162,7 @@ class ControllerAccountRegisters extends Controller {
 						      <tr>
 						         <td align="right">Affilate  ID </td>
 						         
-						         <td>M'.($cus_id + 100000).'</td>
+						         <td>'.$getCountryByID['iso_code_2'].($cus_id + 100000).'</td>
 						      </tr>
 						      <tr>
 						         <td align="right">Login Password </td>

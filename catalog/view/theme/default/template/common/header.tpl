@@ -28,7 +28,8 @@
       <link rel="stylesheet" href="catalog/view/theme/default/assets/css/responsive.css" type="text/css" />
       <script src="catalog/view/theme/default/assets/js/modernizr.min.js"></script>
       <!---  -->  
-    
+      
+      
       <link href="catalog/view/theme/default/css/customer.css" rel="stylesheet">
       <?php foreach ($styles as $style) { ?>
       <link href="<?php echo $style['href']; ?>" type="text/css" rel="<?php echo $style['rel']; ?>" media="<?php echo $style['media']; ?>" />
@@ -65,7 +66,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
       <a href="javascript:void(0)" class="logo d-logo hidden-xs hidden-sm">
-         <img src="catalog/view/theme/default/images/logo_home.png" alt="" style="width: 90%;    margin: 0 auto;" class="img-responsive hidden-xs" height="0">
+         <img src="catalog/view/theme/default/images/logo_home.png" alt="" style="width: 84%; margin: -11px auto;" class="img-responsive hidden-xs" height="0">
       </a> 
       <a href="javascript:void(0)" class="logo d-logo visible-xs visible-sm">
         <img src="catalog/view/theme/default/images/logo_icon.png" alt="" style="width: 50px;" class="img-responsive" height="0">
@@ -78,30 +79,24 @@
       <div class="container">
         <div class="top-fix-navbar">
           <div class="pull-left">
-            <button class="button-menu-mobile open-left waves-effect waves-light"> <i class="fa fa-outdent"></i> </button>
+            <button class="button-menu-mobile open-left waves-effect waves-light hidden-sm hidden-md hidden-lg"> <i class="fa fa-align-justify" aria-hidden="true"></i> </button>
             <span class="clearfix"></span> 
           </div>
           
-          <ul class="nav navbar-nav navbar-right pull-right">
-           
-            <li class="dropdown top-menu-item-xs"> <a href="javascript:void(0)" class="right-bar-toggle profile waves-effect waves-light dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user-name"><?php echo $customer['firstname'] ?></span> <span class="caret"></span> 
+
+          
+          <div class="text-right">
             
-            <?php if ($customer['img_profile'] == "") { ?>
-              <img src="catalog/view/theme/default/images/logo.png" alt="user-img" class="img-circle"> 
-            <?php } else { ?>
+            <div class="pull-right logout">
+              <a href="logout.html"><i class="ti-power-off m-r-10 text-danger"></i> LogOut</a>
+            </div>
 
-            <img src="<?php echo $customer['img_profile'] ?>" alt="user-img" class="img-circle"> 
-            <?php } ?>
-          </a> 
+            <div class="pull-right logout" style="margin-right: 10px;">
+              <a href="message.html"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            </div>
 
-              <ul class="dropdown-menu">
-                <li><a href="your-profile.html"><i class="ti-settings m-r-10 text-custom"></i> Settings</a> </li>
-                
-                <li class="divider"></li>
-                <li><a href="logout.html"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a> </li>
-              </ul>
-            </li>
-          </ul>
+            
+          </div>
         </div>
         <!--/.nav-collapse --> 
       </div>

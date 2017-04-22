@@ -14,7 +14,9 @@
               <div class="row">
 
     
-      <div class="col-md-12">
+      
+        <div class="panel panel-white">
+           <div class="panel-body">
 
                 <?php if(count($user) > 0){ ?>
          <div class="card">
@@ -41,9 +43,9 @@
                                  <td data-title="Email"><?php echo $value['email'] ?></td>
                                  <td data-title="Phone Number"><?php echo $value['telephone'] ?></td>
                                 
-                                <td data-title="Date Join"><?php echo date("d/m/Y H:i A", strtotime($value['date_added'])); ?></td>
+                                <td data-title="Date Join"><?php echo date("d F Y H:i", strtotime($value['date_added'])); ?></td>
                                 
-                                <td data-title="Action">
+                                <td data-title="Action" class="text-center">
                                     <a href="user-edit?id=<?php echo $value['customer_code'] ?>" class="btn btn-info ">Edit</a>
                                 </td>
                             </tr>
@@ -56,6 +58,7 @@
                </div>
             </div>
       </div>
+   </div>
    </div>
    <!-- End Row -->
    <!-- End row -->

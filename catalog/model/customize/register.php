@@ -130,15 +130,16 @@ class ModelCustomizeRegister extends Model {
 			check_Newuser = 1,
 			language = 'english'
 		");
-
 		$customer_id = $this -> db -> getLastId();
-
+		$getCountryByID = $this -> getCountryByID(intval($data['country_id']));
+		
 		$this -> db -> query("
 			UPDATE " . DB_PREFIX . "customer SET
-			username = 'M".(100000+$customer_id)."'
+			username = '".$getCountryByID['iso_code_2'].(100000+$customer_id)."'
 			WHERE customer_id = '".$customer_id."'
 
 		");
+		return $customer_id;
 
 		// p_binary = '" . $data['p_node'] . "',
 		$this -> db -> query("INSERT INTO " . DB_PREFIX . "customer_ml SET 
@@ -342,15 +343,25 @@ public function addCustomer_auto($data){
 			check_signup = 2,
 			language = 'english'
 		");
-
 		$customer_id = $this -> db -> getLastId();
+		$getCountryByID = $this -> getCountryByID(intval($data['country_id']));
+		
 		$this -> db -> query("
 			UPDATE " . DB_PREFIX . "customer SET
-			username = 'M".(100000+$customer_id)."'
+			username = '".$getCountryByID['iso_code_2']."".(100000+$customer_id)."'
 			WHERE customer_id = '".$customer_id."'
 
 		");
 		return $customer_id;
+	}
+
+	public function getCountryByID($id){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM ". DB_PREFIX ."country 
+			WHERE country_id = '".$this->db->escape($id)."'
+		");
+		return $query -> row;
 	}
 	
 	public function insert_code_active($customer_id, $code){

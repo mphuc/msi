@@ -472,7 +472,7 @@ $(document).delegate('.agree', 'click', function(e) {
 })(window.jQuery);
 
 $(function(){
-	$('title').text($('title').text() + ' | Smart financial connections');
+	$('title').text($('title').text() + ' | mackayshieldslife.com');
 	$('.goog-te-gadget img').hide();
 });
 

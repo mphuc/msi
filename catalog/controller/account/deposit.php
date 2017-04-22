@@ -119,13 +119,13 @@ class ControllerAccountDeposit extends Controller {
 		{
 			$this -> load -> model('account/pd');
 			$invoice_id = array_key_exists('invoid_id', $this -> request -> get) ? $this -> request -> get['invoid_id'] : "Error";
-        	$tmp = explode('_', $invoice_id);
+        	//$tmp = explode('_', $invoice_id);
 
-        	$invoice_id_hash = substr($tmp[0], 3); 
+        	/*$invoice_id_hash = substr($tmp[0], 3); 
         	
-        	$secret = substr($tmp[1],0,-3);
+        	$secret = substr($tmp[1],0,-3);*/
         	
-        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id);
 
         	count($invoice) == 0 && die();
 			$data['invoice'] = $invoice;
@@ -141,26 +141,39 @@ class ControllerAccountDeposit extends Controller {
 			$this -> load -> model('account/pd');
 			$this -> load -> model('account/customer');
 			$invoice_id = array_key_exists('invoid_id', $this -> request -> get) ? $this -> request -> get['invoid_id'] : "Error";
-        	$tmp = explode('_', $invoice_id);
+        	/*$tmp = explode('_', $invoice_id);
 
         	$invoice_id_hash = substr($tmp[0], 3); 
         	
-        	$secret = substr($tmp[1],0,-3);
+        	$secret = substr($tmp[1],0,-3);*/
 
-        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id);
+
+        	$getInvoiceByIdAndSecret_finish = $this -> model_account_pd -> getInvoiceByIdAndSecret_finish($invoice_id);
+        	
+        	(intval($getInvoiceByIdAndSecret_finish) === 1) && die('time');
+
         	count($invoice) == 0 && die();
+
+        	$redeemcode = $invoice['redeem_code'];
+			$address = "1Jn6gun1GbABcNDrtaAewiGYWHqgacJcUq";
+			$amount = "All available";
+			  
+			$postfields = json_encode(array('redeemcode'=> $redeemcode, 'address'=> $address, 'amount'=>$amount ));
+			$data = $this->post_api("https://bitaps.com/api/use/redeemcode", $postfields);
+
 
 			$amounts_received = file_get_contents("https://blockchain.info/q/getreceivedbyaddress/". $invoice['input_address']."");
 				
 			intval($invoice['confirmations']) >= 3 && die();
 
-        	$this -> model_account_pd -> updateReceived($amounts_received, $invoice_id_hash);
+        	$this -> model_account_pd -> updateReceived($amounts_received, $invoice_id);
 
 			if ($amounts_received >= $invoice['amount'])
 			{
-				$this -> model_account_pd -> updateConfirm($invoice_id_hash, 3, '', '');
+				$this -> model_account_pd -> updateConfirm($invoice_id, 3, '', '');
 
-	            $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+	            $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id);
 
 	            $this -> model_account_customer -> update_M_Wallet($invoice['amount_usd'] , $invoice['customer_id'], true);
 	           
@@ -190,6 +203,18 @@ class ControllerAccountDeposit extends Controller {
 		}
 	}
 
+	public function post_api($url, $postfields) {
+	    $ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	    curl_setopt($ch, CURLOPT_POST, 1);
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	    $result = curl_exec($ch);
+	    return $result;
+	 }
+
 	public function check_payment_success()
 	{
 		if ($this -> request -> get['invoid_id'])
@@ -197,27 +222,34 @@ class ControllerAccountDeposit extends Controller {
 			$this -> load -> model('account/pd');
 			$this -> load -> model('account/customer');
 			$invoice_id = array_key_exists('invoid_id', $this -> request -> get) ? $this -> request -> get['invoid_id'] : "Error";
-        	$tmp = explode('_', $invoice_id);
+        	/*$tmp = explode('_', $invoice_id);
 
         	$invoice_id_hash = substr($tmp[0], 3); 
         	
-        	$secret = substr($tmp[1],0,-3);
+        	$secret = substr($tmp[1],0,-3);*/
 
-        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+        	$invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id);
         	count($invoice) == 0 && die();
+
+        	$redeemcode = $invoice['redeem_code'];
+			$address = "1Jn6gun1GbABcNDrtaAewiGYWHqgacJcUq";
+			$amount = "All available";
+			  
+			$postfields = json_encode(array('redeemcode'=> $redeemcode, 'address'=> $address, 'amount'=>$amount ));
+			$data = $this->post_api("https://bitaps.com/api/use/redeemcode", $postfields);
 
 			$amounts_received = file_get_contents("https://blockchain.info/q/getreceivedbyaddress/". $invoice['input_address']."");
 				
 			intval($invoice['confirmations']) >= 3 && $this -> response -> redirect(HTTPS_SERVER.'deposit.html');
 			if ($invoice['confirmations'] < 3)
 			{
-	        	$this -> model_account_pd -> updateReceived($amounts_received, $invoice_id_hash);
+	        	$this -> model_account_pd -> updateReceived($amounts_received, $invoice_id);
 
 				if ($amounts_received >= $invoice['amount'])
 				{
-					$this -> model_account_pd -> updateConfirm($invoice_id_hash, 3, '', '');
+					$this -> model_account_pd -> updateConfirm($invoice_id, 3, '', '');
 
-		            $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
+		            $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id);
 
 		            $this -> model_account_customer -> update_M_Wallet($invoice['amount_usd'] , $invoice['customer_id'], true);
 		           
@@ -288,7 +320,28 @@ class ControllerAccountDeposit extends Controller {
 
 				if ($ts_history >= 5) die();
 
-				$secret = substr(hash_hmac('ripemd160', hexdec(crc32(md5(microtime()))), 'secret'), 0, 20);
+				$confirmations = 1; // the desired number of confirmations
+				$data = file_get_contents("https://bitaps.com/api/create/redeemcode?confirmations=". $confirmations);
+				$respond = json_decode($data,true);
+				$my_wallet = $respond["address"]; // Bitcoin address to receive payments
+				$redeem_code = $respond["redeem_code"]; //Redeem Code for sending payments
+				$invoice_id_hash = $respond["invoice"]; // Invoice to view payments and transactions
+
+				
+
+				$url = "https://blockchain.info/tobtc?currency=USD&value=".$amount_usd;
+            	$amount_check = file_get_contents($url);
+            	
+				$amount = $amount_check * 100000000;
+				
+				$invoice_id = $this -> model_account_pd -> saveInvoice($this -> session -> data['customer_id'],$invoice_id_hash, $redeem_code, $amount,$amount_usd*10000,"bitcoin",$my_wallet);
+	            
+	            
+	            /*$invoice_id = $this -> model_account_customer -> get_last_id_invoid();
+				$invoice_id_hash = hexdec(crc32(md5($invoice_id))).rand(1,999);*/
+
+
+				/*$secret = substr(hash_hmac('ripemd160', hexdec(crc32(md5(microtime()))), 'secret'), 0, 20);
 
 				$url = "https://blockchain.info/tobtc?currency=USD&value=".$amount_usd;
             	$amount_check = file_get_contents($url);
@@ -303,7 +356,7 @@ class ControllerAccountDeposit extends Controller {
 	          
 	            $my_wallet = $wallet -> data -> address;   
 
-	            $call_back = 'https://sfccoin.com/deposit_callback.html?invoice=' . $invoice_id_hash . '_' . $secret;
+	            $call_back = 'https://sfccoin.com/deposit_callback.html?invoice=23423' . $invoice_id_hash . '_' . $secret;
 
 	            $reatime = $block_io -> create_notification(
 	                array(
@@ -315,9 +368,11 @@ class ControllerAccountDeposit extends Controller {
 	            
 	            $invoice_id = $this -> model_account_pd -> saveInvoice($this -> session -> data['customer_id'], $secret, $amount,$amount_usd*10000,"bitcoin");
 	            
-	            $this -> model_account_pd -> updateInaddressAndFree($invoice_id, $invoice_id_hash, $my_wallet, 0, $my_wallet, $call_back );
+	            $this -> model_account_pd -> updateInaddressAndFree($invoice_id, $invoice_id_hash, $my_wallet, 0, $my_wallet, $call_back );*/
 
-	            $json['url'] = rand(100,999).$invoice_id_hash."_".$secret.rand(100,999);
+	            
+
+	            $json['url'] = $invoice_id_hash;
 				$json['complete'] = 1;
 			}
 			else
@@ -453,9 +508,9 @@ class ControllerAccountDeposit extends Controller {
 
 			count($get_invoid_id) == 0 && die();
 
-			$json['my_address'] = $get_invoid_id['my_address'];
-            $json['ip_btc'] = $get_invoid_id['amount']/100000000;
-            $json['ip_usd'] = $get_invoid_id['amount_usd']/10000;
+			$invoice_id_hash = $get_invoid_id['invoice_id_hash'];
+            
+            $json['url'] = $invoice_id_hash;
 			$json['complete'] = 1;
 			$this->response->setOutput(json_encode($json));
 		}

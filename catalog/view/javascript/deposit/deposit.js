@@ -248,13 +248,7 @@ $(function(){
 function show_payment(id){
 	window.funLazyLoad.start();
     window.funLazyLoad.show();
-	$('html, body').animate({
-        scrollTop: $("#sucess_point_submit").offset().top - 200
-    }, 400);
-	$('#sucess_point_submit').show();
-	$('#sucess_point_submit').html('<img  style="width:100px; margin-top:30px;" src="catalog/view/theme/default/images/loading-gallery.gif" />');
-	window.funLazyLoad.start();
-    window.funLazyLoad.show();
+	
 	$.ajax({
         url : "index.php?route=account/deposit/get_invoid",
         type : "post",
@@ -265,14 +259,8 @@ function show_payment(id){
         success : function (result){
 
             result = JSON.parse(result);
-	    	var html='<div class="col-md-12 text-center"><img style="margin-left:-10px" src="https://chart.googleapis.com/chart?chs=225x225&chld=L|0&cht=qr&chl=bitcoin:'+result.my_address+'?amount='+result.ip_btc+'"/></div>';
-        	html +='<p>Please send '+result.ip_btc+' BTC to wallets <br/> '+result.my_address+' <br/> to buy '+numberWithCommas(result.ip_usd)+' USD</p>';
-        	
-        	$('#sucess_point_submit').html(html);
-        	check_payment(id);
-        	$('#ip_usd').val('');
-        	$('#ip_btc').val('');
-        	$('#password_transaction').val('');
+	    	window.location.href = 'confirm_deposit.html?invoid_id='+result.url; 
+        	//check_payment(id);
         	window.funLazyLoad.reset();
         }
     });
@@ -338,7 +326,7 @@ function checkPayment(invoid_id) {
 		    
 		     if (result.complete == -1) {
 
-		         setTimeout(function(){ checkPayment(invoid_id); }, 5000);
+		         setTimeout(function(){ checkPayment(invoid_id); }, 1500);
 		       
 		     } 
 		     else 

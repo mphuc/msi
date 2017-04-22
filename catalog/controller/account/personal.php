@@ -389,6 +389,13 @@ public function checkBinary($p_binary){
 					}
 				}
 
+				$checkshare_Wallet = $this -> model_account_customer -> checkshare_Wallet($cus_id);
+				if(intval($checkshare_Wallet['number'])  === 0){
+					if(!$this -> model_account_customer -> insert_share_Wallet($cus_id)){
+						die();
+					}
+				}
+
 				$check_Setting_Customer = $this -> model_account_customer -> check_Setting_Customer($cus_id);
 				if(intval($check_Setting_Customer['number'])  === 0){
 
@@ -400,6 +407,8 @@ public function checkBinary($p_binary){
 					}
 				}
 				
+				$getCountryByID = $this -> model_account_customer -> getCountryByID(intval($this-> request ->post['country_id']));
+
 				$data['has_register'] = true;
 				
 				// send mail
@@ -445,7 +454,7 @@ public function checkBinary($p_binary){
 							      <tr>
 							         <td align="right">Affilate  ID </td>
 							         
-							         <td><b>M'.($cus_id + 100000).'</b></td>
+							         <td><b>'.$getCountryByID['iso_code_2'].($cus_id + 100000).'</b></td>
 							      </tr>
 							      <tr>
 							         <td align="right">Login Password </td>
@@ -753,7 +762,7 @@ public function checkBinary($p_binary){
 		$id = $this->request->get['id_user'];
 
 		$user = $this -> model_account_customer -> getInfoUsers_binary($id);
-
+		
 		$node = new stdClass();
 
 

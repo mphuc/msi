@@ -59,7 +59,7 @@ class ControllerAccountDashboard extends Controller {
 		$data['regulations2'] = $this -> config -> get('config_regulations_2');
 		$data['regulations3'] = $this -> config -> get('config_regulations_3');
 		// getArticles
-		$page = isset($this->request->get['page']) ? $this->request->get['page'] : 1;      
+		/*$page = isset($this->request->get['page']) ? $this->request->get['page'] : 1;      
 
 		$limit = 5;
 		$start = ($page - 1) * 5;
@@ -77,7 +77,7 @@ class ControllerAccountDashboard extends Controller {
 		}else{
 			$Language_id = 1;
 		}
-		
+		*/
 
 		//customer js
 		$data['m_wallet'] = $this -> model_account_customer -> get_M_Wallet($session_id);
@@ -85,10 +85,12 @@ class ControllerAccountDashboard extends Controller {
 		$data['getTotalPD'] = $this -> model_account_customer -> getTotalPD($session_id);
 		
 		
-		$data['total_binary_left'] = $this -> total_binary_left($session_id);
-		$data['total_binary_right'] = $this -> total_binary_right($session_id);
+		/*$data['total_binary_left'] = $this -> total_binary_left($session_id);
+		$data['total_binary_right'] = $this -> total_binary_right($session_id);*/
 		
+		$data['total_share'] = $this -> model_account_customer -> get_customer_share($session_id);
 
+		$data['wallet_share'] = $this -> model_account_customer -> get_share_Wallet($session_id);
 
 		$data['danhhieu'] = $this -> danhhieu($session_id);
 		

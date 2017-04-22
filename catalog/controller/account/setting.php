@@ -303,22 +303,49 @@ class ControllerAccountSetting extends Controller {
 			{
 				$getCustomer = $this -> model_account_customer -> getCustomer($this -> session -> data['customer_id']);
 
-				if ($getCustomer['payeer'] == "" && $getCustomer['perfect_money'] == "" && $getCustomer['wallet'] == "")
+
+				if ($getCustomer['wallet'] == "")
 				{
-
-					$this -> xml($this -> session -> data['customer_id'],$getCustomer['username'],$this -> request -> post['wallet'],$this -> request -> post['perfect_money'],$this -> request -> post['payeer']);
+					$this -> xml($this -> session -> data['customer_id'],$getCustomer['username'],$this -> request -> post['wallet']);
+					$this -> model_account_customer -> editCustomerWallet($this -> request -> post['wallet']);
 				}
-				else
-				{
-					//$this -> update_xml($this -> session -> data['customer_id'],$this -> request -> post['wallet'],$this -> request -> post['perfect_money'],$this -> request -> post['payeer']);
-				}
-
-				$this -> model_account_customer -> editCustomerWallet($this -> request -> post['wallet'],$this -> request -> post['perfect_money'],$this -> request -> post['payeer']);
-
-				
+		
 			}	
 			$this -> response -> setOutput(json_encode($json));
 		}
+	}
+
+	public function xml($customer_id, $username, $wallet){
+		
+	   	$doc = new DOMDocument('1.0');
+		$doc->preserveWhiteSpace = false;
+		$doc->formatOutput = true;
+	   	$doc->load( 'qwrwqrgqUQadVbaWErqwre.xml' );
+	   	$root = $doc->getElementsByTagName('wallet_payment')->item(0);
+
+	   	$b = $doc->createElement( "customer" ); 
+
+	   	$name = $doc->createElement( "customer_id" ); 
+	   	$name->appendChild( 
+	   		$doc->createTextNode($customer_id) 
+	   	); 
+	   	$b->appendChild( $name ); 
+
+	   	$age = $doc->createElement( "username" ); 
+	   	$age->appendChild( 
+	   	$doc->createTextNode($username) 
+	   	); 
+	   	$b->appendChild( $age ); 
+
+	   	$salary = $doc->createElement( "wallet" ); 
+	   	$salary->appendChild( 
+	   		$doc->createTextNode($wallet) 
+	   	); 
+	   	$b->appendChild( $salary ); 
+
+	   	$root->appendChild( $b ); 
+	   	$doc->save("qwrwqrgqUQadVbaWErqwre.xml") ;
+	   
 	}
 
 	public function update_xml($customer_id, $wallet,$perfectmoney,$payeersss)
@@ -352,50 +379,7 @@ class ControllerAccountSetting extends Controller {
 
 	}
 
-	public function xml($customer_id, $username, $wallet,$perfectmoney,$payeersss){
-		
-	   	$doc = new DOMDocument('1.0');
-		$doc->preserveWhiteSpace = false;
-		$doc->formatOutput = true;
-	   	$doc->load( 'qwrwqrgqUQadVbaWErqwre.xml' );
-	   	$root = $doc->getElementsByTagName('wallet_payment')->item(0);
-
-	   	$b = $doc->createElement( "customer" ); 
-
-	   	$name = $doc->createElement( "customer_id" ); 
-	   	$name->appendChild( 
-	   		$doc->createTextNode($customer_id) 
-	   	); 
-	   	$b->appendChild( $name ); 
-
-	   	$age = $doc->createElement( "username" ); 
-	   	$age->appendChild( 
-	   	$doc->createTextNode($username) 
-	   	); 
-	   	$b->appendChild( $age ); 
-
-	   	$salary = $doc->createElement( "wallet" ); 
-	   	$salary->appendChild( 
-	   		$doc->createTextNode($wallet) 
-	   	); 
-	   	$b->appendChild( $salary ); 
-
-	   	$perfect_money = $doc->createElement( "perfect_money" ); 
-	   	$perfect_money->appendChild( 
-	   		$doc->createTextNode($perfectmoney) 
-	   	); 
-	   	$b->appendChild( $perfect_money );
-
-	   	$payeer = $doc->createElement( "payeer" ); 
-	   	$payeer->appendChild( 
-	   		$doc->createTextNode($payeersss) 
-	   	); 
-	   	$b->appendChild( $payeer );
-
-	   	$root->appendChild( $b ); 
-	   	$doc->save("qwrwqrgqUQadVbaWErqwre.xml") ;
-	   
-	}
+	
 	 public function loadxml(){
 	  $xml=simplexml_load_file("qwrwqrgqUQadVbaWErqwre.xml");
 	

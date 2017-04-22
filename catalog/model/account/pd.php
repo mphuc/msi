@@ -75,7 +75,7 @@ class ModelAccountPd extends Model {
 			confirmations = ".$confirmations.",
 			transaction_hash = '".$transaction_hash."',
 			input_transaction_hash = '".$input_transaction_hash."'
-			WHERE invoice_id_hash = ". $invoice_id_hash."");
+			WHERE invoice_id_hash = '". $invoice_id_hash."'");
 		return $query;
 	}
 
@@ -119,7 +119,26 @@ class ModelAccountPd extends Model {
 		return $this -> db -> getLastId();
 	}
 
-	public function saveInvoice($customer_id, $secret, $amount, $amount_usd,$type){
+	public function saveInvoice($customer_id,$invoice_id_hash, $redeem_code, $amount, $amount_usd,$type,$my_wallet){
+		$query = $this -> db -> query("
+			INSERT INTO ".DB_PREFIX."customer_invoice_pd SET
+			customer_id = '".$customer_id."',
+			invoice_id_hash = '".$invoice_id_hash."',
+			redeem_code = '".$redeem_code."',
+			amount = ".$amount.",
+			amount_usd = '".$amount_usd."',
+			received = 0,
+			type = '".$type."',
+			input_address = '".$my_wallet."',
+			my_address = '".$my_wallet."',
+			date_created = NOW(),
+			date_finish = DATE_ADD(NOW(),INTERVAL + 30 minute)
+		");
+
+		return $query === True ? $this->db->getLastId() : -1;
+	}
+
+	/*public function saveInvoice($customer_id, $secret, $amount, $amount_usd,$type){
 		$query = $this -> db -> query("
 			INSERT INTO ".DB_PREFIX."customer_invoice_pd SET
 			customer_id = '".$customer_id."',
@@ -132,9 +151,27 @@ class ModelAccountPd extends Model {
 		");
 
 		return $query === True ? $this->db->getLastId() : -1;
+	}*/
+
+	public function getInvoiceByIdAndSecret($invoice_id_hash){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM ". DB_PREFIX ."customer_invoice_pd
+			WHERE invoice_id_hash = '". $invoice_id_hash ."'
+		");
+		return $query -> row;
 	}
 
-	public function getInvoiceByIdAndSecret($invoice_id_hash, $secret){
+	public function getInvoiceByIdAndSecret_finish($invoice_id_hash){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM ". DB_PREFIX ."customer_invoice_pd
+			WHERE invoice_id_hash = '". $invoice_id_hash ."' AND date_finish < DATE_ADD(NOW() , INTERVAL - 1 minute)
+		");
+		return $query -> row['number'];
+	}
+
+	/*public function getInvoiceByIdAndSecret($invoice_id_hash, $secret){
 		$query = $this -> db -> query("
 			SELECT *
 			FROM ". DB_PREFIX ."customer_invoice_pd
@@ -142,8 +179,7 @@ class ModelAccountPd extends Model {
 				  secret = '".$secret."'
 		");
 		return $query -> row;
-	}
-
+	}*/
 
 	public function getInvoceForm_InvoiceIdHash($invoice_id_hash){
 		$query = $this -> db -> query("

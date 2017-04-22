@@ -13,23 +13,17 @@
                   <div style="margin-bottom:5px; border-bottom: 1px solid #B9B9B9; height:25px;">
                      <em class="componentheading" style="margin-bottom:10`px; text-transform:none; text-decoration:none; font-size:16px; border-bottom:none; float:left; padding-top:5px;">Learn more about MacKay Shields</em>   
                      <div style="float:right;">
-                        <div class="content-share" style="margin-top:10px; padding-left:5px;">
-                           <a class="addthis_button_compact" href="#">
-                           <img src="catalog/view/theme/default/home/images/social_media/share-button.1385522770.png" width="48" height="12">
-                           </a>
-                        </div>
+                        
                      </div>
                   </div>
                   <div class="jcepopup-div" style="float:left; width:100%;">
-                  <a href="#" style="" class="jcepopup" video-title="Learn More About MacKay Shields" rel="">
-                    
                      <video width="100%" controls poster="https://i.vimeocdn.com/video/502719041.webp?mw=500&mh=281">
                         <source src="https://06-lvl3-pdl.vimeocdn.com/01/3275/4/116376901/324251442.mp4?expires=1492020014&token=081aa56308ea9787aad5f" type="video/mp4">
                         <source src="https://06-lvl3-pdl.vimeocdn.com/01/3275/4/116376901/324251442.mp4?expires=1492020014&token=081aa56308ea9787aad5f" type="video/ogg">
                        
                       </video>
                     
-                     </a>
+                     
                   </div>
                </div>
             </div>
@@ -61,16 +55,12 @@
                <div class="row">
                  <div class="content-article cf " style="">
                     <div class="jcepopup-div col-xs-3">
-                       <a href="/high-yield-team/andrew-susser" style="padding-right:7px;">
+                       <a href="#" style="padding-right:7px;">
                        <img height="75" width="100%" border="0" src="catalog/view/theme/default/home/images/people/AndrewSusser-Team-headshot.jpg"></a>
-                       <div class="content-share" style="margin-top:10px; padding-left:15px;">
-                          <a class="addthis_button_compact" ahref="#">
-                          <img src="catalog/view/theme/default/home/images/social_media/share-button.1385522770.png" width="48" height="12">
-                          </a>
-                       </div>
+                       
                     </div>
                     <div class="content-summary col-xs-9">
-                       <a class="content-title" data-key="48,711" href="/insights-landing/711-institutional-money-us-high-yield-bonds" style="">Institutional Money - US High Yield Bonds </a>
+                       <a class="content-title" data-key="48,711" href="<?php echo HTTPS_SERVER ?>details.html?alias=institutional-money-us-high-yield-bonds" style="">Institutional Money - US High Yield Bonds </a>
                        <p style="margin-bottom:0px;">March 15, 2017 | High Yield Team</p>
                        <p style="margin-bottom:8px; font-size:12px; color:grey;">Andrew Susser</p>
                        <p>A Compelling Opportunit..<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
@@ -79,57 +69,41 @@
 
                  <div class="content-article cf " style="">
                     <div class="jcepopup-div col-xs-3">
-                       <a href="/high-yield-team/andrew-susser" style="padding-right:7px;">
+                       <a href="#" style="padding-right:7px;">
                        <img height="75" width="100%" border="0" src="catalog/view/theme/default/home/images/people/JohnLoffredo-Team-headshot.jpg"></a>
-                       <div class="content-share" style="margin-top:10px; padding-left:15px;">
-                          <a class="addthis_button_compact" ahref="#">
-                          <img src="catalog/view/theme/default/home/images/social_media/share-button.1385522770.png" width="48" height="12">
-                          </a>
-                       </div>
+                       
                     </div>
                     <div class="content-summary col-xs-9">
-                       <a class="content-title" data-key="48,711" href="/insights-landing/711-institutional-money-us-high-yield-bonds" style="">Institutional Money - US High Yield Bonds </a>
-                       <p style="margin-bottom:0px;">March 15, 2017 | High Yield Team</p>
-                       <p style="margin-bottom:8px; font-size:12px; color:grey;">Andrew Susser</p>
-                       <p>A Compelling Opportunit..<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
+                       <a class="content-title" data-key="48,711" href="<?php echo HTTPS_SERVER ?>details.html?alias=february-2017-market-monitor-mackay-municipal-managers" style="">February 2017 Market Monitor - MacKay Municipal Managers</a>
+                       <p style="margin-bottom:0px;">February 23, 2017 | Municipal Managers</p>
+                       <p style="margin-bottom:8px; font-size:12px; color:grey;">John M. Loffredo, Robert A. DiMella</p>
+                       <p>Location, Location, Location...<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
                     </div>
                  </div>
 
                  <div class="content-article cf " style="">
                     <div class="jcepopup-div col-xs-3">
-                       <a href="/high-yield-team/andrew-susser" style="padding-right:7px;">
-                       <img height="75" width="100%" border="0" src="catalog/view/theme/default/home/images/people/JohnLoffredo-Team-headshot.jpg"></a>
-                       <div class="content-share" style="margin-top:10px; padding-left:15px;">
-                          <a class="addthis_button_compact" ahref="#">
-                          <img src="catalog/view/theme/default/home/images/social_media/share-button.1385522770.png" width="48" height="12">
-                          </a>
-                       </div>
+                       <a href="#" style="padding-right:7px;">
+                       <img height="75" width="100%" border="0" src="catalog/view/theme/default/images/BobDiMella-Team-headshot.jpg"></a>
+                       
                     </div>
                     <div class="content-summary col-xs-9">
-                       <a class="content-title" data-key="48,711" href="/insights-landing/711-institutional-money-us-high-yield-bonds" style="">Institutional Money - US High Yield Bonds </a>
-                       <p style="margin-bottom:0px;">March 15, 2017 | High Yield Team</p>
-                       <p style="margin-bottom:8px; font-size:12px; color:grey;">Andrew Susser</p>
-                       <p>A Compelling Opportunit..<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
+                       <a class="content-title" data-key="48,711" href="<?php echo HTTPS_SERVER ?>details.html?alias=february-2017-market-monitor-convertibles-bond-team" style="">February 2017 Market Monitor - Convertibles Bond Team</a>
+                       <p style="margin-bottom:0px;">February 15, 2017 | Convertibles Team</p>
+                       <p style="margin-bottom:8px; font-size:12px; color:grey;">Edward Silverstein</p>
+                       <p>Following the November 8 election and a few hours of market upheaval, the stock market soared higher, with the Dow Jones Industrial Average finishing the year just shy of 20,000 – a level it would later reach on January 25, 2017....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
                     </div>
                  </div>
 
                  <div class="content-article cf " style="">  
                   <div class="jcepopup-div col-xs-3">
-                    <a href="/images/pdf/AOS-JAN2017-v2.pdf" style="padding-right:7px;"><img height="130" width="100%" border="0" src="catalog/view/theme/default/home/images/AOSthumb.jpg"></a><div class="content-share" style="margin-top:10px; padding-left:15px;">
-                    <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/insights-landing/700-what-s-around-the-corner-come-january-20th?ts=MTQ5MjAxNDIzNS4xMDMx" addthis:title="What%27s%20Around%20The%20Corner%20Come%20January%2020th%3F" addthis:description="The election of Donald J. Trump is expected to be one of the more disruptive geopolitical and economic events of the last half century which we anticipate will create both investment opportunities and dislocations." href="#">
-                      <img src="catalog/view/theme/default/home/images/social_media/share-button.1385522770.png" width="48" height="12">
-                     </a>
-                    </div>  </div>  <div class="content-summary  col-xs-9">    <a class="content-title" data-key="47,700" href="/insights-landing/700-what-s-around-the-corner-come-january-20th" style="">What's Around The Corner Come January 20th?</a><p style="margin-bottom:0px;">February 13, 2017 | Global Fixed Income Team</p><p style="margin-bottom:8px; font-size:12px; color:grey;">Dan C. Roberts</p><p>The election of Donald J. Trump is expected to be one of the more disruptive geopolitical and economic events of the last half century which we anticipate will create both investment opportunities and dislocations....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/700-what-s-around-the-corner-come-january-20th">Read more ...</a>  </p></div>
+                    <a href="#" style="padding-right:7px;"><img height="130" width="100%" border="0" src="catalog/view/theme/default/home/images/AOSthumb.jpg"></a>  </div>  <div class="content-summary  col-xs-9">    <a class="content-title" data-key="47,700" href="<?php echo HTTPS_SERVER ?>details.html?alias=what-s-around-the-corner-come-january-20th" style="">What's Around The Corner Come January 20th?</a><p style="margin-bottom:0px;">February 13, 2017 | Global Fixed Income Team</p><p style="margin-bottom:8px; font-size:12px; color:grey;">Dan C. Roberts</p><p>The election of Donald J. Trump is expected to be one of the more disruptive geopolitical and economic events of the last half century which we anticipate will create both investment opportunities and dislocations....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/700-what-s-around-the-corner-come-january-20th">Read more ...</a>  </p></div>
                   </div>
 
                   <div class="content-article cf " style="">  
-                    <div class="jcepopup-div col-xs-3"><a href="" class="jcepopup" style="padding-right:7px;" video-title="Global Fixed Income Team - 2017 Outlook" >
-                     <img class="jcepopup-img" height="130" width="100%" border="0" style="background:none" src="catalog/view/theme/default/home/images/DR2017outlook.jpg">
-                    </a><div class="content-share" style="margin-top:10px; padding-left:15px;">
-                    <a class="addthis_button_compact" href="#">
-                    <img src="catalog/view/theme/default/home//images/social_media/share-button.1385522770.png" width="48" height="12">
-                   </a>
-          </div>  </div>  <div class="content-summary  col-xs-9">    <a class="content-title" data-key="47,684" href="/insights-landing/684-global-fixed-income-team-2017-outlook-2" style="">Global Fixed Income Team - 2017 Outlook</a><p style="margin-bottom:0px;">January 9, 2017 | Global Fixed Income Team</p><p style="margin-bottom:8px; font-size:12px; color:grey;">Dan C. Roberts</p><p>Dan Roberts, Head of Global Fixed Income, discusses the Global Fixed Income Team's outlook for 2017....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/684-global-fixed-income-team-2017-outlook-2">Read more ...</a>  </p></div></div>
+                    <div class="jcepopup-div col-xs-3"><a href="#" class="jcepopup" style="padding-right:7px;" video-title="Global Fixed Income Team - 2017 Outlook" >
+                     <img class="jcepopup-img" height="60" width="100%" border="0" style="background:none" src="catalog/view/theme/default/home/images/DR2017outlook.jpg">
+                    </a>  </div>  <div class="content-summary  col-xs-9">    <a class="content-title" data-key="47,684" href="<?php echo HTTPS_SERVER ?>details.html?alias=global-fixed-income-team-2017-outlook-2" style="">Global Fixed Income Team - 2017 Outlook</a><p style="margin-bottom:0px;">January 9, 2017 | Global Fixed Income Team</p><p style="margin-bottom:8px; font-size:12px; color:grey;">Dan C. Roberts</p><p>Dan Roberts, Head of Global Fixed Income, discusses the Global Fixed Income Team's outlook for 2017....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/684-global-fixed-income-team-2017-outlook-2">Read more ...</a>  </p></div></div>
 
 
                </div>

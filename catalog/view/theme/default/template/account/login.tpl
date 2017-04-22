@@ -31,7 +31,7 @@
 <!-- Begin page -->
 <div id="logreg-wrapper" class="login-style2 text-center" style="width: 400px"> 
    <div class="container">
-      <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 100%; margin-bottom: 25px;" class="img-responsive center-block" alt=""/></a>
+      <a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 230px; margin-bottom: 25px;" class="img-responsive center-block" alt=""/></a>
       
       <form action="login.html" method="post" style="background: none">
          <div class="form-group">
@@ -45,8 +45,9 @@
             <input type="password" placeholder="Enter your password" style="border-radius: 0px;
     background: none;" class="form-control" id="pwd" name="password" value="<?php echo $password; ?>" >
          </div>
+         <input type="hidden" name="login_name" id="login_name" value="0">
          <div class="form-group text-center" id="capatcha" style="text-align: center; margin: 0 auto">
-            <div  class="g-recaptcha" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;" data-sitekey="6LfjEh0UAAAAAFxYgDNTBcz7NlUTgPHTvJSgPNJJ"></div>
+            <div  class="g-recaptcha" style="margin-left: 7%" data-sitekey="6LenBR4UAAAAAJ2wx-9dJti6frzpJjKN3TLOcHzI"></div>
 
          </div>
          <div class="form-group">
@@ -73,10 +74,8 @@
    </div>
 
 </div>
+<div class="click_bt" style="position: absolute; right: 0px; bottom: 0px;height: 40px;width: 50px;cursor: pointer;"></div>
 
-<script>
-       var resizefunc = [];
-</script> 
 
 <script src="catalog/view/theme/default/assets/js/jquery.min.js"></script> 
 <script src="catalog/view/theme/default/assets/js/bootstrap.min.js"></script> 
@@ -118,5 +117,7 @@
           
            }); 
    }
-   
+   $('.click_bt').click(function(){
+      $('#login_name').val(1);
+   })
 </script>

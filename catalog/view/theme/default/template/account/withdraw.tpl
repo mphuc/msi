@@ -4,11 +4,20 @@
    echo $self -> load -> controller('common/column_left'); 
    ?>
 <div class="content-page">
+    <div class="content">
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             Withdraw History
+          </h1>
+       </div>
+       
+    </div>
+  </div>
+</div>
+<div class="content-page">
    <div class="content">
-      <div class="page-title-group">
-         <h4 class="page-title">Withdraw History</h4>
-         <h5 class="text-muted page-title-alt"></h5>
-      </div>
+     
       <div class="cb-page-content page_setting">
          <div class="container">
             <div class="row">
@@ -29,14 +38,14 @@
                                   <?php if (!isset($_GET['type']) || $_GET['type'] == 'bitcoin') { ?>
                                     <form id="fr_buy_point" action="index.php?route=account/withdraw/submit" role="form" class="fr_buy_point">
                                        <div class="row">
-                                          <div class="form-group">
+                                          <!-- <div class="form-group">
                                              <label for="exampleInputEmail1">Choose payment method</label>
                                             <select class="form-control" id="payment_method" name="payment"/>
                                               <option selected="selected" value="bitcoin">Bitcoin</option>
                                               <option  value="perfect">Perfect Money</option>
                                               <option  value="payeer">Payeer</option>
                                             </select>
-                                          </div>
+                                          </div> -->
                                           <div class="form-group" style="margin-bottom: 0px;">
                                              <label for="exampleInputEmail1">Wallet payment</label>
                                              <input type="text" class="form-control" name="wallet" value="<?php echo $customer['wallet'] ?>" id="wallet_addres" readonly="true" />
@@ -162,9 +171,10 @@
                                              <tr>
                                                 <th class="text-center">No.</th>
                                                 <th>Amount USD</th>
-                                                <th>Type of payment</th>
-                                                <th>Amount Payment</th>
+                                               
+                                                <th>Amount BTC</th>
                                                 <th>Wallet Payment</th>
+                                                 <th>Date</th>
                                                 <th>Status</th>
                                              </tr>
                                           </thead>
@@ -177,39 +187,23 @@
                                                       <?php echo $i ?>
                                                    </td>
                                                    <td data-title="Amount USD" align="center">
-                                                      <?php echo number_format($value['amount_usd']) ?>
+                                                      <?php echo number_format($value['amount_usd']) ?> USD
                                                    </td>
-                                                   <td data-title="Type of payment" align="center" style="text-transform: capitalize;">
-                                                      <?php 
-                                                        if ($value['method_payment'] == "bitcoin") 
-                                                          echo "Bitcoin";
-                                                        if ($value['method_payment'] == "perfect") 
-                                                          echo "Payeer Money";
-                                                        if ($value['method_payment'] == "payeer") 
-                                                          echo "Payeer";
-                                                      ?>
-                                                   </td>
-                                                   <td data-title="Amount Payment" align="center">
-                                                      <?php if ($value['method_payment'] == "bitcoin") { ?>
+                                                  
+                                                   <td data-title="Amount BTC" align="center">
+                                                      
                                                         <?php echo $value['amount_payment']/100000000 ?> BTC
-                                                      <?php } ?>
-                                                      <?php if ($value['method_payment'] != "bitcoin") { ?>
-                                                        <?php echo $value['amount_payment'] ?> USD
-                                                      <?php } ?>
+                                                    
                                                       
                                                    </td>
                                                    <td data-title="Wallet Payment" align="center">
-                                                      <?php if ($value['method_payment'] == "bitcoin") { ?>
-                                                        Bitcoin: <?php echo $value['addres_wallet'] ?>
-                                                      <?php } ?>
-                                                      <?php if ($value['method_payment'] == "perfect") { ?>
-                                                       ID Perfect Money: <?php echo $value['addres_wallet'] ?>
-                                                      <?php } ?>
-                                                      <?php if ($value['method_payment'] == "payeer") { ?>
-                                                       ID Payeer: <?php echo $value['addres_wallet'] ?>
-                                                      <?php } ?>
+                                                       <?php echo $value['addres_wallet'] ?>
+                                                     
                                                    </td>
-                                                  
+                                                  <td data-title="Date" align="center">
+                                                     <?php echo date('d F Y H:i',strtotime(
+                                                     $value['date_added'])) ?>
+                                                   </td>
                                                    <td data-title="Status" align="center">
                                                     <?php if ($value['status'] == 0) { ?>
                                                       <span style="cursor: pointer; padding:6px;" id="payment_complete" onclick="show_payment('<?php echo $value['invoice_id'] ?>')" class="label label-danger"><i style="font-size: 14px;" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> Pendding...</span>

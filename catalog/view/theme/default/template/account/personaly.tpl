@@ -80,6 +80,18 @@ span.cir {
   border-color: cyan;
 }
 </style>
+<div class="content-page">
+    <div class="content">
+        <div class="section-heading row">
+       <div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+          <h1 class="title text-uppercase">
+             Column Tree
+          </h1>
+       </div>
+       
+    </div>
+  </div>
+</div>
 <div class="main-content">
     <div class="page-header">
       <div class="header-left-panel">

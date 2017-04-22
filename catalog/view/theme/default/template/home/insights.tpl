@@ -4,9 +4,9 @@
       <div class="moduletable">
          <div class="moduletable">
             <ul class="menu">
-               <li class="parent"><a href="/custom-search?filter-mode=insights&amp;content-types=audio-video"><span>Videos/Webcasts</span></a></li>
-               <li class="parent"><a href="/custom-search?filter-mode=insights&amp;content-types=white-paper"><span>White Papers</span></a></li>
-               <li class="parent"><a href="/custom-search?filter-mode=insights&amp;content-types=insights,advertorial"><span>Market Insights</span></a></li>
+               <li class="parent"><a href="#"><span>Videos/Webcasts</span></a></li>
+               <li class="parent"><a href="#"><span>White Papers</span></a></li>
+               <li class="parent"><a href="#"><span>Market Insights</span></a></li>
             </ul>
          </div>
       </div>

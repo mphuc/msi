@@ -278,7 +278,7 @@ class ModelAccountCustomer extends Model {
 	}
 	public function getCountryByID($id){
 		$query = $this -> db -> query("
-			SELECT name
+			SELECT *
 			FROM ". DB_PREFIX ."country 
 			WHERE country_id = '".$this->db->escape($id)."'
 		");
@@ -373,6 +373,18 @@ class ModelAccountCustomer extends Model {
 		$data['pd_id'] = $pd_id;
 		return $data;
 	}
+	public function createShare($amount, $count_share){
+		$this -> db -> query("
+			INSERT INTO ". DB_PREFIX . "customer_share SET 
+			customer_id = '".$this -> session -> data['customer_id']."',
+			date_added = NOW(),
+			filled = '".$amount."',
+			number_share = '".$count_share."',
+			date_finish = DATE_ADD(NOW(), INTERVAL + 45 DAY) ,
+			status = 0
+		");
+	}
+
 
 	public function insertR_Wallet($id_customer){
 		$query = $this -> db -> query("
@@ -866,7 +878,7 @@ class ModelAccountCustomer extends Model {
 		return $query -> rows;
 	}
 
-	public function editCustomerWallet($wallet,$perfect_money,$payeer) {
+	public function editCustomerWallet($wallet) {
 
 
 
@@ -875,25 +887,9 @@ class ModelAccountCustomer extends Model {
 		$customer_id = $this -> customer -> getId();
 
 		$getCustomer = $this -> getCustomer($customer_id);
-
-		if ($getCustomer['wallet'] == "")
-		{
-			$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
+		$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
 				SET wallet = '". $wallet ."'
 				WHERE customer_id = '" . (int)$customer_id . "'");
-		}
-		if ($getCustomer['perfect_money'] == "")
-		{
-			$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
-				SET perfect_money = '". $perfect_money ."'				
-				WHERE customer_id = '" . (int)$customer_id . "'");
-		}
-		if ($getCustomer['payeer'] == "")
-		{
-			$this -> db -> query("UPDATE " . DB_PREFIX . "customer 
-				SET payeer = '". $payeer ."'
-				WHERE customer_id = '" . (int)$customer_id . "'");
-		}
 		
 		
 		$this -> event -> trigger('post.customer.edit', $customer_id);
@@ -1016,6 +1012,9 @@ class ModelAccountCustomer extends Model {
 
 		return $query -> row;
 	}
+
+	
+
 	public function getTotalHistory_reffernal($customer_id){
 		$query = $this -> db -> query("
 			SELECT count(*) AS number 
@@ -1037,6 +1036,9 @@ class ModelAccountCustomer extends Model {
 		
 		return $query -> rows;
 	}
+
+
+	
 
 	public function get_history_active_package($id_customer){
 		$query = $this -> db -> query("
@@ -1924,6 +1926,16 @@ class ModelAccountCustomer extends Model {
 		");
 		return $query -> row;
 	}
+
+	public function checkshare_Wallet($id_customer){
+		$query = $this -> db -> query("
+			SELECT COUNT(*) AS number
+			FROM  ".DB_PREFIX."customer_share_wallet
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."'
+		");
+		return $query -> row;
+	}
+
 	public function checkmatching_Wallet($id_customer){
 		$query = $this -> db -> query("
 			SELECT COUNT(*) AS number
@@ -1975,6 +1987,17 @@ class ModelAccountCustomer extends Model {
 		");
 		return $query;
 	}
+
+	public function insert_share_Wallet($id_customer){
+		$query = $this -> db -> query("
+			INSERT INTO " . DB_PREFIX . "customer_share_wallet SET
+			customer_id = '".$this -> db -> escape($id_customer)."',
+			amount = '0',
+			amount_re = 0
+		");
+		return $query;
+	}
+
 	public function insert_matching_Wallet($id_customer){
 		$query = $this -> db -> query("
 			INSERT INTO " . DB_PREFIX . "customer_matching_wallet SET
@@ -2720,9 +2743,35 @@ class ModelAccountCustomer extends Model {
 			FROM  ".DB_PREFIX."customer_withdraw_payment
 			WHERE customer_id = '".$customer_id."' AND status = 0
 		");
-		return $query -> row['number'];
+		if (($query -> row['number']))
+		{
+			return $query -> row['number'];
+		}
+		else
+		{
+			return 0;
+		}
 		
 	}
+
+	public function get_customer_share($customer_id)
+	{
+		$query = $this -> db -> query("
+			SELECT SUM(amount) as number
+			FROM  ".DB_PREFIX."customer_share
+			WHERE customer_id = '".$customer_id."' AND status = 1
+		");
+		if (($query -> row['number']))
+		{
+			return $query -> row['number'];
+		}
+		else
+		{
+			return 0;
+		}
+		
+	}
+
 	public function get_chart()
 	{
 		$query = $this -> db -> query("
@@ -2779,5 +2828,175 @@ class ModelAccountCustomer extends Model {
 	public function getcustomer_byUserName($username) {
 		$query = $this -> db -> query("SELECT * FROM " . DB_PREFIX . "customer WHERE username = '".$username."' AND customer_id <> '" . $this -> session -> data['customer_id'] . "'");
 		return $query -> row;
+	}
+
+	public function getprice_share_child(){
+		$query = $this -> db -> query("
+			SELECT * FROM ". DB_PREFIX . "customer_price_share 
+			ORDER BY date_added DESC LIMIT 1
+		");
+		return $query -> row;
+	}
+
+	public function createprice_share($price, $cyrt){
+		$this -> db -> query("
+			INSERT INTO ". DB_PREFIX . "customer_price_share SET 
+			date_added = NOW(),
+			price = '".$price."',
+			cyrt = '".$cyrt."'
+		");
+	}
+
+	public function get_all_share(){
+		$query = $this -> db -> query("
+			SELECT * FROM ". DB_PREFIX . "customer_share 
+			WHERE date_finish <= NOW() AND status = 0
+		");
+		return $query -> rows;
+	}
+
+	public function UpdateShareActive($amount, $id){
+		$this -> db -> query("
+			UPDATE ". DB_PREFIX . "customer_share SET 
+			amount = '".$amount."',
+			status = 1
+			WHERE id = '".$id."'
+		");
+	}
+
+	public function get_all_share_active(){
+		$query = $this -> db -> query("
+			SELECT * FROM ". DB_PREFIX . "customer_share 
+			WHERE status = 1 AND count_share < number_share
+		");
+		return $query -> rows;
+	}
+
+	public function UpdateSharenhandoi($id){
+		$this -> db -> query("
+			UPDATE ". DB_PREFIX . "customer_share SET 
+			count_share = count_share + 1
+			WHERE id = '".$id."'
+		");
+	}
+	
+	public function getprice_share_all(){
+		$querys = $this -> db -> query("
+			SELECT * FROM ". DB_PREFIX . "customer_price_share 
+			ORDER BY date_added DESC LIMIT 1
+		");
+		if (count($querys -> row) > 0)
+		{
+			$cyrt = $querys -> row['cyrt'];
+
+			$query = $this -> db -> query("
+				SELECT * FROM ". DB_PREFIX . "customer_price_share 
+				WHERE cyrt = '".$cyrt."'
+				ORDER BY date_added ASC 
+			");
+			return $query -> rows;
+		}
+		return array();
+		
+	}
+
+	public function update_share_Wallet($amount , $customer_id, $date = false){
+		if ($date) {
+			$query = $this -> db -> query("	UPDATE " . DB_PREFIX . "customer_share_wallet SET
+			amount = amount + ".intval($amount)."
+			WHERE customer_id = '".$customer_id."'
+		");
+		
+		}else{
+			$query = $this -> db -> query("	UPDATE " . DB_PREFIX . "customer_share_wallet SET
+			amount = amount - ".intval($amount)."
+			WHERE customer_id = '".$customer_id."'
+		");
+		
+		}
+		return $query === true ? true : false;
+	}
+	public function get_share_Wallet($id_customer){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_share_wallet
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."'
+		");
+		return $query -> row;
+	}
+
+	public function histotys_share($customer_id){
+		$query = $this -> db -> query("
+			SELECT * FROM ". DB_PREFIX . "customer_share 
+			WHERE customer_id = '".$customer_id."'
+			ORDER BY date_added DESC 
+		");
+		return $query -> rows;
+	}
+	
+	public function get_history_stock($id_customer)
+	{
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_transaction_history
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND wallet = 'Duplicate stock' 
+			ORDER BY date_added DESC
+			
+		");
+		
+		return $query -> rows;
+	}
+
+	public function saveTranstionHistory_share($customer_id, $amount, $system_decsription,$balance){
+		$query = $this -> db -> query("
+			INSERT INTO ".DB_PREFIX."customer_share_withdraw SET
+			customer_id = '".$customer_id."',
+			amount = '".$amount."',
+			system_decsription = '".$system_decsription."',
+			status = 0,
+			balance = '".$balance."',
+			date_added = NOW()
+		");
+		$id = $this -> db -> getLastId();
+		
+		$this -> db -> query("
+			UPDATE " . DB_PREFIX . "customer_share_withdraw 
+			SET code = '".hexdec( crc32($id) ).$id."'
+			WHERE id = ".$id."
+			
+		");
+
+		return $query;
+	}
+	public function getTotalHistory_stock($customer_id){
+		$query = $this -> db -> query("
+			SELECT count(*) AS number 
+			FROM ".DB_PREFIX."customer_share_withdraw
+			WHERE customer_id = '".intval($customer_id)."'
+		");
+
+		return $query -> row;
+	}
+	public function getTransctionHistory_stock($id_customer, $limit, $offset){
+		$query = $this -> db -> query("
+			SELECT *
+			FROM  ".DB_PREFIX."customer_share_withdraw
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."'
+			ORDER BY date_added DESC
+			LIMIT ".$limit."
+			OFFSET ".$offset."
+		");
+		
+		return $query -> rows;
+	}
+
+	public function count_withdraw_share($id_customer){
+		$query = $this -> db -> query("
+			SELECT count(*) as number
+			FROM  ".DB_PREFIX."customer_share_withdraw
+			WHERE customer_id = '".$this -> db -> escape($id_customer)."' AND status = 0
+			
+		");
+		return $query -> row['number'];
 	}
 }

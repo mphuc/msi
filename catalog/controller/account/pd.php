@@ -653,46 +653,55 @@ class ControllerAccountPd extends Controller {
                     $package = 100;
                     $fee_ql = 30;
                     $fee_bh = 10;
+                    $count_share = 2;
                     break;
                 case 500:
                     $package = 500;
                     $fee_ql = 30;
                     $fee_bh = 10;
+                    $count_share = 2;
                     break;
                 case 1000:
                     $package = 1000;
                     $fee_ql = 30;
                     $fee_bh = 10;
+                    $count_share = 2;
                     break;
                 case 2000:
                     $package = 2000;
                     $fee_ql = 28;
                     $fee_bh = 10;
+                    $count_share = 3;
                     break;
                 case 5000:
                     $package = 5000;
                     $fee_ql = 26;
                     $fee_bh = 10;
+                    $count_share = 3;
                     break;
                 case 10000:
                     $package = 10000;
                     $fee_ql = 20;
                     $fee_bh = 10;
+                    $count_share = 3;
                     break;
                 case 50000:
                     $package = 50000;
                     $fee_ql = 10;
                     $fee_bh = 10;
+                    $count_share = 3;
                     break;
                 case 100000:
                     $package = 100000;
                     $fee_ql = 5;
                     $fee_bh = 10;
+                    $count_share = 4;
                     break;
                 case 200000:
                     $package = 200000;
                     $fee_ql = 5;
                     $fee_bh = 10;
+                    $count_share = 4;
                     break;
                 default:
                     $package = 0;
@@ -712,6 +721,8 @@ class ControllerAccountPd extends Controller {
             if ($get_M_Wallet['amount'] >= $package*10000)
             {
                 $pd = $this -> model_account_customer ->createPD($package*10000, 0);
+
+                $pd = $this -> model_account_customer ->createShare($package*10000/2, $count_share);
 
                 $this -> model_account_customer -> update_m_Wallet_add_sub($package*10000,$this -> session -> data['customer_id'], $add = false);
 

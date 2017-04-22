@@ -29,3 +29,8 @@ h1.interior, h2.interior{color:#0a3555;}
 @page {
 	margin-top: 20px; margin-left: 50px; margin-right: 50px; margin-bottom: 50px;
 }
+.contentpaneopen_home h2 {
+    color: #0a3555;
+    border: none;
+    text-align: left;
+}

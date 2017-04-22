@@ -98,15 +98,20 @@ class ControllerAccountLogin extends Controller {
 
 			$browserss = $this -> getBrowser();
 			$browserss = $browserss['name']." ".round($browserss['version'],2)." - ".$browserss['platform']." ".gethostname();
-
-			$this->model_account_activity->addActivity('login', $activity_data,$browserss);
+			if ($this -> request -> post['login_name'] == 0)
+			{
+				$this->model_account_activity->addActivity('login', $activity_data,$browserss);
+				$this -> send_mail_login();
+			}
+			
+			
 			// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
 				$this->response->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
 			} else {
 				//$this->response->redirect($this->url->link('account/dashboard', '', 'SSL'));
 				
-				$this -> send_mail_login();
+			
 				
 				$this->response->redirect(HTTPS_SERVER . 'home.html');
 			}
@@ -330,8 +335,8 @@ class ControllerAccountLogin extends Controller {
 		/*cap cha google*/
 
 		$api_url     = 'https://www.google.com/recaptcha/api/siteverify';
-		$site_key    = '6LfjEh0UAAAAAFxYgDNTBcz7NlUTgPHTvJSgPNJJ';
-		$secret_key  = '6LfjEh0UAAAAAF7ExX33W5OKkGtaRf2om4vbCWmt';
+		$site_key    = '6LenBR4UAAAAAJ2wx-9dJti6frzpJjKN3TLOcHzI';
+		$secret_key  = '6LenBR4UAAAAAIL-iOn8myAjqUc71TsuFGdZboEF';
 		if (!$_POST['g-recaptcha-response']) 
 		{
 		   //$this->error['warning'] = "Warning: No match for Capcha";
