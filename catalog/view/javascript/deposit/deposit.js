@@ -323,10 +323,14 @@ function checkPayment(invoid_id) {
 		 },
 		 success: function(result) {
 		     result = JSON.parse(result);
-		    
+		    if (result.time == 1)
+		    {
+		    	$('.refresh').show();
+		    	return false;
+		    }
 		     if (result.complete == -1) {
 
-		         setTimeout(function(){ checkPayment(invoid_id); }, 1500);
+		         setTimeout(function(){ checkPayment(invoid_id); }, 3000);
 		       
 		     } 
 		     else 
@@ -335,6 +339,7 @@ function checkPayment(invoid_id) {
 		         $('.coin_no').hide();
 		         $('#message_no').html('This invoice has been paid!');
 		     }
+
 		 }
 	});
 }

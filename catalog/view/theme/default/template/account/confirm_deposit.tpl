@@ -65,7 +65,7 @@
                                   <input style="width: 255px" readonly class="js-copytextarea addr tooltip-top "value="<?php echo $invoice['input_address'];?>" title=">">
                                 </td>
 
-                                <td style="min-width:80px"><button class="countdowns btn-wallet tooltip-top4" data-countdown="<?php echo $invoice['date_finish']; ?>" title="">Open Wallet</button></td>
+                                <td style="min-width:80px"><!-- <button class="countdowns btn-wallet tooltip-top4" data-countdown="<?php echo $invoice['date_finish']; ?>" title="">Open Wallet</button> --></td>
                              </tr>
                           </tbody>
                        </table>

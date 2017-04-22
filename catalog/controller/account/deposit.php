@@ -151,7 +151,7 @@ class ControllerAccountDeposit extends Controller {
 
         	$getInvoiceByIdAndSecret_finish = $this -> model_account_pd -> getInvoiceByIdAndSecret_finish($invoice_id);
         	
-        	(intval($getInvoiceByIdAndSecret_finish) === 1) && die('time');
+        	(intval($getInvoiceByIdAndSecret_finish) === 1) && $this->response->setOutput(json_encode($json['time'] = 1));;
 
         	count($invoice) == 0 && die();
 

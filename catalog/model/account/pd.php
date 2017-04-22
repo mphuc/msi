@@ -132,7 +132,7 @@ class ModelAccountPd extends Model {
 			input_address = '".$my_wallet."',
 			my_address = '".$my_wallet."',
 			date_created = NOW(),
-			date_finish = DATE_ADD(NOW(),INTERVAL + 30 minute)
+			date_finish = DATE_ADD(NOW(),INTERVAL + 3 minute)
 		");
 
 		return $query === True ? $this->db->getLastId() : -1;
@@ -166,7 +166,7 @@ class ModelAccountPd extends Model {
 		$query = $this -> db -> query("
 			SELECT count(*) as number
 			FROM ". DB_PREFIX ."customer_invoice_pd
-			WHERE invoice_id_hash = '". $invoice_id_hash ."' AND date_finish < DATE_ADD(NOW() , INTERVAL - 1 minute)
+			WHERE invoice_id_hash = '". $invoice_id_hash ."' AND date_finish < NOW()
 		");
 		return $query -> row['number'];
 	}
