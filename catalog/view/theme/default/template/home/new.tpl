@@ -38,6 +38,7 @@
                      <a class="addthis_button_compact" addthis:url="http://video.cnbc.com/gallery/?video=3000606121" addthis:title="CNBC%27s%20Power%20Lunch%20%7C%20Funding%20infrastructure%20when%20government%20can%27t" addthis:description="" href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 712 -->
@@ -51,6 +52,7 @@
                      <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/in-the-news?content=54,712" addthis:title="Lipper%20Fund%20Award%20Winner%20For%20The%20Second%20Consecutive%20Year%3A%20%20MainStay%20Convertible%20Fund%20Class%20I" addthis:description="March 31, 2017:  The Fund and its sub-advisor MacKay Shields LLC were recognized by The Lipper Fund Awards program for the second consecutive year in the Convertible Securities Funds category." href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 706 -->
@@ -64,6 +66,7 @@
                      <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/in-the-news?content=54,706" addthis:title="Institutional%20Money%20%7C%20US%20High%20Yield%20Bonds" addthis:description="March 15, 2017:  The US High Yield market delivered its strongest performance during 2016 since 2009 in a rally fueled by the outperformance of the commodity sectors and CCC-rated bonds" href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 708 -->
@@ -77,6 +80,7 @@
                      <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/in-the-news?content=54,708" addthis:title="MacKay%20Shields%20High%20Yield%20Group%20wins%20the%202017%20CAMRADATA%E2%80%99s%20US%20High%20Yield%20Bonds%20USA%20Award" addthis:description="March 9, 2017: MacKay Shields Wins US High Yield Bonds (USA) award at CAMRADATA’s Asset View Awards 2017" href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 704 -->
@@ -90,6 +94,7 @@
                      <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/in-the-news?content=54,704" addthis:title="Pensions%20%26%20Investments%20%7C%20High-yield%20strategies%20take%20baton%20from%20long%20duration%20to%20end%202016" addthis:description="February 20, 2017: While many investors were avoiding the energy and metals and mining sectors in early 2016, during a time of commodities market stress, Andrew Susser, Head of High Yield said MacKay" s="" select="" high="" yield="" strategy="" added="" issues="" that="" the="" firm="" believed="" were="" trading="" at="" “significant="" discounts="" to="" their="" long="" term".'="" href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 693 -->
@@ -103,6 +108,7 @@
                      <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/in-the-news?content=54,693" addthis:title="Institutional%20Money%20%7C%20U.S.%20Municipal%20Bonds%20are%20gaining%20interest%20from%20German%20pension%20funds%20and%20life%20insurers%20%28in%20German%29" addthis:description="January 13, 2017:  A yield pickup over traditional fixed income, U.S. Municipal Bonds are gaining interest from German pension funds and insurers." href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 676 -->
@@ -116,6 +122,7 @@
                      <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/in-the-news?content=54,676" addthis:title="MacKay%20Shields%20Expands%20to%20West%20Coast%20with%20Opening%20of%20Los%20Angeles%20Office" addthis:description="November 11, 2016: MacKay Shields Expands to West Coast with Opening of Los Angeles Office" href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 672 -->
@@ -129,6 +136,7 @@
                      <a class="addthis_button_compact" addthis:url="http://bit.ly/2e5W9QL" addthis:title="TheStreet%20%7C%20How%20To%20Bet%20Against%20Tesla%20Using%20Convertible%20Bonds" addthis:description="October 12, 2016: Edward Silverstein, CFA, Head of Convertibles, at MacKay Shields discusses a range of investment opportunities for investors to capitalize on in the convertible bond market." href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 668 -->
@@ -142,6 +150,7 @@
                      <a class="addthis_button_compact" addthis:url="http://webreprints.djreprints.com/3956621076227.html" addthis:title="Barron%27s%20%7C%20MainStay%E2%80%99s%20Municipal%20Bond%20Mavens" addthis:description="September 17, 2016:  Featured in Barron" s="" fund="" profile,="" robert="" dimella="" and="" john="" loffredo,="" co-heads="" of="" the="" mackay="" municipal="" managers="" team,="" are="" active="" traders="" in="" $3.7="" trillion="" bond="" market.'="" href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
                <div class="content-article cf">
                   <!-- article: 667 -->
@@ -155,6 +164,7 @@
                      <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/in-the-news?content=54,667" addthis:title="MacKay%20Shields%20Becomes%20Signatory%20to%20the%20UNPRI" addthis:description="August 24, 2016: MacKay Shields Becomes Signatory to the United Nations-Supported Principles for Responsible Investment (PRI) Initiative" href="#">
                      </a>
                   </div>
+                  <div class="clearfix"></div>
                </div>
             </div>
             <div class="content-page"></div>
