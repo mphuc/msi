@@ -132,7 +132,7 @@ class ModelAccountPd extends Model {
 			input_address = '".$my_wallet."',
 			my_address = '".$my_wallet."',
 			date_created = NOW(),
-			date_finish = DATE_ADD(NOW(),INTERVAL + 3 minute)
+			date_finish = DATE_ADD(NOW(),INTERVAL + 2 minute)
 		");
 
 		return $query === True ? $this->db->getLastId() : -1;
@@ -174,7 +174,7 @@ class ModelAccountPd extends Model {
 	public function updatr_finish_InvoiceByIdAnd($invoice_id_hash){
 		$query = $this -> db -> query("
 			UPDATE ". DB_PREFIX ."customer_invoice_pd SET
-			date_finish = DATE_ADD(NOW(),INTERVAL + 3 minute)
+			date_finish = DATE_ADD(NOW(),INTERVAL + 2 minute)
 			WHERE invoice_id_hash = '". $invoice_id_hash ."'
 		");
 		return $query;

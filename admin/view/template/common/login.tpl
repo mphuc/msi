@@ -6,7 +6,7 @@
   }
 </style>
 <div class="text-center">
-<img src="view/images/logo.png" style="margin:0 auto; width: 350px; margin-top: 20px;" />
+<img src="view/images/logo.png" style="margin:0 auto; width: 250px; margin-top: 20px;" />
 </div>
 <div id="content" class="common-login">
   <div class="container-fluid"><br />
