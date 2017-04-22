@@ -37,6 +37,7 @@
                <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/insights-landing/699-reagan-vs-trump-parallels-and-implications?ts=MTQ5MjAxNzA0OS4wNTE2" addthis:title="Reagan%20vs.%20Trump%3A%20Parallels%20and%20Implications" addthis:description="Dan Roberts, Head of Global Fixed Income, discusses Trumponomics vs. Reaganomics and shares perspective on what may be ahead as Trump begins his Presidency." href="#">
                </a>
             </div>
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf audio-video" style="">  
@@ -47,6 +48,7 @@
             <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/insights-landing/698-top-5-municipal-market-insights-for-2017-rebuilding-america?ts=MTQ5MjAxNzExMC41MDAx" addthis:title="Top%205%20Municipal%20Market%20Insights%20for%202017%20-%20Rebuilding%20America" addthis:description="MacKay Municipal Managers surveys the changing municipal landscape and looks at what might be ahead for 2017." href="#">
            </a>
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
         <div class="content-article cf audio-video" style="">  
@@ -57,6 +59,7 @@
             <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/insights-landing/698-top-5-municipal-market-insights-for-2017-rebuilding-america?ts=MTQ5MjAxNzExMC41MDAx" addthis:title="Top%205%20Municipal%20Market%20Insights%20for%202017%20-%20Rebuilding%20America" addthis:description="MacKay Municipal Managers surveys the changing municipal landscape and looks at what might be ahead for 2017." href="#">
            </a>
           </div>
+          <div class="clearfix"></div>
         </div>
          <div class="clearfix"></div>
         <div class="content-article cf audio-video" style="">  
@@ -67,6 +70,7 @@
             <a class="addthis_button_compact" addthis:url="https://www.mackayshields.com/insights-landing/698-top-5-municipal-market-insights-for-2017-rebuilding-america?ts=MTQ5MjAxNzExMC41MDAx" addthis:title="Top%205%20Municipal%20Market%20Insights%20for%202017%20-%20Rebuilding%20America" addthis:description="MacKay Municipal Managers surveys the changing municipal landscape and looks at what might be ahead for 2017." href="#">
            </a>
           </div>
+          <div class="clearfix"></div>
         </div> 
          <div class="clearfix"></div>
          
@@ -83,7 +87,7 @@
                <p style="margin-bottom:8px; font-size:12px; color:grey;">John M. Loffredo, Robert A. DiMella</p>
                <p>MacKay Municipal Managers Municipal Bond Market Insights for 2017...<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/692-top-5-municipal-market-insights-for-2017">Read more ...</a>  </p>
             </div>
-            
+              <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf white-paper" style="">
@@ -94,7 +98,7 @@
                <p style="margin-bottom:8px; font-size:12px; color:grey;">John M. Loffredo, Robert A. DiMella</p>
                <p>MacKay Municipal Managers: Navigating the municipal bond market...<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/673-case-study-puerto-rico">Read more ...</a>  </p>
             </div>
-            
+              <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf white-paper" style="display:none">
@@ -110,6 +114,7 @@
                <img src="/images/social_media/share-button.1385522770.png" width="48" height="12">
                </a>
             </div>
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf white-paper" style="display:none">
@@ -125,6 +130,7 @@
                <img src="/images/social_media/share-button.1385522770.png" width="48" height="12">
                </a>
             </div>
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf white-paper" style="display:none">
@@ -140,6 +146,7 @@
                <img src="/images/social_media/share-button.1385522770.png" width="48" height="12">
                </a>
             </div>
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-insights-title insights-title-margin">
