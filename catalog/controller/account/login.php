@@ -339,7 +339,10 @@ class ControllerAccountLogin extends Controller {
 		$secret_key  = '6LenBR4UAAAAAIL-iOn8myAjqUc71TsuFGdZboEF';
 		if (!$_POST['g-recaptcha-response']) 
 		{
-		   //$this->error['warning'] = "Warning: No match for Capcha";
+			if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1')
+			{
+				$this->error['warning'] = "Warning: No match for Capcha";
+			}
 		} 
 		else
 		{
@@ -374,7 +377,10 @@ class ControllerAccountLogin extends Controller {
 		    }
 		    if (intval($json['captcha']) === -1) 
 		    {
-		       	//$this->error['warning'] = "Warning: No match for Capcha";
+		    	if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1')
+				{
+		       		$this->error['warning'] = "Warning: No match for Capcha";
+		       	}
 		   	}
 		}
 
