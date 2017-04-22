@@ -549,6 +549,7 @@
    </div>
 </div>
       <?php } ?>
+      <div class="clearfix"></div>
    </div>
    <div class="clearfix"></div>
 </div>
