@@ -32,7 +32,7 @@
 
 <div id="error-wrapper" class="text-center"> 
 	<div class="container">
-		<a href="#"><img src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
+		<a href="#"><img src="catalog/view/theme/default/images/logo.png"  style="width: 300px" class="img-responsive center-block" alt=""/></a>
 		<p class="lead">The page you are looking for<br>could not be found</p>
 		<h2>404</h2>
 		<p>Please go to our <a href="home.html">homepage</a> or go back to <a href="#">previous page</a></p>
@@ -41,7 +41,7 @@
 </div>
 
 <div class="page-loader">
-	<a href="#"><img src="catalog/view/theme/default/images/logo.png" class="img-responsive center-block" alt=""/></a>
+	<a href="#"><img src="catalog/view/theme/default/images/logo.png" style="width: 300px" class="img-responsive center-block" alt=""/></a>
 	<span class="text-uppercase">Loading...</span>
 </div>
 
