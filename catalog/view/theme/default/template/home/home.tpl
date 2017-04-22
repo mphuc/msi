@@ -79,8 +79,9 @@
                        <p style="margin-bottom:8px; font-size:12px; color:grey;">John M. Loffredo, Robert A. DiMella</p>
                        <p>Location, Location, Location...<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
                     </div>
+                    <div class="clearfix"></div>
                  </div>
-                  <div class="clearfix"></div>
+
                  <div class="content-article cf " style="">
                     <div class="jcepopup-div col-xs-3">
                        <a href="#" style="padding-right:7px;">
@@ -93,6 +94,7 @@
                        <p style="margin-bottom:8px; font-size:12px; color:grey;">Edward Silverstein</p>
                        <p>Following the November 8 election and a few hours of market upheaval, the stock market soared higher, with the Dow Jones Industrial Average finishing the year just shy of 20,000 – a level it would later reach on January 25, 2017....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
                     </div>
+                    <div class="clearfix"></div>
                  </div>
                   <div class="clearfix"></div>
                  <div class="content-article cf " style="">  
