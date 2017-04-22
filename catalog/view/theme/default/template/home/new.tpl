@@ -170,6 +170,8 @@
          speak only as of the date they are made, and MacKay Shields assumes no duty and does not undertake to update forward looking statements.  Past performance is not indicative of future results.<br><br>
          Note to European prospects, clients and investors:  This material has been issued by MacKay Shields UK LLP, 200 Aldersgate Street, London EC1A 4HD, which is authorized and regulated by the UK Financial Conduct Authority.</span></em>                  
       </p>
+      <div class="clearfix"></div>
    </div>
+   <div class="clearfix"></div>
 </div>
 <?php echo $self->load->controller('home/page/footer'); ?>
