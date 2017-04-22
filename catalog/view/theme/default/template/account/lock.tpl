@@ -52,7 +52,7 @@
          <button type="submit" class="btn btn-success btn-md">Login</button>
       </form>
       
-      <p class="copy">&copy; 2017. Smart<span>Box</span></p>
+      <p class="copy">&copy; 2017. Mackayshieldslife<span>Com</span></p>
    </div>
 </div>
 <!-- END wrapper --> 

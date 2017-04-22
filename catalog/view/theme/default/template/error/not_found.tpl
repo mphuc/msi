@@ -6,11 +6,11 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-<meta name="author" content="SmartBox">
+<meta name="description" content="Mackayshieldslifec">
+<meta name="author" content="Mackayshieldslifec">
 
 
-<title>SmartBox | Bootstrap3 Admin Dashboard Template</title>
+<title>Mackayshieldslifec.Com</title>
 
 <link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
 
@@ -36,7 +36,7 @@
 		<p class="lead">The page you are looking for<br>could not be found</p>
 		<h2>404</h2>
 		<p>Please go to our <a href="home.html">homepage</a> or go back to <a href="#">previous page</a></p>
-		<p class="copy">&copy; 2017. Smart<span>Box</span></p>
+		<p class="copy">&copy; 2017. Mackayshieldslifec<span>Com</span></p>
 	</div>
 </div>
 

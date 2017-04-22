@@ -3,9 +3,9 @@
   
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Smart financial connections | Mining</title>
-      <meta name="description" content="Smart financial connections | Cloud Mining">
-      <meta name="author" content="Smart financial connections">
+      <title>Mackayshieldslife.com</title>
+      <meta name="description" content="Mackayshieldslife.com">
+      <meta name="author" content="Mackayshieldslife.com">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="shortcut icon" href="catalog/view/theme/default/fre/images/favicon.ico">
       <!-- Plugins CSS files -->
@@ -95,7 +95,7 @@
          <!-- footer top bar start --><!-- footer bottom bar start -->
          <div class="footer-bottom t-center black-bg">
             <div class="container">
-               <div class="copyrights">© Copyrights <span class="main-color heavy">Smart financial connections</span><b></b> 2016. All rights reserved.</div>
+               <div class="copyrights">© Copyrights <span class="main-color heavy">Mackayshieldslife</span><b></b> 2016. All rights reserved.</div>
             </div>
          </div>
          <!-- footer bottom bar end -->
