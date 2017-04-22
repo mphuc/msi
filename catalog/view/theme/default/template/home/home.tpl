@@ -110,6 +110,7 @@
               
                
             </div>
+            <div class="clearfix"></div>
             <br>
             <div class="right homepage_right">
             </div>
