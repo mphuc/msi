@@ -550,5 +550,6 @@
 </div>
       <?php } ?>
    </div>
+   <div class="clearfix"></div>
 </div>
 <?php echo $self->load->controller('home/page/footer'); ?> 
