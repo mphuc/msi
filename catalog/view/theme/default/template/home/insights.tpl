@@ -227,6 +227,7 @@
          performance does not guarantee future results.
          </em></span>
       </div>
+      <div class="clearfix"></div>
    </div>
 </div>
 

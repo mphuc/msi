@@ -113,6 +113,7 @@
             <div class="clr"></div>
          </div>
       </div>
+      <div class="clearfix"></div>
    </div>
 </div>
     <?php echo $self->load->controller('home/page/footer'); ?> 
