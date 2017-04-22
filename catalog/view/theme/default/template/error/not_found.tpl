@@ -6,11 +6,11 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Mackayshieldslifec">
-<meta name="author" content="Mackayshieldslifec">
+<meta name="description" content="Mackayshieldslife">
+<meta name="author" content="Mackayshieldslife">
 
 
-<title>Mackayshieldslifec.Com</title>
+<title>Mackayshieldslife.Com</title>
 
 <link rel="shortcut icon" href="catalog/view/theme/default/assets/images/favicon.png">
 
@@ -32,16 +32,16 @@
 
 <div id="error-wrapper" class="text-center"> 
 	<div class="container">
-		<a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
+		<a href="#"><img src="catalog/view/theme/default/assets/images/logo.png" class="img-responsive center-block" alt=""/></a>
 		<p class="lead">The page you are looking for<br>could not be found</p>
 		<h2>404</h2>
 		<p>Please go to our <a href="home.html">homepage</a> or go back to <a href="#">previous page</a></p>
-		<p class="copy">&copy; 2017. Mackayshieldslifec<span>Com</span></p>
+		<p class="copy">&copy; 2017. Mackayshieldslife<span>Com</span></p>
 	</div>
 </div>
 
 <div class="page-loader">
-	<a href="#"><img src="catalog/view/theme/default/assets/images/logo-2.png" class="img-responsive center-block" alt=""/></a>
+	<a href="#"><img src="catalog/view/theme/default/assets/images/logo.png" class="img-responsive center-block" alt=""/></a>
 	<span class="text-uppercase">Loading...</span>
 </div>
 
