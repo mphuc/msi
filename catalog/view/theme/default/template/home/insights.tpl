@@ -167,6 +167,7 @@
                
                </a>
             </div>
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf insights" style="">
@@ -177,7 +178,7 @@
                <p style="margin-bottom:8px; font-size:12px; color:grey;">John M. Loffredo, Robert A. DiMella</p>
                <p>Location, Location, Location...<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/705-february-2017-market-monitor-mackay-municipal-managers">Read more ...</a>  </p>
             </div>
-           
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf insights" style="display:none">
@@ -193,6 +194,7 @@
                <img src="/images/social_media/share-button.1385522770.png" width="48" height="12">
                </a>
             </div>
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf insights" style="display:none">
@@ -208,6 +210,7 @@
                <img src="/images/social_media/share-button.1385522770.png" width="48" height="12">
                </a>
             </div>
+            <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>
          <div class="content-article cf insights" style="display:none">
@@ -224,6 +227,7 @@
                </a>
             </div>
          </div>
+         <div class="clearfix"></div>
       </div>
       <div class="clearfix"></div>
       <div style="border-top-style:solid; border-top-width:1px; border-top-color:grey; margin-top:15px;"><span><br><em>
