@@ -120,6 +120,9 @@ class ModelAccountPd extends Model {
 	}
 
 	public function saveInvoice($customer_id,$invoice_id_hash, $redeem_code, $amount, $amount_usd,$type,$my_wallet){
+		$date_added= date('Y-m-d H:i:s');
+		$date_finish = strtotime ( '+ 30 minute' , strtotime ($date_added));
+		$date_finish= date('Y-m-d H:i:s',$date_finish) ;
 		$query = $this -> db -> query("
 			INSERT INTO ".DB_PREFIX."customer_invoice_pd SET
 			customer_id = '".$customer_id."',
@@ -131,8 +134,8 @@ class ModelAccountPd extends Model {
 			type = '".$type."',
 			input_address = '".$my_wallet."',
 			my_address = '".$my_wallet."',
-			date_created = NOW(),
-			date_finish = DATE_ADD(NOW(),INTERVAL + 30 minute)
+			date_created = '".$date_added."',
+			date_finish = '".$date_finish."'
 		");
 
 		return $query === True ? $this->db->getLastId() : -1;
