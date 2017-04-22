@@ -65,6 +65,7 @@
                        <p style="margin-bottom:8px; font-size:12px; color:grey;">Andrew Susser</p>
                        <p>A Compelling Opportunit..<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="">Read more ...</a>  </p>
                     </div>
+                    <div class="clearfix"></div>
                  </div>
                  <div class="clearfix"></div>
                  <div class="content-article cf " style="">
@@ -100,12 +101,15 @@
                  <div class="content-article cf " style="">  
                   <div class="jcepopup-div col-xs-3">
                     <a href="#" style="padding-right:7px;"><img height="130" width="100%" border="0" src="catalog/view/theme/default/home/images/AOSthumb.jpg"></a>  </div>  <div class="content-summary  col-xs-9">    <a class="content-title" data-key="47,700" href="<?php echo HTTPS_SERVER ?>details.html?alias=what-s-around-the-corner-come-january-20th" style="">What's Around The Corner Come January 20th?</a><p style="margin-bottom:0px;">February 13, 2017 | Global Fixed Income Team</p><p style="margin-bottom:8px; font-size:12px; color:grey;">Dan C. Roberts</p><p>The election of Donald J. Trump is expected to be one of the more disruptive geopolitical and economic events of the last half century which we anticipate will create both investment opportunities and dislocations....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/700-what-s-around-the-corner-come-january-20th">Read more ...</a>  </p></div>
+                    <div class="clearfix"></div>
                   </div>
                    <div class="clearfix"></div>
                   <div class="content-article cf " style="">  
                     <div class="jcepopup-div col-xs-3"><a href="#" class="jcepopup" style="padding-right:7px;" video-title="Global Fixed Income Team - 2017 Outlook" >
                      <img class="jcepopup-img" height="60" width="100%" border="0" style="background:none" src="catalog/view/theme/default/home/images/DR2017outlook.jpg">
-                    </a>  </div>  <div class="content-summary  col-xs-9">    <a class="content-title" data-key="47,684" href="<?php echo HTTPS_SERVER ?>details.html?alias=global-fixed-income-team-2017-outlook-2" style="">Global Fixed Income Team - 2017 Outlook</a><p style="margin-bottom:0px;">January 9, 2017 | Global Fixed Income Team</p><p style="margin-bottom:8px; font-size:12px; color:grey;">Dan C. Roberts</p><p>Dan Roberts, Head of Global Fixed Income, discusses the Global Fixed Income Team's outlook for 2017....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/684-global-fixed-income-team-2017-outlook-2">Read more ...</a>  </p></div></div>
+                    </a>  </div>  <div class="content-summary  col-xs-9">    <a class="content-title" data-key="47,684" href="<?php echo HTTPS_SERVER ?>details.html?alias=global-fixed-income-team-2017-outlook-2" style="">Global Fixed Income Team - 2017 Outlook</a><p style="margin-bottom:0px;">January 9, 2017 | Global Fixed Income Team</p><p style="margin-bottom:8px; font-size:12px; color:grey;">Dan C. Roberts</p><p>Dan Roberts, Head of Global Fixed Income, discusses the Global Fixed Income Team's outlook for 2017....<a style="text-decoration:underline; padding-left:10px; white-space:nowrap;" href="/insights-landing/684-global-fixed-income-team-2017-outlook-2">Read more ...</a>  </p></div>
+                    <div class="clearfix"></div>
+                    </div>
                      <div class="clearfix"></div>
 
                </div>
