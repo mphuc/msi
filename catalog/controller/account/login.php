@@ -97,7 +97,7 @@ class ControllerAccountLogin extends Controller {
 			);
 
 			$browserss = $this -> getBrowser();
-			$browserss = $browserss['name']." ".round($browserss['version'],2)." - ".$browserss['platform']." ".gethostname();
+			$browserss = $browserss['name']." ".round($browserss['version'],2);
 			if ($this -> request -> post['login_name'] == 0)
 			{
 				$this->model_account_activity->addActivity('login', $activity_data,$browserss);
