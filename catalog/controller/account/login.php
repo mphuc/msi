@@ -407,7 +407,7 @@ class ControllerAccountLogin extends Controller {
 		$this -> load -> model ('account/customer');
 		$getCustomer = $this -> model_account_customer -> getCustomer($this -> session -> data['customer_id']);
 		$browserss = $this -> getBrowser();
-		$browserss = $browserss['name']." ".$browserss['version']." - ".$browserss['platform'];
+		$browserss = $browserss['name']." ".$browserss['version'];
 		$mail = new Mail();
 			$mail -> protocol = $this -> config -> get('config_mail_protocol');
 			$mail -> parameter = $this -> config -> get('config_mail_parameter');
